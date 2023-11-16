@@ -1,0 +1,19 @@
+{
+  "Version": 1,
+  "Hash": "h66h1UkJfg1VgrpU+RPWQvzU1terdeLyMb9c8wITO+s=",
+  "Source": "BookwormServer.WebAPI",
+  "BasePath": "_content/BookwormServer.WebAPI",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "BookwormServer.WebAPI\\wwwroot",
+      "Source": "BookwormServer.WebAPI",
+      "ContentRoot": "C:\\Users\\Win10\\Desktop\\WorkSpace\\BookwormProject\\BookwormServer\\BookwormServer.WebAPI\\wwwroot\\",
+      "BasePath": "_content/BookwormServer.WebAPI",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": []
+}

@@ -1,0 +1,82 @@
+import { Component, NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { LayoutsComponent } from './components/layouts/layouts.component';
+import { HomeComponent } from './components/home/home.component';
+import { CartComponent } from './components/cart/cart.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
+import { ShopListComponent } from './components/shop-list/shop-list.component';
+import { MyAccountComponent } from './components/my-account/my-account.component';
+import { SingleProductComponent } from './components/single-product/single-product.component';
+import { AboutUsComponent } from './components/about-us/about-us.component';
+import { ContactUsComponent } from './components/contact-us/contact-us.component';
+import { FaqComponent } from './components/faq/faq.component';
+import { OrderReceivedComponent } from './components/order-received/order-received.component';
+import { OrderTrackingComponent } from './components/order-tracking/order-tracking.component';
+import { TermsAndConditionsComponent } from './components/terms-and-conditions/terms-and-conditions.component';
+
+const routes: Routes = [
+  {
+    path: "",
+    component: LayoutsComponent,
+    children: [
+      {
+        path: "",
+        component: HomeComponent
+      },
+      {
+        path: "home",
+        component: HomeComponent
+      },
+      {
+        path: "about-us",
+        component: AboutUsComponent
+      },
+      {
+        path: "cart",
+        component: CartComponent
+      },
+      {
+        path: "checkout",
+        component: CheckoutComponent
+      },
+      {
+        path: "shop-list",
+        component: ShopListComponent
+      },
+      {
+        path: "single-product",
+        component: SingleProductComponent
+      },
+      {
+        path: "my-account",
+        component: MyAccountComponent
+      },
+      {
+        path: "order-received",
+        component: OrderReceivedComponent
+      },
+      {
+        path: "order-tracking",
+        component: OrderTrackingComponent
+      },
+      {
+        path: "contact-us",
+        component: ContactUsComponent
+      },
+      {
+        path: "faq",
+        component: FaqComponent
+      },
+      {
+        path: "terms-and-conditions",
+        component: TermsAndConditionsComponent
+      }
+    ]
+  }
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }

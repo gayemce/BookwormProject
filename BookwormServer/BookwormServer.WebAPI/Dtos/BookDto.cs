@@ -1,6 +1,8 @@
-﻿namespace BookwormServer.WebAPI.Models;
+﻿using BookwormServer.WebAPI.Models;
 
-public sealed class Book
+namespace BookwormServer.WebAPI.Dtos;
+
+public class BookDto
 {
     public int Id { get; set; }
     public int BookDetailId { get; set; }
@@ -16,6 +18,5 @@ public sealed class Book
     public bool IsActive { get; set; } = false;
     public bool IsDeleted { get; set; } = false;
     public DateTime CreatedAt { get; set; } = DateTime.Now;
-    public List<BookCategory> BookCategories { get; set; }
-
+    public List<BookCategoryDto> BookCategories { get; set; } = new List<BookCategoryDto>();
 }

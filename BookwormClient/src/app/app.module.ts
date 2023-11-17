@@ -36,6 +36,8 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { FormsModule } from '@angular/forms';
 import { MiddlebarComponent } from './components/layouts/header/middlebar/middlebar.component';
+import { CategoriesComponent } from './components/categories/categories.component';
+import { AuthorsComponent } from './components/authors/authors.component';
 
 export function HttpLoaderFactory(http: HttpClient){
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -71,6 +73,8 @@ export function HttpLoaderFactory(http: HttpClient){
     TermsAndConditionsComponent,
     TopbarComponent,
     MiddlebarComponent,
+    CategoriesComponent,
+    AuthorsComponent,
   ],
   imports: [
     BrowserModule,

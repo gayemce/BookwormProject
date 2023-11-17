@@ -9,6 +9,7 @@ import { ErrorService } from 'src/app/services/error.service';
   styleUrls: ['./deals-with-product-tab.component.css']
 })
 export class DealsWithProductTabComponent {
+  
   books: BookModel[] = [];
 
   constructor(

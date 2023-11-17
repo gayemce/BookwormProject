@@ -8,4 +8,5 @@ public sealed record CreateBookDto(
     string Publisher,
     decimal Price,
     string ImgUrl,
-    int Quantity);
+    int Quantity,
+    List<int> CategoryIds);

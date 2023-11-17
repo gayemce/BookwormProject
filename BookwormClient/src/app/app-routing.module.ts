@@ -13,6 +13,8 @@ import { FaqComponent } from './components/faq/faq.component';
 import { OrderReceivedComponent } from './components/order-received/order-received.component';
 import { OrderTrackingComponent } from './components/order-tracking/order-tracking.component';
 import { TermsAndConditionsComponent } from './components/terms-and-conditions/terms-and-conditions.component';
+import { CategoriesComponent } from './components/categories/categories.component';
+import { AuthorsComponent } from './components/authors/authors.component';
 
 const routes: Routes = [
   {
@@ -28,16 +30,8 @@ const routes: Routes = [
         component: HomeComponent
       },
       {
-        path: "about-us",
-        component: AboutUsComponent
-      },
-      {
-        path: "cart",
-        component: CartComponent
-      },
-      {
-        path: "checkout",
-        component: CheckoutComponent
+        path: "categories",
+        component: CategoriesComponent
       },
       {
         path: "shop-list",
@@ -48,8 +42,16 @@ const routes: Routes = [
         component: SingleProductComponent
       },
       {
-        path: "my-account",
-        component: MyAccountComponent
+        path: "authors",
+        component: AuthorsComponent
+      },
+      {
+        path: "cart",
+        component: CartComponent
+      },
+      {
+        path: "checkout",
+        component: CheckoutComponent
       },
       {
         path: "order-received",
@@ -58,6 +60,14 @@ const routes: Routes = [
       {
         path: "order-tracking",
         component: OrderTrackingComponent
+      },
+      {
+        path: "my-account",
+        component: MyAccountComponent
+      },
+      {
+        path: "about-us",
+        component: AboutUsComponent
       },
       {
         path: "contact-us",

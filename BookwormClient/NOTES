@@ -14,8 +14,13 @@
 *Categories tablosu oluşturuldu.
 *BookCategories tablosu oluşturuldu. Çoka çok ilişki tanımlandı.
 *Categories CRUD işlemleri gerçekleştirildi.
+*Categoriler eklendi.
+*Her kitaba bir kategori verildi.
+*Categoriler client tarafında görüntülendi.
+*BrowseCategories menuleri databasedeki kayıtlara göre dil desteği ile çekildi.
 -
-*Categoriler eklenecek.
-*Her kitaba bir kategori verilecek.
-*Categoriler client tarafında görüntülenecek.
+*Categories ve Authors sayfalarında tasarım problemi var.
 *Categorilere göre kitap çekilecek.
+*Categoriye ait kaç kitap olduğu eklenecek
+*Models altındaki tüm classlar oluşturulacak
+*BrowseCategories yan menulerinle ngFordan kaynaklı bir tasarım problemi var

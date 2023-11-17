@@ -1,6 +1,21 @@
 14.11.2023
-*Categories sidebar dil değişimi gerçekleşiyor ama tasarımdan kaynaklı seçilen element değişmiyor. (YAPILDI- ngModel)
+*TranslateService eklendi. Dil dosyaları oluşturuldu.
+*Categories sidebar dil değişimi gerçekleşiyor ama tasarımdan kaynaklı seçilen element değişmiyor. (YAPILDI - ngModel)
 
 16.11.2023
-*ErrorService de bir hata var.
+*Book CRUD işlemleri gerçekleştrildi.
+*Client tarafında eklenen kitaplar görüntülendi.
+-
+*ErrorService de bir hata var.  (YAPILDI - @Injectable({providedIn: 'root'}))
 *BookDetails tablosu oluşturulacak.
+
+17.11.2023
+*BookDetails tablosu oluşturuldu. Book ile bire bir ilişki tanımlandı.
+*Categories tablosu oluşturuldu.
+*BookCategories tablosu oluşturuldu. Çoka çok ilişki tanımlandı.
+*Categories CRUD işlemleri gerçekleştirildi.
+-
+*Categoriler eklenecek.
+*Her kitaba bir kategori verilecek.
+*Categoriler client tarafında görüntülenecek.
+*Categorilere göre kitap çekilecek.

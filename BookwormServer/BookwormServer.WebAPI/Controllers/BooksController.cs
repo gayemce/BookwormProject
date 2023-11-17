@@ -45,7 +45,7 @@ public class BooksController : ControllerBase
     }
 
     [HttpPost]
-    public IActionResult UpdateBookById(UpdateBookDto request)
+    public IActionResult UpdateBook(UpdateBookDto request)
     {
         var book = _context.Books.Find(request.Id);
         if (book is null)
@@ -70,10 +70,10 @@ public class BooksController : ControllerBase
 
     }
 
-    [HttpGet]
-    public IActionResult RemoveBookById(int Id)
+    [HttpGet("{id}")]
+    public IActionResult RemoveBookById(int id)
     {
-        var book = _context.Books.Find(Id);
+        var book = _context.Books.Find(id);
         if(book is null)
         {
             return BadRequest(new { Message = "Kitap bulunamadı!" });

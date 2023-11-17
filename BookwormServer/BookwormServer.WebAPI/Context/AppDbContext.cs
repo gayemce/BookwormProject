@@ -11,4 +11,17 @@ public sealed class AppDbContext : DbContext
     }
 
     public DbSet<Book> Books { get; set; }
+    public DbSet<BookDetail> BookDetails { get; set; }
+    public DbSet<Category> Categories { get; set; }
+    public DbSet<BookCategory> BookCategories { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        //Composite Key - Çoka çok ilişki
+        modelBuilder.Entity<BookCategory>().HasKey(p => new { p.BookId, p.CategoryId });
+
+        //Book & BookDetail - Bire bir ilişki
+        modelBuilder.Entity<Book>().HasOne(b => b.BookDetail).WithOne(bd => bd.Book).HasForeignKey<BookDetail>(bd => bd.BookId);
+        base.OnModelCreating(modelBuilder);
+    }
 }

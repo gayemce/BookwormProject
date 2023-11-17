@@ -6,8 +6,8 @@ export class BookModel {
     descriptionTr: string = "";
     publisher: string = "";
     price: number = 0.0;
-    CoverImgUrl: string = "";
-    Quantity: number = 0; 
+    imgUrl: string = "";
+    quantity: number = 0; 
     isActive: boolean = true; 
     isDeleted: boolean = false; 
     createdAt: string = ""; 

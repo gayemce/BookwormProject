@@ -12,14 +12,20 @@ export class DealsWithProductTabComponent {
   books: BookModel[] = [];
 
   constructor(
-    private http: HttpClient  ) {
-      this.getAllBooks();
-     }
+    private http: HttpClient,
+    private error: ErrorService) {
+    this.getAllBooks();
+  }
 
   getAllBooks() {
     this.http.get<BookModel[]>("https://localhost:7018/api/Books/GetAllBooks")
-      .subscribe(res => {
-        this.books = res;
-      })
+      .subscribe({
+        next: (res: any) => {
+          this.books = res;
+        },
+        error: (err: HttpErrorResponse) => {
+          this.error.errorHandler(err);
+        }
+    });
   }
 }

@@ -3,6 +3,8 @@
 public sealed class Book
 {
     public int Id { get; set; }
+    public int BookDetailId { get; set; }
+    public BookDetail BookDetail { get; set; }
     public string Title { get; set; } = string.Empty;
     public string Author { get; set; } = string.Empty;
     public string DescriptionEn { get; set; } = string.Empty;
@@ -14,4 +16,5 @@ public sealed class Book
     public bool IsActive { get; set; } = false;
     public bool IsDeleted { get; set; } = false;
     public DateTime CreatedAt { get; set; } = DateTime.Now;
+    
 }

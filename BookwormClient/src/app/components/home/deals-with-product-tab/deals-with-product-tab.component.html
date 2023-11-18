@@ -96,9 +96,11 @@
                                             <div class="woocommerce-loop-product__body product__body pt-3 bg-white">
                                                 <div class="text-uppercase font-size-1 mb-1 text-truncate"><a href="../shop/single-product-v5.html">{{b.publisher}}</a></div>
                                                 <h2 class="woocommerce-loop-product__title product__title h6 text-lh-md mb-1 text-height-2 crop-text-2 h-dark"><a href="../shop/single-product-v5.html">{{b.title}}</a></h2>
-                                                <div class="font-size-2  mb-1 text-truncate"><a href="../others/authors-single.html" class="text-gray-700">{{b.author}}</a></div>
+                                                <div class="font-size-2  mb-1 text-truncate"><a href="../others/authors-single.html" class="text-gray-700">
+                                                    <span>{{b.author.name}} {{b.author.lastname}}</span>
+                                                </a></div>
                                                 <div class="price d-flex align-items-center font-weight-medium font-size-3">
-                                                    <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">₺</span>{{b.price}}</span>
+                                                    <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">{{b.price.currency}}</span>{{b.price.value}}</span>
                                                 </div>
                                                 <div class="product__rating d-none align-items-center font-size-2">
                                                     <div class="text-yellow-darker mr-2">

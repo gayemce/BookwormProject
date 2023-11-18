@@ -18,6 +18,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Mapping\" />
+    <Folder Include="Services\" />
+    <Folder Include="Options\" />
     <Folder Include="wwwroot\files\" />
   </ItemGroup>
 

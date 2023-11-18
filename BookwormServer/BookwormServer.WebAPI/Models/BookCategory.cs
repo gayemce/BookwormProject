@@ -2,7 +2,7 @@
 
 namespace BookwormServer.WebAPI.Models;
 
-public class BookCategory
+public sealed class BookCategory
 {
     [ForeignKey("Book")]
     public int BookId { get; set; }

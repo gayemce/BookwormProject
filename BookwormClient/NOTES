@@ -18,9 +18,13 @@
 *Her kitaba bir kategori verildi.
 *Categoriler client tarafında görüntülendi.
 *BrowseCategories menuleri databasedeki kayıtlara göre dil desteği ile çekildi.
--
-*Categories ve Authors sayfalarında tasarım problemi var.
+
+18.11.2023
+*Models altındaki tüm classlar oluşturuldu.
+*Value object olarak Money classı oluşturuldu.
+*Yazar ve kitaplar ilişkilendirildi ve client tarafında basıldı.
+---
 *Categorilere göre kitap çekilecek.
 *Categoriye ait kaç kitap olduğu eklenecek
-*Models altındaki tüm classlar oluşturulacak
+*Categories ve Authors sayfalarında tasarım problemi var.
 *BrowseCategories yan menulerinle ngFordan kaynaklı bir tasarım problemi var

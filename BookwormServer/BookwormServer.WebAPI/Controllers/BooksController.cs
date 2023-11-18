@@ -1,6 +1,7 @@
 ﻿using BookwormServer.WebAPI.Context;
 using BookwormServer.WebAPI.Dtos;
 using BookwormServer.WebAPI.Models;
+using BookwormServer.WebAPI.ValueObjects;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ namespace BookwormServer.WebAPI.Controllers;
 [ApiController]
 public class BooksController : ControllerBase
 {
+    //Mapper kütüphanesi eklenecek.
     private readonly AppDbContext _context;
 
     public BooksController(AppDbContext context)
@@ -34,11 +36,12 @@ public class BooksController : ControllerBase
             book = new()
             {
                 Title = request.Title,
-                Author = request.Author,
+                AuthorId = request.AuthorId,
+                BookDetailId = request.BookDetailId,
                 DescriptionEn = request.DescriptionEn,
                 DescriptionTr = request.DescriptionTr,
                 Publisher = request.Publisher,
-                Price = request.Price,
+                Price = new Money(request.Price.Value, request.Price.Currency),
                 ImgUrl = request.ImgUrl,
                 Quantity = request.Quantity,
                 IsActive = true,
@@ -87,11 +90,12 @@ public class BooksController : ControllerBase
         }
 
         book.Title = request.Title;
-        book.Author = request.Author;
+        book.AuthorId = request.AuthorId;
+        book.BookDetailId = request.BookDetailId;
         book.DescriptionEn = request.DescriptionEn;
         book.DescriptionTr = request.DescriptionTr;
         book.Publisher = request.Publisher;
-        book.Price = request.Price;
+        book.Price = new Money(request.Price.Value, request.Price.Currency);
         book.ImgUrl = request.ImgUrl;
         book.Quantity = request.Quantity;
         book.IsActive = true;
@@ -147,19 +151,24 @@ public class BooksController : ControllerBase
         var books = _context.Books
             .Where(p => p.IsActive == true && p.IsDeleted == false)
             .Include(bc => bc.BookCategories)
-            .ThenInclude(c => c.Category)
+                .ThenInclude(c => c.Category)
+            .Include(a => a.Author)
             .ToList();
 
         var bookDtos = books.Select(book => new BookDto
         {
-            //Mapper kütüphanesi eklenecek.
             Id = book.Id,
             Title = book.Title,
-            Author = book.Author,
+            AuthorId = book.AuthorId,
+            Author = new AuthorDto
+            {
+                Name = book.Author.Name,
+                Lastname = book.Author.Lastname,
+            },
             DescriptionEn = book.DescriptionEn,
             DescriptionTr = book.DescriptionTr,
             Publisher = book.Publisher,
-            Price = book.Price,
+            Price = new Money(book.Price.Value, book.Price.Currency),
             ImgUrl = book.ImgUrl,
             Quantity = book.Quantity,
             IsActive = true,

@@ -4,6 +4,7 @@ using BookwormServer.WebAPI.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookwormServer.WebAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231118181408_mg1")]
+    partial class mg1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -519,7 +522,28 @@ namespace BookwormServer.WebAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsOne("BookwormServer.WebAPI.ValueObjects.Money", "ShippingPrice", b1 =>
+                    b.OwnsOne("BookwormServer.WebAPI.ValueObjects.Money", "ShippingPriceEn", b1 =>
+                        {
+                            b1.Property<int>("CartId")
+                                .HasColumnType("int");
+
+                            b1.Property<string>("Currency")
+                                .IsRequired()
+                                .HasMaxLength(5)
+                                .HasColumnType("nvarchar(5)");
+
+                            b1.Property<decimal>("Value")
+                                .HasColumnType("money");
+
+                            b1.HasKey("CartId");
+
+                            b1.ToTable("Carts");
+
+                            b1.WithOwner()
+                                .HasForeignKey("CartId");
+                        });
+
+                    b.OwnsOne("BookwormServer.WebAPI.ValueObjects.Money", "ShippingPriceTr", b1 =>
                         {
                             b1.Property<int>("CartId")
                                 .HasColumnType("int");
@@ -563,7 +587,10 @@ namespace BookwormServer.WebAPI.Migrations
 
                     b.Navigation("Book");
 
-                    b.Navigation("ShippingPrice")
+                    b.Navigation("ShippingPriceEn")
+                        .IsRequired();
+
+                    b.Navigation("ShippingPriceTr")
                         .IsRequired();
 
                     b.Navigation("TotalPrice")

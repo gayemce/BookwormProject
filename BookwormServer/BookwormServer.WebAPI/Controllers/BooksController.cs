@@ -159,11 +159,11 @@ public class BooksController : ControllerBase
         {
             Id = book.Id,
             Title = book.Title,
-            AuthorId = book.AuthorId,
             Author = new AuthorDto
             {
+                Id = book.Author.Id,
                 Name = book.Author.Name,
-                Lastname = book.Author.Lastname,
+                Lastname = book.Author.Lastname
             },
             DescriptionEn = book.DescriptionEn,
             DescriptionTr = book.DescriptionTr,
@@ -171,8 +171,6 @@ public class BooksController : ControllerBase
             Price = new Money(book.Price.Value, book.Price.Currency),
             ImgUrl = book.ImgUrl,
             Quantity = book.Quantity,
-            IsActive = true,
-            IsDeleted = false,
             CreatedAt = book.CreatedAt,
 
             //Kitaba ait kategori isimlerini getir.
@@ -182,7 +180,7 @@ public class BooksController : ControllerBase
                 CategoryName = bc.Category.NameTr
             }).ToList()
         }).ToList();
-    
+
         return Ok(bookDtos);
     }
 }

@@ -66,16 +66,13 @@
 
             <div class="col-xl-7 col-wd-8">
                 <header class="d-md-flex justify-content-between mb-5">
-                    <h2 class="font-size-26">New Releases</h2>
+                    <h2 class="font-size-26">{{'newArrivals' | translate}}</h2>
                     <ul class="nav nav-gray-700 flex-nowrap flex-md-wrap overflow-auto overflow-md-visible" role="tablist">
                         <li class="nav-item mx-4 flex-shrink-0 flex-md-shrink-1">
-                            <a class="nav-link pb-1 px-0 active" id="history-pill-tab" data-toggle="tab" href="#history-pill" role="tab" aria-controls="history-pill" aria-selected="true">On Sale</a>
-                        </li>
-                        <li class="nav-item mx-4 flex-shrink-0 flex-md-shrink-1">
-                            <a class="nav-link pb-1 px-0" id="romance-pill-tab" data-toggle="tab" href="#romance-pill" role="tab" aria-controls="romance-pill" aria-selected="true">New Arrivals</a>
+                            <a class="nav-link pb-1 px-0" id="romance-pill-tab" data-toggle="tab" href="#romance-pill" role="tab" aria-controls="romance-pill" aria-selected="true">{{'newReleases' | translate}}</a>
                         </li>
                         <li class="nav-item ml-4 flex-shrink-0 flex-md-shrink-1">
-                            <a class="nav-link pb-1 px-0" id="travel-pill-tab" data-toggle="tab" href="#travel-pill" role="tab" aria-controls="travel-pill" aria-selected="true">Most Viewed</a>
+                            <a class="nav-link pb-1 px-0" id="travel-pill-tab" data-toggle="tab" href="#travel-pill" role="tab" aria-controls="travel-pill" aria-selected="true">{{'mostViewed' | translate}}</a>
                         </li>
                     </ul>
                 </header>
@@ -83,7 +80,7 @@
                     <div class="tab-pane fade show active" id="history-pill" role="tabpanel" aria-labelledby="history-pill-tab">
                         <ul class="products row row-cols-2 row-cols-md-3 list-unstyled mb-0">
                             <!-- BOOKS -->
-                            <li class="col" *ngFor="let b of books">
+                            <li class="col" *ngFor="let b of newArrivalBooks">
                                 <div class="product product__space border bg-white mb-5">
                                     <div class="product__inner overflow-hidden p-3 p-md-4d875">
                                         <div class="woocommerce-LoopProduct-link woocommerce-loop-product__link d-block position-relative">

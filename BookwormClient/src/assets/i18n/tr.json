@@ -34,5 +34,8 @@
   "trendingBooks": "Trend Kitaplar",
   "searchForBooksbyKeyword": "Anahtar Kelimeye Göre Kitap Arayın",
   "allBooks": "Tüm Kitaplar",
-  "authors": "Yazarlar"
+  "authors": "Yazarlar",
+  "newArrivals": "Yeni Gelenler",
+  "newReleases": "Yeni Çıkanlar",
+  "mostViewed": "En Çok Görüntülenenler"
 }

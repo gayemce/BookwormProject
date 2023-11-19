@@ -6,9 +6,6 @@ namespace BookwormServer.WebAPI.Dtos;
 public class BookDto
 {
     public int Id { get; set; }
-    public int BookDetailId { get; set; }
-    public BookDetail BookDetail { get; set; }
-    public int AuthorId { get; set; }
     public AuthorDto Author { get; set; }
     public string Title { get; set; } = string.Empty;
     public string DescriptionEn { get; set; } = string.Empty;

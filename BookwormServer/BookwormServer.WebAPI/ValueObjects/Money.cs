@@ -8,6 +8,6 @@ public sealed class Money
         Currency = currency;
     }
 
-    public decimal Value { get; set; }
+    public decimal Value { get; private set; }
     public string Currency { get; private set; }
 }

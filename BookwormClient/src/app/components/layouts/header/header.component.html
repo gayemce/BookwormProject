@@ -79,7 +79,7 @@
                                 aria-labelledby="basicsHeadingOne" data-parent="#basicsAccordion">
                                 <div class="card-body p-0">
                                     <ul class="list-unstyled vertical-menu position-relative mb-0 bg-white">
-                                        <li *ngFor="let b of categories.slice(0, 9)">
+                                        <li *ngFor="let c of categories.slice(0, 9)">
                                             <a id="basicDropdownHoverInvoker2"
                                                 class="text-dark dropdown-nav-link dropdown-toggle d-flex align-items-center border-bottom"
                                                 href="javascript:;" role="button" aria-controls="basicDropdownHover2"
@@ -89,9 +89,9 @@
                                                 data-unfold-delay="50" data-unfold-hide-on-scroll="true"
                                                 data-unfold-animation-in="fadeIn" data-unfold-animation-out="fadeOut">
                                                 <div class="width-30 mr-2 text-lh-sm">
-                                                    <img src="{{b.iconImgUrl}}" style="height: 30px;">
+                                                    <img src="{{c.iconImgUrl}}" style="height: 30px;">
                                                 </div>
-                                                <div class="mr-auto">{{userSelectedLanguage === 'en' ? b.nameEn : b.nameTr}}</div>
+                                                <div class="mr-auto">{{userSelectedLanguage === 'en' ? c.nameEn : c.nameTr}}</div>
                                             </a>
 
                                             <div id="basicDropdownHover2"
@@ -141,22 +141,22 @@
 
                     <div class="site-navigation mr-auto d-none d-xl-block">
                         <ul class="nav">
-                            <li class="nav-item"><a routerLink="/categories"
+                            <li class="nav-item"><a href="categories"
                                 class="nav-link link-black-100 mx-2 px-0 py-3 font-weight-medium border-primary border-width-2"
                                 >{{ 'allCategories' | translate }}</a>
                             </li>
 
-                            <li class="nav-item"><a routerLink="/shop-list"
+                            <li class="nav-item"><a href="shop-list"
                                 class="nav-link link-black-100 mx-2 px-0 py-3 font-weight-medium border-primary border-width-2" 
                                 >{{'allBooks' | translate}}</a>
                             </li>
 
-                            <li class="nav-item"><a routerLink="/single-product"
+                            <li class="nav-item"><a href="single-product"
                                 class="nav-link link-black-100 mx-2 px-0 py-3 font-weight-medium border-primary border-width-2" 
                                 >{{'bestSeller' | translate}}</a>
                             </li>
 
-                            <li class="nav-item"><a routerLink="/authors"
+                            <li class="nav-item"><a href="authors"
                                 class="nav-link link-black-100 mx-2 px-0 py-3 font-weight-medium border-primary border-width-2" 
                                 >{{'authors' | translate}}</a>
                             </li>

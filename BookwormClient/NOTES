@@ -28,3 +28,11 @@
 *Categoriye ait kaç kitap olduğu eklenecek
 *Categories ve Authors sayfalarında tasarım problemi var.
 *BrowseCategories yan menulerinle ngFordan kaynaklı bir tasarım problemi var
+
+19.11.2023
+*newArrivalBooks methodu yazıldı client tarafında görüntülendi.
+---
+*newArrivalBooks methodu backendde tekrar yazılacak. - (Include(b => b.Author))
+*Categoriler ve Authors sayfaları tasarımı düzenlense dahi apiden gelen veriler basılamıyor. Farklı bir tasarım kullanılacak.
+*Categoriler apisi birden fazla yerde kullanıldığı için service yazılabilir.
+*Featured Books ve Biographies Books kodla

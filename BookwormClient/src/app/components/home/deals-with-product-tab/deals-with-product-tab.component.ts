@@ -10,19 +10,20 @@ import { ErrorService } from 'src/app/services/error.service';
 })
 export class DealsWithProductTabComponent {
   
-  books: BookModel[] = [];
+  newArrivalBooks: BookModel[] = [];
 
   constructor(
     private http: HttpClient,
     private error: ErrorService) {
-    this.getAllBooks();
+    this.getNewBooks();
   }
 
-  getAllBooks() {
-    this.http.get<BookModel[]>("https://localhost:7018/api/Books/GetAllBooks")
+  //En son eklenen 6 kitabı getirir
+  getNewBooks() {
+    this.http.get<BookModel[]>("https://localhost:7018/api/Home/GetNewArrivalBooks")
       .subscribe({
         next: (res: any) => {
-          this.books = res;
+          this.newArrivalBooks = res;
         },
         error: (err: HttpErrorResponse) => {
           this.error.errorHandler(err);

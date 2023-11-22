@@ -7,6 +7,7 @@ import { AuthorModel } from '../models/author.model';
 import { CategoryModel } from '../models/category.model';
 import { RequestModel } from '../models/request.model';
 import { SelectedLanguageService } from './selected-language.service';
+import { BookDetailsModel } from '../models/bookDetail.model';
 
 
 @Injectable({
@@ -19,6 +20,7 @@ export class ShopListBooksService {
   category: CategoryModel[] = [];
   author: AuthorModel[] = [];
   searchAuthor: string = "";
+  bookDetails: BookDetailsModel[] = [] 
 
   constructor(
     private router: Router,
@@ -28,6 +30,7 @@ export class ShopListBooksService {
     ) {
       this.getAllCategories();
     this.getAllAuthors();
+    this.getAllBookLanguages();
    }
 
   goToShopListByCategoryId(categoryId: number) {
@@ -39,6 +42,17 @@ export class ShopListBooksService {
     this.getBooksByAuthorId();
   }
 
+  getAllBookLanguages(){
+    this.http.get("https://localhost:7018/api/BookDetails/GetAllBookDetail").subscribe({
+      next: (res: any) => {
+        this.bookDetails = res;
+      },
+      error: (err: HttpErrorResponse) => {
+        this.error.errorHandler(err);
+      }
+    })
+  }
+
   changeAuthor(authorId: number | null = null){
     this.request.authorId = authorId;
     this.request.pageSize = 10;
@@ -46,7 +60,7 @@ export class ShopListBooksService {
   }
 
   getBooksByAuthorId(){
-    this.http.post<AuthorModel[]>("https://localhost:7018/api/Authors/GetBooksByAuthorId", this.request).subscribe({
+    this.http.post<AuthorModel[]>("https://localhost:7018/api/Books/GetBooksByAuthorId", this.request).subscribe({
       next: (res: any) => {
         this.books = res;
       },

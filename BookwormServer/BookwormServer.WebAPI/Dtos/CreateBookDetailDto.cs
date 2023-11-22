@@ -2,11 +2,9 @@
 
 namespace BookwormServer.WebAPI.Dtos;
 
-public class CreateDetailBookDto
+public class CreateBookDetailDto
 {
-    public int Id { get; set; }
     public int BookId { get; set; }
-    public Book Book { get; set; }
     public string CoverFormatEn { get; set; } = string.Empty;
     public string CoverFormatTr { get; set; } = string.Empty;
     public string ISBN { get; set; } = string.Empty;

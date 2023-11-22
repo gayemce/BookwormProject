@@ -43,7 +43,8 @@ Tüm kitaplar Sayfası Yapılacaklar
 2-Aynı sayfa içerisinde seçilen kategoriye göre kitaplar çekilecek. - YAPILDI
 3-Yazarlar çekilecek. - Yapıldı
 4-Aynı sayfa içerisinde seçilen yazara ait kitaplar getirilecek. - YAPILDI
-5-Tüm diller çekilecek.
-6-Aynı sayfa içerisinde seçilen dile göre kitaplar getirilecek.
-7-Öne çıkan kitaplar basılacak.
-8-Ana sayfadan kategoriler sayfasına geçilecek. İki component ve bir service ile YAPILDI.
+5-Tüm diller çekilecek. - 
+6-Aynı sayfa içerisinde seçilen dile göre kitaplar getirilecek. -
+7-Öne çıkan kitaplar basılacak. - 
+8-Ana sayfadan kategoriler sayfasına geçilecek. İki component ve bir service ile YAPILDI
+9-BookDetails CRUD işlemleri YAPILDI

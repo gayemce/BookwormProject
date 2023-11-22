@@ -314,7 +314,11 @@
                                 <ul class="product-categories">
                                     <li class="custom-control custom-checkbox mb-2 pb-2">
                                         <input type="checkbox" class="custom-control-input" id="brandEnglish">
-                                        <label class="custom-control-label" for="brandEnglish">English</label>
+                                        <label class="custom-control-label" for="brandEnglish">{{'allLanguage' | translate}}</label>
+                                    </li>
+                                    <li class="custom-control custom-checkbox mb-2 pb-2" *ngFor="let l of shopListBooks.bookDetails">
+                                        <input type="checkbox" class="custom-control-input" id="brandEnglish">
+                                        <label class="custom-control-label" for="brandEnglish">{{l.Language}}</label>
                                     </li>
                                 </ul>
                             </div>

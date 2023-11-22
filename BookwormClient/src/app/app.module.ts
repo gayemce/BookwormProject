@@ -13,7 +13,7 @@ import { FooterComponent } from './components/layouts/footer/footer.component';
 import { HomeComponent } from './components/home/home.component';
 import { DealsWithProductTabComponent } from './components/home/deals-with-product-tab/deals-with-product-tab.component';
 import { BestsellingBooksComponent } from './components/home/bestselling-books/bestselling-books.component';
-import { BiographiesBooksComponent } from './components/home/biographies-books/biographies-books.component';
+import { ScienceFictionBooksComponent } from './components/home/science-fiction-books/science-fiction-books.component';
 import { BrandServicesComponent } from './components/home/brand-services/brand-services.component';
 import { SlickCarouselComponent } from './components/home/slick-carousel/slick-carousel.component';
 import { SidebarWithProductComponent } from './components/home/sidebar-with-product/sidebar-with-product.component';
@@ -38,6 +38,7 @@ import { FormsModule } from '@angular/forms';
 import { MiddlebarComponent } from './components/layouts/header/middlebar/middlebar.component';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { AuthorsComponent } from './components/authors/authors.component';
+import { ShopListByCategoryComponent } from './components/shop-list-by-category/shop-list-by-category.component';
 
 export function HttpLoaderFactory(http: HttpClient){
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -56,7 +57,7 @@ export function HttpLoaderFactory(http: HttpClient){
     HomeComponent,
     DealsWithProductTabComponent,
     BestsellingBooksComponent,
-    BiographiesBooksComponent,
+    ScienceFictionBooksComponent,
     BrandServicesComponent,
     SlickCarouselComponent,
     SidebarWithProductComponent,
@@ -75,6 +76,7 @@ export function HttpLoaderFactory(http: HttpClient){
     MiddlebarComponent,
     CategoriesComponent,
     AuthorsComponent,
+    ShopListByCategoryComponent,
   ],
   imports: [
     BrowserModule,

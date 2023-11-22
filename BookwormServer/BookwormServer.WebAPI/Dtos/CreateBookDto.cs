@@ -12,4 +12,5 @@ public sealed record CreateBookDto(
     Money Price,
     string ImgUrl,
     int Quantity,
+    bool IsFeatured,
     List<int> CategoryIds);

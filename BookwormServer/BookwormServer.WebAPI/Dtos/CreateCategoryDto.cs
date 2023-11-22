@@ -4,5 +4,5 @@ public sealed record CreateCategoryDto(
     string NameEn,
     string NameTr,
     string IconImgUrl,
-    bool IsActive,
-    bool IsDeleted);
+    bool IsActive = true,
+    bool IsDeleted = false);

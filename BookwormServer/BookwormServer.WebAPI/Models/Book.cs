@@ -16,7 +16,8 @@ public sealed class Book
     public Money Price { get; set; } = new(0, "₺");
     public string ImgUrl { get; set; } = string.Empty;
     public int Quantity { get; set; } = 0;
-    public bool IsActive { get; set; } = false;
+    public bool IsFeatured { get; set; } = false;
+    public bool IsActive { get; set; } = true;
     public bool IsDeleted { get; set; } = false;
     public DateTime CreatedAt { get; set; } = DateTime.Now;
     public List<BookCategory> BookCategories { get; set; }

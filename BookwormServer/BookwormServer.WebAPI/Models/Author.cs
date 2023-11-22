@@ -7,6 +7,7 @@ public sealed class Author
     public string Lastname { get; set; } = string.Empty;
     public string AboutEn { get; set; } = string.Empty;
     public string AboutTr { get; set; } = string.Empty;
+    public bool isActive { get; set; } = true;
     public string ProfileImgUrl { get; set; } = string.Empty;
     public int PublishedBooksCount { get; set; }
 

@@ -7,7 +7,6 @@
 *Client tarafında eklenen kitaplar görüntülendi.
 -
 *ErrorService de bir hata var.  (YAPILDI - @Injectable({providedIn: 'root'}))
-*BookDetails tablosu oluşturulacak.
 
 17.11.2023
 *BookDetails tablosu oluşturuldu. Book ile bire bir ilişki tanımlandı.
@@ -24,15 +23,27 @@
 *Value object olarak Money classı oluşturuldu.
 *Yazar ve kitaplar ilişkilendirildi ve client tarafında basıldı.
 ---
-*Categorilere göre kitap çekilecek.
-*Categoriye ait kaç kitap olduğu eklenecek
-*Categories ve Authors sayfalarında tasarım problemi var.
 *BrowseCategories yan menulerinle ngFordan kaynaklı bir tasarım problemi var
 
 19.11.2023
 *newArrivalBooks methodu yazıldı client tarafında görüntülendi.
 ---
-*newArrivalBooks methodu backendde tekrar yazılacak. - (Include(b => b.Author))
 *Categoriler ve Authors sayfaları tasarımı düzenlense dahi apiden gelen veriler basılamıyor. Farklı bir tasarım kullanılacak.
-*Categoriler apisi birden fazla yerde kullanıldığı için service yazılabilir.
-*Featured Books ve Biographies Books kodla
+
+20.11.2023
+*Featured Book methodu yazıldı client tarafında görüntülendi.
+*Science Fiction Books methodu yazıldı client tarafında görüntülendi.
+*Categorilere göre kitap çekilecek api yazıldı.
+*Browse categorilerden tıklanan idye göre kitapları getirecek.
+
+
+21.11.2023
+Tüm kitaplar Sayfası Yapılacaklar
+1-Tüm kitaplar çekilecek. - YAPILDI
+2-Aynı sayfa içerisinde seçilen kategoriye göre kitaplar çekilecek. - YAPILDI
+3-Yazarlar çekilecek. - Yapıldı
+4-Aynı sayfa içerisinde seçilen yazara ait kitaplar getirilecek. - YAPILDI
+5-Tüm diller çekilecek.
+6-Aynı sayfa içerisinde seçilen dile göre kitaplar getirilecek.
+7-Öne çıkan kitaplar basılacak.
+8-Ana sayfadan kategoriler sayfasına geçilecek. İki component ve bir service ile YAPILDI.

@@ -1,5 +1,7 @@
 ﻿using BookwormServer.WebAPI.Context;
 using BookwormServer.WebAPI.Dtos;
+using BookwormServer.WebAPI.Models;
+using BookwormServer.WebAPI.ValueObjects;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -22,22 +24,21 @@ public class HomeController : ControllerBase
     {
         //Son 6 kitap-yazar bilgilerini getirir.
         var response = _context.Books
-            .Include(b => b.Author)
+            .Include(a => a.Author)
             .OrderByDescending(p => p.CreatedAt)
             .Take(6)
             .ToList();
 
         List<BookDto> books = response
-            .Where(item => item.Author != null)
             .Select(item => new BookDto
             {
                 Id = item.Id,
-                Author = item.Author != null ? new AuthorDto
+                Author = new AuthorDto
                 {
                     Id = item.Author.Id,
                     Name = item.Author.Name,
                     Lastname = item.Author.Lastname,
-                } : new AuthorDto(),
+                },
                 Title = item.Title,
                 DescriptionEn = item.DescriptionEn,
                 DescriptionTr = item.DescriptionTr,
@@ -45,11 +46,80 @@ public class HomeController : ControllerBase
                 Price = item.Price,
                 ImgUrl = item.ImgUrl,
                 Quantity = item.Quantity,
+                IsFeatured = item.IsFeatured,
                 CreatedAt = item.CreatedAt,
             })
             .ToList();
 
         return Ok(books);
-
     }
+
+    [HttpGet]
+    public IActionResult GetFeaturedBooks()
+    {
+        var response = _context.Books
+            .Include(a => a.Author)
+            .Where(p => p.IsActive == true && p.IsFeatured == true && p.IsDeleted == false)
+            .ToList();
+
+        List<BookDto> books = response
+            .Select(item => new BookDto
+            {
+                Author = new AuthorDto
+                {
+                    Id = item.Author.Id,
+                    Name = item.Author.Name,
+                    Lastname = item.Author.Lastname,
+                }
+            })
+            .ToList();
+
+        return Ok(response);
+    }
+
+    [HttpGet]
+    public IActionResult GetScienceFictionBooks()
+    {
+        //Kategori ID'si 3 olan kitapları getir
+        var categoryId = 3; 
+
+        List<Book> books = _context.Books
+            .Include(a => a.Author)
+            .Include(c => c.BookCategories)
+                .ThenInclude(c => c.Category)
+            .Where(p => p.IsActive == true && p.IsDeleted == false &&
+                        p.BookCategories.Any(bc => bc.CategoryId == categoryId))
+            .Take(3)
+            .ToList();
+
+        var BookDtos = books.Select(book => new BookDto
+        {
+            Id = book.Id,
+            Title = book.Title,
+            Author = new AuthorDto
+            {
+                Id = book.Author.Id,
+                Name = book.Author.Name,
+                Lastname = book.Author.Lastname
+            },
+            DescriptionEn = book.DescriptionEn,
+            DescriptionTr = book.DescriptionTr,
+            Publisher = book.Publisher,
+            Price = new Money(book.Price.Value, book.Price.Currency),
+            ImgUrl = book.ImgUrl,
+            Quantity = book.Quantity,
+            IsFeatured = book.IsFeatured,
+            CreatedAt = book.CreatedAt,
+
+            //Kitaba ait kategori isimlerini getir.
+            BookCategories = book.BookCategories.Select(bc => new BookCategoryDto
+            {
+                CategoryId = bc.CategoryId,
+                CategoryName = bc.Category.NameTr
+            }).ToList()
+        }).ToList();
+
+        return Ok(BookDtos);
+    }
+  
 }

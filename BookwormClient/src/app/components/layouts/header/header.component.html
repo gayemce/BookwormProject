@@ -91,7 +91,12 @@
                                                 <div class="width-30 mr-2 text-lh-sm">
                                                     <img src="{{c.iconImgUrl}}" style="height: 30px;">
                                                 </div>
-                                                <div class="mr-auto">{{userSelectedLanguage === 'en' ? c.nameEn : c.nameTr}}</div>
+                                                <div class="mr-auto">
+                                                    <a (click)="shopListBooks.goToShopListByCategoryId(c.id)" >
+                                                        {{selectLang.userSelectedLanguage === 'en' ? c.nameEn : c.nameTr}}
+                                                    </a>
+                                                    
+                                                </div>
                                             </a>
 
                                             <div id="basicDropdownHover2"
@@ -146,12 +151,12 @@
                                 >{{ 'allCategories' | translate }}</a>
                             </li>
 
-                            <li class="nav-item"><a href="shop-list"
+                            <li class="nav-item"><a routerLink="/shop-list"
                                 class="nav-link link-black-100 mx-2 px-0 py-3 font-weight-medium border-primary border-width-2" 
                                 >{{'allBooks' | translate}}</a>
                             </li>
 
-                            <li class="nav-item"><a href="single-product"
+                            <li class="nav-item"><a routerLink="single-product"
                                 class="nav-link link-black-100 mx-2 px-0 py-3 font-weight-medium border-primary border-width-2" 
                                 >{{'bestSeller' | translate}}</a>
                             </li>

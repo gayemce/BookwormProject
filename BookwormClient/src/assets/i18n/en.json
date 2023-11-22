@@ -34,8 +34,15 @@
     "trendingBooks": "Trending Books",
     "searchForBooksbyKeyword": "Search For Books by Keyword",
     "allBooks": "All Books",
+    "allAuthor": "All Author",
     "authors": "Authors",
     "newArrivals": "New Arrivals",
     "newReleases": "New Releases",
-    "mostViewed": "Most Viewed"
+    "mostViewed": "Most Viewed",
+    "featuredBooks": "Featured Books",
+    "topRating": "Top Rating",
+    "populerAuthors": "Populer Authors",
+    "addToCart": "Add To Cart",
+    "scienceFictionBooks": "Science Fiction Books",
+    "viewAll": "View All"
   }

@@ -15,6 +15,7 @@ import { OrderTrackingComponent } from './components/order-tracking/order-tracki
 import { TermsAndConditionsComponent } from './components/terms-and-conditions/terms-and-conditions.component';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { AuthorsComponent } from './components/authors/authors.component';
+import { ShopListByCategoryComponent } from './components/shop-list-by-category/shop-list-by-category.component';
 
 const routes: Routes = [
   {
@@ -32,6 +33,10 @@ const routes: Routes = [
       {
         path: "categories",
         component: CategoriesComponent
+      },
+      {
+        path: 'shop-list/:id',
+        component: ShopListByCategoryComponent
       },
       {
         path: "shop-list",

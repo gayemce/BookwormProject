@@ -13,4 +13,5 @@ public sealed record UpdateBookDto(
     Money Price,
     string ImgUrl,
     int Quantity,
+    bool IsFeatured,
     List<int> CategoryIds);

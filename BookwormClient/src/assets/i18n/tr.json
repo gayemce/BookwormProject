@@ -34,8 +34,15 @@
   "trendingBooks": "Trend Kitaplar",
   "searchForBooksbyKeyword": "Anahtar Kelimeye Göre Kitap Arayın",
   "allBooks": "Tüm Kitaplar",
+  "allAuthor": "Tüm Yazarlar",
   "authors": "Yazarlar",
   "newArrivals": "Yeni Gelenler",
   "newReleases": "Yeni Çıkanlar",
-  "mostViewed": "En Çok Görüntülenenler"
+  "mostViewed": "En Çok Görüntülenenler",
+  "featuredBooks": "Öne Çıkan Kitaplar",
+  "topRating": "En Çok Değerlendirilen",
+  "populerAuthors": "Populer Yazarlar",
+  "addToCart": "Sepete ekle",
+  "scienceFictionBooks": "Bilim Kurgu Kitapları",
+  "viewAll": "Tümünü Görüntüle"
 }

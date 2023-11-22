@@ -20,7 +20,10 @@ public class CategoriesController : ControllerBase
     [HttpPost]
     public IActionResult CreateCategory(CreateCategoryDto request)
     {
-        Category category = _context.Categories.Where(p => p.NameEn == request.NameEn || p.NameTr == request.NameTr).FirstOrDefault();
+        Category category = _context.Categories
+            .Where(p => p.NameEn == request.NameEn || p.NameTr == request.NameTr)
+            .FirstOrDefault();
+
         if(category is not null)
         {
             return BadRequest(new { Message = "Bu kategori zaten mevcut" });
@@ -78,6 +81,7 @@ public class CategoriesController : ControllerBase
     {
         var categories = _context.Categories
             .Where(p => p.IsActive == true && p.IsDeleted == false)
+            .OrderBy(p => p.NameTr)
             .ToList();
 
         return Ok(categories);

@@ -143,11 +143,42 @@ public class BooksController : ControllerBase
         return NoContent();
     }
 
-    [HttpGet]
-    public IActionResult GetAllBooks()
+    [HttpPost]
+    public IActionResult GetAllBooks(RequestDto request)
     {
-        var books = _context.Books.ToList();
-        return Ok(books);
+        ResponseDto<List<Book>> response = new();
+        string replaceSearch = request.Search.Replace("İ", "i").ToLower();
+        var newBooks = new List<Book>();
+
+        if(request.CategoryId != null)
+        {
+            newBooks = _context.BookCategories
+                .Where(p => p.CategoryId == request.CategoryId)
+                .Select(s => s.Book)
+                .ToList();
+        }
+        else
+        {
+            newBooks = _context.Books.ToList();
+        }
+
+        newBooks = newBooks
+            .Where(p => p.Title.ToLower().Contains(replaceSearch) ||
+                        p.Author.Name.ToLower().Contains(replaceSearch) ||
+                        p.Author.Lastname.ToLower().Contains(replaceSearch))
+            .ToList();
+
+        response.Data = newBooks
+            .Skip((request.PageNumber - 1) * request.PageSize)
+            .Take(request.PageSize)
+            .ToList();
+        response.PageNumber = request.PageNumber;
+        response.PageSize = request.PageSize;
+        response.TotalPageCount = (int)Math.Ceiling(newBooks.Count / (double)request.PageSize);
+        response.IsFirstPage = request.PageNumber == 1;
+        response.IsLastPage = request.PageNumber == response.TotalPageCount;
+
+        return Ok(response);
     }
 
     [HttpPost]
@@ -284,10 +315,10 @@ public class BooksController : ControllerBase
     }
 
     [HttpPost]
-    public IActionResult GetBooksByLanguage(RequestDto request)
+    public IActionResult getBooksByLanguageId(RequestDto request)
     {
         List<Book> books = new();
-        if(request.LanguageName == "")
+        if(request.LanguageId == null)
         {
             books = _context.Books
                 .Where(p => p.IsActive == true && p.IsDeleted == false)
@@ -300,8 +331,8 @@ public class BooksController : ControllerBase
         {
             books = _context.Books
                 .Include(bd => bd.BookDetail)
-                .Where(bd => bd.BookDetail.Language == request.LanguageName)
-                .Where(p => p.IsActive && p.IsDeleted == false)
+                .Where(bd => bd.BookDetail.LanguageId == request.LanguageId)
+                .Where(p => p.IsActive == true && p.IsDeleted == false)
                 .Take(request.PageSize)
                 .ToList();
         }

@@ -5,6 +5,9 @@ namespace BookwormServer.WebAPI.Dtos;
 public sealed record RequestDto(
     int? AuthorId,
     int? CategoryId,
-    string? LanguageName,
+    int? LanguageId,
+    string LanguageEn,
+    string LanguageTr,
+    int PageNumber,
     int PageSize,
     string Search);

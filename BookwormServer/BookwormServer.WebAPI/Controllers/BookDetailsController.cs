@@ -35,7 +35,9 @@ public class BookDetailsController : ControllerBase
         bookDetail.ISBN = request.ISBN;
         bookDetail.PublicationDate = request.PublicationDate;
         bookDetail.PublicationCityCountry = request.PublicationCityCountry;
-        bookDetail.Language = request.Language;
+        bookDetail.LanguageId = request.LanguageId;
+        bookDetail.LanguageEn = request.LanguageEn;
+        bookDetail.LanguageTr = request.LanguageTr;
 
         _context.BookDetails.Add(bookDetail);
         _context.SaveChanges();
@@ -57,7 +59,9 @@ public class BookDetailsController : ControllerBase
         bookDetail.ISBN = request.ISBN;
         bookDetail.PublicationDate = request.PublicationDate;
         bookDetail.PublicationCityCountry = request.PublicationCityCountry;
-        bookDetail.Language = request.Language;
+        bookDetail.LanguageId = request.LanguageId;
+        bookDetail.LanguageEn = request.LanguageEn;
+        bookDetail.LanguageTr = request.LanguageTr;
 
         _context.SaveChanges();
         return NoContent();

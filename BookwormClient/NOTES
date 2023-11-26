@@ -27,8 +27,6 @@
 
 19.11.2023
 *newArrivalBooks methodu yazıldı client tarafında görüntülendi.
----
-*Categoriler ve Authors sayfaları tasarımı düzenlense dahi apiden gelen veriler basılamıyor. Farklı bir tasarım kullanılacak.
 
 20.11.2023
 *Featured Book methodu yazıldı client tarafında görüntülendi.
@@ -39,12 +37,23 @@
 
 21.11.2023
 Tüm kitaplar Sayfası Yapılacaklar
-1-Tüm kitaplar çekilecek. - YAPILDI
-2-Aynı sayfa içerisinde seçilen kategoriye göre kitaplar çekilecek. - YAPILDI
-3-Yazarlar çekilecek. - Yapıldı
-4-Aynı sayfa içerisinde seçilen yazara ait kitaplar getirilecek. - YAPILDI
-5-Tüm diller çekilecek. - 
-6-Aynı sayfa içerisinde seçilen dile göre kitaplar getirilecek. -
-7-Öne çıkan kitaplar basılacak. - 
-8-Ana sayfadan kategoriler sayfasına geçilecek. İki component ve bir service ile YAPILDI
-9-BookDetails CRUD işlemleri YAPILDI
+*Tüm kitaplar çekilecek. - YAPILDI
+*Aynı sayfa içerisinde seçilen kategoriye göre kitaplar çekilecek. - YAPILDI
+*Yazarlar çekilecek. - Yapıldı
+*Aynı sayfa içerisinde seçilen yazara ait kitaplar getirilecek. - YAPILDI
+*Ana sayfadan kategoriler sayfasına geçilecek. İki component ve bir service ile YAPILDI
+*BookDetails CRUD işlemleri YAPILDI
+
+23.11.2023
+*Tüm diller çekilecek. - YAPILDI
+*Aynı sayfa içerisinde seçilen dile göre kitaplar getirilecek. - YAPILDI
+*Öne çıkan kitaplar basılacak. - YAPILDI
+*Kitap dilleri translate uygun çekilecek - YAPILDI.
+**Categoriler ve Authors sayfaları tasarımı - YAPILDI
+---
+*Filtreleme tüm seçenekleri kapsayacak şekilde yapılacak
+
+26.11.2023
+*Pagination yapısı ile ilgilenildi.
+---
+*Sayfa değiştirildiğinde o sayfaya ait kitap görüntülenemiyor.

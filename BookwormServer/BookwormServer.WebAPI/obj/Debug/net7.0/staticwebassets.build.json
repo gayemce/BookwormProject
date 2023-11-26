@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "h66h1UkJfg1VgrpU+RPWQvzU1terdeLyMb9c8wITO+s=",
+  "Hash": "TDFmYrIj5QQL5cjujKF7JkkvjkY7RMdL7FQt3LJBh7g=",
   "Source": "BookwormServer.WebAPI",
   "BasePath": "_content/BookwormServer.WebAPI",
   "Mode": "Default",
@@ -10,7 +10,7 @@
     {
       "Name": "BookwormServer.WebAPI\\wwwroot",
       "Source": "BookwormServer.WebAPI",
-      "ContentRoot": "C:\\Users\\Win10\\Desktop\\WorkSpace\\BookwormProject\\BookwormServer\\BookwormServer.WebAPI\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Win10\\Desktop\\WorkSpace\\Projects\\BookwormProject\\BookwormServer\\BookwormServer.WebAPI\\wwwroot\\",
       "BasePath": "_content/BookwormServer.WebAPI",
       "Pattern": "**"
     }

@@ -38,10 +38,10 @@ const routes: Routes = [
         path: 'shop-list/:id',
         component: ShopListByCategoryComponent
       },
-      {
-        path: "shop-list",
-        component: ShopListComponent
-      },
+      // {
+      //   path: "shop-list",
+      //   component: ShopListComponent
+      // },
       {
         path: "single-product",
         component: SingleProductComponent

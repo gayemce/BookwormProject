@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "WjGSkiHFPgj2DprRa0aGAwPuVlmI4NtrIZNq5LSqllqz0ihyjV9Q1yFMjbOzUJBjjtUBeHuEIAR1UhgoV0/LnA==",
+  "dgSpecHash": "GGz5pGn2NYKkrAbqtZE+d6nnDOGVfSsF3k/AkD6by4T3LnL1DHm38K5Io4uu1nDK6VGnfqonjINr0T1HRmtAhw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Win10\\Desktop\\WorkSpace\\BookwormProject\\BookwormServer\\BookwormServer.WebAPI\\BookwormServer.WebAPI.csproj",
+  "projectFilePath": "C:\\Users\\Win10\\Desktop\\WorkSpace\\Projects\\BookwormProject\\BookwormServer\\BookwormServer.WebAPI\\BookwormServer.WebAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Win10\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\Win10\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",

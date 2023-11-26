@@ -312,13 +312,16 @@
                                 aria-labelledby="widgetHeading22"
                                 data-parent="#widgetAccordion">
                                 <ul class="product-categories">
-                                    <li class="custom-control custom-checkbox mb-2 pb-2">
-                                        <input type="checkbox" class="custom-control-input" id="brandEnglish">
-                                        <label class="custom-control-label" for="brandEnglish">{{'allLanguage' | translate}}</label>
+                                    <li class="cat-item cat-item-9 cat-parent">
+                                        <a [ngClass]="shopListBooks.request.languageId === null ? 'myActive' : ''"
+                                        (click)="shopListBooks.changeLanguage(null)">
+                                            {{'allLanguage' | translate}}
+                                        </a>
                                     </li>
-                                    <li class="custom-control custom-checkbox mb-2 pb-2" *ngFor="let l of shopListBooks.bookDetails">
-                                        <input type="checkbox" class="custom-control-input" id="brandEnglish">
-                                        <label class="custom-control-label" for="brandEnglish">{{l.Language}}</label>
+                                    <li class="cat-item cat-item-9 cat-parent" *ngFor="let l of shopListBooks.bookDetails">
+                                        <a (click)="shopListBooks.changeLanguage(l.languageId)">
+                                            {{selectLang.userSelectedLanguage === 'en' ? l.languageEn : l.languageTr}}
+                                        </a>
                                     </li>
                                 </ul>
                             </div>

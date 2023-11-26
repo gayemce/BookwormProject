@@ -3449,11 +3449,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Win10\\Desktop\\WorkSpace\\BookwormProject\\BookwormServer\\BookwormServer.WebAPI\\BookwormServer.WebAPI.csproj",
+      "projectUniqueName": "C:\\Users\\Win10\\Desktop\\WorkSpace\\Projects\\BookwormProject\\BookwormServer\\BookwormServer.WebAPI\\BookwormServer.WebAPI.csproj",
       "projectName": "BookwormServer.WebAPI",
-      "projectPath": "C:\\Users\\Win10\\Desktop\\WorkSpace\\BookwormProject\\BookwormServer\\BookwormServer.WebAPI\\BookwormServer.WebAPI.csproj",
+      "projectPath": "C:\\Users\\Win10\\Desktop\\WorkSpace\\Projects\\BookwormProject\\BookwormServer\\BookwormServer.WebAPI\\BookwormServer.WebAPI.csproj",
       "packagesPath": "C:\\Users\\Win10\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Win10\\Desktop\\WorkSpace\\BookwormProject\\BookwormServer\\BookwormServer.WebAPI\\obj\\",
+      "outputPath": "C:\\Users\\Win10\\Desktop\\WorkSpace\\Projects\\BookwormProject\\BookwormServer\\BookwormServer.WebAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Win10\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -3464,7 +3464,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\sdk\\7.0.304\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -3525,7 +3524,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -15,7 +15,10 @@ export class CategoriesComponent {
   constructor(
     private http: HttpClient,
     private error: ErrorService) {
-    this.getAllCategories();
+    this.getAllCategories()
+  }
+
+  ngOnInit(): void {
   }
 
   getAllCategories() {

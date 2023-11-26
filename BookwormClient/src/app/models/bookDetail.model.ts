@@ -1,10 +1,12 @@
 export class BookDetailsModel {
     id: number = 0;
     bookId: number = 0;
-    CoverFormatEn: string = "";
-    CoverFormatTr: string = "";
-    ISBN: string = "";
-    PublicationDate: string = "";
-    PublicationCityCountry: string = "";
-    Language: string = "";
+    coverFormatEn: string = "";
+    coverFormatTr: string = "";
+    iSBN: string = "";
+    publicationDate: string = "";
+    publicationCityCountry: string = "";
+    languageId: number = 0;
+    languageEn: string = "";
+    languageTr: string = "";
 }

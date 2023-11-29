@@ -149,64 +149,48 @@ public class BooksController : ControllerBase
     {
         ResponseDto<List<BookDto>> response = new();
         string replaceSearch = request.Search.Replace("İ", "i").ToLower();
-        var newBooks = new List<Book>();
 
-        if(request.CategoryId is not null)
+        IQueryable<Book> query = _context.Books
+            .Include(b => b.Author)
+            .Include(bd => bd.BookDetail)
+            .Where(p => p.IsActive == true && p.IsDeleted == false);
+
+        if (request.CategoryId is not null)
         {
-            newBooks = _context.BookCategories
-                .Include(b => b.Book)
-                .Where(p => p.CategoryId == request.CategoryId)
-                .Select(s => s.Book)
-                .Where(p => p.IsActive == true && p.IsDeleted == false)
-                .Where(p => p.Title.ToLower().Contains(request.Search.ToLower()))
-                .Take(request.PageSize)
-                .ToList();
-        }
-        else if(request.AuthorId is not null)
-        {
-            newBooks = _context.Books
-               .Include(a => a.Author)
-               .Where(p => p.Author.Id == request.AuthorId)
-               .Where(p => p.IsActive == true && p.IsDeleted == false)
-               .Take(request.PageSize)
-               .ToList();
-        }
-        else if(request.LanguageId is not null)
-        {
-            newBooks = _context.Books
-                .Include(bd => bd.BookDetail)
-                .Where(bd => bd.BookDetail.LanguageId == request.LanguageId)
-                .Where(p => p.IsActive == true && p.IsDeleted == false)
-                .Take(request.PageSize)
-                .ToList();
-        }
-        else
-        {
-            newBooks = _context.Books.ToList();
+            query = query
+           .Include(b => b.BookCategories)
+           .Where(b => b.BookCategories.Any(bc => bc.CategoryId == request.CategoryId));
         }
 
-        newBooks = newBooks
+        if (request.AuthorId is not null)
+        {
+            query = query.Where(b => b.AuthorId == request.AuthorId);
+        }
+
+        if (request.LanguageId is not null)
+        {
+            query = query.Where(b => b.BookDetail.LanguageId == request.LanguageId);
+        }
+
+        query = query
             .Where(p => p.Title.ToLower().Contains(replaceSearch) ||
                         p.Author.Name.ToLower().Contains(replaceSearch) ||
-                        p.Author.Lastname.ToLower().Contains(replaceSearch))
-            .ToList();
+                        p.Author.Lastname.ToLower().Contains(replaceSearch));
 
-        response.Data = newBooks
+        List<BookDto> booksDto = query
+            .AsNoTracking()
             .Skip((request.PageNumber - 1) * request.PageSize)
             .Take(request.PageSize)
             .Select(book => new BookDto
             {
                 Id = book.Id,
                 Title = book.Title,
-                Author = _context.Authors
-                .Where(a => a.Id == book.AuthorId)
-                .Select(s => new AuthorDto
+                Author = new AuthorDto
                 {
-                    Id = s.Id,
-                    Name = s.Name,
-                    Lastname = s.Lastname,
-                })
-                .FirstOrDefault(),
+                    Id = book.Author.Id,
+                    Name = book.Author.Name,
+                    Lastname = book.Author.Lastname,
+                },
                 DescriptionEn = book.DescriptionEn,
                 DescriptionTr = book.DescriptionTr,
                 Publisher = book.Publisher,
@@ -225,12 +209,14 @@ public class BooksController : ControllerBase
             })
             .ToList();
 
+        response.Data = booksDto;
         response.PageNumber = request.PageNumber;
         response.PageSize = request.PageSize;
-        response.TotalPageCount = (int)Math.Ceiling(newBooks.Count / (double)request.PageSize);
+        response.TotalPageCount = (int)Math.Ceiling(query.Count() / (double)request.PageSize);
         response.IsFirstPage = request.PageNumber == 1;
         response.IsLastPage = request.PageNumber == response.TotalPageCount;
 
         return Ok(response);
     }
+
 }

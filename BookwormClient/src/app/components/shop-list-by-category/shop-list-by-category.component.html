@@ -56,7 +56,9 @@
                     <div
                         class="shop-control-bar d-lg-flex justify-content-between align-items-center mb-5 text-center text-md-left">
                         <div class="shop-control-bar__left mb-4 m-lg-0">
-                            <p class="woocommerce-result-count m-0">Showing 1–12 of 126 results</p>
+                            <p class="woocommerce-result-count m-0">
+                                {{ shopListBooks.getTranslatedResultCount() }}
+                            </p>
                         </div>
                         <div class="shop-control-bar__right d-md-flex align-items-center">
                             <form class="woocommerce-ordering mb-4 m-md-0" method="get">
@@ -147,56 +149,64 @@
                             <!-- Mockup Block -->
                             <ul
                                 class="products list-unstyled row no-gutters row-cols-2 row-cols-lg-3 row-cols-wd-4 border-top border-left mb-6">
-                                <li class="product col" *ngFor="let b of shopListBooks.response?.data">
-                                    <div class="product__inner overflow-hidden p-3 p-md-4d875">
-                                        <div
-                                            class="woocommerce-LoopProduct-link woocommerce-loop-product__link d-block position-relative">
-                                            <div class="woocommerce-loop-product__thumbnail">
-                                                <a href="../shop/single-product-v2.html" class="d-block"><img
-                                                        src={{b.imgUrl}}
-                                                        class="img-fluid d-block mx-auto attachment-shop_catalog size-shop_catalog wp-post-image img-fluid"
-                                                        alt="image-description"></a>
-                                            </div>
-                                            <div class="woocommerce-loop-product__body product__body pt-3 bg-white">
-                                                <div class="text-uppercase font-size-1 mb-1 text-truncate"><a
-                                                        href="../shop/single-product-v2.html">{{b.publisher}}</a></div>
-                                                <h2
-                                                    class="woocommerce-loop-product__title product__title h6 text-lh-md mb-1 text-height-2 crop-text-2 h-dark">
-                                                    <a href="../shop/single-product-v2.html">{{b.title}}</a>
-                                                </h2>
-                                                <div class="font-size-2  mb-1 text-truncate"><a
-                                                        href="../others/authors-single.html"
-                                                        class="text-gray-700">{{b.author.name}}
-                                                        {{b.author.lastname}}</a></div>
-                                                <div
-                                                    class="price d-flex align-items-center font-weight-medium font-size-3">
-                                                    <span class="woocommerce-Price-amount amount"><span
-                                                            class="woocommerce-Price-currencySymbol">{{b.price.currency}}</span>{{b.price.value}}</span>
+                                <ng-container
+                                    *ngIf="shopListBooks.response?.data && shopListBooks.response.data.length > 0; else notFound">
+                                    <li class="product col" *ngFor="let b of shopListBooks.response?.data">
+                                        <div class="product__inner overflow-hidden p-3 p-md-4d875">
+                                            <div
+                                                class="woocommerce-LoopProduct-link woocommerce-loop-product__link d-block position-relative">
+                                                <div class="woocommerce-loop-product__thumbnail">
+                                                    <a href="../shop/single-product-v2.html" class="d-block"><img
+                                                            src={{b.imgUrl}}
+                                                            class="img-fluid d-block mx-auto attachment-shop_catalog size-shop_catalog wp-post-image img-fluid"
+                                                            alt="image-description"></a>
+                                                </div>
+                                                <div class="woocommerce-loop-product__body product__body pt-3 bg-white">
+                                                    <div class="text-uppercase font-size-1 mb-1 text-truncate"><a
+                                                            href="../shop/single-product-v2.html">{{b.publisher}}</a>
+                                                    </div>
+                                                    <h2
+                                                        class="woocommerce-loop-product__title product__title h6 text-lh-md mb-1 text-height-2 crop-text-2 h-dark">
+                                                        <a href="../shop/single-product-v2.html">{{b.title}}</a>
+                                                    </h2>
+                                                    <div class="font-size-2  mb-1 text-truncate"><a
+                                                            href="../others/authors-single.html"
+                                                            class="text-gray-700">{{b.author.name}}
+                                                            {{b.author.lastname}}</a></div>
+                                                    <div
+                                                        class="price d-flex align-items-center font-weight-medium font-size-3">
+                                                        <span class="woocommerce-Price-amount amount"><span
+                                                                class="woocommerce-Price-currencySymbol">{{b.price.currency}}</span>{{b.price.value}}</span>
+                                                    </div>
+                                                </div>
+                                                <div class="product__hover d-flex align-items-center">
+                                                    <a href="../shop/single-product-v2.html"
+                                                        class="text-uppercase text-dark h-dark font-weight-medium mr-auto"
+                                                        data-toggle="tooltip" data-placement="right" title=""
+                                                        data-original-title="ADD TO CART">
+                                                        <span class="product__add-to-cart">{{'addToCart' |
+                                                            translate}}</span>
+                                                        <span class="product__add-to-cart-icon font-size-4"><i
+                                                                class="flaticon-icon-126515"></i></span>
+                                                    </a>
+                                                    <a href="../shop/single-product-v2.html"
+                                                        class="mr-1 h-p-bg btn btn-outline-primary border-0">
+                                                        <i class="flaticon-switch"></i>
+                                                    </a>
+                                                    <a href="../shop/single-product-v2.html"
+                                                        class="h-p-bg btn btn-outline-primary border-0">
+                                                        <i class="flaticon-heart"></i>
+                                                    </a>
                                                 </div>
                                             </div>
-                                            <div class="product__hover d-flex align-items-center">
-                                                <a href="../shop/single-product-v2.html"
-                                                    class="text-uppercase text-dark h-dark font-weight-medium mr-auto"
-                                                    data-toggle="tooltip" data-placement="right" title=""
-                                                    data-original-title="ADD TO CART">
-                                                    <span class="product__add-to-cart">{{'addToCart' |
-                                                        translate}}</span>
-                                                    <span class="product__add-to-cart-icon font-size-4"><i
-                                                            class="flaticon-icon-126515"></i></span>
-                                                </a>
-                                                <a href="../shop/single-product-v2.html"
-                                                    class="mr-1 h-p-bg btn btn-outline-primary border-0">
-                                                    <i class="flaticon-switch"></i>
-                                                </a>
-                                                <a href="../shop/single-product-v2.html"
-                                                    class="h-p-bg btn btn-outline-primary border-0">
-                                                    <i class="flaticon-heart"></i>
-                                                </a>
-                                            </div>
                                         </div>
+                                    </li>
+                                </ng-container>
+                                <ng-template #notFound>
+                                    <div class="text-center d-flex justify-content-center align-items-center" style="height: 82vh; margin-left: 30rem; font-size: 32px;">
+                                      {{ 'notFoundMessage' | translate }}
                                     </div>
-                                </li>
-
+                                </ng-template>                                  
                             </ul>
                             <!-- End Mockup Block -->
                         </div>
@@ -265,47 +275,31 @@
                     <!-- End Tab Content -->
 
                     <!-- Pagination -->
-                    <!-- Pagination -->
-                    <!-- <nav aria-label="Page navigation example" style="float: right;">
-                        <ul class="pagination">
-                            <li class="page-item" [ngClass]="response.isFirstPage === true ? 'disabled' : ''">
-                                <a class="page-link" (click)="getAll(response.pageNumber - 1)" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
-                            </li>
-                            <li class="page-item" [ngClass]="response.pageNumber === p ? 'active' : '' "
-                                *ngFor="let p of pageNumbers">
-                                <a class="page-link" (click)="getAll(p)">{{p}}</a>
-                            </li>
-                            <li class="page-item" [ngClass]="response.isLastPage === true ? 'disabled' : '' ">
-                                <a class="page-link" (click)="getAll(response.pageNumber + 1)" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav> -->
-
-                    <!-- Template Pagination -->
                     <nav aria-label="Page navigation example">
-                        <ul class="pagination pagination__custom justify-content-md-center flex-nowrap flex-md-wrap overflow-auto overflow-md-visble">
-                            <li class="flex-shrink-0 flex-md-shrink-1 page-item" 
-                                [ngClass]="shopListBooks.response?.isFirstPage === true ? 'disabled' : ''">
-                                <a class="page-link" 
-                                (click)="shopListBooks.getAllBooks(shopListBooks.response?.pageNumber - 1)">
-                                Previous
-                            </a>
+                        <ul
+                            class="pagination pagination__custom justify-content-md-center flex-nowrap flex-md-wrap overflow-auto overflow-md-visble">
+                            <li class="flex-shrink-0 flex-md-shrink-1 page-item"
+                                [ngClass]="
+                                    shopListBooks.response?.isFirstPage === true || 
+                                    shopListBooks.response.data.length === 0 ? 'disabled' : ''">
+                                <a class="page-link"
+                                    (click)="shopListBooks.getAllBooks(shopListBooks.response?.pageNumber - 1)">
+                                    Previous
+                                </a>
                             </li>
 
-                            <li class="flex-shrink-0 flex-md-shrink-1 page-item" aria-current="page" 
-                                [ngClass]="shopListBooks.response?.pageNumber === p ? 'active' : ''" 
+                            <li class="flex-shrink-0 flex-md-shrink-1 page-item" aria-current="page"
+                                [ngClass]="shopListBooks.response?.pageNumber === p ? 'active' : ''"
                                 *ngFor="let p of shopListBooks.pageNumbers">
                                 <a class="page-link" (click)="shopListBooks.getAllBooks(p)">{{p}}</a>
                             </li>
 
                             <li class="flex-shrink-0 flex-md-shrink-1 page-item"
-                                [ngClass]="shopListBooks.response?.isLastPage === true ? 'disabled' : ''">
-                                <a class="page-link" 
-                                (click)="shopListBooks.getAllBooks(shopListBooks.response?.pageNumber + 1)">
+                                [ngClass]="
+                                    shopListBooks.response?.isLastPage === true ||
+                                    shopListBooks.response.data.length === 0  ? 'disabled' : ''">
+                                <a class="page-link"
+                                    (click)="shopListBooks.getAllBooks(shopListBooks.response?.pageNumber + 1)">
                                     Next
                                 </a>
                             </li>
@@ -404,7 +398,7 @@
                                         </a>
                                     </li>
                                     <li class="cat-item cat-item-9 cat-parent" *ngFor="let a of shopListBooks.author">
-                                        <a [ngClass]="shopListBooks.request.categoryId === (a.id) ? 'myActive' : ''"
+                                        <a [ngClass]="shopListBooks.request.authorId === (a.id) ? 'myActive' : ''"
                                             (click)="shopListBooks.changeAuthor(a.id)">
                                             {{a.name}} {{a.lastname}}
                                         </a>
@@ -456,7 +450,7 @@
                                     </li>
                                     <li class="cat-item cat-item-9 cat-parent"
                                         *ngFor="let l of shopListBooks.bookDetails">
-                                        <a [ngClass]="shopListBooks.request.categoryId === (l.languageId) ? 'myActive' : ''"
+                                        <a [ngClass]="shopListBooks.request.languageId === (l.languageId) ? 'myActive' : ''"
                                             (click)="shopListBooks.changeLanguage(l.languageId)">
                                             {{selectLang.userSelectedLanguage === 'en' ? l.languageEn : l.languageTr}}
                                         </a>

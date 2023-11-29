@@ -45,5 +45,7 @@
   "populerAuthors": "Populer Yazarlar",
   "addToCart": "Sepete ekle",
   "scienceFictionBooks": "Bilim Kurgu Kitapları",
-  "viewAll": "Tümünü Görüntüle"
+  "viewAll": "Tümünü Görüntüle",
+  "notFoundMessage": "Aradığınız kitap bulunamadı.",
+  "Showing 1–' + shopListBooks.response.data.length + ' of results": "1–' + shopListBooks.response.data.length + ' arasındaki sonuçlar gösteriliyor"
 }

@@ -8,6 +8,7 @@ import { CategoryModel } from '../models/category.model';
 import { RequestModel } from '../models/request.model';
 import { SelectedLanguageService } from './selected-language.service';
 import { BookDetailsModel } from '../models/bookDetail.model';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Injectable({
@@ -31,6 +32,7 @@ export class ShopListBooksService {
     private router: Router,
     private http: HttpClient,
     private error: ErrorService,
+    private translate: TranslateService,
     public selectLang: SelectedLanguageService
   ) {
     this.getAllCategories();
@@ -40,32 +42,36 @@ export class ShopListBooksService {
     this.getAllBooks();
   }
 
+  getTranslatedResultCount(): string {
+    const translationKey = 'showingResults'; // Bu örnekte bir çeviri anahtarı
+    const showingText = this.translate.instant('showing'); // 'showing' çevirisini al
+    const ofText = this.translate.instant('of'); // 'of' çevirisini al
+
+    return `${showingText} 1–${this.response.data.length} ${ofText} ${this.translate.instant(translationKey)}`;
+}
+
+
   goToShopListByCategoryId(categoryId: number) {
     this.request.categoryId = categoryId;
     this.router.navigate(['/shop-list', categoryId]);
     this.request.pageSize = 3;
     this.getAllCategories();
     this.getAllAuthors();
-    this.getBooksByAuthorId();
     this.getAllBooks();
   }
 
-  // handleCheckboxChange(event: any, language: string): void {
-  //   if (!event.target.checked) {
-  //     this.changeLanguage('');
-  //   } else {
-  //     this.changeLanguage(language);
-  //   }
-  // }
-
   getAllBooks(pageNumber = 1) {
     this.request.pageNumber = pageNumber;
-    this.http.post(`https://localhost:7018/api/Books/GetAllBooks`, this.request)
-      .subscribe(res => {
+    this.http.post(`https://localhost:7018/api/Books/GetAllBooks`, this.request).subscribe({
+      next: (res: any) => {
         this.response = res;
         this.setPageNumber();
         console.log(this.response);
-      })
+      },
+      error: (err: HttpErrorResponse) => {
+        this.error.errorHandler(err);
+      }
+    })
   }
 
   setPageNumber() {
@@ -77,27 +83,13 @@ export class ShopListBooksService {
 
   changeLanguage(languageId: number | null = null) {
     this.request.languageId = languageId;
-    this.getBooksByLanguageId();
     this.getAllBooks(1);
-  }
-
-  getBooksByLanguageId() {
-    this.http.post("https://localhost:7018/api/Books/getBooksByLanguageId", this.request).subscribe({
-      next: (res: any) => {
-        this.books = res;
-      },
-      error: (err: HttpErrorResponse) => {
-        this.error.errorHandler(err);
-      }
-    })
   }
 
   getAllBookLanguages() {
     this.http.get("https://localhost:7018/api/BookDetails/GetAllBookDetail").subscribe({
       next: (res: any) => {
         this.bookDetails = res;
-        this.getBooksByLanguageId();
-        console.log(this.bookDetails);
       },
       error: (err: HttpErrorResponse) => {
         this.error.errorHandler(err);
@@ -107,19 +99,7 @@ export class ShopListBooksService {
 
   changeAuthor(authorId: number | null = null) {
     this.request.authorId = authorId;
-    this.getBooksByAuthorId();
     this.getAllBooks(1);
-  }
-
-  getBooksByAuthorId() {
-    this.http.post<AuthorModel[]>("https://localhost:7018/api/Books/GetBooksByAuthorId", this.request).subscribe({
-      next: (res: any) => {
-        this.books = res;
-      },
-      error: (err: HttpErrorResponse) => {
-        this.error.errorHandler(err);
-      }
-    })
   }
 
   getAllAuthors() {
@@ -128,7 +108,6 @@ export class ShopListBooksService {
     this.http.post("https://localhost:7018/api/Authors/GetAllAuthors", this.request).subscribe({
       next: (res: any) => {
         this.author = res;
-        // this.getBooksByAuthorId();
       },
       error: (err: HttpErrorResponse) => {
         this.error.errorHandler(err);
@@ -138,26 +117,13 @@ export class ShopListBooksService {
 
   changeCategory(categoryId: number | null = null) {
     this.request.categoryId = categoryId;
-    this.getBooksByCategoryId();
-    this.getAllBooks(1); //Kategori değiştirilirse 1. sayfadan başlasın
-  }
-
-  getBooksByCategoryId() {
-    this.http.post<BookModel[]>("https://localhost:7018/api/Books/GetBooksByCategoryId", this.request).subscribe({
-      next: (res: any) => {
-        this.books = res;
-      },
-      error: (err: HttpErrorResponse) => {
-        this.error.errorHandler(err);
-      }
-    });
+    this.getAllBooks(1);
   }
 
   getAllCategories() {
     this.http.get("https://localhost:7018/api/Categories/GetAllCategories").subscribe({
       next: (res: any) => {
         this.category = res;
-        this.getBooksByCategoryId();
       },
       error: (err: HttpErrorResponse) => {
         this.error.errorHandler(err);

@@ -45,5 +45,10 @@
     "populerAuthors": "Populer Authors",
     "addToCart": "Add To Cart",
     "scienceFictionBooks": "Science Fiction Books",
-    "viewAll": "View All"
+    "viewAll": "View All",
+    "notFoundMessage": "The book you are looking for could not be found.",
+    "showingResults": "showing result",
+    "showing": "Showing",
+    "of": "of"
+
   }

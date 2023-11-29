@@ -56,4 +56,9 @@ Tüm kitaplar Sayfası Yapılacaklar
 26.11.2023
 *Pagination yapısı ile ilgilenildi.
 ---
-*Sayfa değiştirildiğinde o sayfaya ait kitap görüntülenemiyor.
+*Sayfa değiştirildiğinde o sayfaya ait kitap görüntülenemiyor. Data da veriler geliyor.
+
+29.11.2023
+*Sayfa değiştirildiğinde o sayfaya ait kitaplar görüntüleniyor. 
+---
+*Birden fazla filtreleme işlemi ile alakalı problem var.

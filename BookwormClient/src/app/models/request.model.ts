@@ -5,6 +5,6 @@ export class RequestModel{
     languageEn: string = "";
     languageTr: string = "";
     pageNumber: number = 1;
-    pageSize: number = 1;
+    pageSize: number = 3;
     search: string = "";
 }

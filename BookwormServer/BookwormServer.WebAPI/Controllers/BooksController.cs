@@ -5,6 +5,7 @@ using BookwormServer.WebAPI.ValueObjects;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Immutable;
 
 namespace BookwormServer.WebAPI.Controllers;
 [Route("api/[controller]/[action]")]
@@ -146,15 +147,37 @@ public class BooksController : ControllerBase
     [HttpPost]
     public IActionResult GetAllBooks(RequestDto request)
     {
-        ResponseDto<List<Book>> response = new();
+        ResponseDto<List<BookDto>> response = new();
         string replaceSearch = request.Search.Replace("İ", "i").ToLower();
         var newBooks = new List<Book>();
 
-        if(request.CategoryId != null)
+        if(request.CategoryId is not null)
         {
             newBooks = _context.BookCategories
+                .Include(b => b.Book)
                 .Where(p => p.CategoryId == request.CategoryId)
                 .Select(s => s.Book)
+                .Where(p => p.IsActive == true && p.IsDeleted == false)
+                .Where(p => p.Title.ToLower().Contains(request.Search.ToLower()))
+                .Take(request.PageSize)
+                .ToList();
+        }
+        else if(request.AuthorId is not null)
+        {
+            newBooks = _context.Books
+               .Include(a => a.Author)
+               .Where(p => p.Author.Id == request.AuthorId)
+               .Where(p => p.IsActive == true && p.IsDeleted == false)
+               .Take(request.PageSize)
+               .ToList();
+        }
+        else if(request.LanguageId is not null)
+        {
+            newBooks = _context.Books
+                .Include(bd => bd.BookDetail)
+                .Where(bd => bd.BookDetail.LanguageId == request.LanguageId)
+                .Where(p => p.IsActive == true && p.IsDeleted == false)
+                .Take(request.PageSize)
                 .ToList();
         }
         else
@@ -171,7 +194,37 @@ public class BooksController : ControllerBase
         response.Data = newBooks
             .Skip((request.PageNumber - 1) * request.PageSize)
             .Take(request.PageSize)
+            .Select(book => new BookDto
+            {
+                Id = book.Id,
+                Title = book.Title,
+                Author = _context.Authors
+                .Where(a => a.Id == book.AuthorId)
+                .Select(s => new AuthorDto
+                {
+                    Id = s.Id,
+                    Name = s.Name,
+                    Lastname = s.Lastname,
+                })
+                .FirstOrDefault(),
+                DescriptionEn = book.DescriptionEn,
+                DescriptionTr = book.DescriptionTr,
+                Publisher = book.Publisher,
+                Price = book.Price,
+                ImgUrl = book.ImgUrl,
+                Quantity = book.Quantity,
+                CreatedAt = book.CreatedAt,
+                BookCategories = _context.BookCategories
+                    .Where(p => p.BookId == book.Id)
+                    .Select(s => new BookCategoryDto
+                    {
+                        CategoryId = s.CategoryId,
+                        CategoryName = s.Category.NameTr
+                    })
+                    .ToList(),
+            })
             .ToList();
+
         response.PageNumber = request.PageNumber;
         response.PageSize = request.PageSize;
         response.TotalPageCount = (int)Math.Ceiling(newBooks.Count / (double)request.PageSize);
@@ -180,199 +233,4 @@ public class BooksController : ControllerBase
 
         return Ok(response);
     }
-
-    [HttpPost]
-    public IActionResult GetBooksByCategoryId(RequestDto request)
-    {
-        List<Book> books = new();
-        if (request.CategoryId == null) //Tüm kitapları getir.
-        {
-            books = _context.Books
-                .Where(p => p.IsActive == true && p.IsDeleted == false)
-                .OrderBy(p => p.CreatedAt)
-                .Where(p => p.Title.ToLower().Contains(request.Search.ToLower()))
-                .Take(request.PageSize)
-                .ToList();
-        }
-        else //CategoryId göre seçilen kitapları getir.
-        {
-            books = _context.BookCategories
-                .Where(p => p.CategoryId == request.CategoryId)
-                .Include(b => b.Book)
-                .Select(s => s.Book)
-                .Where(p => p.IsActive == true && p.IsDeleted == false)
-                .Where(p => p.Title.ToLower().Contains(request.Search.ToLower()))
-                .Take(request.PageSize)
-                .ToList();
-        }
-
-        List<BookDto> requestDto = new();
-        foreach (var book in books)
-        {
-            var bookDto = new BookDto()
-            {
-                Id = book.Id,
-                Title = book.Title,
-                Author = _context.Authors
-                .Where(a => a.Id == book.AuthorId)
-                .Select(s => new AuthorDto
-                {
-                    Id = s.Id,
-                    Name = s.Name,
-                    Lastname = s.Lastname,
-                    AboutEn = s.AboutEn,
-                    AboutTr = s.AboutTr,
-                    ProfileImgUrl = s.ProfileImgUrl,
-                    PublishedBooksCount = s.PublishedBooksCount
-                })
-                .FirstOrDefault(),
-                DescriptionEn = book.DescriptionEn,
-                DescriptionTr = book.DescriptionTr,
-                Publisher = book.Publisher,
-                Price = book.Price,
-                ImgUrl = book.ImgUrl,
-                Quantity = book.Quantity,
-                CreatedAt = book.CreatedAt,
-                BookCategories = _context.BookCategories
-                    .Where(p => p.BookId == book.Id)
-                     .Select(s => new BookCategoryDto
-                     {
-                         CategoryId = s.CategoryId,
-                         CategoryName = s.Category.NameTr
-                     })
-                     .ToList(),
-            };
-
-            requestDto.Add(bookDto);
-        }
-
-        return Ok(requestDto);
-    }
-
-    [HttpPost]
-    public IActionResult GetBooksByAuthorId(RequestDto request)
-    {
-        List<Book> books = new();
-        if (request.AuthorId == null) //Yazar seçilmediyse tüm kitapları getir
-        {
-            books = _context.Books
-                .Where(p => p.IsActive == true && p.IsDeleted == false)
-                .OrderBy(p => p.CreatedAt)
-                .Take(request.PageSize)
-                .ToList();
-        }
-        else
-        {
-            books = _context.Books
-               .Include(a => a.Author)
-               .Where(p => p.AuthorId == request.AuthorId)
-               .Where(p => p.IsActive == true && p.IsDeleted == false)
-               .Take(request.PageSize)
-               .ToList();
-        }
-
-        List<BookDto> requestDto = new();
-        foreach (var book in books)
-        {
-            var bookDto = new BookDto()
-            {
-                Id = book.Id,
-                Title = book.Title,
-                Author = _context.Authors
-                .Where(a => a.Id == book.AuthorId)
-                .Select(s => new AuthorDto
-                {
-                    Id = s.Id,
-                    Name = s.Name,
-                    Lastname = s.Lastname,
-                    AboutEn = s.AboutEn,
-                    AboutTr = s.AboutTr,
-                    ProfileImgUrl = s.ProfileImgUrl,
-                    PublishedBooksCount = s.PublishedBooksCount
-                })
-                .FirstOrDefault(),
-                DescriptionEn = book.DescriptionEn,
-                DescriptionTr = book.DescriptionTr,
-                Publisher = book.Publisher,
-                Price = book.Price,
-                ImgUrl = book.ImgUrl,
-                Quantity = book.Quantity,
-                CreatedAt = book.CreatedAt,
-                BookCategories = _context.BookCategories
-                    .Where(p => p.BookId == book.Id)
-                     .Select(s => new BookCategoryDto
-                     {
-                         CategoryId = s.CategoryId,
-                         CategoryName = s.Category.NameTr
-                     })
-                     .ToList(),
-            };
-
-            requestDto.Add(bookDto);
-        }
-
-        return Ok(requestDto);
-    }
-
-    [HttpPost]
-    public IActionResult getBooksByLanguageId(RequestDto request)
-    {
-        List<Book> books = new();
-        if(request.LanguageId == null)
-        {
-            books = _context.Books
-                .Where(p => p.IsActive == true && p.IsDeleted == false)
-                .OrderBy(p => p.CreatedAt)
-                .Take(request.PageSize)
-                .ToList();
-        }
-
-        else 
-        {
-            books = _context.Books
-                .Include(bd => bd.BookDetail)
-                .Where(bd => bd.BookDetail.LanguageId == request.LanguageId)
-                .Where(p => p.IsActive == true && p.IsDeleted == false)
-                .Take(request.PageSize)
-                .ToList();
-        }
-
-        List<BookDto> requestDto = new();
-        foreach (var book in books)
-        {
-            var bookDto = new BookDto()
-            {
-                Id = book.Id,
-                Title = book.Title,
-                Author = _context.Authors
-                .Where(a => a.Id == book.AuthorId)
-                .Select(s => new AuthorDto
-                {
-                    Id = s.Id,
-                    Name = s.Name,
-                    Lastname = s.Lastname,
-                })
-                .FirstOrDefault(),
-                DescriptionEn = book.DescriptionEn,
-                DescriptionTr = book.DescriptionTr,
-                Publisher = book.Publisher,
-                Price = book.Price,
-                ImgUrl = book.ImgUrl,
-                BookCategories = _context.BookCategories
-                    .Where(p => p.BookId == book.Id)
-                     .Select(s => new BookCategoryDto
-                     {
-                         CategoryId = s.CategoryId,
-                         CategoryName = s.Category.NameTr
-                     })
-                     .ToList(),
-                
-            };
-
-            requestDto.Add(bookDto);
-        }
-
-        return Ok(requestDto);
-    }
-
 }

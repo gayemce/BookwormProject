@@ -147,7 +147,7 @@
                             <!-- Mockup Block -->
                             <ul
                                 class="products list-unstyled row no-gutters row-cols-2 row-cols-lg-3 row-cols-wd-4 border-top border-left mb-6">
-                                <li class="product col" *ngFor="let b of shopListBooks.books">
+                                <li class="product col" *ngFor="let b of shopListBooks.response?.data">
                                     <div class="product__inner overflow-hidden p-3 p-md-4d875">
                                         <div
                                             class="woocommerce-LoopProduct-link woocommerce-loop-product__link d-block position-relative">
@@ -289,9 +289,9 @@
                     <nav aria-label="Page navigation example">
                         <ul class="pagination pagination__custom justify-content-md-center flex-nowrap flex-md-wrap overflow-auto overflow-md-visble">
                             <li class="flex-shrink-0 flex-md-shrink-1 page-item" 
-                                [ngClass]="shopListBooks.response.isFirstPage === true ? 'disabled' : ''">
+                                [ngClass]="shopListBooks.response?.isFirstPage === true ? 'disabled' : ''">
                                 <a class="page-link" 
-                                (click)="shopListBooks.GetAllBooks(shopListBooks.response?.pageNumber - 1)">
+                                (click)="shopListBooks.getAllBooks(shopListBooks.response?.pageNumber - 1)">
                                 Previous
                             </a>
                             </li>
@@ -299,13 +299,13 @@
                             <li class="flex-shrink-0 flex-md-shrink-1 page-item" aria-current="page" 
                                 [ngClass]="shopListBooks.response?.pageNumber === p ? 'active' : ''" 
                                 *ngFor="let p of shopListBooks.pageNumbers">
-                                <a class="page-link" (click)="shopListBooks.GetAllBooks(p)">{{p}}</a>
+                                <a class="page-link" (click)="shopListBooks.getAllBooks(p)">{{p}}</a>
                             </li>
 
                             <li class="flex-shrink-0 flex-md-shrink-1 page-item"
-                                [ngClass]="shopListBooks.response.isLastPage === true ? 'disabled' : ''">
+                                [ngClass]="shopListBooks.response?.isLastPage === true ? 'disabled' : ''">
                                 <a class="page-link" 
-                                (click)="shopListBooks.GetAllBooks(shopListBooks.response?.pageNumber + 1)">
+                                (click)="shopListBooks.getAllBooks(shopListBooks.response?.pageNumber + 1)">
                                     Next
                                 </a>
                             </li>
@@ -348,7 +348,8 @@
                                         </a>
                                     </li>
                                     <li class="cat-item cat-item-9 cat-parent" *ngFor="let c of shopListBooks.category">
-                                        <a (click)="shopListBooks.changeCategory(c.id)">
+                                        <a [ngClass]="shopListBooks.request.categoryId === (c.id) ? 'myActive' : ''"
+                                            (click)="shopListBooks.changeCategory(c.id)">
                                             {{selectLang.userSelectedLanguage === 'en' ? c.nameEn : c.nameTr}}</a>
                                     </li>
                                 </ul>
@@ -403,7 +404,8 @@
                                         </a>
                                     </li>
                                     <li class="cat-item cat-item-9 cat-parent" *ngFor="let a of shopListBooks.author">
-                                        <a (click)="shopListBooks.changeAuthor(a.id)">
+                                        <a [ngClass]="shopListBooks.request.categoryId === (a.id) ? 'myActive' : ''"
+                                            (click)="shopListBooks.changeAuthor(a.id)">
                                             {{a.name}} {{a.lastname}}
                                         </a>
                                     </li>
@@ -454,7 +456,8 @@
                                     </li>
                                     <li class="cat-item cat-item-9 cat-parent"
                                         *ngFor="let l of shopListBooks.bookDetails">
-                                        <a (click)="shopListBooks.changeLanguage(l.languageId)">
+                                        <a [ngClass]="shopListBooks.request.categoryId === (l.languageId) ? 'myActive' : ''"
+                                            (click)="shopListBooks.changeLanguage(l.languageId)">
                                             {{selectLang.userSelectedLanguage === 'en' ? l.languageEn : l.languageTr}}
                                         </a>
                                     </li>

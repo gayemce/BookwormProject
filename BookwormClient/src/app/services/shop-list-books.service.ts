@@ -37,16 +37,17 @@ export class ShopListBooksService {
     this.getAllAuthors();
     this.getAllBookLanguages();
     this.getFeaturedBooks();
-    this.GetAllBooks();
+    this.getAllBooks();
   }
 
   goToShopListByCategoryId(categoryId: number) {
     this.request.categoryId = categoryId;
     this.router.navigate(['/shop-list', categoryId]);
-    this.request.pageSize = 10;
+    this.request.pageSize = 3;
     this.getAllCategories();
     this.getAllAuthors();
     this.getBooksByAuthorId();
+    this.getAllBooks();
   }
 
   // handleCheckboxChange(event: any, language: string): void {
@@ -57,13 +58,13 @@ export class ShopListBooksService {
   //   }
   // }
 
-  GetAllBooks(pageNumber = 5) {
+  getAllBooks(pageNumber = 1) {
     this.request.pageNumber = pageNumber;
-    this.http
-      .post(`https://localhost:7018/api/Books/GetAllBooks/`, this.request)
+    this.http.post(`https://localhost:7018/api/Books/GetAllBooks`, this.request)
       .subscribe(res => {
         this.response = res;
         this.setPageNumber();
+        console.log(this.response);
       })
   }
 
@@ -76,8 +77,8 @@ export class ShopListBooksService {
 
   changeLanguage(languageId: number | null = null) {
     this.request.languageId = languageId;
-    this.request.pageSize = 10;
     this.getBooksByLanguageId();
+    this.getAllBooks(1);
   }
 
   getBooksByLanguageId() {
@@ -106,8 +107,8 @@ export class ShopListBooksService {
 
   changeAuthor(authorId: number | null = null) {
     this.request.authorId = authorId;
-    this.request.pageSize = 10;
     this.getBooksByAuthorId();
+    this.getAllBooks(1);
   }
 
   getBooksByAuthorId() {
@@ -137,9 +138,8 @@ export class ShopListBooksService {
 
   changeCategory(categoryId: number | null = null) {
     this.request.categoryId = categoryId;
-    this.request.pageSize = 10;
     this.getBooksByCategoryId();
-    // this.GetAllBooks(1); //Kategori değiştirilirse 1. sayfadan başlasın
+    this.getAllBooks(1); //Kategori değiştirilirse 1. sayfadan başlasın
   }
 
   getBooksByCategoryId() {

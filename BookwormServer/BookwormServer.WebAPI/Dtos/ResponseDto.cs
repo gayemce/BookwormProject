@@ -8,4 +8,5 @@ public sealed class ResponseDto<T>
     public int PageSize { get; set; }
     public bool IsFirstPage { get; set; }
     public bool IsLastPage { get; set; }
+    public string OrderBy { get; set; }
 }

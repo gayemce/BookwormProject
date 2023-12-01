@@ -47,8 +47,17 @@
     "scienceFictionBooks": "Science Fiction Books",
     "viewAll": "View All",
     "notFoundMessage": "The book you are looking for could not be found.",
-    "showingResults": "showing result",
+    "showingResults": "result",
     "showing": "Showing",
-    "of": "of"
-
+    "of": "of",
+    "sortByPopularity": "Sort by popularity",
+    "defaulSorting": "Defaul sorting",
+    "sortByNewness": "Sort by newness",
+    "sortByPrice:LowToHigh": "Sort by price: Low to high",
+    "sortByPrice:HighToLow": "Sort by price: High to low",
+    "show1": "Show 1",
+    "show2": "Show 2",
+    "show3": "Show 3",
+    "show4": "Show 4",
+    "show5": "Show 5"
   }

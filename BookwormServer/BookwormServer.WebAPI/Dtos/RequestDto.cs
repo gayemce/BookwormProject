@@ -10,4 +10,5 @@ public sealed record RequestDto(
     string LanguageTr,
     int PageNumber,
     int PageSize,
-    string Search);
+    string Search,
+    string OrderBy);

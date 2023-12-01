@@ -47,5 +47,17 @@
   "scienceFictionBooks": "Bilim Kurgu Kitapları",
   "viewAll": "Tümünü Görüntüle",
   "notFoundMessage": "Aradığınız kitap bulunamadı.",
-  "Showing 1–' + shopListBooks.response.data.length + ' of results": "1–' + shopListBooks.response.data.length + ' arasındaki sonuçlar gösteriliyor"
+  "results": "sonuç",
+  "showing": "gösteriliyor",
+  "of": "arası",
+  "sortByPopularity": "Popülerliğe göre sırala",
+  "defaulSorting": "Varsayılan sıralama",
+  "sortByNewness": "Yeniliğe göre sırala",
+  "sortByPrice:LowToHigh": "Fiyatı düşükten yükseğe",
+  "sortByPrice:HighToLow": "Fiyatı yüksekten düşüğe",
+  "show1": "Göster 1",
+  "show2": "Göster 2",
+  "show3": "Göster 3",
+  "show4": "Göster 4",
+  "show5": "Göster 5"
 }

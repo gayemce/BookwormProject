@@ -42,22 +42,38 @@ export class ShopListBooksService {
     this.getAllBooks();
   }
 
-  getTranslatedResultCount(): string {
-    const translationKey = 'showingResults'; // Bu örnekte bir çeviri anahtarı
-    const showingText = this.translate.instant('showing'); // 'showing' çevirisini al
-    const ofText = this.translate.instant('of'); // 'of' çevirisini al
+  getTranslatedResultCountEn(): string {
+    const translationKey = 'results';
+    const showingText = this.translate.instant('showing');
+    const ofText = this.translate.instant('of');
 
-    return `${showingText} 1–${this.response.data.length} ${ofText} ${this.translate.instant(translationKey)}`;
+    return `${showingText} 1-${this.response.data.length} ${this.translate.instant(translationKey)}`
 }
+
+  getTranslatedResultCountTr(): string {
+    const translationKey = 'results';
+    const showingText = this.translate.instant('showing');
+    const ofText = this.translate.instant('of');
+
+    return `1-${this.response.data.length} ${ofText} ${this.translate.instant(translationKey)} ${showingText}`
+  }
 
 
   goToShopListByCategoryId(categoryId: number) {
     this.request.categoryId = categoryId;
     this.router.navigate(['/shop-list', categoryId]);
-    this.request.pageSize = 3;
+    // this.request.pageSize = 3;
     this.getAllCategories();
     this.getAllAuthors();
     this.getAllBooks();
+  }
+
+  changeSorting() {
+    this.getAllBooks();
+  }
+
+  changePageSize() {
+    this.getAllBooks(1);
   }
 
   getAllBooks(pageNumber = 1) {

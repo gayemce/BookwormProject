@@ -56,33 +56,40 @@
                     <div
                         class="shop-control-bar d-lg-flex justify-content-between align-items-center mb-5 text-center text-md-left">
                         <div class="shop-control-bar__left mb-4 m-lg-0">
-                            <p class="woocommerce-result-count m-0">
-                                {{ shopListBooks.getTranslatedResultCount() }}
+                            <p class="woocommerce-result-count m-0" *ngIf="selectLang.userSelectedLanguage === 'en'">
+                                {{ shopListBooks.getTranslatedResultCountEn() }}
+                            </p>
+                            <p class="woocommerce-result-count m-0" *ngIf="selectLang.userSelectedLanguage === 'tr'">
+                                {{ shopListBooks.getTranslatedResultCountTr() }}
                             </p>
                         </div>
                         <div class="shop-control-bar__right d-md-flex align-items-center">
                             <form class="woocommerce-ordering mb-4 m-md-0" method="get">
                                 <!-- Select -->
                                 <select class="js-select selectpicker dropdown-select orderby" name="orderby"
-                                    data-style="border-bottom shadow-none outline-none py-2">
-                                    <option value="popularity">Sort by popularity</option>
-                                    <option value="default" selected="selected">Default sorting</option>
-                                    <option value="date">Sort by newness</option>
-                                    <option value="price">Sort by price: low to high</option>
-                                    <option value="price-desc">Sort by price: high to low</option>
+                                    [(ngModel)] = "shopListBooks.request.orderBy"
+                                    (change)="shopListBooks.changeSorting()"
+                                    data-style="border-bottom shadow-none outline-none py-2 px-0">
+                                    <option value="popularity">{{'sortByPopularity' | translate}}</option>
+                                    <option value="default" selected="selected">{{'defaulSorting' | translate}}</option>
+                                    <option value="date">{{'sortByNewness' | translate}}</option>
+                                    <option value="price">{{'sortByPrice:LowToHigh' | translate}}</option>
+                                    <option value="price-desc">{{'sortByPrice:HighToLow' | translate}}</option>
                                 </select>
                                 <!-- End Select -->
                             </form>
 
                             <form class="number-of-items ml-md-4 mb-4 m-md-0 d-none d-xl-block" method="get">
                                 <!-- Select -->
-                                <select class="js-select selectpicker dropdown-select orderby" name="orderby"
+                                <select class="js-select selectpicker dropdown-select orderby" name="pagesize"
+                                    [(ngModel)] = "shopListBooks.request.pageSize"
+                                    (change)="shopListBooks.changePageSize()"
                                     data-style="border-bottom shadow-none outline-none py-2" data-width="fit">
-                                    <option value="show10">Show 10</option>
-                                    <option value="show15">Show 15</option>
-                                    <option value="show20" selected="selected">Show 20</option>
-                                    <option value="show25">Show 25</option>
-                                    <option value="show30">Show 30</option>
+                                    <option value="1">{{'show1' | translate}}</option>
+                                    <option value="2">{{'show2' | translate}}</option>
+                                    <option value="3" selected="selected">{{'show3' | translate}}</option>
+                                    <option value="4">{{'show4' | translate}}</option>
+                                    <option value="5">{{'show5' | translate}}</option>
                                 </select>
                                 <!-- End Select -->
                             </form>
@@ -150,7 +157,7 @@
                             <ul
                                 class="products list-unstyled row no-gutters row-cols-2 row-cols-lg-3 row-cols-wd-4 border-top border-left mb-6">
                                 <ng-container
-                                    *ngIf="shopListBooks.response?.data && shopListBooks.response.data.length > 0; else notFound">
+                                    *ngIf="shopListBooks.response?.data && shopListBooks.response?.data.length > 0; else notFound">
                                     <li class="product col" *ngFor="let b of shopListBooks.response?.data">
                                         <div class="product__inner overflow-hidden p-3 p-md-4d875">
                                             <div
@@ -159,7 +166,7 @@
                                                     <a href="../shop/single-product-v2.html" class="d-block"><img
                                                             src={{b.imgUrl}}
                                                             class="img-fluid d-block mx-auto attachment-shop_catalog size-shop_catalog wp-post-image img-fluid"
-                                                            alt="image-description"></a>
+                                                            alt="image-description" style="height: 250px;"></a>
                                                 </div>
                                                 <div class="woocommerce-loop-product__body product__body pt-3 bg-white">
                                                     <div class="text-uppercase font-size-1 mb-1 text-truncate"><a
@@ -214,15 +221,16 @@
                             aria-labelledby="pills-two-example1-tab">
                             <!-- Mockup Block -->
                             <ul class="products list-unstyled mb-6">
-                                <li class="product product__list" *ngFor="let b of shopListBooks.books">
-                                    <div class="product__inner overflow-hidden p-3 p-md-4d875">
+                                <li class="product product__list" 
+                                *ngIf="shopListBooks.response?.data && shopListBooks.response?.data.length > 0; else notFound">
+                                    <div class="product__inner overflow-hidden p-3 p-md-4d875" *ngFor="let b of shopListBooks.response?.data">
                                         <div
                                             class="woocommerce-LoopProduct-link woocommerce-loop-product__link row position-relative">
                                             <div class="col-md-auto woocommerce-loop-product__thumbnail mb-3 mb-md-0">
                                                 <a href="../shop/single-product-v2.html" class="d-block">
                                                     <img src={{b.imgUrl}}
                                                         class="img-fluid d-block mx-auto attachment-shop_catalog size-shop_catalog wp-post-image img-fluid"
-                                                        alt="image-description" style="height: 170px;"></a>
+                                                        alt="image-description" style="height: 150px;"></a>
                                             </div>
                                             <div
                                                 class="col-md woocommerce-loop-product__body product__body pt-3 bg-white mb-3 mb-md-0">
@@ -267,6 +275,11 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <ng-template #notFound>
+                                        <div class="text-center d-flex justify-content-center align-items-center" style="height: 82vh; margin-left: 30rem; font-size: 32px;">
+                                          {{ 'notFoundMessage' | translate }}
+                                        </div>
+                                    </ng-template> 
                                 </li>
                             </ul>
                             <!-- End Mockup Block -->
@@ -281,7 +294,7 @@
                             <li class="flex-shrink-0 flex-md-shrink-1 page-item"
                                 [ngClass]="
                                     shopListBooks.response?.isFirstPage === true || 
-                                    shopListBooks.response.data.length === 0 ? 'disabled' : ''">
+                                    shopListBooks.response?.data.length === 0 ? 'disabled' : ''">
                                 <a class="page-link"
                                     (click)="shopListBooks.getAllBooks(shopListBooks.response?.pageNumber - 1)">
                                     Previous
@@ -297,7 +310,7 @@
                             <li class="flex-shrink-0 flex-md-shrink-1 page-item"
                                 [ngClass]="
                                     shopListBooks.response?.isLastPage === true ||
-                                    shopListBooks.response.data.length === 0  ? 'disabled' : ''">
+                                    shopListBooks.response?.data.length === 0  ? 'disabled' : ''">
                                 <a class="page-link"
                                     (click)="shopListBooks.getAllBooks(shopListBooks.response?.pageNumber + 1)">
                                     Next

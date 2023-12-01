@@ -59,7 +59,8 @@ Tüm kitaplar Sayfası Yapılacaklar
 *Sayfa değiştirildiğinde o sayfaya ait kitap görüntülenemiyor. Data da veriler geliyor.
 
 29.11.2023
-*Sayfa değiştirildiğinde o sayfaya ait kitaplar görüntüleniyor. 
-*Birden fazla filtreleme işlemi YAPILDI.
----
-*
+*Sayfa değiştirildiğinde o sayfaya ait kitaplar görüntüleniyor. YAPILDI
+*Birden fazla filtreleme işlemi YAPILDI
+
+01.12.2023
+*PageSize ve sıralama yapıldı ama ilk gelmesi için sayfanın yenilenmesini gerekiyor.

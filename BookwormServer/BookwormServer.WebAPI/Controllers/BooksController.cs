@@ -172,6 +172,29 @@ public class BooksController : ControllerBase
             query = query.Where(b => b.BookDetail.LanguageId == request.LanguageId);
         }
 
+        // Sıralama işlemi
+        if (!string.IsNullOrEmpty(request.OrderBy))
+        {
+            switch (request.OrderBy.ToLower())
+            {
+                //case "popularity":
+                //    query = query.OrderBy(b => b.Popularity);
+                //    break;
+                case "date":
+                    query = query.OrderByDescending(b => b.CreatedAt);
+                    break;
+                case "price":
+                    query = query.OrderBy(b => b.Price.Value);
+                    break;
+                case "price-desc":
+                    query = query.OrderByDescending(b => b.Price.Value);
+                    break;
+                default:
+                    query = query.OrderBy(b => b.Id);
+                    break;
+            }
+        }
+
         query = query
             .Where(p => p.Title.ToLower().Contains(replaceSearch) ||
                         p.Author.Name.ToLower().Contains(replaceSearch) ||
@@ -212,6 +235,7 @@ public class BooksController : ControllerBase
         response.Data = booksDto;
         response.PageNumber = request.PageNumber;
         response.PageSize = request.PageSize;
+        response.OrderBy = request.OrderBy;
         response.TotalPageCount = (int)Math.Ceiling(query.Count() / (double)request.PageSize);
         response.IsFirstPage = request.PageNumber == 1;
         response.IsLastPage = request.PageNumber == response.TotalPageCount;

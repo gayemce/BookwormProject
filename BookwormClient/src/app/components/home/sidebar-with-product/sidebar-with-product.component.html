@@ -143,7 +143,7 @@
                                     <div
                                         class="woocommerce-LoopProduct-link woocommerce-loop-product__link d-block position-relative">
                                         <div class="woocommerce-loop-product__thumbnail">
-                                            <a href="../shop/single-product-v5.html" class="d-block">
+                                            <a routerLink="single-product/{{f.id}}" class="d-block">
                                                 <img src={{f.imgUrl}}
                                                     class="d-block mx-auto attachment-shop_catalog size-shop_catalog wp-post-image img-fluid"
                                                     alt="image-description">
@@ -154,7 +154,7 @@
                                                     href="../shop/single-product-v5.html">{{f.publisher}}</a></div>
                                             <h2
                                                 class="woocommerce-loop-product__title product__title h6 text-lh-md mb-1 text-height-2 crop-text-2 h-dark">
-                                                <a href="../shop/single-product-v5.html">{{f.title}}</a>
+                                                <a routerLink="single-product/{{f.id}}">{{f.title}}</a>
                                             </h2>
                                             <div class="font-size-2  mb-1 text-truncate"><a
                                                     href="../others/authors-single.html" class="text-gray-700">

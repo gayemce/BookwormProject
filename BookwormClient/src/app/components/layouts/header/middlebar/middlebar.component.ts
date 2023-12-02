@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ShopListBooksService } from 'src/app/services/shop-list-books.service';
 
 @Component({
   selector: 'app-middlebar',
@@ -7,4 +8,7 @@ import { Component } from '@angular/core';
 })
 export class MiddlebarComponent {
 
+  constructor(
+    public shopListBooks: ShopListBooksService
+  ){}
 }

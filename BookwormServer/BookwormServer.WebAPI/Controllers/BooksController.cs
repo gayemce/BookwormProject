@@ -1,11 +1,14 @@
-﻿using BookwormServer.WebAPI.Context;
+﻿using Azure.Core;
+using BookwormServer.WebAPI.Context;
 using BookwormServer.WebAPI.Dtos;
 using BookwormServer.WebAPI.Models;
 using BookwormServer.WebAPI.ValueObjects;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Collections.Immutable;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace BookwormServer.WebAPI.Controllers;
 [Route("api/[controller]/[action]")]
@@ -144,11 +147,53 @@ public class BooksController : ControllerBase
         return NoContent();
     }
 
+    [HttpGet("{id}")]
+    public IActionResult GetById(int id)
+    {
+        var book = _context.Books
+            .Include(b => b.Author) 
+            .FirstOrDefault(b => b.Id == id);
+
+        if (book == null)
+        {
+            return NotFound();
+        }
+
+        var bookDto = new BookDto
+        {
+            Id = book.Id,
+            Title = book.Title,
+            Author = new AuthorDto
+            {
+                Id = book.Author.Id,
+                Name = book.Author.Name,
+                Lastname = book.Author.Lastname,
+            },
+            DescriptionEn = book.DescriptionEn,
+            DescriptionTr = book.DescriptionTr,
+            Publisher = book.Publisher,
+            Price = book.Price,
+            ImgUrl = book.ImgUrl,
+            Quantity = book.Quantity,
+            CreatedAt = book.CreatedAt,
+            BookCategories = _context.BookCategories
+                .Where(p => p.BookId == book.Id)
+                .Select(s => new BookCategoryDto
+                {
+                    CategoryId = s.CategoryId,
+                    CategoryName = s.Category.NameTr
+                })
+                .ToList(),
+        };
+
+        return Ok(bookDto);
+    }
+
     [HttpPost]
     public IActionResult GetAllBooks(RequestDto request)
     {
         ResponseDto<List<BookDto>> response = new();
-        string replaceSearch = request.Search.Replace("İ", "i").ToLower();
+        string replaceSearch = request.Search?.ToLower() ?? "";
 
         IQueryable<Book> query = _context.Books
             .Include(b => b.Author)

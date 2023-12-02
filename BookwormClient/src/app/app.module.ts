@@ -21,7 +21,6 @@ import { CartComponent } from './components/cart/cart.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { ShopListComponent } from './components/shop-list/shop-list.component';
 import { MyAccountComponent } from './components/my-account/my-account.component';
-import { SingleProductComponent } from './components/single-product/single-product.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
 import { FaqComponent } from './components/faq/faq.component';
@@ -65,7 +64,6 @@ export function HttpLoaderFactory(http: HttpClient){
     CheckoutComponent,
     ShopListComponent,
     MyAccountComponent,
-    SingleProductComponent,
     AboutUsComponent,
     ContactUsComponent,
     FaqComponent,

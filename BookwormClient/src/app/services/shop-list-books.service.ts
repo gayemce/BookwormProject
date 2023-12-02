@@ -88,6 +88,10 @@ export class ShopListBooksService {
     this.getAllBooks(1);
   }
 
+  // changeSearch(){
+  //   this.getAllBooks(1);
+  // }
+
   getAllBooks(pageNumber = 1) {
     this.request.pageNumber = pageNumber;
     this.http.post(`https://localhost:7018/api/Books/GetAllBooks`, this.request).subscribe({

@@ -4,9 +4,7 @@ import { LayoutsComponent } from './components/layouts/layouts.component';
 import { HomeComponent } from './components/home/home.component';
 import { CartComponent } from './components/cart/cart.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
-import { ShopListComponent } from './components/shop-list/shop-list.component';
 import { MyAccountComponent } from './components/my-account/my-account.component';
-import { SingleProductComponent } from './components/single-product/single-product.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
 import { FaqComponent } from './components/faq/faq.component';
@@ -16,6 +14,7 @@ import { TermsAndConditionsComponent } from './components/terms-and-conditions/t
 import { CategoriesComponent } from './components/categories/categories.component';
 import { AuthorsComponent } from './components/authors/authors.component';
 import { ShopListByCategoryComponent } from './components/shop-list-by-category/shop-list-by-category.component';
+import SingleProductComponent from './components/single-product/single-product.component';
 
 const routes: Routes = [
   {
@@ -43,9 +42,17 @@ const routes: Routes = [
       //   component: ShopListComponent
       // },
       {
-        path: "single-product",
+        path: "shop-list/:id/single-product/:value",
         component: SingleProductComponent
       },
+      {
+        path: "shop-list/:id/single-product/:value",
+        component: SingleProductComponent
+      },
+      // {
+      //   path: "single-product/:value",
+      //   loadComponent:()=> import("./components/single-product/single-product.component")
+      // },
       {
         path: "authors",
         component: AuthorsComponent

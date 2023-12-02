@@ -87,9 +87,9 @@
                                     data-style="border-bottom shadow-none outline-none py-2" data-width="fit">
                                     <option value="1">{{'show1' | translate}}</option>
                                     <option value="2">{{'show2' | translate}}</option>
-                                    <option value="3" selected="selected">{{'show3' | translate}}</option>
+                                    <option value="3">{{'show3' | translate}}</option>
                                     <option value="4">{{'show4' | translate}}</option>
-                                    <option value="5">{{'show5' | translate}}</option>
+                                    <option value="5" selected="selected">{{'show5' | translate}}</option>
                                 </select>
                                 <!-- End Select -->
                             </form>
@@ -446,28 +446,28 @@
                             <div id="widgetCollapse22" class="mt-4 widget-content collapse show"
                                 aria-labelledby="widgetHeading22" data-parent="#widgetAccordion">
                                 <ul class="product-categories">
-                                    <!-- <li class="custom-control custom-checkbox mb-2 pb-2"
+                                    <li class="custom-control custom-checkbox mb-2 pb-2"
                                         *ngFor="let l of shopListBooks.bookDetails">
-                                        <input type="checkbox" class="custom-control-input" [id]="'brand_'+l.language"
-                                            [checked]="shopListBooks.request.language === (l.language) ? true : false "
-                                            (change)="shopListBooks.handleCheckboxChange($event, l.language)">
-                                        <label class="custom-control-label" [for]="'brand_'+l.language">
-                                            {{l.language}}
+                                        <input type="checkbox" class="custom-control-input" [id]="'brand_'+l.languageId"
+                                            [checked]="shopListBooks.request.languageId === (l.languageId) ? true : false "
+                                            (click)="shopListBooks.languageCheckboxChange($event, l.languageId)">
+                                        <label class="custom-control-label" [for]="'brand_'+l.languageId">
+                                            {{selectLang.userSelectedLanguage === 'en' ? l.languageEn : l.languageTr}}
                                         </label>
-                                    </li> -->
-                                    <li class="cat-item cat-item-9 cat-parent">
+                                    </li>
+                                    <!-- <li class="cat-item cat-item-9 cat-parent">
                                         <a [ngClass]="shopListBooks.request.languageId === null ? 'myActive' : ''"
                                             (click)="shopListBooks.changeLanguage(null)">
                                             {{'allLanguage' | translate}}
                                         </a>
-                                    </li>
-                                    <li class="cat-item cat-item-9 cat-parent"
+                                    </li> -->
+                                    <!-- <li class="cat-item cat-item-9 cat-parent"
                                         *ngFor="let l of shopListBooks.bookDetails">
                                         <a [ngClass]="shopListBooks.request.languageId === (l.languageId) ? 'myActive' : ''"
                                             (click)="shopListBooks.changeLanguage(l.languageId)">
                                             {{selectLang.userSelectedLanguage === 'en' ? l.languageEn : l.languageTr}}
                                         </a>
-                                    </li>
+                                    </li> -->
                                 </ul>
                             </div>
                         </div>

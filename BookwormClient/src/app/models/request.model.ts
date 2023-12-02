@@ -5,7 +5,7 @@ export class RequestModel{
     languageEn: string = "";
     languageTr: string = "";
     pageNumber: number = 1;
-    pageSize: number = 3;
+    pageSize: number = 5;
     search: string = "";
     orderBy: string = "default";
 }

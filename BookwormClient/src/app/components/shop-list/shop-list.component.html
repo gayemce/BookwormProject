@@ -313,8 +313,8 @@
                                 data-parent="#widgetAccordion">
                                 <ul class="product-categories">
                                     <li class="cat-item cat-item-9 cat-parent">
-                                        <a [ngClass]="shopListBooks.request.languageId === null ? 'myActive' : ''"
-                                        (click)="shopListBooks.changeLanguage(null)">
+                                        <a [ngClass]="shopListBooks.request.languageId === null ? 'myActive' : ''">
+                                            <!-- (click)="shopListBooks.changeLanguage(null)" -->
                                             {{'allLanguage' | translate}}
                                         </a>
                                     </li>

@@ -48,7 +48,7 @@ export class ShopListBooksService {
     const ofText = this.translate.instant('of');
 
     return `${showingText} 1-${this.response.data.length} ${this.translate.instant(translationKey)}`
-}
+  }
 
   getTranslatedResultCountTr(): string {
     const translationKey = 'results';
@@ -62,10 +62,17 @@ export class ShopListBooksService {
   goToShopListByCategoryId(categoryId: number) {
     this.request.categoryId = categoryId;
     this.router.navigate(['/shop-list', categoryId]);
-    // this.request.pageSize = 3;
     this.getAllCategories();
     this.getAllAuthors();
     this.getAllBooks();
+  }
+
+  languageCheckboxChange(event: any, languageId: number): void {
+    if (!event.target.checked) {
+      this.changeLanguage(null);
+    } else {
+      this.changeLanguage(languageId);
+    }
   }
 
   changeSorting() {
@@ -73,6 +80,11 @@ export class ShopListBooksService {
   }
 
   changePageSize() {
+    this.getAllBooks(1);
+  }
+
+  changeLanguage(languageId: number | null = null) {
+    this.request.languageId = languageId;
     this.getAllBooks(1);
   }
 
@@ -95,11 +107,6 @@ export class ShopListBooksService {
     for (let i = 0; i < this.response.totalPageCount; i++) {
       this.pageNumbers.push(i + 1);
     }
-  }
-
-  changeLanguage(languageId: number | null = null) {
-    this.request.languageId = languageId;
-    this.getAllBooks(1);
   }
 
   getAllBookLanguages() {

@@ -1,11 +1,13 @@
 import { AuthorModel } from "./author.model";
+import { BookDetailsModel } from "./bookDetail.model";
 import { Money } from "./money.model";
 
 export class BookModel {
     id: number = 0;
     authorId: number = 0;
     author: AuthorModel = new AuthorModel();
-    BookDetailId: number = 0;
+    bookDetails: BookDetailsModel[] = [];
+    bookDetailId: number = 0;
     title: string = "";
     descriptionEn: string = "";
     descriptionTr: string = "";

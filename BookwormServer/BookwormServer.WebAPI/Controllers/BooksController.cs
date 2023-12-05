@@ -148,10 +148,11 @@ public class BooksController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public IActionResult GetById(int id)
+    public IActionResult GetBookDetailById(int id)
     {
         var book = _context.Books
-            .Include(b => b.Author) 
+            .Include(a => a.Author)
+            .Include(bd => bd.BookDetail)
             .FirstOrDefault(b => b.Id == id);
 
         if (book == null)
@@ -184,6 +185,22 @@ public class BooksController : ControllerBase
                     CategoryName = s.Category.NameTr
                 })
                 .ToList(),
+
+            BookDetails = _context.BookDetails
+                .Where(p => p.BookId == book.Id)
+                .Select(s => new BookDetailDto
+                {
+                    BookId = s.BookId,
+                    CoverTypeEn = _context.BookCovers.Where(p => p.BookId == s.BookId).ToList(),
+                    CoverTypeTr = _context.BookCovers.Where(p => p.BookId == s.BookId).ToList(),
+                    ISBN = s.ISBN,
+                    PublicationDate = s.PublicationDate,
+                    PublicationCityCountry = s.PublicationCityCountry,
+                    LanguageId = s.LanguageId,
+                    LanguageEn = s.LanguageEn,
+                    LanguageTr = s.LanguageTr
+                })
+                .ToList()
         };
 
         return Ok(bookDto);

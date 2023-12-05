@@ -19,4 +19,5 @@ public class BookDto
     public bool IsDeleted { get; set; } = false;
     public DateTime CreatedAt { get; set; } = DateTime.Now;
     public List<BookCategoryDto> BookCategories { get; set; } = new List<BookCategoryDto>();
+    public List<BookDetailDto> BookDetails { get; set; } = new List<BookDetailDto>();
 }

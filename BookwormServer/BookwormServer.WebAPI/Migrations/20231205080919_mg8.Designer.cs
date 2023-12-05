@@ -4,6 +4,7 @@ using BookwormServer.WebAPI.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookwormServer.WebAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231205080919_mg8")]
+    partial class mg8
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -130,30 +133,6 @@ namespace BookwormServer.WebAPI.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("BookCategories");
-                });
-
-            modelBuilder.Entity("BookwormServer.WebAPI.Models.BookCover", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("BookId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CoverTypeEn")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CoverTypeTr")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BookId");
-
-                    b.ToTable("BookCovers");
                 });
 
             modelBuilder.Entity("BookwormServer.WebAPI.Models.BookDetail", b =>
@@ -516,17 +495,6 @@ namespace BookwormServer.WebAPI.Migrations
                     b.Navigation("Book");
 
                     b.Navigation("Category");
-                });
-
-            modelBuilder.Entity("BookwormServer.WebAPI.Models.BookCover", b =>
-                {
-                    b.HasOne("BookwormServer.WebAPI.Models.Book", "Book")
-                        .WithMany()
-                        .HasForeignKey("BookId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Book");
                 });
 
             modelBuilder.Entity("BookwormServer.WebAPI.Models.BookDetail", b =>

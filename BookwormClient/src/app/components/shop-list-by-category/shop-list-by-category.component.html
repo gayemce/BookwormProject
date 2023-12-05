@@ -67,8 +67,7 @@
                             <form class="woocommerce-ordering mb-4 m-md-0" method="get">
                                 <!-- Select -->
                                 <select class="js-select selectpicker dropdown-select orderby" name="orderby"
-                                    [(ngModel)] = "shopListBooks.request.orderBy"
-                                    (change)="shopListBooks.changeSorting()"
+                                    [(ngModel)]="shopListBooks.request.orderBy" (change)="shopListBooks.changeSorting()"
                                     data-style="border-bottom shadow-none outline-none py-2 px-0">
                                     <option value="popularity">{{'sortByPopularity' | translate}}</option>
                                     <option value="default" selected="selected">{{'defaulSorting' | translate}}</option>
@@ -82,7 +81,7 @@
                             <form class="number-of-items ml-md-4 mb-4 m-md-0 d-none d-xl-block" method="get">
                                 <!-- Select -->
                                 <select class="js-select selectpicker dropdown-select orderby" name="pagesize"
-                                    [(ngModel)] = "shopListBooks.request.pageSize"
+                                    [(ngModel)]="shopListBooks.request.pageSize"
                                     (change)="shopListBooks.changePageSize()"
                                     data-style="border-bottom shadow-none outline-none py-2" data-width="fit">
                                     <option value="1">{{'show1' | translate}}</option>
@@ -163,8 +162,8 @@
                                             <div
                                                 class="woocommerce-LoopProduct-link woocommerce-loop-product__link d-block position-relative">
                                                 <div class="woocommerce-loop-product__thumbnail">
-                                                    <a routerLink="single-product/{{b.id}}" class="d-block"><img
-                                                            src={{b.imgUrl}}
+                                                    <a routerLink="single-product/{{b.id}}" class="d-block">
+                                                        <img src={{b.imgUrl}}
                                                             class="img-fluid d-block mx-auto attachment-shop_catalog size-shop_catalog wp-post-image img-fluid"
                                                             alt="image-description" style="height: 250px;"></a>
                                                 </div>
@@ -210,10 +209,11 @@
                                     </li>
                                 </ng-container>
                                 <ng-template #notFound>
-                                    <div class="text-center d-flex justify-content-center align-items-center" style="height: 82vh; margin-left: 30rem; font-size: 32px;">
-                                      {{ 'notFoundMessage' | translate }}
+                                    <div class="text-center d-flex justify-content-center align-items-center"
+                                        style="height: 82vh; margin-left: 30rem; font-size: 32px;">
+                                        {{ 'notFoundMessage' | translate }}
                                     </div>
-                                </ng-template>                                  
+                                </ng-template>
                             </ul>
                             <!-- End Mockup Block -->
                         </div>
@@ -221,10 +221,10 @@
                             aria-labelledby="pills-two-example1-tab">
                             <!-- Mockup Block -->
                             <ul class="products list-unstyled mb-6">
-                                <li class="product product__list" 
-                                *ngIf="shopListBooks.response?.data && shopListBooks.response?.data.length > 0; else notFound">
-                                    <div class="product__inner overflow-hidden p-3 p-md-4d875" 
-                                    *ngFor="let b of shopListBooks.response?.data">
+                                <li class="product product__list"
+                                    *ngIf="shopListBooks.response?.data && shopListBooks.response?.data.length > 0; else notFound">
+                                    <div class="product__inner overflow-hidden p-3 p-md-4d875"
+                                        *ngFor="let b of shopListBooks.response?.data">
                                         <div
                                             class="woocommerce-LoopProduct-link woocommerce-loop-product__link row position-relative">
                                             <div class="col-md-auto woocommerce-loop-product__thumbnail mb-3 mb-md-0">
@@ -239,8 +239,7 @@
                                                         href="../shop/single-product-v2.html">{{b.publisher}}</a></div>
                                                 <h2
                                                     class="woocommerce-loop-product__title product__title h6 text-lh-md mb-1 crop-text-2 h-dark">
-                                                    <a routerLink="single-product/{{b.id}}"
-                                                        tabindex="0">{{b.title}}</a>
+                                                    <a routerLink="single-product/{{b.id}}" tabindex="0">{{b.title}}</a>
                                                 </h2>
                                                 <div class="font-size-2  mb-2 text-truncate"><a
                                                         href="../others/authors-single.html"
@@ -277,10 +276,11 @@
                                         </div>
                                     </div>
                                     <ng-template #notFound>
-                                        <div class="text-center d-flex justify-content-center align-items-center" style="height: 82vh; margin-left: 30rem; font-size: 32px;">
-                                          {{ 'notFoundMessage' | translate }}
+                                        <div class="text-center d-flex justify-content-center align-items-center"
+                                            style="height: 82vh; margin-left: 30rem; font-size: 32px;">
+                                            {{ 'notFoundMessage' | translate }}
                                         </div>
-                                    </ng-template> 
+                                    </ng-template>
                                 </li>
                             </ul>
                             <!-- End Mockup Block -->
@@ -292,8 +292,7 @@
                     <nav aria-label="Page navigation example">
                         <ul
                             class="pagination pagination__custom justify-content-md-center flex-nowrap flex-md-wrap overflow-auto overflow-md-visble">
-                            <li class="flex-shrink-0 flex-md-shrink-1 page-item"
-                                [ngClass]="
+                            <li class="flex-shrink-0 flex-md-shrink-1 page-item" [ngClass]="
                                     shopListBooks.response?.isFirstPage === true || 
                                     shopListBooks.response?.data.length === 0 ? 'disabled' : ''">
                                 <a class="page-link"
@@ -308,8 +307,7 @@
                                 <a class="page-link" (click)="shopListBooks.getAllBooks(p)">{{p}}</a>
                             </li>
 
-                            <li class="flex-shrink-0 flex-md-shrink-1 page-item"
-                                [ngClass]="
+                            <li class="flex-shrink-0 flex-md-shrink-1 page-item" [ngClass]="
                                     shopListBooks.response?.isLastPage === true ||
                                     shopListBooks.response?.data.length === 0  ? 'disabled' : ''">
                                 <a class="page-link"

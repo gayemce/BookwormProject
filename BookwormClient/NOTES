@@ -67,3 +67,9 @@ Tüm kitaplar Sayfası Yapılacaklar
 
 02.12.2023
 *Language seçimi checkboxlarla gerçekleştirildi.
+
+05.12.2023
+*Kitap CoverType için Enumlar oluşturuldu.
+*CoverType değeri varken undufined döndüğü için ekranda görünmüyor. - BookDetailsModel değişken isminden kaynaklı hata DÜZELTİLDİ.
+---
+*BookVaryantosları için tekrar düşünülecek.

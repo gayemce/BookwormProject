@@ -30,8 +30,8 @@ public class BookDetailsController : ControllerBase
 
         bookDetail = new();
         bookDetail.BookId = request.BookId;
-        bookDetail.CoverFormatEn = request.CoverFormatEn;
-        bookDetail.CoverFormatTr = request.CoverFormatTr;
+        bookDetail.CoverTypeEn = request.CoverTypeEn;
+        bookDetail.CoverTypeTr = request.CoverTypeTr;
         bookDetail.ISBN = request.ISBN;
         bookDetail.PublicationDate = request.PublicationDate;
         bookDetail.PublicationCityCountry = request.PublicationCityCountry;
@@ -54,8 +54,8 @@ public class BookDetailsController : ControllerBase
             return BadRequest(new { Message = "Kayıt bulunamadı!" });
         }
 
-        bookDetail.CoverFormatEn = request.CoverFormatEn;
-        bookDetail.CoverFormatTr = request.CoverFormatTr;
+        bookDetail.CoverTypeEn = request.CoverTypeEn;
+        bookDetail.CoverTypeTr = request.CoverTypeTr;
         bookDetail.ISBN = request.ISBN;
         bookDetail.PublicationDate = request.PublicationDate;
         bookDetail.PublicationCityCountry = request.PublicationCityCountry;

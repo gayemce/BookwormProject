@@ -7,6 +7,7 @@ public class BookDto
 {
     public int Id { get; set; }
     public AuthorDto Author { get; set; }
+    public BookLanguageDto BookLanguage { get; set; }
     public string Title { get; set; } = string.Empty;
     public string DescriptionEn { get; set; } = string.Empty;
     public string DescriptionTr { get; set; } = String.Empty;

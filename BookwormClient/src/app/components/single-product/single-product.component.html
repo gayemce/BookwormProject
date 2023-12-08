@@ -69,11 +69,7 @@
                                                     class="js-select selectpicker dropdown-select w-100 position-relative"
                                                     data-style=" border px-4 py-2 rounded-0 height-5 outline-none shadow-none form-control font-size-2"
                                                     data-show-subtext="true" data-dropdown-align-right="true">
-                                                    <option value="one" data-subtext="$9.59" selected>
-                                                        {{selectLang.userSelectedLanguage === "en" ?
-                                                            getCoverTypeEn(book.bookDetails[0].coverTypeEn) : 
-                                                            getCoverTypeEn(book.bookDetails[0].coverTypeEn)}}
-                                                    </option>
+                                                    <option value="one" data-subtext="$9.59" selected>Hardcover</option>
                                                     <option value="two" data-subtext="$9.59">Softcover</option>
                                                     <option value="three" data-subtext="$10.00">Kindal</option>
                                                 </select>
@@ -195,11 +191,8 @@
                                             <table class="table table-hover table-borderless">
                                                 <tbody>
                                                     <tr>
-                                                        <th class="px-4 px-xl-5">Format: </th>
-                                                        <td class="">{{selectLang.userSelectedLanguage === "en" ?
-                                                            getCoverTypeEn(book.bookDetails[0].coverTypeEn) :
-                                                            getCoverTypeTr(book.bookDetails[0].coverTypeTr)}} | 384
-                                                            pages</td>
+                                                        <th class="px-4 px-xl-5">Page: </th>
+                                                        <td class="">384 pages</td>
                                                     </tr>
                                                     <tr>
                                                         <th class="px-4 px-xl-5">Publication date: </th>

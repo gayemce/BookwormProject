@@ -26,13 +26,16 @@ public class AuthorsController : ControllerBase
             return BadRequest(new { Message = "Yazar mevcut kayıtlarda zaten var." });
         }
 
-        author.Name = request.Name;
-        author.Lastname = request.Lastname;
-        author.AboutEn = request.AboutEn;
-        author.AboutTr = request.AboutTr;
-        author.isActive = request.isActive;
-        author.ProfileImgUrl = request.ProfileImgUrl;
-
+        author = new()
+        {
+            Name = request.Name,
+            Lastname = request.Lastname,
+            AboutEn = request.AboutEn,
+            AboutTr = request.AboutTr,
+            isActive = request.isActive,
+            ProfileImgUrl = request.ProfileImgUrl
+        };
+        
         _context.Authors.Add(author);
         _context.SaveChanges();
         return NoContent();
@@ -67,7 +70,7 @@ public class AuthorsController : ControllerBase
             return BadRequest(new { Message = "Kayıt Bulunamdı" });
         }
 
-        author.isActive = true;
+        author.isActive = false;
         _context.SaveChanges();
         return NoContent();
     }

@@ -2,6 +2,7 @@
 using BookwormServer.WebAPI.Dtos;
 using BookwormServer.WebAPI.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookwormServer.WebAPI.Controllers;
@@ -30,19 +31,13 @@ public class BookDetailsController : ControllerBase
 
         bookDetail = new();
         bookDetail.BookId = request.BookId;
-        bookDetail.CoverTypeEn = request.CoverTypeEn;
-        bookDetail.CoverTypeTr = request.CoverTypeTr;
         bookDetail.ISBN = request.ISBN;
         bookDetail.PublicationDate = request.PublicationDate;
         bookDetail.PublicationCityCountry = request.PublicationCityCountry;
-        bookDetail.LanguageId = request.LanguageId;
-        bookDetail.LanguageEn = request.LanguageEn;
-        bookDetail.LanguageTr = request.LanguageTr;
 
         _context.BookDetails.Add(bookDetail);
         _context.SaveChanges();
         return NoContent();
-
     }
 
     [HttpPost]
@@ -54,24 +49,19 @@ public class BookDetailsController : ControllerBase
             return BadRequest(new { Message = "Kayıt bulunamadı!" });
         }
 
-        bookDetail.CoverTypeEn = request.CoverTypeEn;
-        bookDetail.CoverTypeTr = request.CoverTypeTr;
         bookDetail.ISBN = request.ISBN;
         bookDetail.PublicationDate = request.PublicationDate;
         bookDetail.PublicationCityCountry = request.PublicationCityCountry;
-        bookDetail.LanguageId = request.LanguageId;
-        bookDetail.LanguageEn = request.LanguageEn;
-        bookDetail.LanguageTr = request.LanguageTr;
 
         _context.SaveChanges();
         return NoContent();
     }
 
     [HttpGet("{id}")]
-    public IActionResult RemoveCategoryById(int id)
+    public IActionResult RemoveBookDetailById(int id)
     {
         var bookDetail = _context.BookDetails.Find(id);
-        if(bookDetail is null)
+        if (bookDetail is null)
         {
             return BadRequest(new { Message = "Kayıt bulunamadı." });
         }
@@ -84,7 +74,9 @@ public class BookDetailsController : ControllerBase
     [HttpGet]
     public IActionResult GetAllBookDetail()
     {
-        var bookDetail = _context.BookDetails.ToList();
-        return Ok(bookDetail);
+        var bookDetails = _context.BookDetails.ToList();
+        return Ok(bookDetails);
     }
+
+
 }

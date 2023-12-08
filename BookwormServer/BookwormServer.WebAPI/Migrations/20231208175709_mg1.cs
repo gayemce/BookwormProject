@@ -21,6 +21,7 @@ namespace BookwormServer.WebAPI.Migrations
                     Lastname = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AboutEn = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AboutTr = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    isActive = table.Column<bool>(type: "bit", nullable: false),
                     ProfileImgUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PublishedBooksCount = table.Column<int>(type: "int", nullable: false)
                 },
@@ -87,6 +88,7 @@ namespace BookwormServer.WebAPI.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     AuthorId = table.Column<int>(type: "int", nullable: false),
                     BookDetailId = table.Column<int>(type: "int", nullable: false),
+                    BookLanguageId = table.Column<int>(type: "int", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DescriptionEn = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DescriptionTr = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -95,6 +97,7 @@ namespace BookwormServer.WebAPI.Migrations
                     Price_Currency = table.Column<string>(type: "nvarchar(5)", maxLength: 5, nullable: false),
                     ImgUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
+                    IsFeatured = table.Column<bool>(type: "bit", nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
@@ -141,18 +144,58 @@ namespace BookwormServer.WebAPI.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     BookId = table.Column<int>(type: "int", nullable: false),
-                    CoverFormatEn = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CoverFormatTr = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ISBN = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PublicationDate = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PublicationCityCountry = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Language = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    PublicationCityCountry = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_BookDetails", x => x.Id);
                     table.ForeignKey(
                         name: "FK_BookDetails_Books_BookId",
+                        column: x => x.BookId,
+                        principalTable: "Books",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "BookDiscounts",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    BookId = table.Column<int>(type: "int", nullable: false),
+                    DiscountPercentage = table.Column<int>(type: "int", nullable: false),
+                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BookDiscounts", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_BookDiscounts_Books_BookId",
+                        column: x => x.BookId,
+                        principalTable: "Books",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "BookLanguages",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    BookId = table.Column<int>(type: "int", nullable: false),
+                    NameEn = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NameTr = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BookLanguages", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_BookLanguages_Books_BookId",
                         column: x => x.BookId,
                         principalTable: "Books",
                         principalColumn: "Id",
@@ -172,10 +215,8 @@ namespace BookwormServer.WebAPI.Migrations
                     TotalPrice_Currency = table.Column<string>(type: "nvarchar(5)", maxLength: 5, nullable: false),
                     ShippingTypeEn = table.Column<int>(type: "int", nullable: false),
                     ShippingTypeTr = table.Column<int>(type: "int", nullable: false),
-                    ShippingPriceTr_Value = table.Column<decimal>(type: "money", nullable: false),
-                    ShippingPriceTr_Currency = table.Column<string>(type: "nvarchar(5)", maxLength: 5, nullable: false),
-                    ShippingPriceEn_Value = table.Column<decimal>(type: "money", nullable: false),
-                    ShippingPriceEn_Currency = table.Column<string>(type: "nvarchar(5)", maxLength: 5, nullable: false)
+                    ShippingPrice_Value = table.Column<decimal>(type: "money", nullable: false),
+                    ShippingPrice_Currency = table.Column<string>(type: "nvarchar(5)", maxLength: 5, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -190,28 +231,6 @@ namespace BookwormServer.WebAPI.Migrations
                         name: "FK_Carts_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "DiscountBooks",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    BookId = table.Column<int>(type: "int", nullable: false),
-                    DiscountPercentage = table.Column<int>(type: "int", nullable: false),
-                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_DiscountBooks", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_DiscountBooks_Books_BookId",
-                        column: x => x.BookId,
-                        principalTable: "Books",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -320,6 +339,17 @@ namespace BookwormServer.WebAPI.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_BookDiscounts_BookId",
+                table: "BookDiscounts",
+                column: "BookId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BookLanguages_BookId",
+                table: "BookLanguages",
+                column: "BookId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Books_AuthorId",
                 table: "Books",
                 column: "AuthorId");
@@ -333,11 +363,6 @@ namespace BookwormServer.WebAPI.Migrations
                 name: "IX_Carts_UserId",
                 table: "Carts",
                 column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_DiscountBooks_BookId",
-                table: "DiscountBooks",
-                column: "BookId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Orders_BookId",
@@ -380,10 +405,13 @@ namespace BookwormServer.WebAPI.Migrations
                 name: "BookDetails");
 
             migrationBuilder.DropTable(
-                name: "Carts");
+                name: "BookDiscounts");
 
             migrationBuilder.DropTable(
-                name: "DiscountBooks");
+                name: "BookLanguages");
+
+            migrationBuilder.DropTable(
+                name: "Carts");
 
             migrationBuilder.DropTable(
                 name: "Orders");

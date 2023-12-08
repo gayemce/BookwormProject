@@ -14,8 +14,8 @@ public sealed class AppDbContext : DbContext
     public DbSet<Book> Books { get; set; }
     public DbSet<BookCategory> BookCategories { get; set; }
     public DbSet<BookDetail> BookDetails { get; set; }
-    public DbSet<BookCover> BookCovers { get; set; }
     public DbSet<BookDiscount> BookDiscounts { get; set; }
+    public DbSet<BookLanguage> BookLanguages { get; set; }
     public DbSet<Cart> Carts { get; set; }
     public DbSet<Category> Categories { get; set; }
     public DbSet<Order> Orders { get; set; }

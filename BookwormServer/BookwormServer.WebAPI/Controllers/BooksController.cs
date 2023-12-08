@@ -48,13 +48,14 @@ public class BooksController : ControllerBase
                 Price = new Money(request.Price.Value, request.Price.Currency),
                 ImgUrl = request.ImgUrl,
                 Quantity = request.Quantity,
-                IsFeatured = request.IsFeatured
+                IsFeatured = request.IsFeatured,
+                BookLanguageId = request.BookLanguageId,
             };
 
             _context.Books.Add(book);
             _context.SaveChanges();
 
-            //Kategori ekleme
+            // Kategori ekleme
             if (request.CategoryIds is not null && request.CategoryIds.Any())
             {
                 foreach (var categoryId in request.CategoryIds)
@@ -102,6 +103,7 @@ public class BooksController : ControllerBase
         book.ImgUrl = request.ImgUrl;
         book.Quantity = request.Quantity;
         book.IsFeatured = request.IsFeatured;
+        book.BookLanguageId = request.BookLanguageId;
 
         //Kategori güncelleme
         if (request.CategoryIds is not null)
@@ -170,6 +172,12 @@ public class BooksController : ControllerBase
                 Name = book.Author.Name,
                 Lastname = book.Author.Lastname,
             },
+            BookLanguage = new BookLanguageDto
+            {
+                Id = book.BookLanguage.Id,
+                NameEn = book.BookLanguage.NameEn,
+                NameTr = book.BookLanguage.NameTr,
+            },
             DescriptionEn = book.DescriptionEn,
             DescriptionTr = book.DescriptionTr,
             Publisher = book.Publisher,
@@ -191,16 +199,12 @@ public class BooksController : ControllerBase
                 .Select(s => new BookDetailDto
                 {
                     BookId = s.BookId,
-                    CoverTypeEn = _context.BookCovers.Where(p => p.BookId == s.BookId).ToList(),
-                    CoverTypeTr = _context.BookCovers.Where(p => p.BookId == s.BookId).ToList(),
                     ISBN = s.ISBN,
                     PublicationDate = s.PublicationDate,
                     PublicationCityCountry = s.PublicationCityCountry,
-                    LanguageId = s.LanguageId,
-                    LanguageEn = s.LanguageEn,
-                    LanguageTr = s.LanguageTr
                 })
-                .ToList()
+                .ToList(),
+                          
         };
 
         return Ok(bookDto);
@@ -215,6 +219,7 @@ public class BooksController : ControllerBase
         IQueryable<Book> query = _context.Books
             .Include(b => b.Author)
             .Include(bd => bd.BookDetail)
+            .Include(bl => bl.BookLanguage)
             .Where(p => p.IsActive == true && p.IsDeleted == false);
 
         if (request.CategoryId is not null)
@@ -231,7 +236,7 @@ public class BooksController : ControllerBase
 
         if (request.LanguageId is not null)
         {
-            query = query.Where(b => b.BookDetail.LanguageId == request.LanguageId);
+            query = query.Where(b => b.BookLanguageId == request.LanguageId);
         }
 
         // Sıralama işlemi
@@ -275,6 +280,12 @@ public class BooksController : ControllerBase
                     Id = book.Author.Id,
                     Name = book.Author.Name,
                     Lastname = book.Author.Lastname,
+                },
+                BookLanguage = new BookLanguageDto
+                {
+                    Id = book.BookLanguage.Id,
+                    NameEn = book.BookLanguage.NameEn,
+                    NameTr = book.BookLanguage.NameTr
                 },
                 DescriptionEn = book.DescriptionEn,
                 DescriptionTr = book.DescriptionTr,

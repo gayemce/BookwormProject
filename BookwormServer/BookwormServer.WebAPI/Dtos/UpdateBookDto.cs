@@ -7,6 +7,7 @@ public sealed record UpdateBookDto(
     string Title,
     int AuthorId,
     int BookDetailId,
+    int BookLanguageId,
     string DescriptionEn,
     string DescriptionTr,
     string Publisher,

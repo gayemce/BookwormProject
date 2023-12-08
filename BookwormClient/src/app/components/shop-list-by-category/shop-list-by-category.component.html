@@ -450,23 +450,11 @@
                                         <input type="checkbox" class="custom-control-input" [id]="'brand_'+l.languageId"
                                             [checked]="shopListBooks.request.languageId === (l.languageId) ? true : false "
                                             (click)="shopListBooks.languageCheckboxChange($event, l.languageId)">
+                                            
                                         <label class="custom-control-label" [for]="'brand_'+l.languageId">
                                             {{selectLang.userSelectedLanguage === 'en' ? l.languageEn : l.languageTr}}
                                         </label>
                                     </li>
-                                    <!-- <li class="cat-item cat-item-9 cat-parent">
-                                        <a [ngClass]="shopListBooks.request.languageId === null ? 'myActive' : ''"
-                                            (click)="shopListBooks.changeLanguage(null)">
-                                            {{'allLanguage' | translate}}
-                                        </a>
-                                    </li> -->
-                                    <!-- <li class="cat-item cat-item-9 cat-parent"
-                                        *ngFor="let l of shopListBooks.bookDetails">
-                                        <a [ngClass]="shopListBooks.request.languageId === (l.languageId) ? 'myActive' : ''"
-                                            (click)="shopListBooks.changeLanguage(l.languageId)">
-                                            {{selectLang.userSelectedLanguage === 'en' ? l.languageEn : l.languageTr}}
-                                        </a>
-                                    </li> -->
                                 </ul>
                             </div>
                         </div>

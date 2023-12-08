@@ -73,3 +73,9 @@ Tüm kitaplar Sayfası Yapılacaklar
 *CoverType değeri varken undufined döndüğü için ekranda görünmüyor. - BookDetailsModel değişken isminden kaynaklı hata DÜZELTİLDİ.
 ---
 *BookVaryantosları için tekrar düşünülecek.
+
+08.12.2023
+*BookLanguage için book ile ilişkili yeni class oluşturuldu.
+---
+*Allbooks sayfasında görüntülenecek
+*Kitap eklenecek

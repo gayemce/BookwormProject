@@ -7,6 +7,8 @@ public sealed class Book
     public int Id { get; set; }
     public int AuthorId { get; set; }
     public Author Author { get; set; }
+    public int BookLanguageId { get; set; }
+    public BookLanguage BookLanguage { get; set; }
     public int BookDetailId { get; set; }
     public BookDetail? BookDetail { get; set; }
     public string Title { get; set; } = string.Empty;

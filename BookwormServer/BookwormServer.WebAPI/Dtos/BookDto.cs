@@ -8,6 +8,7 @@ public class BookDto
     public int Id { get; set; }
     public AuthorDto Author { get; set; }
     public BookLanguageDto BookLanguage { get; set; }
+    public BookDetailDto BookDetail { get; set; }
     public string Title { get; set; } = string.Empty;
     public string DescriptionEn { get; set; } = string.Empty;
     public string DescriptionTr { get; set; } = String.Empty;
@@ -20,5 +21,5 @@ public class BookDto
     public bool IsDeleted { get; set; } = false;
     public DateTime CreatedAt { get; set; } = DateTime.Now;
     public List<BookCategoryDto> BookCategories { get; set; } = new List<BookCategoryDto>();
-    public List<BookDetailDto> BookDetails { get; set; } = new List<BookDetailDto>();
+    //public List<BookDetailDto> BookDetails { get; set; } = new List<BookDetailDto>();
 }

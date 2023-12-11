@@ -446,13 +446,13 @@
                                 aria-labelledby="widgetHeading22" data-parent="#widgetAccordion">
                                 <ul class="product-categories">
                                     <li class="custom-control custom-checkbox mb-2 pb-2"
-                                        *ngFor="let l of shopListBooks.bookDetails">
-                                        <input type="checkbox" class="custom-control-input" [id]="'brand_'+l.languageId"
-                                            [checked]="shopListBooks.request.languageId === (l.languageId) ? true : false "
-                                            (click)="shopListBooks.languageCheckboxChange($event, l.languageId)">
+                                        *ngFor="let l of shopListBooks.bookLanguages">
+                                        <input type="checkbox" class="custom-control-input" [id]="'brand_'+l.id"
+                                            [checked]="shopListBooks.request.languageId === (l.id) ? true : false "
+                                            (click)="shopListBooks.languageCheckboxChange($event, l.id)">
                                             
-                                        <label class="custom-control-label" [for]="'brand_'+l.languageId">
-                                            {{selectLang.userSelectedLanguage === 'en' ? l.languageEn : l.languageTr}}
+                                        <label class="custom-control-label" [for]="'brand_'+l.id">
+                                            {{selectLang.userSelectedLanguage === 'en' ? l.nameEn : l.nameTr}}
                                         </label>
                                     </li>
                                 </ul>

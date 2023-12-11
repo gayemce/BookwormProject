@@ -23,6 +23,7 @@ export default class SingleProductComponent {
     this.activated.params.subscribe(res => {
       this.http.get<BookModel[]>('https://localhost:7018/api/Books/GetBookDetailById/' + res["value"]).subscribe({
         next: (res: any) => {
+          console.log(res);
           this.book = res;
         },
         error: (err: HttpErrorResponse) => {

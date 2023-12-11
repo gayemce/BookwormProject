@@ -52,7 +52,7 @@ public class BookLanguagesController : ControllerBase
     }
 
     [HttpGet]
-    public IActionResult GetAll()
+    public IActionResult GetAllLanguages()
     {
         var bookLanguages = _context.BookLanguages.ToList();
         return Ok(bookLanguages);

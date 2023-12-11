@@ -31,9 +31,11 @@ public class BookDetailsController : ControllerBase
 
         bookDetail = new();
         bookDetail.BookId = request.BookId;
+        bookDetail.Page = request.Page;
         bookDetail.ISBN = request.ISBN;
         bookDetail.PublicationDate = request.PublicationDate;
-        bookDetail.PublicationCityCountry = request.PublicationCityCountry;
+        bookDetail.PublicationCityCountryEn = request.PublicationCityCountryEn;
+        bookDetail.PublicationCityCountryTr = request.PublicationCityCountryTr;
 
         _context.BookDetails.Add(bookDetail);
         _context.SaveChanges();
@@ -49,9 +51,11 @@ public class BookDetailsController : ControllerBase
             return BadRequest(new { Message = "Kayıt bulunamadı!" });
         }
 
+        bookDetail.Page = request.Page;
         bookDetail.ISBN = request.ISBN;
         bookDetail.PublicationDate = request.PublicationDate;
-        bookDetail.PublicationCityCountry = request.PublicationCityCountry;
+        bookDetail.PublicationCityCountryEn = request.PublicationCityCountryEn;
+        bookDetail.PublicationCityCountryTr = request.PublicationCityCountryTr;
 
         _context.SaveChanges();
         return NoContent();

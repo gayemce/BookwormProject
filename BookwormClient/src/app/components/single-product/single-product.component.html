@@ -192,29 +192,27 @@
                                                 <tbody>
                                                     <tr>
                                                         <th class="px-4 px-xl-5">Page: </th>
-                                                        <td class="">384 pages</td>
+                                                        <td class="">{{book.bookDetail.page}}</td>
                                                     </tr>
                                                     <tr>
                                                         <th class="px-4 px-xl-5">Publication date: </th>
-                                                        <td>{{book.bookDetails[0].publicationDate}}</td>
+                                                        <td>{{book.bookDetail.publicationDate}}</td>
                                                     </tr>
                                                     <tr>
                                                         <th class="px-4 px-xl-5">Publisher:</th>
                                                         <td>{{book.publisher}}</td>
                                                     </tr>
-                                                    <!-- <tr>
-                                                        <th class="px-4 px-xl-5">Imprint:</th>
-                                                        <td>Corsair</td>
-                                                    </tr> -->
                                                     <tr>
                                                         <th class="px-4 px-xl-5">Publication City/Country:</th>
-                                                        <td>{{book.bookDetails[0].publicationCityCountry}}</td>
+                                                        <td>{{selectLang.userSelectedLanguage === 'en' ? 
+                                                        book.bookDetail.publicationCityCountryEn : 
+                                                        book.bookDetail.publicationCityCountryTr}}</td>
                                                     </tr>
                                                     <tr>
                                                         <th class="px-4 px-xl-5">Language:</th>
                                                         <td>{{selectLang.userSelectedLanguage === 'en' ?
-                                                            book.bookDetails[0].languageEn :
-                                                            book.bookDetails[0].languageTr}}</td>
+                                                            book.bookLanguage.nameEn :
+                                                            book.bookLanguage.nameTr}}</td>
                                                     </tr>
                                                 </tbody>
                                             </table>

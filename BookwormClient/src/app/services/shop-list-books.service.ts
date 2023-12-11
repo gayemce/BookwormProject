@@ -7,8 +7,9 @@ import { AuthorModel } from '../models/author.model';
 import { CategoryModel } from '../models/category.model';
 import { RequestModel } from '../models/request.model';
 import { SelectedLanguageService } from './selected-language.service';
-import { BookDetailsModel } from '../models/bookDetail.model';
+import { BookDetailsModel } from '../models/book-detail.model';
 import { TranslateService } from '@ngx-translate/core';
+import { BookLanguageModel } from '../models/book-language.model';
 
 
 @Injectable({
@@ -26,6 +27,7 @@ export class ShopListBooksService {
   searchAuthor: string = "";
   bookDetails: BookDetailsModel[] = [];
   featuredBooks: BookModel[] = [];
+  bookLanguages: BookLanguageModel[] = [];
 
 
   constructor(
@@ -114,9 +116,10 @@ export class ShopListBooksService {
   }
 
   getAllBookLanguages() {
-    this.http.get("https://localhost:7018/api/BookDetails/GetAllBookDetail").subscribe({
+    this.http.get("https://localhost:7018/api/BookLanguages/GetAllLanguages").subscribe({
       next: (res: any) => {
-        this.bookDetails = res;
+        console.log(res);
+        this.bookLanguages = res;
       },
       error: (err: HttpErrorResponse) => {
         this.error.errorHandler(err);

@@ -155,6 +155,7 @@ public class BooksController : ControllerBase
         var book = _context.Books
             .Include(a => a.Author)
             .Include(bd => bd.BookDetail)
+            .Include(bl => bl.BookLanguage)
             .FirstOrDefault(b => b.Id == id);
 
         if (book == null)
@@ -178,6 +179,16 @@ public class BooksController : ControllerBase
                 NameEn = book.BookLanguage.NameEn,
                 NameTr = book.BookLanguage.NameTr,
             },
+            BookDetail = new BookDetailDto
+            {
+                Id = book.BookDetail.Id,
+                BookId = book.Id,
+                Page = book.BookDetail.Page,
+                ISBN = book.BookDetail.ISBN,
+                PublicationDate = book.BookDetail.PublicationDate,
+                PublicationCityCountryEn = book.BookDetail.PublicationCityCountryEn,
+                PublicationCityCountryTr = book.BookDetail.PublicationCityCountryTr
+            },
             DescriptionEn = book.DescriptionEn,
             DescriptionTr = book.DescriptionTr,
             Publisher = book.Publisher,
@@ -192,19 +203,7 @@ public class BooksController : ControllerBase
                     CategoryId = s.CategoryId,
                     CategoryName = s.Category.NameTr
                 })
-                .ToList(),
-
-            BookDetails = _context.BookDetails
-                .Where(p => p.BookId == book.Id)
-                .Select(s => new BookDetailDto
-                {
-                    BookId = s.BookId,
-                    ISBN = s.ISBN,
-                    PublicationDate = s.PublicationDate,
-                    PublicationCityCountry = s.PublicationCityCountry,
-                })
-                .ToList(),
-                          
+                .ToList(),                          
         };
 
         return Ok(bookDto);

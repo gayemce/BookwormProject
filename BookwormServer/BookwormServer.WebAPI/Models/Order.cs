@@ -9,8 +9,8 @@ public sealed class Order
     public string OrderNumber { get; set; } = string.Empty;
     public int BookId { get; set; }
     public Book Book { get; set; }
-    public int UserId { get; set; }
-    public User User { get; set; }
+    public Guid AppUserId { get; set; }
+    public AppUser AppUser { get; set; }
     public Money TotalPrice { get; set; } = new(0, "₺");
     public DateTime CreatedAt { get; set; } = DateTime.Now;
     public DateTime PaymentDate { get; set; } = DateTime.Now;

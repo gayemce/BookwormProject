@@ -15,8 +15,13 @@ import { CategoriesComponent } from './components/categories/categories.componen
 import { AuthorsComponent } from './components/authors/authors.component';
 import { ShopListByCategoryComponent } from './components/shop-list-by-category/shop-list-by-category.component';
 import SingleProductComponent from './components/single-product/single-product.component';
+import { AccountSidebarDesktopComponent } from './components/layouts/account-sidebar-desktop/account-sidebar-desktop.component';
 
 const routes: Routes = [
+  {
+    path: "login",
+    component: AccountSidebarDesktopComponent
+  },
   {
     path: "",
     component: LayoutsComponent,

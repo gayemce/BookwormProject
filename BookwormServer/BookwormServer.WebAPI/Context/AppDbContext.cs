@@ -1,9 +1,11 @@
 ﻿using BookwormServer.WebAPI.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace BookwormServer.WebAPI.Context;
 
-public sealed class AppDbContext : DbContext
+public sealed class AppDbContext : IdentityDbContext<AppUser, AppRole, int>
 {
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -21,13 +23,18 @@ public sealed class AppDbContext : DbContext
     public DbSet<Order> Orders { get; set; }
     public DbSet<OrderStatus> OrderStatuses { get; set; }
     public DbSet<Review> Reviews { get; set; }
-    public DbSet<User> Users { get; set; }
+    public DbSet<AppUser> Users { get; set; }
     public DbSet<WishList> WishLists { get; set; }
-
 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Ignore<IdentityRoleClaim<Guid>>();
+        modelBuilder.Ignore<IdentityUserClaim<Guid>>();
+        modelBuilder.Ignore<IdentityUserLogin<Guid>>();
+        modelBuilder.Ignore<IdentityUserToken<Guid>>();
+        modelBuilder.Ignore<IdentityUserRole<Guid>>();
+
         //Composite Key - Çoka çok ilişki
         modelBuilder.Entity<BookCategory>().HasKey(p => new { p.BookId, p.CategoryId });
 

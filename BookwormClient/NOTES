@@ -82,3 +82,9 @@ Tüm kitaplar Sayfası Yapılacaklar
 
 11.12.2023
 *BookLanguages için hata düzeltildi yeni class eklenerek YAPILDI.
+
+15.12.2023
+*Identity, fluentValidation, JWT Kütüphaneleri eklendi.
+*AutoMigration ve CreateFirstUser ExtensionsMiddleware eklendi.
+---
+Login için ayrı bir tasarım gerçekleştirilecek.

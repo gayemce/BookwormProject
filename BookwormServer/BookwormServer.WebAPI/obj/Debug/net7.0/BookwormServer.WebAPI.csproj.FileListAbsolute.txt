@@ -155,3 +155,13 @@ C:\Users\Win10\Desktop\WorkSpace\Projects\BookwormProject\BookwormServer\Bookwor
 C:\Users\Win10\Desktop\WorkSpace\Projects\BookwormProject\BookwormServer\BookwormServer.WebAPI\obj\Debug\net7.0\BookwormServer.WebAPI.pdb
 C:\Users\Win10\Desktop\WorkSpace\Projects\BookwormProject\BookwormServer\BookwormServer.WebAPI\obj\Debug\net7.0\BookwormServer.WebAPI.genruntimeconfig.cache
 C:\Users\Win10\Desktop\WorkSpace\Projects\BookwormProject\BookwormServer\BookwormServer.WebAPI\obj\Debug\net7.0\ref\BookwormServer.WebAPI.dll
+C:\Users\Win10\Desktop\WorkSpace\Projects\BookwormProject\BookwormServer\BookwormServer.WebAPI\bin\Debug\net7.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\Win10\Desktop\WorkSpace\Projects\BookwormProject\BookwormServer\BookwormServer.WebAPI\bin\Debug\net7.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Users\Win10\Desktop\WorkSpace\Projects\BookwormProject\BookwormServer\BookwormServer.WebAPI\bin\Debug\net7.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\Win10\Desktop\WorkSpace\Projects\BookwormProject\BookwormServer\BookwormServer.WebAPI\bin\Debug\net7.0\Microsoft.Extensions.Identity.Core.dll
+C:\Users\Win10\Desktop\WorkSpace\Projects\BookwormProject\BookwormServer\BookwormServer.WebAPI\bin\Debug\net7.0\Microsoft.Extensions.Identity.Stores.dll
+C:\Users\Win10\Desktop\WorkSpace\Projects\BookwormProject\BookwormServer\BookwormServer.WebAPI\bin\Debug\net7.0\Microsoft.Extensions.Options.dll
+C:\Users\Win10\Desktop\WorkSpace\Projects\BookwormProject\BookwormServer\BookwormServer.WebAPI\bin\Debug\net7.0\FluentValidation.dll
+C:\Users\Win10\Desktop\WorkSpace\Projects\BookwormProject\BookwormServer\BookwormServer.WebAPI\bin\Debug\net7.0\JWT.dll
+C:\Users\Win10\Desktop\WorkSpace\Projects\BookwormProject\BookwormServer\BookwormServer.WebAPI\bin\Debug\net7.0\Newtonsoft.Json.dll
+C:\Users\Win10\Desktop\WorkSpace\Projects\BookwormProject\BookwormServer\BookwormServer.WebAPI\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

@@ -50,7 +50,7 @@ builder.Services.AddIdentity<AppUser, AppRole>(opt =>
 {
     opt.Password.RequiredLength = 6;
     opt.SignIn.RequireConfirmedEmail = true;
-    opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15);
+    opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(1); //15 olarak düzeltilecek
     opt.Lockout.MaxFailedAccessAttempts = 2;
     opt.Lockout.AllowedForNewUsers = true;
 

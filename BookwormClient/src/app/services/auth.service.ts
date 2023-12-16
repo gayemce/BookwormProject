@@ -8,42 +8,50 @@ import { jwtDecode } from 'jwt-decode';
 })
 export class AuthService {
 
-  token: TokenModel = new TokenModel();
-  tokenString: string = "";
+  // token: TokenModel = new TokenModel();
+  // tokenString: string = "";
 
-  constructor(
-    private router: Router
-  ) { }
+  // constructor(
+  //   private router: Router
+  // ) { }
 
-  checkAuthentication() {
-    const responseString = localStorage.getItem("response");
-    if(!responseString){
-      return this.redirectToLogin()
-    }
+  // checkAuthentication() {
+  //   if (localStorage.getItem("response"))
+  //   {
+  //     const responseString = localStorage.getItem("response");
+  //     if (!responseString) {
+  //       return this.redirectToLogin()
+  //     }
 
-    const responseJson = JSON.parse(responseString);
-    this.tokenString = responseJson?.accessToken;
-    if(!this.tokenString){
-      return this.redirectToLogin()
-    }
+  //     const responseJson = JSON.parse(responseString);
+  //     this.tokenString = responseJson?.accessToken;
+  //     if (!this.tokenString) {
+  //       return this.redirectToLogin()
+  //     }
 
-    const decode: any = jwtDecode(this.tokenString);
-    this.token.email = decode?.Email;
-    this.token.name = decode?.Name;
-    this.token.userName = decode?.userName;
-    this.token.userId = decode?.userId;
-    this.token.exp = decode?.exp;
+  //     const decode: any = jwtDecode(this.tokenString);
+  //     this.token.email = decode?.Email;
+  //     this.token.name = decode?.Name;
+  //     this.token.userName = decode?.userName;
+  //     this.token.userId = decode?.userId;
+  //     this.token.exp = decode?.exp;
 
-    const now = new Date().getTime() / 1000;
-    if (this.token.exp < now){
-      return this.redirectToLogin();
-    }
+  //     const now = new Date().getTime() / 1000;
+  //     if (this.token.exp < now) {
+  //       return this.redirectToLogin();
+  //     }
 
-    return true;
-  }
+  //   }
 
-  redirectToLogin() {
-    this.router.navigateByUrl("/login");
-    return false;
-  }
+  //   else{
+  //     this.redirectToLogin();
+  //   }
+
+  //   return true;
+  // }
+
+  // redirectToLogin() {
+  //   this.router.navigateByUrl("/login");
+  //   return false;
+  // }
 }

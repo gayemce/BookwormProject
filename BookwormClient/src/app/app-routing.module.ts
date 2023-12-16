@@ -1,27 +1,13 @@
-import { Component, NgModule } from '@angular/core';
+import { Component, NgModule, inject } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LayoutsComponent } from './components/layouts/layouts.component';
-import { HomeComponent } from './components/home/home.component';
-import { CartComponent } from './components/cart/cart.component';
-import { CheckoutComponent } from './components/checkout/checkout.component';
-import { MyAccountComponent } from './components/my-account/my-account.component';
-import { AboutUsComponent } from './components/about-us/about-us.component';
-import { ContactUsComponent } from './components/contact-us/contact-us.component';
-import { FaqComponent } from './components/faq/faq.component';
-import { OrderReceivedComponent } from './components/order-received/order-received.component';
-import { OrderTrackingComponent } from './components/order-tracking/order-tracking.component';
-import { TermsAndConditionsComponent } from './components/terms-and-conditions/terms-and-conditions.component';
-import { CategoriesComponent } from './components/categories/categories.component';
-import { AuthorsComponent } from './components/authors/authors.component';
 import { ShopListByCategoryComponent } from './components/shop-list-by-category/shop-list-by-category.component';
 import SingleProductComponent from './components/single-product/single-product.component';
-import { AccountSidebarDesktopComponent } from './components/layouts/account-sidebar-desktop/account-sidebar-desktop.component';
+import { AuthService } from './services/auth.service';
+import HomeComponent from './components/home/home.component';
+import CategoriesComponent from './components/categories/categories.component';
 
 const routes: Routes = [
-  {
-    path: "login",
-    component: AccountSidebarDesktopComponent
-  },
   {
     path: "",
     component: LayoutsComponent,
@@ -50,53 +36,49 @@ const routes: Routes = [
         path: "shop-list/:id/single-product/:value",
         component: SingleProductComponent
       },
-      {
-        path: "shop-list/:id/single-product/:value",
-        component: SingleProductComponent
-      },
       // {
       //   path: "single-product/:value",
       //   loadComponent:()=> import("./components/single-product/single-product.component")
       // },
       {
         path: "authors",
-        component: AuthorsComponent
+        loadComponent: () => import("./components/authors/authors.component")
       },
       {
         path: "cart",
-        component: CartComponent
+        loadComponent: () => import("./components/cart/cart.component")
       },
       {
         path: "checkout",
-        component: CheckoutComponent
+        loadComponent: () => import("./components/checkout/checkout.component")
       },
       {
         path: "order-received",
-        component: OrderReceivedComponent
+        loadComponent: () => import("./components/order-received/order-received.component")
       },
       {
         path: "order-tracking",
-        component: OrderTrackingComponent
+        loadComponent: () => import("./components/order-tracking/order-tracking.component")
       },
       {
         path: "my-account",
-        component: MyAccountComponent
+        loadComponent: () => import("./components/my-account/my-account.component")
       },
       {
         path: "about-us",
-        component: AboutUsComponent
+        loadComponent: () => import("./components/about-us/about-us.component")
       },
       {
         path: "contact-us",
-        component: ContactUsComponent
+        loadComponent: () => import("./components/contact-us/contact-us.component")
       },
       {
         path: "faq",
-        component: FaqComponent
+        loadComponent: () => import("./components/faq/faq.component")
       },
       {
         path: "terms-and-conditions",
-        component: TermsAndConditionsComponent
+        loadComponent: () => import("./components/terms-and-conditions/terms-and-conditions.component")
       }
     ]
   }

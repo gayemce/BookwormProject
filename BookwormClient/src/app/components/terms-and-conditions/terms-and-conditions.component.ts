@@ -5,6 +5,6 @@ import { Component } from '@angular/core';
   templateUrl: './terms-and-conditions.component.html',
   styleUrls: ['./terms-and-conditions.component.css']
 })
-export class TermsAndConditionsComponent {
+export default class TermsAndConditionsComponent {
 
 }

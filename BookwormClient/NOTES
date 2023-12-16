@@ -86,5 +86,6 @@ Tüm kitaplar Sayfası Yapılacaklar
 15.12.2023
 *Identity, fluentValidation, JWT Kütüphaneleri eklendi.
 *AutoMigration ve CreateFirstUser ExtensionsMiddleware eklendi.
----
-Login için ayrı bir tasarım gerçekleştirilecek.
+
+16.12.2023
+*LoginService jwtDecode işlemi kontrol edilecek.

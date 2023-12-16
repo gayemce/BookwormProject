@@ -5,6 +5,6 @@ import { Component } from '@angular/core';
   templateUrl: './contact-us.component.html',
   styleUrls: ['./contact-us.component.css']
 })
-export class ContactUsComponent {
+export default class ContactUsComponent {
 
 }

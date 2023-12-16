@@ -10,7 +10,7 @@ import { ErrorService } from 'src/app/services/error.service';
   templateUrl: './authors.component.html',
   styleUrls: ['./authors.component.css']
 })
-export class AuthorsComponent {
+export default class AuthorsComponent {
 
   request: RequestModel = new RequestModel();
   authors: AuthorModel[] = [];

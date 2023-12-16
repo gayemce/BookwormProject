@@ -8,7 +8,7 @@ import { ErrorService } from 'src/app/services/error.service';
   templateUrl: './categories.component.html',
   styleUrls: ['./categories.component.css']
 })
-export class CategoriesComponent {
+export default class CategoriesComponent {
 
   categories: CategoryModel[] = [];
 

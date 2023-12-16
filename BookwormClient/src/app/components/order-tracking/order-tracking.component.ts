@@ -5,6 +5,6 @@ import { Component } from '@angular/core';
   templateUrl: './order-tracking.component.html',
   styleUrls: ['./order-tracking.component.css']
 })
-export class OrderTrackingComponent {
+export default class OrderTrackingComponent {
 
 }

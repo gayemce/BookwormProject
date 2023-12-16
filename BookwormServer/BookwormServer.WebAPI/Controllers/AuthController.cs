@@ -1,5 +1,6 @@
 ﻿using BookwormServer.WebAPI.Dtos;
 using BookwormServer.WebAPI.Models;
+using BookwormServer.WebAPI.Services;
 using BookwormServer.WebAPI.Validators;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Http;
@@ -13,11 +14,13 @@ public class AuthController : ControllerBase
 {
     private readonly UserManager<AppUser> _userManager;
     private readonly SignInManager<AppUser> _signInManager;
+    private readonly JwtService _jwtService;
 
-    public AuthController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
+    public AuthController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, JwtService jwtService)
     {
         _userManager = userManager;
         _signInManager = signInManager;
+        _jwtService = jwtService;
     }
 
     [HttpPost]
@@ -56,8 +59,7 @@ public class AuthController : ControllerBase
             return BadRequest(new { Message = "Şifreniz yanlış!" });
         }
 
-        
-
-        return NoContent();
+        string token = _jwtService.CreateToken(appUser, request.RememberMe);
+        return Ok(new {AccesToken = token});
     }
 }

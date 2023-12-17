@@ -1,10 +1,7 @@
-﻿using BookwormServer.WebAPI.Dtos;
+﻿using BookwormServer.WebAPI.Context;
+using BookwormServer.WebAPI.Dtos;
 using BookwormServer.WebAPI.Models;
 using BookwormServer.WebAPI.Services;
-using BookwormServer.WebAPI.Validators;
-using FluentValidation.Results;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookwormServer.WebAPI.Controllers;
@@ -12,54 +9,47 @@ namespace BookwormServer.WebAPI.Controllers;
 [ApiController]
 public class AuthController : ControllerBase
 {
-    private readonly UserManager<AppUser> _userManager;
-    private readonly SignInManager<AppUser> _signInManager;
-    private readonly JwtService _jwtService;
+    private readonly AppDbContext _context;
 
-    public AuthController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, JwtService jwtService)
+    public AuthController(AppDbContext context)
     {
-        _userManager = userManager;
-        _signInManager = signInManager;
-        _jwtService = jwtService;
+        _context = context;
     }
 
     [HttpPost]
-    public async Task<IActionResult> Login(LoginDto request, CancellationToken cancellationToken)
+    public IActionResult Register(RegisterDto request)
     {
-        LoginValidator validator = new();
-        ValidationResult validationResult = validator.Validate(request);
-
-        if (!validationResult.IsValid)
+        User user = new()
         {
-            return StatusCode(422, validationResult.Errors.Select(s => s.ErrorMessage));
+            FirstName = request.FirstName,
+            LastName = request.LastName,
+            Email = request.Email,
+            Password = request.Password,
+            UserName = request.UserName,
+        };
+
+        _context.Add(user);
+        _context.SaveChanges();
+
+        return Ok(new { Message = "Kayıt işlemi başarıyla tamamlandı" });
+    }
+
+    [HttpPost]
+    public IActionResult Login(LoginDto request) 
+    {
+        User user = _context.Users.Where(p => p.Email == request.UserNameOrEmail || p.UserName == request.UserNameOrEmail).FirstOrDefault();
+
+        if(user is null)
+        {
+            return BadRequest(new { Message = "Kullanıcı bulunamadı!" });
         }
 
-        AppUser? appUser = await _userManager.FindByNameAsync(request.UserNameOrEmail);
-        if (appUser is null)
+        if(user.Password != request.Password)
         {
-            appUser = await _userManager.FindByEmailAsync(request.UserNameOrEmail);
-
-            if (appUser is null)
-            {
-                return BadRequest(new { Message = "Kullanıcı bulunamadı!" });
-            }
+            return BadRequest(new { Message = "Şifre yanlış!" });
         }
 
-        var result = await _signInManager.CheckPasswordSignInAsync(appUser, request.Password, true);
-
-        if (result.IsLockedOut)
-        {
-            TimeSpan? timeSpan = appUser.LockoutEnd - DateTime.UtcNow;
-            if (timeSpan is not null)
-                return BadRequest(new { Message = $"Kullanıcınız 3 kere yanlış şifre girişinden dolayı {Math.Ceiling(timeSpan.Value.TotalMinutes)} dakika kitlenmiştir." });
-        }
-
-        if (!result.Succeeded)
-        {
-            return BadRequest(new { Message = "Şifreniz yanlış!" });
-        }
-
-        string token = _jwtService.CreateToken(appUser, request.RememberMe);
-        return Ok(new {AccesToken = token});
+        string token = JwtService.CreateToken(user);
+        return Ok(new LoginResponseDto(Token: token, UserId: user.Id, UserName: user.GetName()));
     }
 }

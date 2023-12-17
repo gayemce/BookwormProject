@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { LayoutsComponent } from './components/layouts/layouts.component';
 import { ShopListByCategoryComponent } from './components/shop-list-by-category/shop-list-by-category.component';
 import SingleProductComponent from './components/single-product/single-product.component';
-import { AuthService } from './services/auth.service';
 import HomeComponent from './components/home/home.component';
 import CategoriesComponent from './components/categories/categories.component';
 

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-account-sidebar-mobile',
@@ -9,6 +8,5 @@ import { LoginService } from 'src/app/services/login.service';
 export class AccountSidebarMobileComponent {
 
   constructor(
-    public login: LoginService
   ){}
 }

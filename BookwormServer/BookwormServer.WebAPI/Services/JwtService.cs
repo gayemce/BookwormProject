@@ -6,31 +6,26 @@ using System.Text;
 
 namespace BookwormServer.WebAPI.Services;
 
-public sealed class JwtService
+public class JwtService
 {
-    public string CreateToken(AppUser appUser, bool rememberMe)
+    public static string CreateToken(User user)
     {
-        string token = string.Empty;
+        var claims = new Claim[]
+        {
+            new("UserId", user.Id.ToString()),
+            new("UserName", user.LastName + " " + user.LastName)
+        };
 
-        List<Claim> claims = new();
-        claims.Add(new ("UserId", appUser.Id.ToString()));
-        claims.Add(new("Name", appUser.GetName()));
-        claims.Add(new("Email", appUser.Email ?? string.Empty));
-        claims.Add(new("UserName", appUser.UserName ?? string.Empty));
-
-        DateTime expires = rememberMe ? DateTime.Now.AddMonths(1) : DateTime.Now.AddDays(1);
-
-        JwtSecurityToken jwtSecurityToken = new(
-            issuer: "Gaye Tekin",
-            audience: "IT Desk Angular App",
+        JwtSecurityToken handler = new(
+            issuer: "Issuer",
+            audience: "audience",
             claims: claims,
             notBefore: DateTime.Now,
-            expires: expires,
-            signingCredentials: new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes("my secret key my secret key my secret key 12345 ... my secret key my secret key my secret key 12345 ...")), SecurityAlgorithms.HmacSha512));
+            expires: DateTime.Now.AddDays(1),
+            signingCredentials: new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes("My secret key my secret key my secret key my secret key")), SecurityAlgorithms.HmacSha256));
 
-        JwtSecurityTokenHandler handler = new();
-        token = handler.WriteToken(jwtSecurityToken);
-
+        //token üretildi
+        string token = new JwtSecurityTokenHandler().WriteToken(handler);
         return token;
     }
 }

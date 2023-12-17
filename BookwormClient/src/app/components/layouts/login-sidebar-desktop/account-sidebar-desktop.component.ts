@@ -1,9 +1,4 @@
-import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { LoginModel } from 'src/app/models/login.model';
-import { AuthService } from 'src/app/services/auth.service';
-import { ErrorService } from 'src/app/services/error.service';
 import { LoginService } from 'src/app/services/login.service';
 
 @Component({
@@ -16,5 +11,4 @@ export default class AccountSidebarDesktopComponent {
   constructor(
     public login: LoginService
   ){}
-
 }

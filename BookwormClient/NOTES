@@ -89,3 +89,6 @@ Tüm kitaplar Sayfası Yapılacaklar
 
 16.12.2023
 *LoginService jwtDecode işlemi kontrol edilecek.
+
+17.12.2023
+*Login de signIn methodu çalışmıyor gibi

@@ -24,12 +24,12 @@
                 <!-- Content -->
                 <div class="js-scrollbar u-sidebar__body">
                     <div class="u-sidebar__content u-header-sidebar__content">
-                        <form class="">
+                        <form #loginForm="ngForm" autocomplete="off" (ngSubmit)="login.signIn(loginForm)">
                             <!-- Login -->
                             <div id="login" data-target-group="idForm">
                                 <!-- Title -->
                                 <header class="border-bottom px-4 px-md-6 py-4">
-                                    <h2 class="font-size-3 mb-0 d-flex align-items-center"><i class="flaticon-user mr-3 font-size-5"></i>Account</h2>
+                                    <h2 class="font-size-3 mb-0 d-flex align-items-center"><i class="flaticon-user mr-3 font-size-5"></i>{{'Account' | translate}}</h2>
                                 </header>
                                 <!-- End Title -->
 
@@ -37,8 +37,9 @@
                                     <!-- Form Group -->
                                     <div class="form-group mb-4">
                                         <div class="js-form-message js-focus-state">
-                                            <label id="signinEmailLabel" class="form-label" for="signinEmail">Username or email *</label>
-                                            <input [(ngModel)]="login.request.userNameOrEmail" type="email" class="form-control rounded-0 height-4 px-4" name="email" id="signinEmail" placeholder="creativelayers088@gmail.com" aria-label="creativelayers088@gmail.com" aria-describedby="signinEmailLabel" required>
+                                            <label id="signinEmailLabel" class="form-label" for="usernameOrEmail">Username or email *
+                                            </label>
+                                            <input type="email" ngModel class="form-control rounded-0 height-4 px-4" name="usernameOrEmail" id="signinEmail" placeholder="creativelayers088@gmail.com" aria-label="creativelayers088@gmail.com" aria-describedby="signinEmailLabel" required>
                                         </div>
                                     </div>
                                     <!-- End Form Group -->
@@ -46,8 +47,8 @@
                                     <!-- Form Group -->
                                     <div class="form-group mb-4">
                                         <div class="js-form-message js-focus-state">
-                                            <label id="signinPasswordLabel" class="form-label" for="signinPassword">Password *</label>
-                                            <input [(ngModel)]="login.request.password" type="password" class="form-control rounded-0 height-4 px-4" name="password" id="signinPassword" placeholder="" aria-label="" aria-describedby="signinPasswordLabel" required>
+                                            <label id="signinPasswordLabel" class="form-label" for="password">Password *</label>
+                                            <input type="password" ngModel class="form-control rounded-0 height-4 px-4" name="password" id="signinPassword" placeholder="" aria-label="" aria-describedby="signinPasswordLabel" required>
                                         </div>
                                     </div>
                                     <!-- End Form Group -->
@@ -56,7 +57,7 @@
                                         <!-- Checkbox -->
                                         <div class="js-form-message">
                                             <div class="custom-control custom-checkbox d-flex align-items-center text-muted">
-                                                <input [(ngModel)]="login.request.rememberMe" type="checkbox" class="custom-control-input" id="termsCheckbox" name="termsCheckbox" required>
+                                                <input type="checkbox" class="custom-control-input" id="termsCheckbox" name="termsCheckbox" required>
                                                 <label class="custom-control-label" for="termsCheckbox">
                                                     <span class="font-size-2 text-secondary-gray-700">
                                                         Remember me
@@ -73,7 +74,7 @@
                                     </div>
 
                                     <div class="mb-4d75">
-                                        <button (click)="login.signIn()" type="submit" class="btn btn-block py-3 rounded-0 btn-dark">Sign In</button>
+                                        <button type="submit" class="btn btn-block py-3 rounded-0 btn-dark">Sign In</button>
                                     </div>
 
                                     <div class="mb-2">
@@ -84,9 +85,11 @@
                                     </div>
                                 </div>
                             </div>
+                        </form>
 
-                            <!-- Signup -->
-                            <div id="signup" style="display: none; opacity: 0;" data-target-group="idForm">
+                        <form action="">
+                             <!-- Signup -->
+                             <div id="signup" style="display: none; opacity: 0;" data-target-group="idForm">
                                 <!-- Title -->
                                 <header class="border-bottom px-4 px-md-6 py-4">
                                     <h2 class="font-size-3 mb-0 d-flex align-items-center"><i class="flaticon-resume mr-3 font-size-5"></i>Create Account</h2>

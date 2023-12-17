@@ -6,7 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LayoutsComponent } from './components/layouts/layouts.component';
 import { HeaderComponent } from './components/layouts/header/header.component';
-import { AccountSidebarMobileComponent } from './components/layouts/account-sidebar-mobile/account-sidebar-mobile.component';
+import { AccountSidebarMobileComponent } from './components/layouts/login-sidebar-mobile/account-sidebar-mobile.component';
 import { CartSidebarComponent } from './components/layouts/cart-sidebar/cart-sidebar.component';
 import { CategoriesSidebarComponent } from './components/layouts/categories-sidebar/categories-sidebar.component';
 import { FooterComponent } from './components/layouts/footer/footer.component';
@@ -38,7 +38,7 @@ import OrderTrackingComponent from './components/order-tracking/order-tracking.c
 import CategoriesComponent from './components/categories/categories.component';
 import AuthorsComponent from './components/authors/authors.component';
 import TermsAndConditionsComponent from './components/terms-and-conditions/terms-and-conditions.component';
-import AccountSidebarDesktopComponent from './components/layouts/account-sidebar-desktop/account-sidebar-desktop.component';
+import AccountSidebarDesktopComponent from './components/layouts/login-sidebar-desktop/account-sidebar-desktop.component';
 
 export function HttpLoaderFactory(http: HttpClient){
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');

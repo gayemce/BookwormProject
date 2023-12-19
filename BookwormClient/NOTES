@@ -92,3 +92,10 @@ Tüm kitaplar Sayfası Yapılacaklar
 
 17.12.2023
 *Login de signIn methodu çalışmıyor gibi
+
+19.12.2023
+*SignIn methodu çalıştırıldı.
+*jwtDecode işlemi başarılı.
+---
+*Kullanıcı Login olduğunda ana sayfadan veya kaldığı yerden devam etmeli
+*LocalStorage da response değeri varsa kullanıcı girişini tetiklememeli dğrudan /my-accounta yönlenmeli.

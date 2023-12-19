@@ -5,6 +5,7 @@ import { ShopListByCategoryComponent } from './components/shop-list-by-category/
 import SingleProductComponent from './components/single-product/single-product.component';
 import HomeComponent from './components/home/home.component';
 import CategoriesComponent from './components/categories/categories.component';
+import MyAccountComponent from './components/my-account/my-account.component';
 
 const routes: Routes = [
   {
@@ -61,7 +62,7 @@ const routes: Routes = [
       },
       {
         path: "my-account",
-        loadComponent: () => import("./components/my-account/my-account.component")
+        component: MyAccountComponent
       },
       {
         path: "about-us",

@@ -2,7 +2,7 @@
     <div class="container pt-3 pb-2 pt-lg-5 pb-lg-5">
         <div class="d-flex align-items-center position-relative flex-wrap">
             <div class="site-branding pr-md-7 mx-auto mx-md-0">
-                <a href="/" class="d-block mb-1">
+                <a routerLink="/" class="d-block mb-1">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="170px"
                         height="30px">
                         <path fill-rule="evenodd" fill="rgb(25, 17, 11)"
@@ -18,8 +18,9 @@
                 <form class="form-inline my-2 my-xl-0">
                     <div class="input-group w-100">
                         <div class="input-group-prepend border-right-0 d-none d-xl-block">
-                            <select class="d-none d-lg-block custom-select pr-7 pl-4 rounded-0 height-5 shadow-none text-dark position-relative z-index-2" id="inputGroupSelect01" name="search" 
-                            [(ngModel)] = "shopListBooks.request.search">
+                            <select
+                                class="d-none d-lg-block custom-select pr-7 pl-4 rounded-0 height-5 shadow-none text-dark position-relative z-index-2"
+                                id="inputGroupSelect01" name="search" [(ngModel)]="shopListBooks.request.search">
                                 <option selected>{{'allCategories' | translate}}</option>
                                 <option value="1">One</option>
                                 <option value="2">Two</option>
@@ -51,6 +52,16 @@
                         }' data-unfold-animation-in="fadeInRight" data-unfold-animation-out="fadeOutRight"
                         data-unfold-duration="500">
                         <i class="glph-icon flaticon-user font-size-4"></i>
+                        <span *ngIf="responseInLocalStorage">
+                            <span routerLink="/my-account"> {{auth.token.name}}</span> 
+                        </span>
+                        <!-- <span>
+                            <i *ngIf="!responseInLocalStorage" class="glph-icon flaticon-user font-size-4"></i>
+                            <a *ngIf="responseInLocalStorage" routerLink="/my-account">
+                                {{auth.token.name}}
+                            </a>
+                        </span> -->
+
                     </a>
                     <!-- End Account Sidebar Toggle Button -->
                 </li>

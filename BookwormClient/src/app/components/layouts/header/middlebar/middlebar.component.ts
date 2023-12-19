@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 import { ShopListBooksService } from 'src/app/services/shop-list-books.service';
 
 @Component({
@@ -8,7 +9,15 @@ import { ShopListBooksService } from 'src/app/services/shop-list-books.service';
 })
 export class MiddlebarComponent {
 
+  responseInLocalStorage: any;
+
   constructor(
     public shopListBooks: ShopListBooksService,
+    public auth: AuthService
   ){}
+
+  ngOnInit(){
+    this.auth.checkAuthentication();
+    this.responseInLocalStorage = localStorage.getItem("response");
+  }
 }

@@ -53,15 +53,8 @@
                         data-unfold-duration="500">
                         <i class="glph-icon flaticon-user font-size-4"></i>
                         <span *ngIf="responseInLocalStorage">
-                            <span routerLink="/my-account"> {{auth.token.name}}</span> 
+                            <span routerLink="/my-account"> {{auth.token.name}}</span>
                         </span>
-                        <!-- <span>
-                            <i *ngIf="!responseInLocalStorage" class="glph-icon flaticon-user font-size-4"></i>
-                            <a *ngIf="responseInLocalStorage" routerLink="/my-account">
-                                {{auth.token.name}}
-                            </a>
-                        </span> -->
-
                     </a>
                     <!-- End Account Sidebar Toggle Button -->
                 </li>

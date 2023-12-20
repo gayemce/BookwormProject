@@ -38,6 +38,7 @@ export class LoginService {
       next: (res: any) => {
         localStorage.setItem("response", JSON.stringify(res));
         this.auth.checkAuthentication();
+        location.href = "/shop-list/:id";
         console.log("response var!")
       },
       error: (err: HttpErrorResponse) => {

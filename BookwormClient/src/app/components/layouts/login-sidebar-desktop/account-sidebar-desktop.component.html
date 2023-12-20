@@ -1,5 +1,5 @@
 <!-- Account Sidebar Navigation - Desktop -->
-<aside id="sidebarContent" class="u-sidebar u-sidebar__lg" aria-labelledby="sidebarNavToggler">
+<aside *ngIf="!responseInLocalStorage" id="sidebarContent" class="u-sidebar u-sidebar__lg" aria-labelledby="sidebarNavToggler">
     <div class="u-sidebar__scroller">
         <div class="u-sidebar__container">
             <div class="u-header-sidebar__footer-offset">

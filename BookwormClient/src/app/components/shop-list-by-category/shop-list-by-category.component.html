@@ -1,19 +1,5 @@
 <section class="left-sidebar">
-    <div class="page-header border-bottom mb-8">
-        <div class="container">
-            <div class="d-md-flex justify-content-between align-items-center py-4">
-                <h1 class="page-title font-size-3 font-weight-medium m-0 text-lh-lg">Shop</h1>
-                <nav class="woocommerce-breadcrumb font-size-2">
-                    <a href="../home/index.html" class="h-primary">Home</a>
-                    <span class="breadcrumb-separator mx-1"><i class="fas fa-angle-right"></i></span>
-                    <a href="../shop/v4.html" class="h-primary">Electronics</a>
-                    <span class="breadcrumb-separator mx-1"><i class="fas fa-angle-right"></i></span>
-                    <a href="../shop/v4.html" class="h-primary">Cameras</a>
-                    <span class="breadcrumb-separator mx-1"><i class="fas fa-angle-right"></i></span>Build Your DSLR
-                </nav>
-            </div>
-        </div>
-    </div>
+    <div class="page-header border-bottom mb-5"></div>
     <div class="site-content space-bottom-3" id="content">
         <div class="container">
             <div class="row">
@@ -84,11 +70,11 @@
                                     [(ngModel)]="shopListBooks.request.pageSize"
                                     (change)="shopListBooks.changePageSize()"
                                     data-style="border-bottom shadow-none outline-none py-2" data-width="fit">
-                                    <option value="1">{{'show1' | translate}}</option>
-                                    <option value="2">{{'show2' | translate}}</option>
-                                    <option value="3">{{'show3' | translate}}</option>
-                                    <option value="4">{{'show4' | translate}}</option>
-                                    <option value="5" selected="selected">{{'show5' | translate}}</option>
+                                    <option value="5">{{'show5' | translate}}</option>
+                                    <option value="10" selected="selected">{{'show10' | translate}}</option>
+                                    <option value="15">{{'show15' | translate}}</option>
+                                    <option value="20">{{'show20' | translate}}</option>
+                                    <option value="25">{{'show25' | translate}}</option>
                                 </select>
                                 <!-- End Select -->
                             </form>
@@ -353,7 +339,7 @@
                                             {{'allCategories' | translate}}
                                         </a>
                                     </li>
-                                    <li class="cat-item cat-item-9 cat-parent" *ngFor="let c of shopListBooks.category">
+                                    <li class="cat-item cat-item-9 cat-parent" *ngFor="let c of shopListBooks.category.slice(0, 5)">
                                         <a [ngClass]="shopListBooks.request.categoryId === (c.id) ? 'myActive' : ''"
                                             (click)="shopListBooks.changeCategory(c.id)">
                                             {{selectLang.userSelectedLanguage === 'en' ? c.nameEn : c.nameTr}}</a>
@@ -409,7 +395,7 @@
                                             {{'allAuthor' | translate}}
                                         </a>
                                     </li>
-                                    <li class="cat-item cat-item-9 cat-parent" *ngFor="let a of shopListBooks.author">
+                                    <li class="cat-item cat-item-9 cat-parent" *ngFor="let a of shopListBooks.author.slice(0, 5)">
                                         <a [ngClass]="shopListBooks.request.authorId === (a.id) ? 'myActive' : ''"
                                             (click)="shopListBooks.changeAuthor(a.id)">
                                             {{a.name}} {{a.lastname}}
@@ -446,7 +432,7 @@
                                 aria-labelledby="widgetHeading22" data-parent="#widgetAccordion">
                                 <ul class="product-categories">
                                     <li class="custom-control custom-checkbox mb-2 pb-2"
-                                        *ngFor="let l of shopListBooks.bookLanguages">
+                                        *ngFor="let l of shopListBooks.bookLanguages.slice(0, 3)">
                                         <input type="checkbox" class="custom-control-input" [id]="'brand_'+l.id"
                                             [checked]="shopListBooks.request.languageId === (l.id) ? true : false "
                                             (click)="shopListBooks.languageCheckboxChange($event, l.id)">

@@ -55,11 +55,11 @@
   "sortByNewness": "Yeniliğe göre sırala",
   "sortByPrice:LowToHigh": "Fiyatı düşükten yükseğe",
   "sortByPrice:HighToLow": "Fiyatı yüksekten düşüğe",
-  "show1": "Göster 1",
-  "show2": "Göster 2",
-  "show3": "Göster 3",
-  "show4": "Göster 4",
   "show5": "Göster 5",
+  "show10": "Göster 10",
+  "show15": "Göster 15",
+  "show20": "Göster 20",
+  "show25": "Göster 25",
   "bookFormat": "Kitap Tipi"
 
 }

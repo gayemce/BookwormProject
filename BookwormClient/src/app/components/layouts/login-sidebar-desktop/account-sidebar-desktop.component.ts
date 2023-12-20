@@ -9,12 +9,17 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export default class AccountSidebarDesktopComponent {
 
+  responseInLocalStorage: any;
   @ViewChild("accountSidebarCloseBtn") closeBtn: ElementRef<HTMLButtonElement> | undefined;
 
   constructor(
     private router: Router,
     public login: LoginService
   ) { }
+
+  ngOnInit(){
+    this.responseInLocalStorage = localStorage.getItem("response");
+  }
 
   handleButtonClick() {
     this.login.signIn();
@@ -25,17 +30,8 @@ export default class AccountSidebarDesktopComponent {
     if (this.closeBtn != undefined) {
       this.closeBtn.nativeElement.click();
     }
-    //const cartSidebarCloseBtn = document.getElementById("cartSidebarCloseBtn");
-    //cartSidebarCloseBtn?.click();
     if(localStorage.getItem("response"))
     this.router.navigateByUrl("/my-account")
   }
-
-  // gotoCheckout(){
-  //   if(this.closeBtn != undefined){
-  //     this.closeBtn.nativeElement.click();
-  //   }
-  //   this.router.navigateByUrl("/checkout")
-  // }
 }
 

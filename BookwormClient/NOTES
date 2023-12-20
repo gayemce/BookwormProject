@@ -98,4 +98,6 @@ Tüm kitaplar Sayfası Yapılacaklar
 *jwtDecode işlemi başarılı.
 ---
 *Kullanıcı Login olduğunda ana sayfadan veya kaldığı yerden devam etmeli
-*LocalStorage da response değeri varsa kullanıcı girişini tetiklememeli dğrudan /my-accounta yönlenmeli.
+*LocalStorage da response değeri varsa kullanıcı girişini tetiklememeli doğrudan /my-accounta yönlenmeli.
+
+20.12.2023

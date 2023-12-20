@@ -55,10 +55,10 @@
   "sortByNewness": "Sort by newness",
   "sortByPrice:LowToHigh": "Sort by price: Low to high",
   "sortByPrice:HighToLow": "Sort by price: High to low",
-  "show1": "Show 1",
-  "show2": "Show 2",
-  "show3": "Show 3",
-  "show4": "Show 4",
   "show5": "Show 5",
+  "show10": "Show 10",
+  "show15": "Show 15",
+  "show20": "Show 20",
+  "show25": "Show 25",
   "bookFormat": "Book Format"
 }

@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AuthService } from './auth.service';
 import { ErrorService } from './error.service';
 import { LoginModel } from '../models/login.model';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
@@ -16,29 +17,20 @@ export class LoginService {
     private http: HttpClient,
     private router: Router,
     private auth: AuthService,
-    private error: ErrorService
-  ) {}
+    private error: ErrorService,
+    private translate: TranslateService
+  ) { }
 
   ngOnInit(): void {
     this.signIn();
   }
 
   signIn() {
-    if (this.request.userNameOrEmail.length < 3) {
-      console.log('Geçerli bir kullanıcı adı ya da email adresi girin.');
-      return;
-    };
-
-    if (this.request.password.length < 6) {
-      console.log('Şifreniz en az 6 karakter olmalıdır.');
-      return;
-    };
-
     this.http.post("https://localhost:7018/api/Auth/Login", this.request).subscribe({
       next: (res: any) => {
         localStorage.setItem("response", JSON.stringify(res));
         this.auth.checkAuthentication();
-        location.href = "/shop-list/:id";
+        location.href = "/";
         console.log("response var!")
       },
       error: (err: HttpErrorResponse) => {

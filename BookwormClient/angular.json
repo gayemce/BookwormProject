@@ -50,7 +50,9 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
+              "node_modules/primeng/resources/primeng.min.css"
             ],
             "scripts": []
           },
@@ -85,10 +87,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "BookStoreClient:build:production"
+              "buildTarget": "BookStoreClient:build:production"
             },
             "development": {
-              "browserTarget": "BookStoreClient:build:development"
+              "buildTarget": "BookStoreClient:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -96,7 +98,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "BookStoreClient:build"
+            "buildTarget": "BookStoreClient:build"
           }
         },
         "test": {

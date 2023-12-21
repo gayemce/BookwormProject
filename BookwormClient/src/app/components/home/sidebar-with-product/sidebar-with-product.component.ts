@@ -2,11 +2,16 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { BookModel } from 'src/app/models/book.model';
 import { ErrorService } from 'src/app/services/error.service';
+import { TranslateModule } from '@ngx-translate/core';
+import { RouterLink } from '@angular/router';
+
 
 @Component({
-  selector: 'app-sidebar-with-product',
-  templateUrl: './sidebar-with-product.component.html',
-  styleUrls: ['./sidebar-with-product.component.css']
+    selector: 'app-sidebar-with-product',
+    templateUrl: './sidebar-with-product.component.html',
+    styleUrls: ['./sidebar-with-product.component.css'],
+    standalone: true,
+    imports: [RouterLink, TranslateModule]
 })
 export class SidebarWithProductComponent {
 

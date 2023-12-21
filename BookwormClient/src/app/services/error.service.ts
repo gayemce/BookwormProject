@@ -11,7 +11,8 @@ export class ErrorService {
 
     constructor(
         private router: Router,
-        private translate: TranslateService
+        private translate: TranslateService,
+        // private message: MessageService
     ) { }
 
     errorHandler(err: HttpErrorResponse) {
@@ -32,6 +33,11 @@ export class ErrorService {
                 this.translate.get("apiNotFound").subscribe(res => {
                     console.log(res, "error");
                 });
+                break;
+                
+            case 422:
+                for (let e of err.error)
+                    console.log(e, "Validation Error")
                 break;
 
             case 500:

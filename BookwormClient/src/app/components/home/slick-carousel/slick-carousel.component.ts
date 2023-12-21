@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-slick-carousel',
-  templateUrl: './slick-carousel.component.html',
-  styleUrls: ['./slick-carousel.component.css']
+    selector: 'app-slick-carousel',
+    templateUrl: './slick-carousel.component.html',
+    styleUrls: ['./slick-carousel.component.css'],
+    standalone: true
 })
 export class SlickCarouselComponent {
 

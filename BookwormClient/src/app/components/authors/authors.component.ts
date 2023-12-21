@@ -5,10 +5,13 @@ import { CategoryModel } from 'src/app/models/category.model';
 import { RequestModel } from 'src/app/models/request.model';
 import { ErrorService } from 'src/app/services/error.service';
 
+
 @Component({
-  selector: 'app-authors',
-  templateUrl: './authors.component.html',
-  styleUrls: ['./authors.component.css']
+    selector: 'app-authors',
+    templateUrl: './authors.component.html',
+    styleUrls: ['./authors.component.css'],
+    standalone: true,
+    imports: []
 })
 export default class AuthorsComponent {
 

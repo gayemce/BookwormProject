@@ -1,10 +1,13 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-cart-sidebar',
-  templateUrl: './cart-sidebar.component.html',
-  styleUrls: ['./cart-sidebar.component.css']
+    selector: 'app-cart-sidebar',
+    templateUrl: './cart-sidebar.component.html',
+    styleUrls: ['./cart-sidebar.component.css'],
+    standalone: true,
+    imports: [TranslateModule]
 })
 export class CartSidebarComponent {
   

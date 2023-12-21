@@ -1,11 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateService, TranslateModule } from '@ngx-translate/core';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-categories-sidebar',
-  templateUrl: './categories-sidebar.component.html',
-  styleUrls: ['./categories-sidebar.component.css']
+    selector: 'app-categories-sidebar',
+    templateUrl: './categories-sidebar.component.html',
+    styleUrls: ['./categories-sidebar.component.css'],
+    standalone: true,
+    imports: [FormsModule, TranslateModule]
 })
 export class CategoriesSidebarComponent {
 

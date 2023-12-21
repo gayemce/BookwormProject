@@ -3,10 +3,14 @@ import { Component } from '@angular/core';
 import { CategoryModel } from 'src/app/models/category.model';
 import { ErrorService } from 'src/app/services/error.service';
 
+import { RouterLink } from '@angular/router';
+
 @Component({
-  selector: 'app-categories',
-  templateUrl: './categories.component.html',
-  styleUrls: ['./categories.component.css']
+    selector: 'app-categories',
+    templateUrl: './categories.component.html',
+    styleUrls: ['./categories.component.css'],
+    standalone: true,
+    imports: [RouterLink]
 })
 export default class CategoriesComponent {
 

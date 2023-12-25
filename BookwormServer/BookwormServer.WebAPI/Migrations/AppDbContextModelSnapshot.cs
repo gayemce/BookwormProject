@@ -46,9 +46,6 @@ namespace BookwormServer.WebAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("GoogleProvideId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -63,6 +60,9 @@ namespace BookwormServer.WebAPI.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NormalizedUserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PasswordConfirmed")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PasswordHash")

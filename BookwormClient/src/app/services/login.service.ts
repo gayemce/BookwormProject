@@ -1,24 +1,23 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ElementRef, Injectable, ViewChild } from '@angular/core';
 import { AuthService } from './auth.service';
 import { ErrorService } from './error.service';
 import { LoginModel } from '../models/login.model';
-import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
   request: LoginModel = new LoginModel();
+  errorMessageUserNameOrEmail: string = "";
+  errorMessagePassword: string = "";
+  isUserNameOrEmailError: boolean = false;
+  isPasswordError: boolean = false;
 
   constructor(
     private http: HttpClient,
-    private router: Router,
     private auth: AuthService,
     private error: ErrorService,
-    private translate: TranslateService
   ) { }
 
   ngOnInit(): void {
@@ -38,6 +37,63 @@ export class LoginService {
       }
     });
   }
+
+
+  checkUserNameOrEmail(){
+    if (this.request.userNameOrEmail.length < 3) {
+      this.isUserNameOrEmailError = true;
+      this.errorMessageUserNameOrEmail = 'Geçerli bir kullanıcı adı ya da e-posta girin!'
+      return;
+    }else{
+      this.isUserNameOrEmailError = false;
+    }
+  }
+
+  checkPassword() {
+    // Şifreniz en az 6 karakter olmalıdır.
+    if(this.request.password.length < 6){
+      this.isPasswordError = true;
+      this.errorMessagePassword = 'Şifreniz en az 6 karakter olmalıdır.'
+      return;
+    }
+    else{
+      this.isPasswordError = false;
+    }
+
+    // Şifre büyük harf içermelidir
+    if (!/[A-Z]/.test(this.request.password)) {
+      this.isPasswordError = true;
+      this.errorMessagePassword = 'Şifreniz en az bir büyük harf içermelidir.'
+      return;
+    }else{
+      this.isPasswordError = false;
+    }
+
+    // Şifre küçük harf içermelidir
+    if (!/[a-z]/.test(this.request.password)) {
+      this.isPasswordError = true;
+      this.errorMessagePassword = 'Şifreniz en az bir küçük harf içermelidir.'
+      return;
+    }else{
+      this.isPasswordError = false;
+    }
+
+    // Şifre rakam içermelidir
+    if (!/\d/.test(this.request.password)) {
+      this.isPasswordError = true;
+      this.errorMessagePassword = 'Şifreniz en az bir rakam içermelidir.'
+      return;
+    }else{
+      this.isPasswordError = false;
+    }
+
+    // Şifre özel karakter içermelidir (örneğin: !@#$%^&*)
+    if (!/[!@#$%^&*]/.test(this.request.password)) {
+      this.isPasswordError = true;
+      this.errorMessagePassword = 'Şifreniz en az bir özel karakter içermelidir.'
+      return;
+    }else{
+      this.isPasswordError = false;
+    }
+  }
 }
-
-

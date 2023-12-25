@@ -100,7 +100,6 @@ export class ShopListBooksService {
       next: (res: any) => {
         this.response = res;
         this.setPageNumber();
-        console.log(this.response);
       },
       error: (err: HttpErrorResponse) => {
         this.error.errorHandler(err);
@@ -118,7 +117,6 @@ export class ShopListBooksService {
   getAllBookLanguages() {
     this.http.get("https://localhost:7018/api/BookLanguages/GetAllLanguages").subscribe({
       next: (res: any) => {
-        console.log(res);
         this.bookLanguages = res;
       },
       error: (err: HttpErrorResponse) => {

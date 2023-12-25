@@ -30,28 +30,30 @@
                   <!-- Form Group -->
                   <div class="form-group mb-4">
                     <div class="js-form-message js-focus-state">
-                      <label id="signinEmailLabel" class="form-label" for="signinEmail">Username
-                        or email *</label>
-                      <input [(ngModel)]="login.request.userNameOrEmail" validate required minlength="3" type="email"
+                      <label id="signinEmailLabel" class="form-label" for="signinEmail">Username or email *</label>
+                      <input #signinEmail [(ngModel)]="login.request.userNameOrEmail" type="email"
                         class="form-control rounded-0 height-4 px-4" name="signinEmail" id="signinEmail"
-                        placeholder="creativelayers088@gmail.com" aria-label="creativelayers088@gmail.com"
-                        aria-describedby="signinEmailLabel">
-                      <div class="invalid-feedback">User name or email must be valid</div>
+                        (keyup)="login.checkUserNameOrEmail()" placeholder="Bookworm01@gmail.com"
+                        aria-label="bookworm01@gmail.com" aria-describedby="signinEmailLabel" autocomplete="off">
                     </div>
+                    <span class="mt-2"
+                      [ngStyle]="{'display' : login.isUserNameOrEmailError ? 'block' : 'none', 'color': 'red', 'font-size': '14px', 'font-style': 'italic'}">
+                      {{login.errorMessageUserNameOrEmail}}
+                    </span>
                   </div>
                   <!-- End Form Group -->
                   <!-- Form Group -->
                   <div class="form-group mb-4">
                     <div class="js-form-message js-focus-state">
                       <label id="signinPasswordLabel" class="form-label" for="signinPassword">Password *</label>
-                      <input [(ngModel)]="login.request.password" (focus)="isPasswordFocus = true" #password required minlength="6" type="password"
-                        class="form-control rounded-0 height-4 px-4" name="signinPassword" id="signinPassword" placeholder=""
-                        aria-label="" aria-describedby="signinPasswordLabel">
-                        <span class="input-group-text" id="basic-addon1">
-                          <i (click)="showOrHidePassword(password)" *ngIf="!isShowPassword" class="fa-solid fa-eye"></i>
-                          <i (click)="showOrHidePassword(password)" *ngIf="isShowPassword" class="fa-solid fa-eye-slash"></i>
-                      </span>
+                      <input [(ngModel)]="login.request.password" (keyup)="login.checkPassword()"
+                        type="password" class="form-control rounded-0 height-4 px-4" name="signinPassword"
+                        id="signinPassword" placeholder="******" aria-label="" aria-describedby="signinPasswordLabel" autocomplete="off">
                     </div>
+                    <span class="mt-2"
+                      [ngStyle]="{'display': login.isPasswordError ? 'block' : 'none', 'color': 'red', 'font-size': '14px', 'font-style': 'italic'}">
+                      {{login.errorMessagePassword}}
+                    </span>
                   </div>
                   <!-- End Form Group -->
                   <div class="d-flex justify-content-between mb-5 align-items-center">
@@ -131,7 +133,7 @@
                   <div class="text-center mb-4">
                     <span class="small text-muted">Already have an account?</span>
                     <a class="js-animation-link small" href="javascript:;" data-target="#login" data-link-group="idForm"
-                      data-animation-in="fadeIn">Login
+                      data-animation-in="fadeIn"> Login
                     </a>
                   </div>
                 </div>

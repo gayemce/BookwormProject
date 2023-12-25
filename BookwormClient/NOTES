@@ -100,4 +100,8 @@ Tüm kitaplar Sayfası Yapılacaklar
 *Kullanıcı Login olduğunda ana sayfadan veya kaldığı yerden devam etmeli
 *LocalStorage da response değeri varsa kullanıcı girişini tetiklememeli doğrudan /my-accounta yönlenmeli.
 
-20.12.2023
+25.12.2023
+*Login girişin validasyon hataları göstrildi.
+--
+*Validasyon hatalarına translate eklenecek
+*Server da register işlemine tekrar bakılacak.

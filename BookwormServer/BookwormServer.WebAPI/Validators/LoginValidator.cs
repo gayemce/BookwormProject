@@ -13,6 +13,6 @@ public sealed class LoginValidator : AbstractValidator<LoginDto>
         RuleFor(p => p.Password).Matches("[A-Z]").WithMessage("Şifre en az 1 adet büyük harf içermelidir!");
         RuleFor(p => p.Password).Matches("[a-z]").WithMessage("Şifre en az 1 adet küçük harf içermelidir!");
         RuleFor(p => p.Password).Matches("[0-9]").WithMessage("Şifre en az 1 rakam içermelidir!");
-        RuleFor(p => p.Password).Matches("[^a-zA-Z0-9]").WithMessage("Şifre en az 1 adet özel karakter içermelidir!");
+        RuleFor(p => p.Password).Matches("[^]").WithMessage("Şifre en az 1 adet özel karakter içermelidir!");
     }
 }

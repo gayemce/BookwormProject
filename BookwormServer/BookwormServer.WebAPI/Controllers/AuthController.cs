@@ -68,5 +68,41 @@ public class AuthController : ControllerBase
         string token = _jwtService.CreateToken(appUser, null ,request.RemeberMe);
         return Ok(new { AccessToken = token });
     }
+
+    [HttpPost]
+    public async Task<IActionResult> Register(RegisterDto request, CancellationToken cancellationToken)
+    {
+        //Aynı kullanıcıdan birden fazla kayıda izin veriyor
+        AppUser? appUser = await _userManager.FindByNameAsync(request.UserName);
+        if (appUser is null)
+        {
+            appUser = await _userManager.FindByEmailAsync(request.Email);
+            if (appUser is null)
+            {
+                appUser = new()
+                {
+                    FirstName = request.FirstName,
+                    LastName = request.LastName,
+                    Email = request.Email,
+                    UserName = request.UserName,
+                    PasswordHash = request.Password,
+                    PasswordConfirmed = request.ConfirmedPassword
+                };
+
+                if (request.Password != request.ConfirmedPassword)
+                {
+                    return BadRequest(new { Message = "Başarısız Kayıt işlemi. Şifreler uyuşmuyor!" });
+                }
+
+                _context.Add(appUser);
+                _context.SaveChanges();
+
+                return Ok(new { Message = "Kayıt işlemi başarıyla tamamlandı" });
+            }
+        }
+
+        return BadRequest(new { Message = "Bu kullanıcı kayıdı zaten mevcut"});
+
+    }
 }
 

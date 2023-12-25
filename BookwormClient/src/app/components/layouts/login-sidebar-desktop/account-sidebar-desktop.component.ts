@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
+import { MessageService } from 'primeng/api';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
@@ -10,13 +12,11 @@ import { FormsModule } from '@angular/forms';
     templateUrl: './account-sidebar-desktop.component.html',
     styleUrls: ['./account-sidebar-desktop.component.css'],
     standalone: true,
-    imports: [FormsModule, TranslateModule]
+    imports: [FormsModule, TranslateModule, CommonModule]
 })
 export default class AccountSidebarDesktopComponent {
 
   responseInLocalStorage: any;
-  isShowPassword: boolean = false;
-  isPasswordFocus: boolean = false;
   
   @ViewChild("accountSidebarCloseBtn") closeBtn: ElementRef<HTMLButtonElement> | undefined;
 
@@ -41,15 +41,4 @@ export default class AccountSidebarDesktopComponent {
     if(localStorage.getItem("response"))
     this.router.navigateByUrl("/my-account")
   }
-
-  showOrHidePassword(password: HTMLInputElement) {
-    if (this.isShowPassword) {
-      this.isShowPassword = false;
-      password.type = "password";
-    } else {
-      this.isShowPassword = true;
-      password.type = "text";
-    }
-  }
 }
-

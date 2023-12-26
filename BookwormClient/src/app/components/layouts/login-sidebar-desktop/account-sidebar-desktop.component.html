@@ -17,7 +17,7 @@
         <!-- Content -->
         <div class="js-scrollbar u-sidebar__body">
           <div class="u-sidebar__content u-header-sidebar__content">
-            <form>
+            <form #registerForm="ngForm" autocomplete="off">
               <!-- Login -->
               <div id="login" data-target-group="idForm">
                 <!-- Title -->
@@ -31,14 +31,14 @@
                   <div class="form-group mb-4">
                     <div class="js-form-message js-focus-state">
                       <label id="signinEmailLabel" class="form-label" for="signinEmail">Username or email *</label>
-                      <input #signinEmail [(ngModel)]="login.request.userNameOrEmail" type="email"
+                      <input #signinEmail [(ngModel)]="login.loginRequest.userNameOrEmail" type="email"
                         class="form-control rounded-0 height-4 px-4" name="signinEmail" id="signinEmail"
-                        (keyup)="login.checkUserNameOrEmail()" placeholder="Bookworm01@gmail.com"
-                        aria-label="bookworm01@gmail.com" aria-describedby="signinEmailLabel" autocomplete="off">
+                        (keyup)="login.checkUserNameOrEmail()" placeholder="Bookworm011@gmail.com"
+                        aria-label="bookworm011@gmail.com" aria-describedby="signinEmailLabel" autocomplete="off">
                     </div>
                     <span class="mt-2"
                       [ngStyle]="{'display' : login.isUserNameOrEmailError ? 'block' : 'none', 'color': 'red', 'font-size': '14px', 'font-style': 'italic'}">
-                      {{login.errorMessageUserNameOrEmail}}
+                      {{login.errorMessage}}
                     </span>
                   </div>
                   <!-- End Form Group -->
@@ -46,13 +46,13 @@
                   <div class="form-group mb-4">
                     <div class="js-form-message js-focus-state">
                       <label id="signinPasswordLabel" class="form-label" for="signinPassword">Password *</label>
-                      <input [(ngModel)]="login.request.password" (keyup)="login.checkPassword()"
+                      <input [(ngModel)]="login.loginRequest.password" (keyup)="login.checkSignInPassword()"
                         type="password" class="form-control rounded-0 height-4 px-4" name="signinPassword"
                         id="signinPassword" placeholder="******" aria-label="" aria-describedby="signinPasswordLabel" autocomplete="off">
                     </div>
                     <span class="mt-2"
                       [ngStyle]="{'display': login.isPasswordError ? 'block' : 'none', 'color': 'red', 'font-size': '14px', 'font-style': 'italic'}">
-                      {{login.errorMessagePassword}}
+                      {{login.errorMessage}}
                     </span>
                   </div>
                   <!-- End Form Group -->
@@ -60,7 +60,7 @@
                     <!-- Checkbox -->
                     <div class="js-form-message">
                       <div class="custom-control custom-checkbox d-flex align-items-center text-muted">
-                        <input [(ngModel)]="login.request.rememberMe" type="checkbox" class="custom-control-input"
+                        <input [(ngModel)]="login.loginRequest.rememberMe" type="checkbox" class="custom-control-input"
                           id="termsCheckbox" name="termsCheckbox" required>
                         <label class="custom-control-label" for="termsCheckbox">
                           <span class="font-size-2 text-secondary-gray-700">
@@ -75,7 +75,7 @@
                       data-animation-in="fadeIn">Forgot Password?</a>
                   </div>
                   <div class="mb-4d75">
-                    <button (click)="handleButtonClick()" type="submit"
+                    <button (click)="signIn()" type="submit"
                       class="btn btn-block py-3 rounded-0 btn-dark">Sign In</button>
                   </div>
                   <div class="mb-2">
@@ -97,38 +97,88 @@
                   <!-- Form Group -->
                   <div class="form-group mb-4">
                     <div class="js-form-message js-focus-state">
-                      <label id="signinEmailLabel1" class="form-label" for="signinEmail1">Email
-                        *</label>
-                      <input type="email" class="form-control rounded-0 height-4 px-4" name="email" id="signinEmail1"
-                        placeholder="creativelayers088@gmail.com" aria-label="creativelayers088@gmail.com"
+                      <label id="signinFirstnameLabel1" class="form-label" for="signinFirstname1">First Name *</label>
+                      <input [(ngModel)]="login.registerRequest.firstName" (keyup)="login.checkFirstName()" type="text" class="form-control rounded-0 height-4 px-4" name="signinFirstName" id="signinFirstname1"
+                        placeholder="Book" aria-label="Book" aria-describedby="signinFirstnameLabel1" required>
+                    </div>
+                    <span class="mt-2"
+                      [ngStyle]="{'display': login.isFirstNameError ? 'block' : 'none', 'color': 'red', 'font-size': '14px', 'font-style': 'italic'}">
+                      {{login.errorMessage}}
+                    </span>
+                  </div>
+                  <!-- End Form Group -->
+                  <!-- Form Group -->
+                  <div class="form-group mb-4">
+                    <div class="js-form-message js-focus-state">
+                      <label id="signinLastnameLabel1" class="form-label" for="signinLastname1">Last Name *</label>
+                      <input [(ngModel)]="login.registerRequest.lastName" (keyup)="login.checkLastName()" type="text" class="form-control rounded-0 height-4 px-4" name="signinLastName" id="signinLastname1"
+                        placeholder="Worm" aria-label="Worm" aria-describedby="signinLastnameLabel1" required>
+                    </div>
+                    <span class="mt-2"
+                      [ngStyle]="{'display': login.isLastNameError ? 'block' : 'none', 'color': 'red', 'font-size': '14px', 'font-style': 'italic'}">
+                      {{login.errorMessage}}
+                    </span>
+                  </div>
+                  <!-- End Form Group -->
+                  <!-- Form Group -->
+                  <div class="form-group mb-4">
+                    <div class="js-form-message js-focus-state">
+                      <label id="signinUsernameLabel1" class="form-label" for="signinUsername1">User Name *</label>
+                      <input [(ngModel)]="login.registerRequest.userName" (keyup)="login.checkUserName()" type="text" class="form-control rounded-0 height-4 px-4" name="signinUserName" id="signinUsername1"
+                        placeholder="Worm" aria-label="Worm" aria-describedby="signinUsernameLabel1" required>
+                    </div>
+                    <span class="mt-2"
+                      [ngStyle]="{'display': login.isUserNameError ? 'block' : 'none', 'color': 'red', 'font-size': '14px', 'font-style': 'italic'}">
+                      {{login.errorMessage}}
+                    </span>
+                  </div>
+                  <!-- End Form Group -->
+                  <!-- Form Group -->
+                  <div class="form-group mb-4">
+                    <div class="js-form-message js-focus-state">
+                      <label id="signinEmailLabel1" class="form-label" for="signinEmail1">Email *</label>
+                      <input [(ngModel)]="login.registerRequest.email" (keyup)="login.checkEmail()" type="email" class="form-control rounded-0 height-4 px-4" name="signinEmail" id="signinEmail1"
+                        placeholder="bookworm011@gmail.com" aria-label="bookworm011@gmail.com"
                         aria-describedby="signinEmailLabel1" required>
                     </div>
+                    <span class="mt-2"
+                      [ngStyle]="{'display': login.isEmailError ? 'block' : 'none', 'color': 'red', 'font-size': '14px', 'font-style': 'italic'}">
+                      {{login.errorMessage}}
+                    </span>
                   </div>
                   <!-- End Form Group -->
                   <!-- Form Group -->
                   <div class="form-group mb-4">
                     <div class="js-form-message js-focus-state">
                       <label id="signinPasswordLabel1" class="form-label" for="signinPassword1">Password *</label>
-                      <input type="password" class="form-control rounded-0 height-4 px-4" name="password"
-                        id="signinPassword1" placeholder="" aria-label="" aria-describedby="signinPasswordLabel1"
+                      <input [(ngModel)]="login.registerRequest.password" (keyup)="login.checkSignUpPassword()" type="password" class="form-control rounded-0 height-4 px-4" name="signinPassword"
+                        id="signinPassword1" placeholder="******" aria-label="" aria-describedby="signinPasswordLabel1"
                         required>
                     </div>
+                    <span class="mt-2"
+                      [ngStyle]="{'display': login.isPasswordError ? 'block' : 'none', 'color': 'red', 'font-size': '14px', 'font-style': 'italic'}">
+                      {{login.errorMessage}}
+                    </span>
                   </div>
                   <!-- End Form Group -->
                   <!-- Form Group -->
                   <div class="form-group mb-4">
                     <div class="js-form-message js-focus-state">
-                      <label id="signupConfirmPasswordLabel" class="form-label" for="signupConfirmPassword">Confirm
-                        Password *</label>
-                      <input type="password" class="form-control rounded-0 height-4 px-4" name="confirmPassword"
-                        id="signupConfirmPassword" placeholder="" aria-label=""
+                      <label id="signupConfirmPasswordLabel" class="form-label" for="signupConfirmPassword">Confirm Password *</label>
+                      <input [(ngModel)]="login.registerRequest.confirmedPassword" (keyup)="login.checkSignUpConfPassword()" type="password" class="form-control rounded-0 height-4 px-4" name="signinConfirmPassword"
+                        id="signupConfirmPassword" placeholder="******" aria-label=""
                         aria-describedby="signupConfirmPasswordLabel" required>
                     </div>
+                    <span class="mt-2"
+                      [ngStyle]="{'display': login.isPasswordError ? 'block' : 'none', 'color': 'red', 'font-size': '14px', 'font-style': 'italic'}">
+                      {{login.errorMessage}}
+                    </span>
                   </div>
                   <!-- End Input -->
                   <div class="mb-3">
-                    <button type="submit" class="btn btn-block py-3 rounded-0 btn-dark">Create
-                      Account</button>
+                    <button (click)="createAccount()" type="submit" class="btn btn-block py-3 rounded-0 btn-dark">
+                      Create Account
+                    </button>
                   </div>
                   <div class="text-center mb-4">
                     <span class="small text-muted">Already have an account?</span>

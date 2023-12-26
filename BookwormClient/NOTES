@@ -105,3 +105,9 @@ Tüm kitaplar Sayfası Yapılacaklar
 --
 *Validasyon hatalarına translate eklenecek
 *Server da register işlemine tekrar bakılacak.
+
+26.12.2023
+*Register kodlandı.
+*Register validasyon hataları gösterildi.
+---
+*Register Password de aynı anda tüm inputlar hata veriyor düzeltilecek.

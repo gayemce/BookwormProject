@@ -6,6 +6,7 @@ using BookwormServer.WebAPI.Validators;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookwormServer.WebAPI.Controllers;
 [Route("api/[controller]/[action]")]
@@ -36,14 +37,16 @@ public class AuthController : ControllerBase
             return StatusCode(422, validationResult.Errors.Select(s => s.ErrorMessage));
         }
 
-        AppUser? appUser = await _userManager.FindByNameAsync(request.UserNameOrEmail);
+        //AppUser? appUser = await _userManager.FindByNameAsync(request.UserNameOrEmail) ?? await _userManager.FindByEmailAsync(request.UserNameOrEmail);
+
+        AppUser? appUserByUsername = await _userManager.Users.FirstOrDefaultAsync(u => u.UserName == request.UserNameOrEmail);
+        AppUser? appUserByEmail = await _userManager.Users.FirstOrDefaultAsync(u => u.Email == request.UserNameOrEmail);
+
+        AppUser? appUser = appUserByUsername ?? appUserByEmail;
+
         if (appUser is null)
         {
-            appUser = await _userManager.FindByEmailAsync(request.UserNameOrEmail);
-            if(appUser is null)
-            {
-                return BadRequest(new { Message = "Kullanıcı bulanmadı! " });
-            }
+            return BadRequest(new { Message = "Kullanıcı bulunamadı!" });
         }
 
         var result = await _signInManager.CheckPasswordSignInAsync(appUser, request.Password, true);
@@ -72,33 +75,41 @@ public class AuthController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Register(RegisterDto request, CancellationToken cancellationToken)
     {
-        //Aynı kullanıcıdan birden fazla kayıda izin veriyor
-        AppUser? appUser = await _userManager.FindByNameAsync(request.UserName);
-        if (appUser is null)
+        RegisterValidator validator = new();
+        ValidationResult validationResult = validator.Validate(request);
+
+        if (!validationResult.IsValid)
         {
-            appUser = await _userManager.FindByEmailAsync(request.Email);
-            if (appUser is null)
+            return StatusCode(422, validationResult.Errors.Select(s => s.ErrorMessage));
+        }
+
+        bool userNameExist = await _userManager.Users.AnyAsync(p => p.UserName == request.UserName);
+        bool emailExist = await _userManager.Users.AnyAsync(p => p.Email == request.Email);
+
+        if (!userNameExist && !emailExist)
+        {
+            if(request.Password != request.ConfirmedPassword)
             {
-                appUser = new()
-                {
-                    FirstName = request.FirstName,
-                    LastName = request.LastName,
-                    Email = request.Email,
-                    UserName = request.UserName,
-                    PasswordHash = request.Password,
-                    PasswordConfirmed = request.ConfirmedPassword
-                };
-
-                if (request.Password != request.ConfirmedPassword)
-                {
-                    return BadRequest(new { Message = "Başarısız Kayıt işlemi. Şifreler uyuşmuyor!" });
-                }
-
-                _context.Add(appUser);
-                _context.SaveChanges();
-
-                return Ok(new { Message = "Kayıt işlemi başarıyla tamamlandı" });
+                return BadRequest(new { Message = "Başarısız kayıt işlemi. Şifreler uyuşmuyor!" });
             }
+
+            var passwordHasher = new PasswordHasher<AppUser>();
+            var hashedPassword = passwordHasher.HashPassword(null, request.Password);
+
+            AppUser appUser = new()
+            {
+                FirstName = request.FirstName,
+                LastName = request.LastName,
+                Email = request.Email,
+                EmailConfirmed = true,
+                UserName = request.UserName,
+                PasswordHash = hashedPassword,
+            };
+
+            _context.Add(appUser);
+            await _context.SaveChangesAsync();
+
+            return Ok(new { Message = "Kayıt işlemi başarıyla tamamlandı." });
         }
 
         return BadRequest(new { Message = "Bu kullanıcı kayıdı zaten mevcut"});

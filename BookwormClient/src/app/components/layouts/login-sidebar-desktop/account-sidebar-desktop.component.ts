@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoginService } from 'src/app/services/login.service';
+import { LoginRegisterService } from 'src/app/services/login-register.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
 import { MessageService } from 'primeng/api';
@@ -22,23 +22,27 @@ export default class AccountSidebarDesktopComponent {
 
   constructor(
     private router: Router,
-    public login: LoginService
+    public login: LoginRegisterService
   ) { }
 
   ngOnInit(){
     this.responseInLocalStorage = localStorage.getItem("response");
   }
 
-  handleButtonClick() {
+  signIn() {
     this.login.signIn();
-    this.goToMyAccount();
-  }
-
-  goToMyAccount() {
     if (this.closeBtn != undefined) {
       this.closeBtn.nativeElement.click();
     }
-    if(localStorage.getItem("response"))
-    this.router.navigateByUrl("/my-account")
+    if(this.responseInLocalStorage){
+      this.router.navigateByUrl("/my-account")
+    }
+  }
+
+  createAccount() {
+    if (this.closeBtn != undefined) {
+      this.closeBtn.nativeElement.click();
+    }
+    this.login.signUp();
   }
 }

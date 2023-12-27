@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -12,7 +13,8 @@ export default class MyAccountComponent {
 
   constructor(
     private router: Router,
-    public auth: AuthService
+    public auth: AuthService,
+    public translate: TranslateService
   ){}
 
   logout(){

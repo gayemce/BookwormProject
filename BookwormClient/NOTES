@@ -98,16 +98,20 @@ Tüm kitaplar Sayfası Yapılacaklar
 *jwtDecode işlemi başarılı.
 ---
 *Kullanıcı Login olduğunda ana sayfadan veya kaldığı yerden devam etmeli
-*LocalStorage da response değeri varsa kullanıcı girişini tetiklememeli doğrudan /my-accounta yönlenmeli.
 
 25.12.2023
 *Login girişin validasyon hataları göstrildi.
 --
 *Validasyon hatalarına translate eklenecek
-*Server da register işlemine tekrar bakılacak.
 
 26.12.2023
 *Register kodlandı.
 *Register validasyon hataları gösterildi.
 ---
-*Register Password de aynı anda tüm inputlar hata veriyor düzeltilecek.
+
+27.12.2023
+*Register server validasyon hataları kodlandı.
+*Register client validasyon hataları kodlandı.
+*Hata mesajları türkçe ve ingilizce yazdırıldı.
+--
+*Validasyon kuralları sağlanmadıysa create ve signIn butonları pasifleştirilecek.

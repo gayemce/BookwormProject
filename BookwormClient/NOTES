@@ -113,5 +113,9 @@ Tüm kitaplar Sayfası Yapılacaklar
 *Register server validasyon hataları kodlandı.
 *Register client validasyon hataları kodlandı.
 *Hata mesajları türkçe ve ingilizce yazdırıldı.
---
-*Validasyon kuralları sağlanmadıysa create ve signIn butonları pasifleştirilecek.
+
+28.12.2023
+*Validasyon kuralları sağlanmadıysa create ve signIn butonları pasif görünür.
+---
+*Backend validasyon hataları login de görüntülenecek. (translate olarak)
+*Login de şifre hatalı olunca if bloğuna düşmüyor kontrol et.

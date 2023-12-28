@@ -18,6 +18,7 @@ export class LoginRegisterService {
   errorUserNameOrEmailMessageTr: string = "";
   errorSignInPasswordMessageEn: string = "";
   errorSignInPasswordMessageTr: string = "";
+
   errorFirstNameMessageEn: string = "";
   errorFirstNameMessageTr: string = "";
   errorLastNameMessageEn: string = "";
@@ -30,14 +31,16 @@ export class LoginRegisterService {
   errorSignUpPasswordMessageTr: string = "";
   errorSignUpConfPasswordMessageEn: string = "";
   errorSignUpConfPasswordMessageTr: string = "";
+
   isUserNameOrEmailError: boolean = false;
   isSigninPasswordError: boolean = false;
-  isSignupPasswordError: boolean = false;
-  isSignupConfPasswordError: boolean = false;
+
   isFirstNameError: boolean = false;
   isLastNameError: boolean = false;
   isUserNameError: boolean = false;
   isEmailError: boolean = false;
+  isSignupPasswordError: boolean = false;
+  isSignupConfPasswordError: boolean = false;
 
   constructor(
     private http: HttpClient,
@@ -138,13 +141,11 @@ export class LoginRegisterService {
     }
   }
 
-
   checkUserNameOrEmail() {
     if (this.loginRequest.userNameOrEmail.length < 3) {
       this.isUserNameOrEmailError = true;
       this.errorUserNameOrEmailMessageEn = '* Enter a valid username or email!'
       this.errorUserNameOrEmailMessageTr = '* Geçerli bir kullanıcı adı ya da e-posta girin!'
-      return;
     } else {
       this.isUserNameOrEmailError = false;
     }
@@ -156,7 +157,6 @@ export class LoginRegisterService {
       this.isSigninPasswordError = true;
       this.errorSignInPasswordMessageEn = '* Your password must be at least 6 characters.'
       this.errorSignInPasswordMessageTr = '* Şifreniz en az 6 karakter olmalıdır.'
-      return;
     }
     else {
       this.isSigninPasswordError = false;
@@ -167,7 +167,6 @@ export class LoginRegisterService {
       this.isSigninPasswordError = true;
       this.errorSignInPasswordMessageEn = '* Your password must contain at least one capital letter.'
       this.errorSignInPasswordMessageTr = '* Şifreniz en az bir büyük harf içermelidir.'
-      return;
     } else {
       this.isSigninPasswordError = false;
     }
@@ -177,7 +176,6 @@ export class LoginRegisterService {
       this.isSigninPasswordError = true;
       this.errorSignInPasswordMessageEn = '* Your password must contain at least one lowercase letter.'
       this.errorSignInPasswordMessageTr = '* Şifreniz en az bir küçük harf içermelidir.'
-      return;
     } else {
       this.isSigninPasswordError = false;
     }
@@ -187,7 +185,6 @@ export class LoginRegisterService {
       this.isSigninPasswordError = true;
       this.errorSignInPasswordMessageEn = '* Your password must contain at least one digit.'
       this.errorSignInPasswordMessageTr = '* Şifreniz en az bir rakam içermelidir.'
-      return;
     } else {
       this.isSigninPasswordError = false;
     }
@@ -197,7 +194,6 @@ export class LoginRegisterService {
       this.isSigninPasswordError = true;
       this.errorSignInPasswordMessageEn = '* Your password must contain at least one special character.'
       this.errorSignInPasswordMessageTr = '* Şifreniz en az bir özel karakter içermelidir.'
-      return;
     } else {
       this.isSigninPasswordError = false;
     }

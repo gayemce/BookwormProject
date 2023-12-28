@@ -17,7 +17,7 @@
         <!-- Content -->
         <div class="js-scrollbar u-sidebar__body">
           <div class="u-sidebar__content u-header-sidebar__content">
-            <form #registerForm="ngForm" autocomplete="off">
+            <form autocomplete="off">
               <!-- Login -->
               <div id="login" data-target-group="idForm">
                 <!-- Title -->
@@ -29,6 +29,11 @@
                 <div class="p-4 p-md-6">
                   <!-- Form Group -->
                   <div class="form-group mb-4">
+                    <!-- @if(selectLang.userSelectedLanguage === 'en'){
+                    <p-messages [(value)]="messageSignInEn" [enableService]="false" [closable]="false"></p-messages>
+                    }@else {
+                    <p-messages [(value)]="messageSignInTr" [enableService]="false" [closable]="false"></p-messages>
+                    } -->
                     <div class="js-form-message js-focus-state">
                       <label id="signinEmailLabel" class="form-label" for="signinEmail">Username or email *</label>
                       <input #signinEmail [(ngModel)]="login.loginRequest.userNameOrEmail" type="email"
@@ -38,7 +43,8 @@
                     </div>
                     <span class="mt-2"
                       [ngStyle]="{'display' : login.isUserNameOrEmailError ? 'block' : 'none', 'color': 'red', 'font-size': '14px', 'font-style': 'italic'}">
-                      {{selectLang.userSelectedLanguage === 'en' ? login.errorUserNameOrEmailMessageEn : login.errorUserNameOrEmailMessageEn}}
+                      {{selectLang.userSelectedLanguage === 'en' ? login.errorUserNameOrEmailMessageEn :
+                      login.errorUserNameOrEmailMessageTr}}
                     </span>
                   </div>
                   <!-- End Form Group -->
@@ -53,7 +59,8 @@
                     </div>
                     <span class="mt-2"
                       [ngStyle]="{'display': login.isSigninPasswordError ? 'block' : 'none', 'color': 'red', 'font-size': '14px', 'font-style': 'italic'}">
-                      {{selectLang.userSelectedLanguage === 'en' ? login.errorSignInPasswordMessageEn : login.errorSignInPasswordMessageTr}}
+                      {{selectLang.userSelectedLanguage === 'en' ? login.errorSignInPasswordMessageEn :
+                      login.errorSignInPasswordMessageTr}}
                     </span>
                   </div>
                   <!-- End Form Group -->
@@ -76,8 +83,12 @@
                       data-animation-in="fadeIn">Forgot Password?</a>
                   </div>
                   <div class="mb-4d75">
-                    <button (click)="signIn()" type="submit" class="btn btn-block py-3 rounded-0 btn-dark">Sign
-                      In</button>
+                    <button (click)="updateSignInButtonStatus() ? signIn() : null"
+                      [ngStyle]="{'cursor': updateSignInButtonStatus() ? 'pointer' : 'not-allowed'}" type="submit"
+                      class="btn btn-block py-3 rounded-0 btn-dark"
+                      [ngClass]="{'disabled': !updateSignInButtonStatus()}">
+                      Sign In
+                    </button>
                   </div>
                   <div class="mb-2">
                     <a href="javascript:;"
@@ -97,6 +108,11 @@
                 <div class="p-4 p-md-6">
                   <!-- Form Group -->
                   <div class="form-group mb-4">
+                    <!-- @if(selectLang.userSelectedLanguage === 'en'){
+                      <p-messages [(value)]="messageSignUpEn" [enableService]="false" [closable]="false"></p-messages>
+                    }@else {
+                      <p-messages [(value)]="messageSignUpTr" [enableService]="false" [closable]="false"></p-messages>
+                    } -->
                     <div class="js-form-message js-focus-state">
                       <label id="signupFirstnameLabel1" class="form-label" for="signupFirstname">First Name *</label>
                       <input [(ngModel)]="login.registerRequest.firstName" (keyup)="login.checkFirstName()" type="text"
@@ -105,7 +121,8 @@
                     </div>
                     <span class="mt-2"
                       [ngStyle]="{'display': login.isFirstNameError ? 'block' : 'none', 'color': 'red', 'font-size': '14px', 'font-style': 'italic'}">
-                      {{selectLang.userSelectedLanguage === 'en' ? login.errorFirstNameMessageEn : login.errorFirstNameMessageTr}}
+                      {{selectLang.userSelectedLanguage === 'en' ? login.errorFirstNameMessageEn :
+                      login.errorFirstNameMessageTr}}
                     </span>
                   </div>
                   <!-- End Form Group -->
@@ -119,7 +136,8 @@
                     </div>
                     <span class="mt-2"
                       [ngStyle]="{'display': login.isLastNameError ? 'block' : 'none', 'color': 'red', 'font-size': '14px', 'font-style': 'italic'}">
-                      {{selectLang.userSelectedLanguage === 'en' ? login.errorLastNameMessageEn : login.errorLastNameMessageTr}}
+                      {{selectLang.userSelectedLanguage === 'en' ? login.errorLastNameMessageEn :
+                      login.errorLastNameMessageTr}}
                     </span>
                   </div>
                   <!-- End Form Group -->
@@ -133,7 +151,8 @@
                     </div>
                     <span class="mt-2"
                       [ngStyle]="{'display': login.isUserNameError ? 'block' : 'none', 'color': 'red', 'font-size': '14px', 'font-style': 'italic'}">
-                      {{selectLang.userSelectedLanguage === 'en' ? login.errorUserNameMessageEn : login.errorUserNameMessageTr}}
+                      {{selectLang.userSelectedLanguage === 'en' ? login.errorUserNameMessageEn :
+                      login.errorUserNameMessageTr}}
                     </span>
                   </div>
                   <!-- End Form Group -->
@@ -148,7 +167,8 @@
                     </div>
                     <span class="mt-2"
                       [ngStyle]="{'display': login.isEmailError ? 'block' : 'none', 'color': 'red', 'font-size': '14px', 'font-style': 'italic'}">
-                      {{selectLang.userSelectedLanguage === 'en' ? login.errorEmailMessageEn : login.errorEmailMessageTr}}
+                      {{selectLang.userSelectedLanguage === 'en' ? login.errorEmailMessageEn :
+                      login.errorEmailMessageTr}}
                     </span>
                   </div>
                   <!-- End Form Group -->
@@ -163,7 +183,8 @@
                     </div>
                     <span class="mt-2"
                       [ngStyle]="{'display': login.isSignupPasswordError ? 'block' : 'none', 'color': 'red', 'font-size': '14px', 'font-style': 'italic'}">
-                      {{selectLang.userSelectedLanguage === 'en' ? login.errorSignUpPasswordMessageEn : login.errorSignUpPasswordMessageTr}}
+                      {{selectLang.userSelectedLanguage === 'en' ? login.errorSignUpPasswordMessageEn :
+                      login.errorSignUpPasswordMessageTr}}
                     </span>
                   </div>
                   <!-- End Form Group -->
@@ -172,18 +193,24 @@
                     <div class="js-form-message js-focus-state">
                       <label id="signupConfirmPasswordLabel" class="form-label" for="signupConfirmPassword">Confirm
                         Password *</label>
-                      <input [(ngModel)]="login.registerRequest.confirmedPassword" (keyup)="login.checkSignUpConfPassword()" type="password"
-                        class="form-control rounded-0 height-4 px-4" name="signupConfirmPassword" id="signupConfirmPassword" placeholder="******" aria-label=""
+                      <input [(ngModel)]="login.registerRequest.confirmedPassword"
+                        (keyup)="login.checkSignUpConfPassword()" type="password"
+                        class="form-control rounded-0 height-4 px-4" name="signupConfirmPassword"
+                        id="signupConfirmPassword" placeholder="******" aria-label=""
                         aria-describedby="signupConfirmPasswordLabel" required>
                     </div>
                     <span class="mt-2"
                       [ngStyle]="{'display': login.isSignupConfPasswordError ? 'block' : 'none', 'color': 'red', 'font-size': '14px', 'font-style': 'italic'}">
-                      {{selectLang.userSelectedLanguage === 'en' ? login.errorSignUpConfPasswordMessageEn : login.errorSignUpConfPasswordMessageTr}}
+                      {{selectLang.userSelectedLanguage === 'en' ? login.errorSignUpConfPasswordMessageEn :
+                      login.errorSignUpConfPasswordMessageTr}}
                     </span>
                   </div>
                   <!-- End Input -->
                   <div class="mb-3">
-                    <button (click)="createAccount()" type="submit" class="btn btn-block py-3 rounded-0 btn-dark">
+                    <button (click)="updateSignUpButtonStatus() ? createAccount() : null"
+                      [ngStyle]="{'cursor': updateSignUpButtonStatus() ? 'pointer' : 'not-allowed'}" type="submit"
+                      class="btn btn-block py-3 rounded-0 btn-dark"
+                      [ngClass]="{'disabled': !updateSignUpButtonStatus()}">
                       Create Account
                     </button>
                   </div>

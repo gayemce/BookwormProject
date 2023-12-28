@@ -15,6 +15,7 @@ public sealed class RegisterValidator : AbstractValidator<RegisterDto>
 
         RuleFor(p => p.Email).NotEmpty().WithMessage("Geçerli bir e-posta adresi girin");
         RuleFor(p => p.Email).MinimumLength(3).WithMessage("Geçerli bir e-posta adresi girin");
+        RuleFor(p => p.Email).Matches(".+@.+").WithMessage("E-posta adresi '@' işareti içermelidir");
 
         RuleFor(p => p.UserName).NotEmpty().WithMessage("Geçerli bir kullanıcı adı girin");
         RuleFor(p => p.UserName).MinimumLength(3).WithMessage("Geçerli bir kullanıcı adı girin");

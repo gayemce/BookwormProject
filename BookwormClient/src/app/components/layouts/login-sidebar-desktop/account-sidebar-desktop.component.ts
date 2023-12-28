@@ -3,9 +3,10 @@ import { Router } from '@angular/router';
 import { LoginRegisterService } from 'src/app/services/login-register.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
-import { MessageService } from 'primeng/api';
+import { Message } from 'primeng/api';
 import { CommonModule } from '@angular/common';
 import { SelectedLanguageService } from 'src/app/services/selected-language.service';
+import { MessagesModule } from 'primeng/messages';
 
 
 @Component({
@@ -13,11 +14,15 @@ import { SelectedLanguageService } from 'src/app/services/selected-language.serv
   templateUrl: './account-sidebar-desktop.component.html',
   styleUrls: ['./account-sidebar-desktop.component.css'],
   standalone: true,
-  imports: [FormsModule, TranslateModule, CommonModule]
+  imports: [FormsModule, TranslateModule, CommonModule, MessagesModule]
 })
 export default class AccountSidebarDesktopComponent {
 
   responseInLocalStorage: any;
+  messageSignInEn: Message[] | any;
+  messageSignInTr: Message[] | any;
+  messageSignUpEn: Message[] | any;
+  messageSignUpTr: Message[] | any;
 
   @ViewChild("accountSidebarCloseBtn") closeBtn: ElementRef<HTMLButtonElement> | undefined;
 
@@ -25,28 +30,45 @@ export default class AccountSidebarDesktopComponent {
     private router: Router,
     public login: LoginRegisterService,
     public selectLang: SelectedLanguageService
-  ) { }
+  ) { 
+    this.updateSignInButtonStatus();
+  }
 
   ngOnInit() {
     this.responseInLocalStorage = localStorage.getItem("response");
   }
 
   signIn() {
-    this.login.signIn();
+    if(this.updateSignInButtonStatus() === true){
+      this.messageSignInEn = [{severity: 'error', detail: 'Please Fill All Spaces!'}];
+      this.messageSignInTr = [{severity: 'error', detail: 'Lütfen Tüm Alanları Doldurun!'}];
+      this.login.signIn();
+    }
+    else{
+      this.login.signIn();
     if (this.closeBtn != undefined) {
       this.closeBtn.nativeElement.click();
     }
     if (this.responseInLocalStorage) {
       this.router.navigateByUrl("/my-account")
     }
+    }
+    
   }
 
   createAccount() {
-    if (this.closeBtn != undefined) {
-      this.closeBtn.nativeElement.click();
+    if(this.updateSignUpButtonStatus() === true){
+      this.messageSignUpEn = [{severity: 'error', detail: 'Please Fill All Spaces!'}];
+      this.messageSignUpTr = [{severity: 'error', detail: 'Lütfen Tüm Alanları Doldurun!'}];
+      this.login.signUp();
     }
-    this.login.signUp();
-    this.clearInputs();
+    else{
+      if (this.closeBtn != undefined) {
+        this.closeBtn.nativeElement.click();
+      }
+      this.login.signUp();
+      this.clearInputs();
+    }
   }
 
   clearInputs(){  
@@ -74,5 +96,13 @@ export default class AccountSidebarDesktopComponent {
 
     if (signupConfirmPassword && signupConfirmPassword.value.length > 0)
       signupConfirmPassword.value = '';
+  }
+
+  updateSignInButtonStatus(): boolean {
+    return (!this.login.isUserNameOrEmailError && !this.login.isSigninPasswordError);
+  }
+
+  updateSignUpButtonStatus(): boolean {
+    return (!this.login.isFirstNameError && !this.login.isLastNameError && !this.login.isEmailError && !this.login.isUserNameError && !this.login.isSignupPasswordError && !this.login.isSignupConfPasswordError)
   }
 }

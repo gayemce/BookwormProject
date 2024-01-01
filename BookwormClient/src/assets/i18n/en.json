@@ -60,5 +60,9 @@
   "show15": "Show 15",
   "show20": "Show 20",
   "show25": "Show 25",
-  "bookFormat": "Book Format"
+  "bookFormat": "Book Format",
+  "bookAddedtoCart": "Book added to cart!",
+  "home": "Home",
+  "cart": "Cart",
+  "cartDetail": "Cart Detail"
 }

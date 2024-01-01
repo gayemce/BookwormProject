@@ -1,6 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
+import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
 
 @Component({
     selector: 'app-cart-sidebar',
@@ -14,7 +15,8 @@ export class CartSidebarComponent {
   @ViewChild("cartSidebarCloseBtn") closeBtn: ElementRef<HTMLButtonElement> | undefined;
 
   constructor(
-    private router: Router
+    private router: Router,
+    public shopping: ShoppingCartService
   ){}
 
   gotoCart(){

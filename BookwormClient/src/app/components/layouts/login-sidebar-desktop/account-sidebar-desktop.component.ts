@@ -39,21 +39,18 @@ export default class AccountSidebarDesktopComponent {
   }
 
   signIn() {
-    if(this.updateSignInButtonStatus() === true){
-      this.messageSignInEn = [{severity: 'error', detail: 'Please Fill All Spaces!'}];
-      this.messageSignInTr = [{severity: 'error', detail: 'Lütfen Tüm Alanları Doldurun!'}];
-      this.login.signIn();
-    }
-    else{
-      this.login.signIn();
+    // if(this.updateSignInButtonStatus() === true){
+    //   this.messageSignInEn = [{severity: 'error', detail: 'Please Fill All Spaces!'}];
+    //   this.messageSignInTr = [{severity: 'error', detail: 'Lütfen Tüm Alanları Doldurun!'}];
+    //   this.login.signIn();
+    // }
+    this.login.signIn();
     if (this.closeBtn != undefined) {
       this.closeBtn.nativeElement.click();
     }
     if (this.responseInLocalStorage) {
       this.router.navigateByUrl("/my-account")
-    }
-    }
-    
+    }    
   }
 
   createAccount() {

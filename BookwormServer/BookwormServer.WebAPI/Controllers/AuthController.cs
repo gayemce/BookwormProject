@@ -49,24 +49,31 @@ public class AuthController : ControllerBase
             return BadRequest(new { Message = "Kullanıcı bulunamadı!" });
         }
 
-        var result = await _signInManager.CheckPasswordSignInAsync(appUser, request.Password, true);
+        //var result = await _signInManager.CheckPasswordSignInAsync(appUser, request.Password, true);
+        var passwordHasher = new PasswordHasher<AppUser>();
+        var passwordVerificationResult = passwordHasher.VerifyHashedPassword(appUser, appUser.PasswordHash, request.Password);
 
-        if (result.IsLockedOut)
-        {
-            TimeSpan? timeSpan = appUser.LockoutEnd - DateTime.UtcNow;
-            if(timeSpan is not null)
-                return BadRequest(new { Message = $"Kullanıcınız 3 kere yanlış şifre girişinden dolayı {Math.Ceiling(timeSpan.Value.TotalMinutes)} dakika kitlenmiştir." });
-        }
-
-        if (result.IsNotAllowed)
-        {
-            return BadRequest(new { Message = "Mail adresiniz onaylı değil!" });
-        }
-
-        if (!result.Succeeded)
+        if(passwordVerificationResult == PasswordVerificationResult.Failed)
         {
             return BadRequest(new { Message = "Şifreniz yanlış!" });
         }
+
+        //if (result.IsLockedOut)
+        //{
+        //    TimeSpan? timeSpan = appUser.LockoutEnd - DateTime.UtcNow;
+        //    if(timeSpan is not null)
+        //        return BadRequest(new { Message = $"Kullanıcınız 3 kere yanlış şifre girişinden dolayı {Math.Ceiling(timeSpan.Value.TotalMinutes)} dakika kitlenmiştir." });
+        //}
+
+        //if (result.IsNotAllowed)
+        //{
+        //    return BadRequest(new { Message = "Mail adresiniz onaylı değil!" });
+        //}
+
+        //if (!result.Succeeded)
+        //{
+        //    return BadRequest(new { Message = "Şifreniz yanlış!" });
+        //}
 
         string token = _jwtService.CreateToken(appUser, null ,request.RemeberMe);
         return Ok(new { AccessToken = token });

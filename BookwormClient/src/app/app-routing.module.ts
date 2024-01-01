@@ -6,6 +6,15 @@ import SingleProductComponent from './components/single-product/single-product.c
 import HomeComponent from './components/home/home.component';
 import CategoriesComponent from './components/categories/categories.component';
 import MyAccountComponent from './components/my-account/my-account.component';
+import CartComponent from './components/cart/cart.component';
+import AuthorsComponent from './components/authors/authors.component';
+import CheckoutComponent from './components/checkout/checkout.component';
+import OrderReceivedComponent from './components/order-received/order-received.component';
+import OrderTrackingComponent from './components/order-tracking/order-tracking.component';
+import AboutUsComponent from './components/about-us/about-us.component';
+import ContactUsComponent from './components/contact-us/contact-us.component';
+import FaqComponent from './components/faq/faq.component';
+import TermsAndConditionsComponent from './components/terms-and-conditions/terms-and-conditions.component';
 
 const routes: Routes = [
   {
@@ -28,37 +37,33 @@ const routes: Routes = [
         path: 'shop-list/:id',
         component: ShopListByCategoryComponent
       },
-      // {
-      //   path: "shop-list",
-      //   component: ShopListComponent
-      // },
+      {
+        path: "single-product/:value",
+        component: SingleProductComponent
+      },
       {
         path: "shop-list/:id/single-product/:value",
         component: SingleProductComponent
       },
-      // {
-      //   path: "single-product/:value",
-      //   loadComponent:()=> import("./components/single-product/single-product.component")
-      // },
       {
         path: "authors",
-        loadComponent: () => import("./components/authors/authors.component")
+        component: AuthorsComponent
       },
       {
         path: "cart",
-        loadComponent: () => import("./components/cart/cart.component")
+        component: CartComponent
       },
       {
         path: "checkout",
-        loadComponent: () => import("./components/checkout/checkout.component")
+        component: CheckoutComponent
       },
       {
         path: "order-received",
-        loadComponent: () => import("./components/order-received/order-received.component")
+        component: OrderReceivedComponent
       },
       {
         path: "order-tracking",
-        loadComponent: () => import("./components/order-tracking/order-tracking.component")
+        component: OrderTrackingComponent
       },
       {
         path: "my-account",
@@ -66,19 +71,19 @@ const routes: Routes = [
       },
       {
         path: "about-us",
-        loadComponent: () => import("./components/about-us/about-us.component")
+        component: AboutUsComponent
       },
       {
         path: "contact-us",
-        loadComponent: () => import("./components/contact-us/contact-us.component")
+        component: ContactUsComponent
       },
       {
         path: "faq",
-        loadComponent: () => import("./components/faq/faq.component")
+        component: FaqComponent
       },
       {
         path: "terms-and-conditions",
-        loadComponent: () => import("./components/terms-and-conditions/terms-and-conditions.component")
+        component: TermsAndConditionsComponent
       }
     ]
   }

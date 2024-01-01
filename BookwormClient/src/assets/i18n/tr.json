@@ -60,5 +60,9 @@
   "show15": "Göster 15",
   "show20": "Göster 20",
   "show25": "Göster 25",
-  "bookFormat": "Kitap Tipi"
+  "bookFormat": "Kitap Tipi",
+  "bookAddedtoCart": "Kitap sepete eklendi!",
+  "home": "Ana Sayfa",
+  "cart": "Sepet",
+  "cartDetail": "Sepet Detay"
 }

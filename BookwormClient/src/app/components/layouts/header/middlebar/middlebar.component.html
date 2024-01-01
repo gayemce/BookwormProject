@@ -72,8 +72,8 @@
             "animationSpeed": 500
             }' data-unfold-animation-in="fadeInRight" data-unfold-animation-out="fadeOutRight"
             data-unfold-duration="500">
-            <span
-            class="ml-1 position-absolute bg-dark width-16 height-16 rounded-circle d-flex align-items-center justify-content-center text-white font-size-n9 left-0">3</span>
+            <span *ngIf="shopping.count > 0" routerLink="/cart"
+            class="ml-1 position-absolute bg-dark width-16 height-16 rounded-circle d-flex align-items-center justify-content-center text-white font-size-n9 left-0">{{shopping.count}}</span>
             <i class="glph-icon flaticon-icon-126515 font-size-4"></i>
             <span class="d-none d-xl-inline h6 mb-0 ml-1">$40.93</span>
           </a>

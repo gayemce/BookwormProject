@@ -64,5 +64,20 @@
   "bookAddedtoCart": "Book added to cart!",
   "home": "Home",
   "cart": "Cart",
-  "cartDetail": "Cart Detail"
+  "cartDetail": "Cart Detail",
+  "yourCart": "Your cart",
+  "items": "items",
+  "product": "Product",
+  "price": "Price",
+  "quantity": "Quantity",
+  "total": "Total",
+  "cartTotals": "Cart Totals",
+  "shipping": "Shipping",
+  "freeShipping": "Free Shipping",
+  "flatRate": "Flat Rate",
+  "localPickup": "Local Pickup",
+  "shippingToTurkey": "Shipping to Turkey",
+  "changeAddress": "Change address",
+  "proceedToCheckout": "Proceed to Checkout"
+  
 }

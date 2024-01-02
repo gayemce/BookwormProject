@@ -34,6 +34,10 @@ const routes: Routes = [
         component: CategoriesComponent
       },
       {
+        path: 'shop-list',
+        component: ShopListByCategoryComponent
+      },
+      {
         path: 'shop-list/:id',
         component: ShopListByCategoryComponent
       },

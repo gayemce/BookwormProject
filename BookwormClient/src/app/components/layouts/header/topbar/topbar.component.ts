@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { RouterLink } from '@angular/router';
+import { SelectedLanguageService } from 'src/app/services/selected-language.service';
 
 @Component({
     selector: 'app-topbar',
@@ -16,7 +17,8 @@ export class TopbarComponent {
 
   constructor(
     private http: HttpClient,
-    private translate: TranslateService
+    private translate: TranslateService,
+    public selectLang: SelectedLanguageService
   ){
     if(localStorage.getItem("language")){
       this.language = localStorage.getItem("language") as string;

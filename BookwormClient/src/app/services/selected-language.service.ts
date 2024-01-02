@@ -11,9 +11,10 @@ export class SelectedLanguageService {
     this.selectedLanguage();
    }
 
-  selectedLanguage(){
-    if(localStorage.getItem("language")){
-      this.userSelectedLanguage = localStorage.getItem("language");
+  selectedLanguage(): void{
+    const storedLanguage = localStorage.getItem("language");
+    if (storedLanguage) {
+      this.userSelectedLanguage = storedLanguage;
     }
   }
 }

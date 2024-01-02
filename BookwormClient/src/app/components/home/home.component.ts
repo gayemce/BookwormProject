@@ -32,17 +32,6 @@ export default class HomeComponent {
         this.getScienceFictionBooks();
     }
 
-    addShoppingCart(book: BookModel){
-        this.shopping.shoppingCarts.push(book);
-        localStorage.setItem('shoppingCarts', JSON.stringify(this.shopping.shoppingCarts));
-        this.shopping.count++;
-        this.translate.get("bookAddedtoCart").subscribe(
-            res => {
-                this.swal.callToast(res, 'success');
-            }
-        )
-    }
-
     //En son eklenen 6 kitabı getirir
     getNewBooks() {
         this.http.get<BookModel[]>("https://localhost:7018/api/Home/GetNewArrivalBooks")

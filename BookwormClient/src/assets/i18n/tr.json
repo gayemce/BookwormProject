@@ -64,5 +64,19 @@
   "bookAddedtoCart": "Kitap sepete eklendi!",
   "home": "Ana Sayfa",
   "cart": "Sepet",
-  "cartDetail": "Sepet Detay"
+  "cartDetail": "Sepet Detay",
+  "yourCart": "Sepetiniz",
+  "items": "ürün",
+  "product": "Ürün",
+  "price": "Fiyat",
+  "quantity": "Miktar",
+  "total": "Toplam",
+  "cartTotals": "Sepet Toplamı",
+  "shipping": "Kargo",
+  "freeShipping": "Ücretsiz Kargo",
+  "flatRate": "Sabit Ücret",
+  "localPickup": "Yerinde Alım",
+  "shippingToTurkey": "Türkiye'ye Kargo",
+  "changeAddress": "Adresi Değiştir",
+  "proceedToCheckout": "Ödeme İşlemine Geç"
 }

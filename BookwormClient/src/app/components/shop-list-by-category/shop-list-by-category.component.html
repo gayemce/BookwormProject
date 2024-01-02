@@ -1,4 +1,4 @@
-<section class="left-sidebar">
+<section class="left-sidebar" *ngIf="selectLang.userSelectedLanguage === 'en'">
     <div class="page-header border-bottom mb-5"></div>
     <div class="site-content space-bottom-3" id="content">
         <div class="container">
@@ -45,9 +45,9 @@
                             <p class="woocommerce-result-count m-0" *ngIf="selectLang.userSelectedLanguage === 'en'">
                                 {{ shopListBooks.getTranslatedResultCountEn() }}
                             </p>
-                            <p class="woocommerce-result-count m-0" *ngIf="selectLang.userSelectedLanguage === 'tr'">
+                            <!-- <p class="woocommerce-result-count m-0" *ngIf="selectLang.userSelectedLanguage === 'tr'">
                                 {{ shopListBooks.getTranslatedResultCountTr() }}
-                            </p>
+                            </p> -->
                         </div>
                         <div class="shop-control-bar__right d-md-flex align-items-center">
                             <form class="woocommerce-ordering mb-4 m-md-0" method="get">
@@ -172,7 +172,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="product__hover d-flex align-items-center">
-                                                    <a href="../shop/single-product-v2.html"
+                                                    <a (click)="shopping.addShoppingCart(b)"
                                                         class="text-uppercase text-dark h-dark font-weight-medium mr-auto"
                                                         data-toggle="tooltip" data-placement="right" title=""
                                                         data-original-title="ADD TO CART">

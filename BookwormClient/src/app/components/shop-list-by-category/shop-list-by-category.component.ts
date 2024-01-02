@@ -5,6 +5,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NgIf, NgFor, NgClass } from '@angular/common';
+import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
 
 @Component({
     selector: 'app-shop-list-by-category',
@@ -17,6 +18,7 @@ export class ShopListByCategoryComponent {
 
   constructor(
     public shopListBooks: ShopListBooksService,
-    public selectLang: SelectedLanguageService
+    public selectLang: SelectedLanguageService,
+    public shopping: ShoppingCartService
   ){}
 }

@@ -96,6 +96,12 @@ export class ShopListBooksService {
 
   getAllBooks(pageNumber = 1) {
     this.request.pageNumber = pageNumber;
+    if(this.selectLang.selectedLanguage() === "en"){
+      this.request.languageId = 44;
+    }
+    else{
+      this.request.languageId = 45;
+    }
     this.http.post(`https://localhost:7018/api/Books/GetAllBooks`, this.request).subscribe({
       next: (res: any) => {
         this.response = res;

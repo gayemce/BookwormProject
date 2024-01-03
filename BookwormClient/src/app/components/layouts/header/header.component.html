@@ -146,26 +146,20 @@
 
           <div class="site-navigation mr-auto d-none d-xl-block">
             <ul class="nav">
-              <li class="nav-item"><a href="categories"
+              <li class="nav-item"><a routerLink="/categories"
                 class="nav-link link-black-100 mx-2 px-0 py-3 font-weight-medium border-primary border-width-2"
               >{{ 'allCategories' | translate }}</a>
             </li>
 
-            <li class="nav-item"><a routerLink="/shop-list/"
+            <li class="nav-item"><a routerLink="/shop-list"
               class="nav-link link-black-100 mx-2 px-0 py-3 font-weight-medium border-primary border-width-2"
             >{{'allBooks' | translate}}</a>
           </li>
 
-          <li class="nav-item"><a routerLink="single-product"
-            class="nav-link link-black-100 mx-2 px-0 py-3 font-weight-medium border-primary border-width-2"
-          >{{'bestSeller' | translate}}</a>
-        </li>
-
-        <li class="nav-item"><a href="authors"
-          class="nav-link link-black-100 mx-2 px-0 py-3 font-weight-medium border-primary border-width-2"
-        >{{'authors' | translate}}</a>
-      </li>
-
+            <li class="nav-item"><a routerLink="/authors"
+              class="nav-link link-black-100 mx-2 px-0 py-3 font-weight-medium border-primary border-width-2"
+            >{{'authors' | translate}}</a>
+          </li>
     </ul>
   </div>
 

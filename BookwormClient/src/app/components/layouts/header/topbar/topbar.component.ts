@@ -36,8 +36,8 @@ export class TopbarComponent {
   switchLanguage(value: string){
     localStorage.setItem("language", value);
     this.language = value;
-    this.translate.use(this.language);
     location.reload();
+    this.translate.use(this.language);
   }
 
   changeLanguageElemenentInnerText(){

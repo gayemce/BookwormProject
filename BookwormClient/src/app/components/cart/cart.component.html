@@ -105,16 +105,19 @@
                                                     </td>
 
                                                     <td class="product-subtotal" data-title="Total">
-                                                        <span *ngIf="language === 'tr'"
+                                                        <span *ngIf="shopping.selectedCurrency === '₺'"
                                                             class="woocommerce-Price-amount amount"><span
-                                                                class="woocommerce-Price-currencySymbol">{{s.price.value
-                                                                * s.quantity |
-                                                                trCurrency}}</span>{{s.price.currency}}</span>
-                                                        <span *ngIf="language !== 'tr'"
+                                                                class="woocommerce-Price-currencySymbol">
+                                                                {{(s.price.value * s.quantity) |
+                                                                trCurrency}}
+                                                            </span>{{s.price.currency}}</span>
+                                                            
+                                                        <span *ngIf="shopping.selectedCurrency !== '₺'"
                                                             class="woocommerce-Price-amount amount"><span
-                                                                class="woocommerce-Price-currencySymbol">{{s.price.value
-                                                                * s.quantity | currency:
-                                                                '':'':'1.2-2'}}</span>{{s.price.currency}}</span>
+                                                                class="woocommerce-Price-currencySymbol">
+                                                                {{s.price.value * s.quantity | currency:
+                                                                '':'':'1.2-2'}}
+                                                            </span>{{s.price.currency}}</span>
                                                     </td>
                                                     <td class="product-remove">
                                                         <a href="#" class="remove" aria-label="Remove this item">
@@ -136,6 +139,7 @@
                         </div>
                     </main>
                 </div>
+                <!-- Cart Total -->
                 <div id="secondary" class="sidebar cart-collaterals order-1" role="complementary">
                     <div id="cartAccordion" class="border border-gray-900 bg-white mb-5">
                         <div class="p-4d875 border">
@@ -167,24 +171,38 @@
                                     <tbody>
                                         <tr class="cart-subtotal" *ngFor="let p of shopping.prices">
                                             <th>{{'subtotal' | translate}}</th>
-                                            <td data-title="Subtotal" >
+                                            <td data-title="Subtotal">
                                                 <span class="woocommerce-Price-amount amount">
-                                                <span class="woocommerce-Price-currencySymbol">
-                                                    <span *ngIf="language === 'tr'" >{{p.value| trCurrency}} {{p.currency}}</span>
-                                                    <span *ngIf="language !== 'tr'">{{p.value | currency: '':'': '1.2-2'}} {{p.currency}}</span>
-                                                </span>
+                                                    <span class="woocommerce-Price-currencySymbol">
+                                                        <span *ngIf="language === 'tr'">{{p.value| trCurrency}}
+                                                            {{p.currency}}</span>
+                                                        <span *ngIf="language !== 'tr'">{{p.value | currency: '':'':
+                                                            '1.2-2'}} {{p.currency}}</span>
+                                                    </span>
                                                 </span>
                                             </td>
                                         </tr>
 
-                                        <tr class="order-shipping">
+                                        <!-- <tr class="order-shipping">
                                             <th>{{'shipping' | translate}}</th>
                                             <td data-title="Shipping">{{'freeShipping' | translate}}</td>
-                                        </tr>
+                                        </tr> -->
                                     </tbody>
                                 </table>
+                                <button (click)="shopping.onCurrencyButtonClick('₺')"
+                                    [disabled]="shopping.buttonClicked"
+                                    class="btn btn-block py-2 rounded-0 btn-outline-dark mt-4 mb-2">
+                                    {{'payTL' | translate}}
+                                </button>
+                                <button (click)="shopping.onCurrencyButtonClick('$')"
+                                    [disabled]="shopping.buttonClicked"
+                                    class="btn btn-block py-2 rounded-0 btn-outline-dark">
+                                    {{'payUSD' | translate}}
+                                </button>
                             </div>
                         </div>
+
+
 
                         <div class="p-4d875 border">
                             <div id="cartHeadingTwo" class="cart-head">
@@ -248,18 +266,20 @@
                         <div class="p-4d875 border">
                             <table class="shop_table shop_table_responsive">
                                 <tbody>
-                                    <tr class="order-total" *ngFor="let p of shopping.prices">
+                                    <tr class="order-total">
                                         <th>{{'total' | translate}}</th>
                                         <td data-title="Total">
                                             <strong>
                                                 <span class="woocommerce-Price-amount amount">
-                                                <span class="woocommerce-Price-currencySymbol">
-                                                        <span *ngIf="language === 'tr'" >{{p.value| trCurrency}} {{p.currency}}</span>
-                                                        <span *ngIf="language !== 'tr'">{{p.value | currency: '':'': '1.2-2'}} {{p.currency}}</span>
-                                                </span>
+                                                    <span class="woocommerce-Price-currencySymbol">
+                                                        <span *ngIf="shopping.selectedCurrency === '₺'">{{
+                                                            shopping.getTotal() | trCurrency }} {{'₺'}}</span>
+                                                        <span *ngIf="shopping.selectedCurrency === '$'">{{
+                                                            shopping.getTotal() | currency: '':'':'1.2-2' }}
+                                                            {{'$'}}</span>
+                                                    </span>
                                                 </span>
                                             </strong>
-                                                
                                         </td>
                                     </tr>
                                 </tbody>
@@ -272,6 +292,7 @@
                             | translate}}</a>
                     </div>
                 </div>
+                <!-- End Cart Total -->
             </div>
         </div>
     </div>

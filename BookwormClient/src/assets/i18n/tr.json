@@ -78,5 +78,7 @@
   "localPickup": "Yerinde Alım",
   "shippingToTurkey": "Türkiye'ye Kargo",
   "changeAddress": "Adresi Değiştir",
-  "proceedToCheckout": "Ödeme İşlemine Geç"
+  "proceedToCheckout": "Ödeme İşlemine Geç",
+  "payTL": "TL Cinsinden Öde",
+  "payUSD": "USD Cinsinden Öde"
 }

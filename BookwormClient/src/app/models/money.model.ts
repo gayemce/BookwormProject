@@ -1,4 +1,4 @@
-export class Money{
+export class MoneyModel{
     value: Number = 0;
     currency: string = "";
 }

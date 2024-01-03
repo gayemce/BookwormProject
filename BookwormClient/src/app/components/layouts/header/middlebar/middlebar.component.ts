@@ -7,13 +7,14 @@ import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
 import { CommonModule } from '@angular/common';
+import { TrCurrencyPipe } from 'tr-currency';
 
 @Component({
     selector: 'app-middlebar',
     templateUrl: './middlebar.component.html',
     styleUrls: ['./middlebar.component.css'],
     standalone: true,
-    imports: [RouterLink, FormsModule, TranslateModule, CommonModule]
+    imports: [RouterLink, FormsModule, TranslateModule, CommonModule, TrCurrencyPipe]
 })
 export class MiddlebarComponent {
 

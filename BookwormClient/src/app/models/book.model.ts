@@ -1,7 +1,7 @@
 import { AuthorModel } from "./author.model";
 import { BookDetailsModel } from "./book-detail.model";
 import { BookLanguageModel } from "./book-language.model";
-import { Money } from "./money.model";
+import { MoneyModel } from "./money.model";
 
 export class BookModel {
     id: number = 0;
@@ -14,7 +14,7 @@ export class BookModel {
     descriptionEn: string = "";
     descriptionTr: string = "";
     publisher: string = "";
-    price: Money = new Money();
+    price: MoneyModel = new MoneyModel();
     imgUrl: string = "";
     quantity: number = 0; 
     isActive: boolean = true; 

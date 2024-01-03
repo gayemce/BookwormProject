@@ -2,7 +2,7 @@
   <div class="container pt-3 pb-2 pt-lg-5 pb-lg-5">
     <div class="d-flex align-items-center position-relative flex-wrap">
       <div class="site-branding pr-md-7 mx-auto mx-md-0">
-        <a routerLink="/" class="d-block mb-1">
+        <a href="/" class="d-block mb-1">
           <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="170px"
             height="30px">
             <path fill-rule="evenodd" fill="rgb(25, 17, 11)"
@@ -28,24 +28,23 @@
               </select>
             </div>
             <input type="text" class="form-control height-5 rounded-0 border-right-0 px-3"
-              placeholder="{{'searchForBooksbyKeyword' | translate}}"
-              aria-label="Amount (to the nearest dollar)">
+              placeholder="{{'searchForBooksbyKeyword' | translate}}" aria-label="Amount (to the nearest dollar)">
             <div class="input-group-append border-left">
               <button class="btn btn-primary px-3 rounded-0" type="submit"><i
-              class="mx-1 glph-icon flaticon-loupe "></i></button>
+                  class="mx-1 glph-icon flaticon-loupe "></i></button>
             </div>
           </div>
         </form>
       </div>
       <ul class="nav align-self-center d-none d-md-flex">
         <li class="nav-item"><a href="#" class="nav-link text-dark"><i
-        class="glph-icon flaticon-heart font-size-4"></i></a></li>
+              class="glph-icon flaticon-heart font-size-4"></i></a></li>
         <li class="nav-item">
           <!-- Account Sidebar Toggle Button -->
           <a id="sidebarNavToggler" href="javascript:;" role="button" class="nav-link text-dark"
-            aria-controls="sidebarContent" aria-haspopup="true" aria-expanded="false"
-            data-unfold-event="click" data-unfold-hide-on-scroll="false"
-            data-unfold-target="#sidebarContent" data-unfold-type="css-animation" data-unfold-overlay='{
+            aria-controls="sidebarContent" aria-haspopup="true" aria-expanded="false" data-unfold-event="click"
+            data-unfold-hide-on-scroll="false" data-unfold-target="#sidebarContent" data-unfold-type="css-animation"
+            data-unfold-overlay='{
             "className": "u-sidebar-bg-overlay",
             "background": "rgba(0, 0, 0, .7)",
             "animationSpeed": 500
@@ -53,29 +52,31 @@
             data-unfold-duration="500">
             <i class="glph-icon flaticon-user font-size-4"></i>
             @if (responseInLocalStorage) {
-              <span>
-                <span routerLink="/my-account"> {{auth.token.name}}</span>
-              </span>
+            <span>
+              <span routerLink="/my-account"> {{auth.token.name}}</span>
+            </span>
             }
           </a>
           <!-- End Account Sidebar Toggle Button -->
         </li>
         <li class="nav-item">
           <!-- Cart Sidebar Toggle Button -->
-          <a id="sidebarNavToggler1" href="javascript:;" role="button"
-            class="nav-link pr-0 text-dark position-relative" aria-controls="sidebarContent1"
-            aria-haspopup="true" aria-expanded="false" data-unfold-event="click"
-            data-unfold-hide-on-scroll="false" data-unfold-target="#sidebarContent1"
-            data-unfold-type="css-animation" data-unfold-overlay='{
+          <a id="sidebarNavToggler1" href="javascript:;" role="button" class="nav-link pr-0 text-dark position-relative"
+            aria-controls="sidebarContent1" aria-haspopup="true" aria-expanded="false" data-unfold-event="click"
+            data-unfold-hide-on-scroll="false" data-unfold-target="#sidebarContent1" data-unfold-type="css-animation"
+            data-unfold-overlay='{
             "className": "u-sidebar-bg-overlay",
             "background": "rgba(0, 0, 0, .7)",
             "animationSpeed": 500
             }' data-unfold-animation-in="fadeInRight" data-unfold-animation-out="fadeOutRight"
             data-unfold-duration="500">
             <span *ngIf="shopping.count > 0"
-            class="ml-1 position-absolute bg-dark width-16 height-16 rounded-circle d-flex align-items-center justify-content-center text-white font-size-n9 left-0">{{shopping.count}}</span>
+              class="ml-1 position-absolute bg-dark width-16 height-16 rounded-circle d-flex align-items-center justify-content-center text-white font-size-n9 left-0">{{shopping.count}}</span>
             <i class="glph-icon flaticon-icon-126515 font-size-4"></i>
-            <span class="d-none d-xl-inline h6 mb-0 ml-1">$40.93</span>
+            <span class="d-none d-xl-inline h6 mb-0 ml-1">
+              <span *ngIf="shopping.selectedCurrency === '₺'">{{ shopping.getTotal() | trCurrency }} {{'₺'}}</span>
+              <span *ngIf="shopping.selectedCurrency === '$'">{{ shopping.getTotal() | currency: '':'':'1.2-2' }} {{'$'}}</span>
+            </span>
           </a>
           <!-- End Cart Sidebar Toggle Button -->
         </li>

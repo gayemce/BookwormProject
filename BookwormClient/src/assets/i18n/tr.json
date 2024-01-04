@@ -80,5 +80,7 @@
   "changeAddress": "Adresi Değiştir",
   "proceedToCheckout": "Ödeme İşlemine Geç",
   "payTL": "TL Cinsinden Öde",
-  "payUSD": "USD Cinsinden Öde"
+  "payUSD": "USD Cinsinden Öde",
+  "selectACurrency": "Bir para birimi seçin.",
+  "noItemsInYourShoppingBag": "Sepetinizde ürün yok."
 }

@@ -6,7 +6,6 @@ import { RouterLink } from '@angular/router';
 import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { SwalService } from 'src/app/services/swal.service';
 
 @Component({
     selector: 'app-home',
@@ -26,7 +25,7 @@ export default class HomeComponent {
         private error: ErrorService,
         public translate: TranslateService,
         public shopping: ShoppingCartService,
-        private swal: SwalService) {
+        ) {
         this.getNewBooks();
         this.getFeaturedBooks();
         this.getScienceFictionBooks();

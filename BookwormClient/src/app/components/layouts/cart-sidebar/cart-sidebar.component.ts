@@ -19,7 +19,12 @@ export class CartSidebarComponent {
   constructor(
     private router: Router,
     public shopping: ShoppingCartService
-  ){}
+  ){
+    this.shopping.calcTotal();
+    // shopping.onCurrencyButtonClick(shopping.selectedCurrency);
+    // this.shopping.getTotal();
+    // console.log(this.shopping.getTotal());
+  }
 
   gotoCart(){
     if(this.closeBtn != undefined){

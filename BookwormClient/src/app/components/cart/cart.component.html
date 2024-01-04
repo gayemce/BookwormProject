@@ -1,3 +1,4 @@
+@if(shopping.shoppingCarts.length > 0){
 <section class="right-sidebar woocommerce-cart">
     <div class="page-header border-bottom">
         <div class="container">
@@ -42,7 +43,7 @@
 
                                             <tbody>
                                                 <tr class="woocommerce-cart-form__cart-item cart_item"
-                                                    *ngFor="let s of shopping.shoppingCarts">
+                                                    *ngFor="let s of shopping.shoppingCarts let i = index">
                                                     <td class="product-name" data-title="Product">
                                                         <div class="d-flex align-items-center">
                                                             <a href="#">
@@ -59,9 +60,22 @@
                                                     </td>
 
                                                     <td class="product-price" data-title="Price">
-                                                        <span class="woocommerce-Price-amount amount"><span
-                                                                class="woocommerce-Price-currencySymbol">{{s.price.value
-                                                                | trCurrency}}</span>{{s.price.currency}}</span>
+                                                        <span *ngIf="s.price.currency === '₺'"
+                                                            class="woocommerce-Price-amount amount">
+                                                            {{s.price.value | trCurrency}}
+                                                            <span class="woocommerce-Price-currencySymbol">
+                                                                {{s.price.currency}}
+                                                            </span>
+                                                        </span>
+
+                                                        <span *ngIf="s.price.currency === '$'"
+                                                            class="woocommerce-Price-currencySymbol">
+                                                            {{s.price.currency}}
+                                                            <span class="woocommerce-Price-amount amount">
+                                                                {{s.price.value * s.quantity | currency: '':'':'1.2-2'}}
+
+                                                            </span>
+                                                        </span>
                                                     </td>
 
                                                     <td class="product-quantity" data-title="Quantity">
@@ -105,22 +119,28 @@
                                                     </td>
 
                                                     <td class="product-subtotal" data-title="Total">
-                                                        <span *ngIf="shopping.selectedCurrency === '₺'"
-                                                            class="woocommerce-Price-amount amount"><span
-                                                                class="woocommerce-Price-currencySymbol">
-                                                                {{(s.price.value * s.quantity) |
-                                                                trCurrency}}
-                                                            </span>{{s.price.currency}}</span>
-                                                            
-                                                        <span *ngIf="shopping.selectedCurrency !== '₺'"
-                                                            class="woocommerce-Price-amount amount"><span
-                                                                class="woocommerce-Price-currencySymbol">
-                                                                {{s.price.value * s.quantity | currency:
-                                                                '':'':'1.2-2'}}
-                                                            </span>{{s.price.currency}}</span>
+                                                        <span *ngIf="s.price.currency === '₺'"
+                                                            class="woocommerce-Price-amount amount">
+                                                            {{s.price.value | trCurrency}}
+                                                            <span class="woocommerce-Price-currencySymbol">
+                                                                {{s.price.currency}}
+                                                            </span>
+                                                        </span>
+
+                                                        <span *ngIf="s.price.currency === '$'"
+                                                            class="woocommerce-Price-currencySymbol">
+                                                            {{s.price.currency}}
+                                                            <span class="woocommerce-Price-amount amount">
+                                                                {{s.price.value * s.quantity | currency: '':'':'1.2-2'}}
+
+                                                            </span>
+                                                        </span>
+
                                                     </td>
+
                                                     <td class="product-remove">
-                                                        <a href="#" class="remove" aria-label="Remove this item">
+                                                        <a (click)="shopping.removeByIndex(i)" class="remove"
+                                                            aria-label="Remove this item">
                                                             <svg xmlns="http://www.w3.org/2000/svg"
                                                                 xmlns:xlink="http://www.w3.org/1999/xlink" width="15px"
                                                                 height="15px">
@@ -172,30 +192,28 @@
                                         <tr class="cart-subtotal" *ngFor="let p of shopping.prices">
                                             <th>{{'subtotal' | translate}}</th>
                                             <td data-title="Subtotal">
-                                                <span class="woocommerce-Price-amount amount">
-                                                    <span class="woocommerce-Price-currencySymbol">
-                                                        <span *ngIf="language === 'tr'">{{p.value| trCurrency}}
-                                                            {{p.currency}}</span>
-                                                        <span *ngIf="language !== 'tr'">{{p.value | currency: '':'':
-                                                            '1.2-2'}} {{p.currency}}</span>
-                                                    </span>
+                                                <span *ngIf="p.currency === '₺'"
+                                                    class="woocommerce-Price-amount amount">
+                                                    {{p.value | trCurrency}} {{p.currency}}
+                                                </span>
+                                                <span *ngIf="p.currency === '$'"
+                                                    class="woocommerce-Price-amount amount">
+                                                    {{p.currency}} {{p.value | currency: '':'':'1.2-2'}}
                                                 </span>
                                             </td>
                                         </tr>
 
                                         <!-- <tr class="order-shipping">
-                                            <th>{{'shipping' | translate}}</th>
-                                            <td data-title="Shipping">{{'freeShipping' | translate}}</td>
-                                        </tr> -->
+                                                <th>{{'shipping' | translate}}</th>
+                                                <td data-title="Shipping">{{'freeShipping' | translate}}</td>
+                                            </tr> -->
                                     </tbody>
                                 </table>
                                 <button (click)="shopping.onCurrencyButtonClick('₺')"
-                                    [disabled]="shopping.buttonClicked"
                                     class="btn btn-block py-2 rounded-0 btn-outline-dark mt-4 mb-2">
                                     {{'payTL' | translate}}
                                 </button>
                                 <button (click)="shopping.onCurrencyButtonClick('$')"
-                                    [disabled]="shopping.buttonClicked"
                                     class="btn btn-block py-2 rounded-0 btn-outline-dark">
                                     {{'payUSD' | translate}}
                                 </button>
@@ -270,30 +288,78 @@
                                         <th>{{'total' | translate}}</th>
                                         <td data-title="Total">
                                             <strong>
-                                                <span class="woocommerce-Price-amount amount">
+                                                <span *ngIf="shopping.selectedCurrency === ''" class="selectacurrency">
+                                                    {{'selectACurrency' | translate}}
+                                                </span>
+                                                <span *ngIf="shopping.selectedCurrency === '₺'"
+                                                    class="woocommerce-Price-amount amount">
+                                                    {{ shopping.getTotal() | trCurrency }}
                                                     <span class="woocommerce-Price-currencySymbol">
-                                                        <span *ngIf="shopping.selectedCurrency === '₺'">{{
-                                                            shopping.getTotal() | trCurrency }} {{'₺'}}</span>
-                                                        <span *ngIf="shopping.selectedCurrency === '$'">{{
-                                                            shopping.getTotal() | currency: '':'':'1.2-2' }}
-                                                            {{'$'}}</span>
+                                                        {{'₺'}}
                                                     </span>
                                                 </span>
+
+                                                <span *ngIf="shopping.selectedCurrency === '$'"
+                                                    class="woocommerce-Price-currencySymbol">
+                                                    {{'$'}}
+                                                    <span class="woocommerce-Price-amount amount">
+                                                        {{ shopping.getTotal() | currency: '':'':'1.2-2' }}
+                                                    </span>
+                                                </span>
+
                                             </strong>
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
-                    </div>
+                    </div>              
+                    @if(shopping.selectedCurrency === ''){
                     <div class="wc-proceed-to-checkout">
-                        <a href="../shop/checkout.html"
-                            class="checkout-button button alt wc-forward btn btn-dark btn-block rounded-0 py-4">{{'proceedToCheckout'
-                            | translate}}</a>
+                        <a routerLink="/checkout"
+                            class="checkout-button-disabled checkout-button button alt wc-forward btn btn btn-block btn-outline-dark rounded-0 py-4">{{'proceedToCheckout'
+                            | translate}}
+                        </a>
                     </div>
+                    }@else {
+                    <div class="wc-proceed-to-checkout">
+                        <a routerLink="/checkout"
+                            class="checkout-button button alt wc-forward btn btn-dark btn-block rounded-0 py-4">{{'proceedToCheckout'
+                            | translate}}
+                        </a>
+                    </div>
+                    }
+
                 </div>
-                <!-- End Cart Total -->
             </div>
+            <!-- End Cart Total -->
         </div>
     </div>
 </section>
+}@else {
+<section class="right-sidebar woocommerce-cart">
+    <div class="page-header border-bottom">
+        <div class="container">
+            <div class="d-md-flex justify-content-between align-items-center py-4">
+                <h1 class="page-title font-size-3 font-weight-medium m-0 text-lh-lg">{{'cartDetail' | translate}}</h1>
+                <nav class="woocommerce-breadcrumb font-size-2">
+                    <a href="#" class="h-primary">{{'home' | translate}}</a>
+                    <span class="breadcrumb-separator mx-1"><i class="fas fa-angle-right"></i></span>
+                    <a href="#" class="h-primary">{{'cart' | translate}}</a>
+                    <span class="breadcrumb-separator mx-1"><i class="fas fa-angle-right"></i></span>{{'cartDetail' |
+                    translate}}
+                </nav>
+            </div>
+        </div>
+    </div>
+    <div class="site-content bg-punch-light overflow-hidden" id="content">
+        <div class="container">
+            <header class="entry-header space-top-2 space-bottom-1 mb-2">
+                <h1 class="entry-title font-size-7">{{'yourCart' | translate}}: {{shopping.shoppingCarts.length}}
+                    {{'items' | translate}}</h1>
+            </header>
+
+        </div>
+    </div>
+</section>
+}

@@ -80,6 +80,7 @@
   "changeAddress": "Change address",
   "proceedToCheckout": "Proceed to Checkout",
   "payTL": "Pay TL",
-  "payUSD": "Pay USD"
-  
+  "payUSD": "Pay USD",
+  "selectACurrency": "Select a currency.",
+  "noItemsInYourShoppingBag": "No items in your shopping bag."
 }

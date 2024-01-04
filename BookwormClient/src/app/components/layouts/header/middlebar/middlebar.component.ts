@@ -20,14 +20,22 @@ export class MiddlebarComponent {
 
   responseInLocalStorage: any;
 
+  ngOnInit(){
+    this.auth.checkAuthentication();
+    this.responseInLocalStorage = localStorage.getItem("response");
+    //Buradan devam edilecek.
+    this.shopping.onCurrencyButtonClick(this.shopping.selectedCurrency);
+  }
+
   constructor(
     public shopListBooks: ShopListBooksService,
     public auth: AuthService,
     public shopping: ShoppingCartService
-  ){}
-
-  ngOnInit(){
-    this.auth.checkAuthentication();
-    this.responseInLocalStorage = localStorage.getItem("response");
+  ){ 
+        // shopping.onCurrencyButtonClick(shopping.selectedCurrency);
+        // this.shopping.getTotal();
+        this.shopping.calcTotal();
   }
+
+  
 }

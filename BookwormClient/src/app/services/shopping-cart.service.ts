@@ -11,10 +11,14 @@ export class ShoppingCartService {
 
   shoppingCarts: any[] = [];
   prices: { value: number, currency: string }[] = [];
-  selectedCurrency: string = '';
+  selectedCurrency: string = '₺';
   count: number = 0;
   total: number = 0;
-  buttonClicked: boolean = false;
+
+  ngOnInit(): void {
+    //Buradan devam edilecek.
+    this.onCurrencyButtonClick(this.selectedCurrency);
+  }
 
   constructor(
     private translate: TranslateService,
@@ -28,12 +32,6 @@ export class ShoppingCartService {
         this.count = this.shoppingCarts.length;
       }
     }
-    // if(this.selectLang.userSelectedLanguage === 'tr'){
-    //   this.onCurrencyButtonClick('₺');
-    // }
-    // else{
-    //   this.onCurrencyButtonClick('$')
-    // }
     
   }
 
@@ -45,7 +43,6 @@ export class ShoppingCartService {
     this.prices = [];
     for (let s of this.shoppingCarts) {
       this.prices.push({ ...s.price });
-      // this.total += s.quantity * s.price.value;
     }
 
     for (const item of this.prices) {
@@ -60,6 +57,14 @@ export class ShoppingCartService {
     }
   }
 
+  removeByIndex(index: number){
+    this.shoppingCarts.splice(index,1)
+    localStorage.setItem("shoppingCarts", JSON.stringify(this.shoppingCarts));
+    this.count = this.shoppingCarts.length;
+    this.calcTotal();
+    this.onCurrencyButtonClick(this.selectedCurrency)
+  }
+
   addShoppingCart(book: BookModel) {
     this.shoppingCarts.push(book);
     localStorage.setItem('shoppingCarts', JSON.stringify(this.shoppingCarts));
@@ -69,55 +74,49 @@ export class ShoppingCartService {
         this.swal.callToast(res, 'success');
       }
     )
+    this.calcTotal();
   }
 
+  onCurrencyButtonClick(currency: string) {
+    this.selectedCurrency = currency;
+    this.ForeignCurrencyAccount();
+  }
 
-onCurrencyButtonClick(currency: string) {
-  this.selectedCurrency = currency;
-  this.ForeignCurrencyAccount();
-  this.buttonClicked = true;
-}
+  getTotal(): number {
+    // Sepetin toplam tutarını hesapla ve döndür
+    return this.prices.reduce((total, price) => total + price.value, 0);
+  }
 
-getTotal(): number {
-  // Sepetin toplam tutarını hesapla ve döndür
-  return this.prices.reduce((total, price) => total + price.value, 0);
-}
+  ForeignCurrencyAccount() {
+    // Seçilen para birimine göre döviz kuru al ve işlemleri gerçekleştir
+    const exchangeRate = this.getExchangeRate(this.selectedCurrency);
 
-ForeignCurrencyAccount() {
-  // Seçilen para birimine göre döviz kuru al ve işlemleri gerçekleştir
-  const exchangeRate = this.getExchangeRate(this.selectedCurrency);
-
-  this.prices.forEach(price => {
-    if (price && price.value && price.currency) {
-      if (price.currency === '₺' && this.selectedCurrency === '$') {
-        // ₺'yi $'ye çevir
-        price.value /= exchangeRate;
-        price.currency = this.selectedCurrency;
-      } else if (price.currency === '$' && this.selectedCurrency === '₺') {
-        // $'yi ₺'ye çevir
-        price.value *= exchangeRate;
-        price.currency = this.selectedCurrency;
+    this.prices.forEach(price => {
+      if (price && price.value && price.currency) {
+        if (this.selectedCurrency === '$' && price.currency === '₺' ) {
+          // ₺'yi $'ye çevir
+          price.value /= exchangeRate;
+          price.currency = this.selectedCurrency;
+        } else if (this.selectedCurrency === '₺' && price.currency === '$') {
+          // $'yi ₺'ye çevir
+          price.value *= exchangeRate;
+          price.currency = this.selectedCurrency;
+        }
+      } else {
+        console.error("Invalid price object:", price);
       }
-    } else {
-      console.error("Invalid price object:", price);
-    }
-  });
-
-  // this.getTotal();
-}
-
-getExchangeRate(selectedCurrency: string): number {
-  // Seçilen para birimine göre döviz kuru algoritmasını uygula
-  if (selectedCurrency === '₺') {
-    return 30; // Örnek olarak 1 $ = 31.2 ₺
-  } else if (selectedCurrency === '$') {
-    // Diğer para birimleri
-    return 30; // Örnek bir döviz kuru
-  } else {
-    return 1.0;
+    });
   }
-}
 
-
+  getExchangeRate(selectedCurrency: string): number {
+    // Seçilen para birimine göre döviz kuru algoritmasını uygula
+    if (selectedCurrency === '₺') {
+      return 30.0;
+    } else if (selectedCurrency === '$') {
+      return 30.0; // Örnek bir döviz kuru
+    } else {
+      return 1.0;
+    }
+  }
 
 }

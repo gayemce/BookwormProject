@@ -62,7 +62,7 @@
                   class="btn btn-link btn-block p-0 d-flex align-items-center card-btn"
                   data-toggle="collapse" data-target="#basicsCollapseOne" aria-expanded="true"
                   aria-controls="basicsCollapseOne">
-                  <svg width="20px" height="18px">
+                  <svg class="browseCategoriesSvg" width="20px" height="18px">
                     <path fill-rule="evenodd" fill="rgb(255, 255, 255)"
                       d="M-0.000,-0.000 L20.000,-0.000 L20.000,2.000 L-0.000,2.000 L-0.000,-0.000 Z" />
                     <path fill-rule="evenodd" fill="rgb(255, 255, 255)"
@@ -78,7 +78,7 @@
                 class="z-index-2 collapse show position-absolute right-0 left-0 border"
                 aria-labelledby="basicsHeadingOne" data-parent="#basicsAccordion">
                 <div class="card-body p-0">
-                  <ul class="list-unstyled vertical-menu position-relative mb-0 bg-white">
+                  <ul *ngIf="router.url === '/' || router.url === '/home'" class="list-unstyled vertical-menu position-relative mb-0 bg-white">
                     @for (c of categories.slice(0, 9); track c) {
                       <li>
                         <a id="basicDropdownHoverInvoker2"

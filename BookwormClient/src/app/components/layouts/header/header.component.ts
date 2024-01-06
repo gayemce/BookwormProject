@@ -1,5 +1,5 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, ViewChild } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { BookModel } from 'src/app/models/book.model';
 import { CategoryModel } from 'src/app/models/category.model';
@@ -11,6 +11,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { MiddlebarComponent } from './middlebar/middlebar.component';
 import { TopbarComponent } from './topbar/topbar.component';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
@@ -18,7 +19,7 @@ import { TopbarComponent } from './topbar/topbar.component';
     templateUrl: './header.component.html',
     styleUrls: ['./header.component.css'],
     standalone: true,
-    imports: [TopbarComponent, MiddlebarComponent, RouterLink, TranslateModule]
+    imports: [TopbarComponent, MiddlebarComponent, RouterLink, TranslateModule, CommonModule]
 })
 export class HeaderComponent {
 
@@ -27,23 +28,30 @@ export class HeaderComponent {
   @ViewChild("browseCategoriesBtn") categoriesBtn: ElementRef<HTMLButtonElement> | undefined
 
   constructor(
-    private router: Router,
+    public router: Router,
     private http: HttpClient,
     private error: ErrorService,
     public selectLang: SelectedLanguageService,
-    public shopListBooks: ShopListBooksService
+    public shopListBooks: ShopListBooksService,
+    // private cdr: ChangeDetectorRef  // ChangeDetectorRef'yi enjekte edin
   ){
-    this.closeCategories();
+    // this.closeCategories();
     this.getBrowseCategories();
   }
 
-  closeCategories(){
-    setTimeout(() => {
-      if(this.categoriesBtn != undefined){
-        this.categoriesBtn.nativeElement.click();
-      }
-    }, 1000);
-  }
+  // closeCategories(){
+  //   console.log('Current URL:', this.router.url);
+    
+  //   if(this.router.url !== '/'){
+  //     setTimeout(() => {
+  //       console.log('Kategoriler kapatılıyor');
+  //       if(this.categoriesBtn != undefined){
+  //         this.categoriesBtn.nativeElement.click();
+  //       }
+  //        this.cdr.detectChanges();  // Manüel değişiklik algılamayı tetikle
+  //     }, 3000);
+  //   }
+  // }
   
   getBrowseCategories(){
     this.http.get("https://localhost:7018/api/Categories/GetAllCategories").subscribe({

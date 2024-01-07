@@ -14,9 +14,10 @@ export class ShoppingCartService {
   selectedCurrency: string = '';
   count: number = 0;
   total: number = 0;
-  //Buradan devam edilecek.
-  flatRate: number = 15;
-  localPickup: number = 8;
+  flatRateTl: number = 24.99;
+  localPickupTl: number = 12.99;
+  flatRateUsd: number = 9.99;
+  localPickupUsd: number = 4.99;
 
   constructor(
     private translate: TranslateService,
@@ -33,7 +34,6 @@ export class ShoppingCartService {
 
     this.onCurrencyButtonClick(this.selectedCurrency);
     this.calcTotal();
-    
   }
 
   calcTotal() {
@@ -83,10 +83,26 @@ export class ShoppingCartService {
     this.ForeignCurrencyAccount();
   }
 
+  updateTotal(shippingMethod: string): void {
+    switch (shippingMethod) {
+      case 'flatRate':
+        this.total = 0;
+        this.total += this.selectedCurrency === '₺' ? this.flatRateTl : this.flatRateUsd;
+        console.log(this.total);
+        break;
+      case 'localPickup':
+        this.total = 0;
+        this.total += this.selectedCurrency === '₺' ? this.localPickupTl : this.localPickupUsd;
+        console.log(this.total);
+        break;
+      default:
+        break;
+    }
+  }
+
   getTotal(): number {
     // Sepetin toplam tutarını hesapla ve döndür
-    console.log(this.prices.reduce((total, price) => total + price.value, 0));
-    return this.prices.reduce((total, price) => total + price.value, 0);
+    return this.prices.reduce((total, price) => total + price.value, 0) + this.total;
   }
 
   ForeignCurrencyAccount() {

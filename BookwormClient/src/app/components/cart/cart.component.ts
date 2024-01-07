@@ -19,12 +19,12 @@ export default class CartComponent {
 
     constructor(
         public shopping: ShoppingCartService,
-    ){
-        if(localStorage.getItem("language")){
+    ) {
+        if (localStorage.getItem("language")) {
             this.language = localStorage.getItem("language") as string;
-        }      
+        }
         this.shopping.calcTotal();
-        // shopping.onCurrencyButtonClick(shopping.selectedCurrency);
-        // this.shopping.getTotal();
+        //Buradan devam edilecek.
+        this.shopping.updateTotal('localPickup');
     }
 }

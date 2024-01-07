@@ -266,7 +266,7 @@
                                             class="shipping_method">
                                         <label for="shipping_method_0_flat_rate2">{{'flatRate' | translate}}: <span
                                                 class="woocommerce-Price-amount amount"><span
-                                                    class="woocommerce-Price-currencySymbol">₺</span>{{shopping.flatRate}}</span></label>
+                                                    class="woocommerce-Price-currencySymbol">₺</span>{{shopping.flatRateTl}}</span></label>
                                     </li>
 
                                     <li>
@@ -275,7 +275,7 @@
                                             class="shipping_method">
                                         <label for="shipping_method_0_flat_rate3">{{'localPickup' | translate}}: <span
                                                 class="woocommerce-Price-amount amount"><span
-                                                    class="woocommerce-Price-currencySymbol">₺</span>{{shopping.localPickup}}</span></label>
+                                                    class="woocommerce-Price-currencySymbol">₺</span>{{shopping.localPickupTl}}</span></label>
                                     </li>
                                 </ul>
                                 <!-- End Checkboxes -->
@@ -312,26 +312,46 @@
                                         <label for="shipping_method_0_flat_rate1">{{'freeShipping' | translate}}</label>
                                     </li>
 
+                                    <!-- flatRate -->
                                     <li
                                         [ngClass]="(shopping.getTotal() > 149 && shopping.selectedCurrency === '₺') || (shopping.getTotal() > 19 && shopping.selectedCurrency === '$') ? 'shipping-disabled' : ''">
                                         <input type="radio" name="shipping_method[0]" data-index="0"
                                             id="shipping_method_0_flat_rate2" value="flat_rate:2"
                                             class="shipping_method"
-                                            [checked]="(shopping.getTotal() < 149 && shopping.selectedCurrency === '₺') || (shopping.getTotal() < 19 && shopping.selectedCurrency === '$')">
-                                        <label for="shipping_method_0_flat_rate2">{{'flatRate' | translate}}: <span
-                                                class="woocommerce-Price-amount amount"><span
-                                                    class="woocommerce-Price-currencySymbol">₺</span>{{shopping.flatRate}}</span></label>
+                                            [checked]="(shopping.getTotal() < 149 && shopping.selectedCurrency === '₺') || (shopping.getTotal() < 19 && shopping.selectedCurrency === '$')"
+                                            (change)="shopping.updateTotal('flatRate')">
+                                        <label for="shipping_method_0_flat_rate2">{{'flatRate' | translate}}:
+                                            <span *ngIf="shopping.selectedCurrency === '₺'" class="woocommerce-Price-amount amount">
+                                                {{shopping.flatRateTl}}
+                                                <span class="woocommerce-Price-currencySymbol">₺</span>
+                                            </span>
+
+                                            <span *ngIf="shopping.selectedCurrency === '$'" class="woocommerce-Price-amount amount">
+                                                <span class="woocommerce-Price-currencySymbol">$</span>
+                                                {{shopping.flatRateUsd}}
+                                            </span>
+                                        </label>
                                     </li>
 
+                                    <!-- localPickup -->
                                     <li
                                         [ngClass]="(shopping.getTotal() > 149 && shopping.selectedCurrency === '₺') || (shopping.getTotal() > 19 && shopping.selectedCurrency === '$') ? 'shipping-disabled' : ''">
                                         <input type="radio" name="shipping_method[0]" data-index="0"
                                             id="shipping_method_0_flat_rate3" value="flat_rate:2"
                                             class="shipping_method"
-                                            [checked]="(shopping.getTotal() < 149 && shopping.selectedCurrency === '₺') || (shopping.getTotal() < 19 && shopping.selectedCurrency === '$')">
-                                        <label for="shipping_method_0_flat_rate3">{{'localPickup' | translate}}: <span
-                                                class="woocommerce-Price-amount amount"><span
-                                                    class="woocommerce-Price-currencySymbol">₺</span>{{shopping.localPickup}}</span></label>
+                                            [checked]="(shopping.getTotal() < 149 && shopping.selectedCurrency === '₺') || (shopping.getTotal() < 19 && shopping.selectedCurrency === '$')"
+                                            (change)="shopping.updateTotal('localPickup')">
+                                        <label for="shipping_method_0_flat_rate3">{{'localPickup' | translate}}: 
+                                            <span *ngIf="shopping.selectedCurrency === '₺'" class="woocommerce-Price-amount amount">
+                                                {{shopping.localPickupTl}}
+                                                <span class="woocommerce-Price-currencySymbol">₺</span>
+                                            </span>
+
+                                            <span *ngIf="shopping.selectedCurrency === '$'" class="woocommerce-Price-amount amount">
+                                                <span class="woocommerce-Price-currencySymbol">$</span>
+                                                {{shopping.localPickupUsd}}
+                                            </span>
+                                        </label>
                                     </li>
                                 </ul>
                                 <!-- End Checkboxes -->

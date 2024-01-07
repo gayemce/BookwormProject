@@ -82,5 +82,7 @@
   "payTL": "TL Cinsinden Öde",
   "payUSD": "USD Cinsinden Öde",
   "selectACurrency": "Bir para birimi seçin.",
-  "noItemsInYourShoppingBag": "Sepetinizde ürün yok."
+  "noItemsInYourShoppingBag": "Sepetinizde ürün yok.",
+  "freeShippingOver149₺": "149₺ Üzeri Ücretsiz Kargo",
+  "freeShippingOver19$": "$19 Üzeri Ücretsiz Kargo"
 }

@@ -11,14 +11,12 @@ export class ShoppingCartService {
 
   shoppingCarts: any[] = [];
   prices: { value: number, currency: string }[] = [];
-  selectedCurrency: string = '₺';
+  selectedCurrency: string = '';
   count: number = 0;
   total: number = 0;
-
-  ngOnInit(): void {
-    //Buradan devam edilecek.
-    this.onCurrencyButtonClick(this.selectedCurrency);
-  }
+  //Buradan devam edilecek.
+  flatRate: number = 15;
+  localPickup: number = 8;
 
   constructor(
     private translate: TranslateService,
@@ -32,6 +30,9 @@ export class ShoppingCartService {
         this.count = this.shoppingCarts.length;
       }
     }
+
+    this.onCurrencyButtonClick(this.selectedCurrency);
+    this.calcTotal();
     
   }
 
@@ -84,6 +85,7 @@ export class ShoppingCartService {
 
   getTotal(): number {
     // Sepetin toplam tutarını hesapla ve döndür
+    console.log(this.prices.reduce((total, price) => total + price.value, 0));
     return this.prices.reduce((total, price) => total + price.value, 0);
   }
 

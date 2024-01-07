@@ -82,5 +82,7 @@
   "payTL": "Pay TL",
   "payUSD": "Pay USD",
   "selectACurrency": "Select a currency.",
-  "noItemsInYourShoppingBag": "No items in your shopping bag."
+  "noItemsInYourShoppingBag": "No items in your shopping bag.",
+  "freeShippingOver149₺": "Free Shipping Over 149₺",
+  "freeShippingOver19$": "Free Shipping Over $19"
 }

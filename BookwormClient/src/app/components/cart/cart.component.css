@@ -19,3 +19,11 @@ a{
     pointer-events: none;
     font-style: italic;
 }
+
+.shipping-disabled{
+    color: #888;
+    cursor: not-allowed;
+    pointer-events: none;
+    font-style: italic;
+}
+

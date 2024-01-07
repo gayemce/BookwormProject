@@ -23,8 +23,6 @@ export class MiddlebarComponent {
   ngOnInit(){
     this.auth.checkAuthentication();
     this.responseInLocalStorage = localStorage.getItem("response");
-    //Buradan devam edilecek.
-    this.shopping.onCurrencyButtonClick(this.shopping.selectedCurrency);
   }
 
   constructor(
@@ -32,10 +30,6 @@ export class MiddlebarComponent {
     public auth: AuthService,
     public shopping: ShoppingCartService
   ){ 
-        // shopping.onCurrencyButtonClick(shopping.selectedCurrency);
-        // this.shopping.getTotal();
         this.shopping.calcTotal();
   }
-
-  
 }

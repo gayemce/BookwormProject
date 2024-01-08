@@ -24,7 +24,6 @@ export default class CartComponent {
             this.language = localStorage.getItem("language") as string;
         }
         this.shopping.calcTotal();
-        //Buradan devam edilecek.
-        this.shopping.updateTotal('localPickup');
+        
     }
 }

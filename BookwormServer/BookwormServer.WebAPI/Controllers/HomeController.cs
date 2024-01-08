@@ -10,7 +10,7 @@ using System.Reflection;
 namespace BookwormServer.WebAPI.Controllers;
 [Route("api/[controller]/[action]")]
 [ApiController]
-public class HomeController : ControllerBase
+public sealed class HomeController : ControllerBase
 {
     private readonly AppDbContext _context;
 

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 namespace BookwormServer.WebAPI.Controllers;
 [Route("api/[controller]/[action]")]
 [ApiController]
-public class AuthorsController : ControllerBase
+public sealed class AuthorsController : ControllerBase
 {
     private readonly AppDbContext _context;
 

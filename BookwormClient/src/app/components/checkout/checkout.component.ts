@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
 
 @Component({
     selector: 'app-checkout',
@@ -10,4 +11,7 @@ import { FormsModule } from '@angular/forms';
 })
 export default class CheckoutComponent {
 
+    constructor(
+        public shopping: ShoppingCartService
+    ){}
 }

@@ -83,6 +83,11 @@
   "payUSD": "Pay USD",
   "selectACurrency": "Select a currency.",
   "noItemsInYourShoppingBag": "No items in your shopping bag.",
-  "freeShippingOver149₺": "Free Shipping Over 149₺",
-  "freeShippingOver19$": "Free Shipping Over $19"
+  "freeShippingOver249₺": "Free Shipping Over 249₺",
+  "freeShippingOver19$": "Free Shipping Over $19",
+  "remove": {
+    "doYouWantToDeleted": "Do you want to deleted?",
+    "cancelButton": "Cancel",
+    "confirmButton": "Confirm"
+  }
 }

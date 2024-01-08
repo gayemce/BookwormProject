@@ -13,7 +13,7 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 namespace BookwormServer.WebAPI.Controllers;
 [Route("api/[controller]/[action]")]
 [ApiController]
-public class BooksController : ControllerBase
+public sealed class BooksController : ControllerBase
 {
     //Mapper kütüphanesi eklenecek.
     private readonly AppDbContext _context;
@@ -172,6 +172,8 @@ public class BooksController : ControllerBase
                 Id = book.Author.Id,
                 Name = book.Author.Name,
                 Lastname = book.Author.Lastname,
+                AboutEn = book.Author.AboutEn,
+                AboutTr = book.Author.AboutTr,
             },
             BookLanguage = new BookLanguageDto
             {
@@ -279,6 +281,8 @@ public class BooksController : ControllerBase
                     Id = book.Author.Id,
                     Name = book.Author.Name,
                     Lastname = book.Author.Lastname,
+                    AboutEn = book.Author.AboutEn,
+                    AboutTr = book.Author.AboutTr,
                 },
                 BookLanguage = new BookLanguageDto
                 {

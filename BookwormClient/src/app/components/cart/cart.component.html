@@ -268,20 +268,11 @@
                                                 class="woocommerce-Price-amount amount"><span
                                                     class="woocommerce-Price-currencySymbol">₺</span>{{shopping.flatRateTl}}</span></label>
                                     </li>
-
-                                    <li>
-                                        <input type="radio" name="shipping_method[0]" data-index="0"
-                                            id="shipping_method_0_flat_rate3" value="flat_rate:2"
-                                            class="shipping_method">
-                                        <label for="shipping_method_0_flat_rate3">{{'localPickup' | translate}}: <span
-                                                class="woocommerce-Price-amount amount"><span
-                                                    class="woocommerce-Price-currencySymbol">₺</span>{{shopping.localPickupTl}}</span></label>
-                                    </li>
                                 </ul>
                                 <!-- End Checkboxes -->
-                                <span class="font-size-2">{{'shippingToTurkey' | translate}}.</span>
+                                <!-- <span class="font-size-2">{{'shippingToTurkey' | translate}}.</span>
                                 <a class="font-weight-medium h-primary ml-3 font-size-2">{{'changeAddress' | translate}}
-                                </a>
+                                </a> -->
                             </div>
                             }
                             @else{
@@ -289,10 +280,10 @@
                                 aria-labelledby="cartHeadingTwo" data-parent="#cartAccordion">
                                 <!-- Checkboxes -->
 
-                                <div *ngIf="shopping.selectedCurrency === '₺' && shopping.getTotal() > 149"
+                                <div *ngIf="shopping.selectedCurrency === '₺' && shopping.getTotal() > 249"
                                     class="bg-punch-light" style="padding: 3px 10px 0px 30px">
-                                    <p *ngIf="shopping.getTotal() > 149">
-                                        {{'freeShippingOver149₺' | translate}}
+                                    <p *ngIf="shopping.getTotal() > 249">
+                                        {{'freeShippingOver249₺' | translate}}
                                     </p>
                                 </div>
                                 <div *ngIf="shopping.selectedCurrency === '$' && shopping.getTotal() > 19"
@@ -303,61 +294,41 @@
                                 </div>
 
                                 <ul id="shipping_method">
-                                    <li
-                                        [ngClass]="(shopping.getTotal() < 149 && shopping.selectedCurrency === '₺') || (shopping.getTotal() < 19 && shopping.selectedCurrency === '$') ? 'shipping-disabled' : ''">
+                                    <li 
+                                        [ngClass]="(shopping.getTotal() < 249 && shopping.selectedCurrency === '₺') || (shopping.getTotal() < 19 && shopping.selectedCurrency === '$') ? 'shipping-disabled' : ''">
                                         <input type="radio" name="shipping_method[0]" data-index="0"
                                             id="shipping_method_0_flat_rate1" value="flat_rate:1"
                                             class="shipping_method"
-                                            [checked]="(shopping.getTotal() > 149 && shopping.selectedCurrency === '₺') || (shopping.getTotal() > 19 && shopping.selectedCurrency === '$')">
+                                            [checked]="(shopping.getTotal() > 249 && shopping.selectedCurrency === '₺') || (shopping.getTotal() > 19 && shopping.selectedCurrency === '$')">
                                         <label for="shipping_method_0_flat_rate1">{{'freeShipping' | translate}}</label>
                                     </li>
 
                                     <!-- flatRate -->
                                     <li
-                                        [ngClass]="(shopping.getTotal() > 149 && shopping.selectedCurrency === '₺') || (shopping.getTotal() > 19 && shopping.selectedCurrency === '$') ? 'shipping-disabled' : ''">
+                                        [ngClass]="(shopping.getTotal() > 249 && shopping.selectedCurrency === '₺') || (shopping.getTotal() > 19 && shopping.selectedCurrency === '$') ? 'shipping-disabled' : ''">
                                         <input type="radio" name="shipping_method[0]" data-index="0"
                                             id="shipping_method_0_flat_rate2" value="flat_rate:2"
                                             class="shipping_method"
-                                            [checked]="(shopping.getTotal() < 149 && shopping.selectedCurrency === '₺') || (shopping.getTotal() < 19 && shopping.selectedCurrency === '$')"
-                                            (change)="shopping.updateTotal('flatRate')">
+                                            [checked]="(shopping.getTotal() < 249 && shopping.selectedCurrency === '₺') || (shopping.getTotal() < 19 && shopping.selectedCurrency === '$')">
                                         <label for="shipping_method_0_flat_rate2">{{'flatRate' | translate}}:
-                                            <span *ngIf="shopping.selectedCurrency === '₺'" class="woocommerce-Price-amount amount">
+                                            <span *ngIf="shopping.selectedCurrency === '₺'"
+                                                class="woocommerce-Price-amount amount">
                                                 {{shopping.flatRateTl}}
                                                 <span class="woocommerce-Price-currencySymbol">₺</span>
                                             </span>
 
-                                            <span *ngIf="shopping.selectedCurrency === '$'" class="woocommerce-Price-amount amount">
+                                            <span *ngIf="shopping.selectedCurrency === '$'"
+                                                class="woocommerce-Price-amount amount">
                                                 <span class="woocommerce-Price-currencySymbol">$</span>
                                                 {{shopping.flatRateUsd}}
                                             </span>
                                         </label>
                                     </li>
-
-                                    <!-- localPickup -->
-                                    <li
-                                        [ngClass]="(shopping.getTotal() > 149 && shopping.selectedCurrency === '₺') || (shopping.getTotal() > 19 && shopping.selectedCurrency === '$') ? 'shipping-disabled' : ''">
-                                        <input type="radio" name="shipping_method[0]" data-index="0"
-                                            id="shipping_method_0_flat_rate3" value="flat_rate:2"
-                                            class="shipping_method"
-                                            [checked]="(shopping.getTotal() < 149 && shopping.selectedCurrency === '₺') || (shopping.getTotal() < 19 && shopping.selectedCurrency === '$')"
-                                            (change)="shopping.updateTotal('localPickup')">
-                                        <label for="shipping_method_0_flat_rate3">{{'localPickup' | translate}}: 
-                                            <span *ngIf="shopping.selectedCurrency === '₺'" class="woocommerce-Price-amount amount">
-                                                {{shopping.localPickupTl}}
-                                                <span class="woocommerce-Price-currencySymbol">₺</span>
-                                            </span>
-
-                                            <span *ngIf="shopping.selectedCurrency === '$'" class="woocommerce-Price-amount amount">
-                                                <span class="woocommerce-Price-currencySymbol">$</span>
-                                                {{shopping.localPickupUsd}}
-                                            </span>
-                                        </label>
-                                    </li>
                                 </ul>
                                 <!-- End Checkboxes -->
-                                <span class="font-size-2">{{'shippingToTurkey' | translate}}.</span><a href="#"
+                                <!-- <span class="font-size-2">{{'shippingToTurkey' | translate}}.</span><a href="#"
                                     class="font-weight-medium h-primary ml-3 font-size-2">{{'changeAddress' |
-                                    translate}}</a>
+                                    translate}}</a> -->
                             </div>
                             }
 
@@ -375,7 +346,7 @@
                                                 </span>
                                                 <span *ngIf="shopping.selectedCurrency === '₺'"
                                                     class="woocommerce-Price-amount amount">
-                                                    {{ shopping.getTotal() | trCurrency }}
+                                                    {{ shopping.shippingAndCartTotal() | trCurrency }}
                                                     <span class="woocommerce-Price-currencySymbol">
                                                         {{'₺'}}
                                                     </span>
@@ -385,7 +356,7 @@
                                                     class="woocommerce-Price-currencySymbol">
                                                     {{'$'}}
                                                     <span class="woocommerce-Price-amount amount">
-                                                        {{ shopping.getTotal() | currency: '':'':'1.2-2' }}
+                                                        {{ shopping.shippingAndCartTotal() | currency: '':'':'1.2-2' }}
                                                     </span>
                                                 </span>
 
@@ -399,15 +370,15 @@
                     @if(shopping.selectedCurrency === ''){
                     <div class="wc-proceed-to-checkout">
                         <a routerLink="/checkout"
-                            class="checkout-button-disabled checkout-button button alt wc-forward btn btn btn-block btn-outline-dark rounded-0 py-4">{{'proceedToCheckout'
-                            | translate}}
+                            class="checkout-button-disabled checkout-button button alt wc-forward btn btn btn-block btn-outline-dark rounded-0 py-4">
+                            {{'proceedToCheckout' | translate}}
                         </a>
                     </div>
                     }@else {
                     <div class="wc-proceed-to-checkout">
                         <a routerLink="/checkout"
-                            class="checkout-button button alt wc-forward btn btn-dark btn-block rounded-0 py-4">{{'proceedToCheckout'
-                            | translate}}
+                            class="checkout-button button alt wc-forward btn btn-dark btn-block rounded-0 py-4">
+                            {{'proceedToCheckout' | translate}}
                         </a>
                     </div>
                     }

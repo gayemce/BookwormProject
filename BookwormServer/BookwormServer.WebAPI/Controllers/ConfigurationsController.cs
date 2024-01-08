@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace BookwormServer.WebAPI.Controllers;
 [Route("api/[controller]")]
 [ApiController]
-public class ConfigurationsController : ControllerBase
+public sealed class ConfigurationsController : ControllerBase
 {
     private readonly AppDbContext context = new();
 

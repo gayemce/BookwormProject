@@ -8,7 +8,7 @@ using static Azure.Core.HttpHeader;
 namespace BookwormServer.WebAPI.Controllers;
 [Route("api/[controller]/[action]")]
 [ApiController]
-public class CategoriesController : ControllerBase
+public sealed class CategoriesController : ControllerBase
 {
     private readonly AppDbContext _context;
 

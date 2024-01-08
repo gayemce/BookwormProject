@@ -83,6 +83,11 @@
   "payUSD": "USD Cinsinden Öde",
   "selectACurrency": "Bir para birimi seçin.",
   "noItemsInYourShoppingBag": "Sepetinizde ürün yok.",
-  "freeShippingOver149₺": "149₺ Üzeri Ücretsiz Kargo",
-  "freeShippingOver19$": "$19 Üzeri Ücretsiz Kargo"
+  "freeShippingOver249₺": "249₺ Üzeri Ücretsiz Kargo",
+  "freeShippingOver19$": "$19 Üzeri Ücretsiz Kargo",
+  "remove": {
+    "doYouWantToDeleted": "Silmek istiyor musunuz?",
+    "cancelButton": "Vazgeç",
+    "confirmButton": "Sil"
+  }
 }

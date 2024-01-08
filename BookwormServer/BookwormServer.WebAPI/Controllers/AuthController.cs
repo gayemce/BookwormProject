@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore;
 namespace BookwormServer.WebAPI.Controllers;
 [Route("api/[controller]/[action]")]
 [ApiController]
-public class AuthController : ControllerBase
+public sealed class AuthController : ControllerBase
 {
     private readonly AppDbContext _context;
     private readonly UserManager<AppUser> _userManager;

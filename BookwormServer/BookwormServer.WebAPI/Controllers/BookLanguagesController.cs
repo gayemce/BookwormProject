@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace BookwormServer.WebAPI.Controllers;
 [Route("api/[controller]/[action]")]
 [ApiController]
-public class BookLanguagesController : ControllerBase
+public sealed class BookLanguagesController : ControllerBase
 {
     private readonly AppDbContext _context;
 

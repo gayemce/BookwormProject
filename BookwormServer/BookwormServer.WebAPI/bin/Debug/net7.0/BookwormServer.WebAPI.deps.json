@@ -10,6 +10,7 @@
         "dependencies": {
           "FluentValidation": "11.8.1",
           "GenericFileService": "1.0.3",
+          "Iyzipay": "2.1.61",
           "JWT": "10.1.1",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "7.0.14",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "7.0.14",
@@ -80,6 +81,17 @@
           "lib/net6.0/Humanizer.dll": {
             "assemblyVersion": "2.14.0.0",
             "fileVersion": "2.14.1.48190"
+          }
+        }
+      },
+      "Iyzipay/2.1.61": {
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.2"
+        },
+        "runtime": {
+          "lib/netstandard2.1/Iyzipay.dll": {
+            "assemblyVersion": "2.1.61.0",
+            "fileVersion": "2.1.61.0"
           }
         }
       },
@@ -779,6 +791,13 @@
       "sha512": "sha512-lQKvtaTDOXnoVJ20ibTuSIOf2i0uO0MPbDhd1jm238I+U/2ZnRENj0cktKZhtchBMtCUSRQ5v4xBCUbKNmyVMw==",
       "path": "humanizer.core/2.14.1",
       "hashPath": "humanizer.core.2.14.1.nupkg.sha512"
+    },
+    "Iyzipay/2.1.61": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-22yAn2AxqvbcRgz/qfOQgsATuS+lozEgX09eiLGSzws9d+DwLOjFzfkpQHZyRWHZS1orME5EU6xD2ugDYE26YA==",
+      "path": "iyzipay/2.1.61",
+      "hashPath": "iyzipay.2.1.61.nupkg.sha512"
     },
     "JWT/10.1.1": {
       "type": "package",

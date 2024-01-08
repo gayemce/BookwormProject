@@ -84,6 +84,18 @@
           }
         }
       },
+      "Iyzipay/2.1.61": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.2"
+        },
+        "compile": {
+          "lib/netstandard2.1/Iyzipay.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.1/Iyzipay.dll": {}
+        }
+      },
       "JWT/10.1.1": {
         "type": "package",
         "dependencies": {
@@ -1440,6 +1452,19 @@
         "lib/netstandard2.0/Humanizer.dll",
         "lib/netstandard2.0/Humanizer.xml",
         "logo.png"
+      ]
+    },
+    "Iyzipay/2.1.61": {
+      "sha512": "22yAn2AxqvbcRgz/qfOQgsATuS+lozEgX09eiLGSzws9d+DwLOjFzfkpQHZyRWHZS1orME5EU6xD2ugDYE26YA==",
+      "type": "package",
+      "path": "iyzipay/2.1.61",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "iyzipay.2.1.61.nupkg.sha512",
+        "iyzipay.nuspec",
+        "lib/net45/Iyzipay.dll",
+        "lib/netstandard2.1/Iyzipay.dll"
       ]
     },
     "JWT/10.1.1": {
@@ -3770,6 +3795,7 @@
     "net7.0": [
       "FluentValidation >= 11.8.1",
       "GenericFileService >= 1.0.3",
+      "Iyzipay >= 2.1.61",
       "JWT >= 10.1.1",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 7.0.14",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 7.0.14",
@@ -3825,6 +3851,10 @@
           "GenericFileService": {
             "target": "Package",
             "version": "[1.0.3, )"
+          },
+          "Iyzipay": {
+            "target": "Package",
+            "version": "[2.1.61, )"
           },
           "JWT": {
             "target": "Package",

@@ -165,3 +165,4 @@ C:\Users\Win10\Desktop\WorkSpace\Projects\BookwormProject\BookwormServer\Bookwor
 C:\Users\Win10\Desktop\WorkSpace\Projects\BookwormProject\BookwormServer\BookwormServer.WebAPI\bin\Debug\net7.0\JWT.dll
 C:\Users\Win10\Desktop\WorkSpace\Projects\BookwormProject\BookwormServer\BookwormServer.WebAPI\bin\Debug\net7.0\Newtonsoft.Json.dll
 C:\Users\Win10\Desktop\WorkSpace\Projects\BookwormProject\BookwormServer\BookwormServer.WebAPI\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\Win10\Desktop\WorkSpace\Projects\BookwormProject\BookwormServer\BookwormServer.WebAPI\bin\Debug\net7.0\Iyzipay.dll

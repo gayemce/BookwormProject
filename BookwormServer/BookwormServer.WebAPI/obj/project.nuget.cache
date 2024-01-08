@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "FVnpsxqaAYFOhlkUYxh1zWubetV9l/McmkJ/r7YGKbWqI+fa9TXuTq3+7aqosKpRrUGN5QSfcq7WTbJxSxPOZA==",
+  "dgSpecHash": "4Ba138jgYdiSh4HES4ydOg8H+Ey+fhhL7zy4bA8G6NGWea/h7zgbQlB/pz091z6vuxSypMiEdtZrkw0OMoO7pw==",
   "success": true,
   "projectFilePath": "C:\\Users\\Win10\\Desktop\\WorkSpace\\Projects\\BookwormProject\\BookwormServer\\BookwormServer.WebAPI\\BookwormServer.WebAPI.csproj",
   "expectedPackageFiles": [
@@ -9,6 +9,7 @@
     "C:\\Users\\Win10\\.nuget\\packages\\fluentvalidation\\11.8.1\\fluentvalidation.11.8.1.nupkg.sha512",
     "C:\\Users\\Win10\\.nuget\\packages\\genericfileservice\\1.0.3\\genericfileservice.1.0.3.nupkg.sha512",
     "C:\\Users\\Win10\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
+    "C:\\Users\\Win10\\.nuget\\packages\\iyzipay\\2.1.61\\iyzipay.2.1.61.nupkg.sha512",
     "C:\\Users\\Win10\\.nuget\\packages\\jwt\\10.1.1\\jwt.10.1.1.nupkg.sha512",
     "C:\\Users\\Win10\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\7.0.14\\microsoft.aspnetcore.authentication.jwtbearer.7.0.14.nupkg.sha512",
     "C:\\Users\\Win10\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\7.0.14\\microsoft.aspnetcore.cryptography.internal.7.0.14.nupkg.sha512",

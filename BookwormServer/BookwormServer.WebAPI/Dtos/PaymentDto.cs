@@ -3,4 +3,6 @@
 namespace BookwormServer.WebAPI.Dtos;
 
 public sealed record PaymentDto(
-    List<Book> Books);
+    List<Book> Books,
+    decimal CartTotal,
+    string Currency);

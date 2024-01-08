@@ -48,6 +48,10 @@
               "target": "Package",
               "version": "[1.0.3, )"
             },
+            "Iyzipay": {
+              "target": "Package",
+              "version": "[2.1.61, )"
+            },
             "JWT": {
               "target": "Package",
               "version": "[10.1.1, )"

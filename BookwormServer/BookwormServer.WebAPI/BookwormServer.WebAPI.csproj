@@ -9,6 +9,7 @@
   <ItemGroup>
     <PackageReference Include="FluentValidation" Version="11.8.1" />
     <PackageReference Include="GenericFileService" Version="1.0.3" />
+    <PackageReference Include="Iyzipay" Version="2.1.61" />
     <PackageReference Include="JWT" Version="10.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.14" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.14" />

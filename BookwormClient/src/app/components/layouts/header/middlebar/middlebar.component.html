@@ -74,8 +74,8 @@
               class="ml-1 position-absolute bg-dark width-16 height-16 rounded-circle d-flex align-items-center justify-content-center text-white font-size-n9 left-0">{{shopping.count}}</span>
             <i class="glph-icon flaticon-icon-126515 font-size-4"></i>
             <span class="d-none d-xl-inline h6 mb-0 ml-1">
-              <span *ngIf="shopping.selectedCurrency === '₺'">{{ shopping.getTotal() | trCurrency }} {{'₺'}}</span>
-              <span *ngIf="shopping.selectedCurrency === '$'">{{'$'}} {{ shopping.getTotal() | currency: '':'':'1.2-2' }} </span>
+              <span *ngIf="shopping.selectedCurrency === '₺'">{{ shopping.shippingAndCartTotal() | trCurrency }} {{'₺'}}</span>
+              <span *ngIf="shopping.selectedCurrency === '$'">{{'$'}} {{ shopping.shippingAndCartTotal() | currency: '':'':'1.2-2' }} </span>
             </span>
           </a>
           <!-- End Cart Sidebar Toggle Button -->

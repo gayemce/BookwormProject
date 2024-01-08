@@ -5,6 +5,7 @@ import { SwalService } from 'src/app/services/swal.service';
 import { forkJoin } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ErrorService } from './error.service';
+import { PaymentModel } from '../models/payment.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,7 @@ export class ShoppingCartService {
   total: number = 0;
   flatRateTl: number = 24.99;
   flatRateUsd: number = 4.99;
+  cartTotal: number = 0;
 
   constructor(
     private translate: TranslateService,
@@ -103,7 +105,6 @@ export class ShoppingCartService {
     switch (shippingMethod) {
       case 'flatRate':
         this.total = this.selectedCurrency === '₺' ? this.flatRateTl : this.flatRateUsd;
-        console.log(this.total);
         break;
       default:
         break;
@@ -116,22 +117,37 @@ export class ShoppingCartService {
 
   shippingAndCartTotal(): number {
     // Kargo ile sepetin toplam tutarı
-    return this.prices.reduce((total, price) => total + price.value, 0) + this.total;
+    console.log(this.total);
+    this.cartTotal = this.prices.reduce((total, price) => total + price.value, 0) + this.total;
+    return this.cartTotal;
   }
 
-  payment(){
-    this.http.post(`https://localhost:7018/api/Carts/Payment`, {books: this.shoppingCarts}).subscribe({
-        next: (res: any) => {
-          console.log(res);
-        },
-        error: (err: HttpErrorResponse) => {
-          this.error.errorHandler(err);
-        }
-      });
+
+  payment(currency: string) {
+    console.log(this.cartTotal);
+    console.log(this.selectedCurrency);
+    // this.shoppingCarts.forEach(item => {
+    //   item.price.value = this.cartTotal;
+    //   item.price.currency = currency;
+    // });
+
+    const paymentRequest: PaymentModel = {
+      books: this.shoppingCarts,
+      cartTotal: this.cartTotal,
+      currency: currency
+    }
+
+    this.http.post(`https://localhost:7018/api/Carts/Payment`, paymentRequest).subscribe({
+      next: (res: any) => {
+        console.log(res);
+      },
+      error: (err: HttpErrorResponse) => {
+        this.error.errorHandler(err);
+      }
+    });
   }
 
   ForeignCurrencyAccount() {
-    // Seçilen para birimine göre döviz kuru al ve işlemleri gerçekleştir
     const exchangeRate = this.getExchangeRate(this.selectedCurrency);
 
     this.prices.forEach(price => {
@@ -152,7 +168,6 @@ export class ShoppingCartService {
   }
 
   getExchangeRate(selectedCurrency: string): number {
-    // Seçilen para birimine göre döviz kuru algoritmasını uygula
     if (selectedCurrency === '₺') {
       return 30.0;
     } else if (selectedCurrency === '$') {

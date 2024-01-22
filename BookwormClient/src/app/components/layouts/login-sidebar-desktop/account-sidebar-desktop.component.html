@@ -1,0 +1,268 @@
+<!-- Account Sidebar Navigation - Desktop -->
+@if (!responseInLocalStorage) {
+<aside id="sidebarContent" class="u-sidebar u-sidebar__lg" aria-labelledby="sidebarNavToggler">
+  <div class="u-sidebar__scroller">
+    <div class="u-sidebar__container">
+      <div class="u-header-sidebar__footer-offset">
+        <!-- Toggle Button -->
+        <div class="d-flex align-items-center position-absolute top-0 right-0 z-index-2 mt-5 mr-md-6 mr-4">
+          <button #accountSidebarCloseBtn id="accountSidebarCloseBtn" type="button" class="close ml-auto"
+            aria-controls="sidebarContent" aria-haspopup="true" aria-expanded="false" data-unfold-event="click"
+            data-unfold-hide-on-scroll="false" data-unfold-target="#sidebarContent" data-unfold-type="css-animation"
+            data-unfold-animation-in="fadeInRight" data-unfold-animation-out="fadeOutRight" data-unfold-duration="500">
+            <span aria-hidden="true">Close <i class="fas fa-times ml-2"></i></span>
+          </button>
+        </div>
+        <!-- End Toggle Button -->
+        <!-- Content -->
+        <div class="js-scrollbar u-sidebar__body">
+          <div class="u-sidebar__content u-header-sidebar__content">
+            <form autocomplete="off">
+              <!-- Login -->
+              <div id="login" data-target-group="idForm">
+                <!-- Title -->
+                <header class="border-bottom px-4 px-md-6 py-4">
+                  <h2 class="font-size-3 mb-0 d-flex align-items-center"><i
+                      class="flaticon-user mr-3 font-size-5"></i>{{'Account' | translate}}</h2>
+                </header>
+                <!-- End Title -->
+                <div class="p-4 p-md-6">
+                  <!-- Form Group -->
+                  <div class="form-group mb-4">
+                    <!-- @if(selectLang.userSelectedLanguage === 'en'){
+                    <p-messages [(value)]="messageSignInEn" [enableService]="false" [closable]="false"></p-messages>
+                    }@else {
+                    <p-messages [(value)]="messageSignInTr" [enableService]="false" [closable]="false"></p-messages>
+                    } -->
+                    <div class="js-form-message js-focus-state">
+                      <label id="signinEmailLabel" class="form-label" for="signinEmail">Username or email *</label>
+                      <input #signinEmail [(ngModel)]="login.request.userNameOrEmail" type="email"
+                        class="form-control rounded-0 height-4 px-4" name="signinEmail" id="signinEmail"
+                        (keyup)="login.checkUserNameOrEmail()" placeholder="Bookworm011@gmail.com"
+                        aria-label="bookworm011@gmail.com" aria-describedby="signinEmailLabel" autocomplete="off">
+                    </div>
+                    <span class="mt-2"
+                      [ngStyle]="{'display' : login.isUserNameOrEmailError ? 'block' : 'none', 'color': 'red', 'font-size': '14px', 'font-style': 'italic'}">
+                      {{selectLang.userSelectedLanguage === 'en' ? login.errorUserNameOrEmailMessageEn :
+                      login.errorUserNameOrEmailMessageTr}}
+                    </span>
+                  </div>
+                  <!-- End Form Group -->
+                  <!-- Form Group -->
+                  <div class="form-group mb-4">
+                    <div class="js-form-message js-focus-state">
+                      <label id="signinPasswordLabel" class="form-label" for="signinPassword">Password *</label>
+                      <input [(ngModel)]="login.request.password" (keyup)="login.checkSignInPassword()"
+                        type="password" class="form-control rounded-0 height-4 px-4" name="signinPassword"
+                        id="signinPassword" placeholder="******" aria-label="" aria-describedby="signinPasswordLabel"
+                        autocomplete="off">
+                    </div>
+                    <span class="mt-2"
+                      [ngStyle]="{'display': login.isSigninPasswordError ? 'block' : 'none', 'color': 'red', 'font-size': '14px', 'font-style': 'italic'}">
+                      {{selectLang.userSelectedLanguage === 'en' ? login.errorSignInPasswordMessageEn :
+                      login.errorSignInPasswordMessageTr}}
+                    </span>
+                  </div>
+                  <!-- End Form Group -->
+                  <div class="d-flex justify-content-between mb-5 align-items-center">
+                    <!-- Checkbox -->
+                    <div class="js-form-message">
+                      <div class="custom-control custom-checkbox d-flex align-items-center text-muted">
+                        <input [(ngModel)]="login.request.rememberMe" type="checkbox" class="custom-control-input"
+                          id="termsCheckbox" name="termsCheckbox" required>
+                        <label class="custom-control-label" for="termsCheckbox">
+                          <span class="font-size-2 text-secondary-gray-700">
+                            Remember me
+                          </span>
+                        </label>
+                      </div>
+                    </div>
+                    <!-- End Checkbox -->
+                    <a class="js-animation-link text-dark font-size-2 t-d-u link-muted font-weight-medium"
+                      href="javascript:;" data-target="#forgotPassword" data-link-group="idForm"
+                      data-animation-in="fadeIn">Forgot Password?</a>
+                  </div>
+                  <div class="mb-4d75">
+                    <button (click)="updateSignInButtonStatus() ? signIn() : null"
+                      [ngStyle]="{'cursor': updateSignInButtonStatus() ? 'pointer' : 'not-allowed'}" type="submit"
+                      class="btn btn-block py-3 rounded-0 btn-dark"
+                      [ngClass]="{'disabled': !updateSignInButtonStatus()}">
+                      Sign In
+                    </button>
+                  </div>
+                  <div class="mb-2">
+                    <a href="javascript:;"
+                      class="js-animation-link btn btn-block py-3 rounded-0 btn-outline-dark font-weight-medium"
+                      data-target="#signup" data-link-group="idForm" data-animation-in="fadeIn">Create Account</a>
+                  </div>
+                </div>
+              </div>
+              <!-- Signup -->
+              <div id="signup" style="display: none; opacity: 0;" data-target-group="idForm">
+                <!-- Title -->
+                <header class="border-bottom px-4 px-md-6 py-4">
+                  <h2 class="font-size-3 mb-0 d-flex align-items-center"><i
+                      class="flaticon-resume mr-3 font-size-5"></i>Create Account</h2>
+                </header>
+                <!-- End Title -->
+                <div class="p-4 p-md-6">
+                  <!-- Form Group -->
+                  <div class="form-group mb-4">
+                    <!-- @if(selectLang.userSelectedLanguage === 'en'){
+                      <p-messages [(value)]="messageSignUpEn" [enableService]="false" [closable]="false"></p-messages>
+                    }@else {
+                      <p-messages [(value)]="messageSignUpTr" [enableService]="false" [closable]="false"></p-messages>
+                    } -->
+                    <div class="js-form-message js-focus-state">
+                      <label id="signupFirstnameLabel1" class="form-label" for="signupFirstname">First Name *</label>
+                      <input [(ngModel)]="register.request.firstName" (keyup)="register.checkFirstName()" type="text"
+                        class="form-control rounded-0 height-4 px-4" name="signupFirstname" id="signupFirstname"
+                        placeholder="Book" aria-label="Book" aria-describedby="signupFirstnameLabel1" required>
+                    </div>
+                    <span class="mt-2"
+                      [ngStyle]="{'display': register.isFirstNameError ? 'block' : 'none', 'color': 'red', 'font-size': '14px', 'font-style': 'italic'}">
+                      {{selectLang.userSelectedLanguage === 'en' ? register.errorFirstNameMessageEn :
+                      register.errorFirstNameMessageTr}}
+                    </span>
+                  </div>
+                  <!-- End Form Group -->
+                  <!-- Form Group -->
+                  <div class="form-group mb-4">
+                    <div class="js-form-message js-focus-state">
+                      <label id="signupLastnameLabel1" class="form-label" for="signupLastname">Last Name *</label>
+                      <input [(ngModel)]="register.request.lastName" (keyup)="register.checkLastName()" type="text"
+                        class="form-control rounded-0 height-4 px-4" name="signupLastname" id="signupLastname"
+                        placeholder="Worm" aria-label="Worm" aria-describedby="signupLastnameLabel1" required>
+                    </div>
+                    <span class="mt-2"
+                      [ngStyle]="{'display': register.isLastNameError ? 'block' : 'none', 'color': 'red', 'font-size': '14px', 'font-style': 'italic'}">
+                      {{selectLang.userSelectedLanguage === 'en' ? register.errorLastNameMessageEn :
+                      register.errorLastNameMessageTr}}
+                    </span>
+                  </div>
+                  <!-- End Form Group -->
+                  <!-- Form Group -->
+                  <div class="form-group mb-4">
+                    <div class="js-form-message js-focus-state">
+                      <label id="signupEmailLabel1" class="form-label" for="signupEmail">Email *</label>
+                      <input [(ngModel)]="register.request.email" (keyup)="register.checkEmail()" type="email"
+                        class="form-control rounded-0 height-4 px-4" name="signupEmail" id="signupEmail"
+                        placeholder="bookworm011@gmail.com" aria-label="bookworm011@gmail.com"
+                        aria-describedby="signupEmailLabel1" required>
+                    </div>
+                    <span class="mt-2"
+                      [ngStyle]="{'display': register.isEmailError ? 'block' : 'none', 'color': 'red', 'font-size': '14px', 'font-style': 'italic'}">
+                      {{selectLang.userSelectedLanguage === 'en' ? register.errorEmailMessageEn :
+                      register.errorEmailMessageTr}}
+                    </span>
+                  </div>
+                  <!-- End Form Group -->
+                  <!-- Form Group -->
+                  <div class="form-group mb-4">
+                    <div class="js-form-message js-focus-state">
+                      <label id="signupUsernameLabel1" class="form-label" for="signupUsername">User Name *</label>
+                      <input [(ngModel)]="register.request.userName" (keyup)="register.checkUserName()" type="text"
+                        class="form-control rounded-0 height-4 px-4" name="signupUsername" id="signupUsername"
+                        placeholder="book_worm01" aria-label="Worm" aria-describedby="signupUsernameLabel1" required>
+                    </div>
+                    <span class="mt-2"
+                      [ngStyle]="{'display': register.isUserNameError ? 'block' : 'none', 'color': 'red', 'font-size': '14px', 'font-style': 'italic'}">
+                      {{selectLang.userSelectedLanguage === 'en' ? register.errorUserNameMessageEn :
+                      register.errorUserNameMessageTr}}
+                    </span>
+                  </div>
+                  <!-- End Form Group -->
+                  <!-- Form Group -->
+                  <div class="form-group mb-4">
+                    <div class="js-form-message js-focus-state">
+                      <label id="signupPasswordLabel1" class="form-label" for="signupPassword">Password *</label>
+                      <input [(ngModel)]="register.request.password" (keyup)="register.checkSignUpPassword()"
+                        type="password" class="form-control rounded-0 height-4 px-4" name="signupPassword"
+                        id="signupPassword" placeholder="******" aria-label="" aria-describedby="signupPasswordLabel1"
+                        required>
+                    </div>
+                    <span class="mt-2"
+                      [ngStyle]="{'display': register.isSignupPasswordError ? 'block' : 'none', 'color': 'red', 'font-size': '14px', 'font-style': 'italic'}">
+                      {{selectLang.userSelectedLanguage === 'en' ? register.errorSignUpPasswordMessageEn :
+                      register.errorSignUpPasswordMessageTr}}
+                    </span>
+                  </div>
+                  <!-- End Form Group -->
+                  <!-- Form Group -->
+                  <div class="form-group mb-4">
+                    <div class="js-form-message js-focus-state">
+                      <label id="signupConfirmPasswordLabel" class="form-label" for="signupConfirmPassword">Confirm
+                        Password *</label>
+                      <input [(ngModel)]="register.request.confirmedPassword"
+                        (keyup)="register.checkSignUpConfPassword()" type="password"
+                        class="form-control rounded-0 height-4 px-4" name="signupConfirmPassword"
+                        id="signupConfirmPassword" placeholder="******" aria-label=""
+                        aria-describedby="signupConfirmPasswordLabel" required>
+                    </div>
+                    <span class="mt-2"
+                      [ngStyle]="{'display': register.isSignupConfPasswordError ? 'block' : 'none', 'color': 'red', 'font-size': '14px', 'font-style': 'italic'}">
+                      {{selectLang.userSelectedLanguage === 'en' ? register.errorSignUpConfPasswordMessageEn :
+                      register.errorSignUpConfPasswordMessageTr}}
+                    </span>
+                  </div>
+                  <!-- End Input -->
+                  <div class="mb-3">
+                    <button (click)="updateSignUpButtonStatus() ? createAccount() : null"
+                      [ngStyle]="{'cursor': updateSignUpButtonStatus() ? 'pointer' : 'not-allowed'}" type="submit"
+                      class="btn btn-block py-3 rounded-0 btn-dark"
+                      [ngClass]="{'disabled': !updateSignUpButtonStatus()}">
+                      Create Account
+                    </button>
+                  </div>
+                  <div class="text-center mb-4">
+                    <span class="small text-muted">Already have an account?</span>
+                    <a class="js-animation-link small" href="javascript:;" data-target="#login" data-link-group="idForm"
+                      data-animation-in="fadeIn"> Login
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <!-- End Signup -->
+              <!-- Forgot Password -->
+              <div id="forgotPassword" style="display: none; opacity: 0;" data-target-group="idForm">
+                <!-- Title -->
+                <header class="border-bottom px-4 px-md-6 py-4">
+                  <h2 class="font-size-3 mb-0 d-flex align-items-center"><i
+                      class="flaticon-question mr-3 font-size-5"></i>Forgot Password?</h2>
+                </header>
+                <!-- End Title -->
+                <div class="p-4 p-md-6">
+                  <!-- Form Group -->
+                  <div class="form-group mb-4">
+                    <div class="js-form-message js-focus-state">
+                      <label id="signinEmailLabel3" class="form-label" for="signinEmail3">Email
+                        *</label>
+                      <input type="email" class="form-control rounded-0 height-4 px-4" name="email" id="signinEmail3"
+                        placeholder="creativelayers088@gmail.com" aria-label="creativelayers088@gmail.com"
+                        aria-describedby="signinEmailLabel3" required>
+                    </div>
+                  </div>
+                  <!-- End Form Group -->
+                  <div class="mb-3">
+                    <button type="submit" class="btn btn-block py-3 rounded-0 btn-dark">Recover
+                      Password</button>
+                  </div>
+                  <div class="text-center mb-4">
+                    <span class="small text-muted">Remember your password?</span>
+                    <a class="js-animation-link small" href="javascript:;" data-target="#login" data-link-group="idForm"
+                      data-animation-in="fadeIn">Login
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <!-- End Forgot Password -->
+            </form>
+          </div>
+        </div>
+        <!-- End Content -->
+      </div>
+    </div>
+  </div>
+</aside>
+}
+<!-- End Account Sidebar Navigation - Desktop -->

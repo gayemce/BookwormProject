@@ -1,0 +1,181 @@
+<header id="site-header" class="site-header__v5">
+  <!-- Top Bar -->
+  <app-topbar></app-topbar>
+  <!-- End Top Bar -->
+
+  <div class="masthead">
+    <!-- Middle Bar -->
+    <app-middlebar></app-middlebar>
+    <!-- End Middle Bar -->
+
+    <!-- Bottom Bar -->
+    <div class="border-bottom py-3 py-md-0">
+      <div class="container">
+        <div class="d-md-flex position-relative">
+          <div class="offcanvas-toggler align-self-center mr-md-5 d-xl-none d-flex d-md-block">
+            <a id="sidebarNavToggler2" href="javascript:;" role="button" class="cat-menu text-dark"
+              aria-controls="sidebarContent2" aria-haspopup="true" aria-expanded="false"
+              data-unfold-event="click" data-unfold-hide-on-scroll="false"
+              data-unfold-target="#sidebarContent2" data-unfold-type="css-animation" data-unfold-overlay='{
+              "className": "u-sidebar-bg-overlay",
+              "background": "rgba(0, 0, 0, .7)",
+              "animationSpeed": 100
+              }' data-unfold-animation-in="fadeInLeft" data-unfold-animation-out="fadeOutLeft"
+              data-unfold-duration="100">
+              <svg width="20px" height="18px">
+                <path fill-rule="evenodd" fill="rgb(0, 0, 0)"
+                  d="M-0.000,-0.000 L20.000,-0.000 L20.000,2.000 L-0.000,2.000 L-0.000,-0.000 Z" />
+                <path fill-rule="evenodd" fill="rgb(0, 0, 0)"
+                  d="M-0.000,8.000 L15.000,8.000 L15.000,10.000 L-0.000,10.000 L-0.000,8.000 Z" />
+                <path fill-rule="evenodd" fill="rgb(0, 0, 0)"
+                  d="M-0.000,16.000 L20.000,16.000 L20.000,18.000 L-0.000,18.000 L-0.000,16.000 Z" />
+              </svg>
+              <span class="ml-3">{{'allCategories' | translate}}</span>
+            </a>
+
+            <ul class="nav d-md-none ml-auto">
+              <li class="nav-item">
+                <!-- Account Sidebar Toggle Button - Mobile -->
+                <a id="sidebarNavToggler9" href="javascript:;" role="button"
+                  class="px-2 nav-link h-primary" aria-controls="sidebarContent9" aria-haspopup="true"
+                  aria-expanded="false" data-unfold-event="click" data-unfold-hide-on-scroll="false"
+                  data-unfold-target="#sidebarContent9" data-unfold-type="css-animation"
+                  data-unfold-overlay='{
+                  "className": "u-sidebar-bg-overlay",
+                  "background": "rgba(0, 0, 0, .7)",
+                  "animationSpeed": 500
+                  }' data-unfold-animation-in="fadeInRight" data-unfold-animation-out="fadeOutRight"
+                  data-unfold-duration="500">
+                  <i class="glph-icon flaticon-user"></i>
+                </a>
+                <!-- End Account Sidebar Toggle Button - Mobile -->
+              </li>
+            </ul>
+          </div>
+
+          <!-- Basics Accordion -->
+          <div id="basicsAccordion" class="mr-5 d-none d-xl-block">
+            <!-- Card -->
+            <div class="position-relative">
+              <div class="bg-primary py-3 px-5 card-collapse" id="basicsHeadingOne">
+                <button #browseCategoriesBtn type="button"
+                  class="btn btn-link btn-block p-0 d-flex align-items-center card-btn"
+                  data-toggle="collapse" data-target="#basicsCollapseOne" aria-expanded="true"
+                  aria-controls="basicsCollapseOne">
+                  <svg class="browseCategoriesSvg" width="20px" height="18px">
+                    <path fill-rule="evenodd" fill="rgb(255, 255, 255)"
+                      d="M-0.000,-0.000 L20.000,-0.000 L20.000,2.000 L-0.000,2.000 L-0.000,-0.000 Z" />
+                    <path fill-rule="evenodd" fill="rgb(255, 255, 255)"
+                      d="M-0.000,8.000 L15.000,8.000 L15.000,10.000 L-0.000,10.000 L-0.000,8.000 Z" />
+                    <path fill-rule="evenodd" fill="rgb(255, 255, 255)"
+                      d="M-0.000,16.000 L20.000,16.000 L20.000,18.000 L-0.000,18.000 L-0.000,16.000 Z" />
+                  </svg>
+                  <span class="ml-3 text-white">{{'browseCategories' | translate}}</span>
+                  <i class="fas fa-chevron-down ml-5 text-white font-size-2"></i>
+                </button>
+              </div>
+              <div id="basicsCollapseOne"
+                class="z-index-2 collapse show position-absolute right-0 left-0 border"
+                aria-labelledby="basicsHeadingOne" data-parent="#basicsAccordion">
+                <div class="card-body p-0">
+                  <ul *ngIf="router.url === '/' || router.url === '/home'" class="list-unstyled vertical-menu position-relative mb-0 bg-white">
+                    @for (c of categories.slice(0, 8); track c) {
+                      <li>
+                        <a id="basicDropdownHoverInvoker2"
+                          class="text-dark dropdown-nav-link dropdown-toggle d-flex align-items-center border-bottom"
+                          href="javascript:;" role="button" aria-controls="basicDropdownHover2"
+                          aria-haspopup="true" aria-expanded="false" data-unfold-event="hover"
+                          data-unfold-target="#basicDropdownHover2"
+                          data-unfold-type="css-animation" data-unfold-duration="200"
+                          data-unfold-delay="50" data-unfold-hide-on-scroll="true"
+                          data-unfold-animation-in="fadeIn" data-unfold-animation-out="fadeOut">
+                          <div class="width-30 mr-2 text-lh-sm">
+                            <img src="{{c.iconImgUrl}}" style="height: 30px;">
+                          </div>
+                          <div class="mr-auto">
+                            <a (click)="shopListBooks.goToShopListByCategoryId(c.id)" >
+                              {{selectLang.userSelectedLanguage === 'en' ? c.nameEn : c.nameTr}}
+                            </a>
+                          </div>
+                        </a>
+                        <div id="basicDropdownHover2"
+                          class="px-5 py-3 dropdown-menu dropdown-unfold top-0 right-auto left-100 bottom-0 mt-0 rounded-0"
+                          style="width: 250px;" aria-labelledby="basicDropdownHoverInvoker2">
+                          <div class="row">
+                            <div class="col-12">
+                              <ul class="menu list-unstyled">
+                                <li><a href="#"
+                                  class=" d-block link-black-100 py-3 font-size-3 font-weight-medium">Popular
+                                Features</a></li>
+                                <li><a href="#" class=" d-block link-black-100 py-1">New
+                                Releases</a></li>
+                                <li><a href="#" class=" d-block link-black-100 py-1">Best
+                                Books Ever</a></li>
+                                <li><a href="#" class=" d-block link-black-100 py-1">Book
+                                Club Classics</a></li>
+                                <li><a href="#" class=" d-block link-black-100 py-1">Our
+                                Bookmarks</a></li>
+                                <li><a href="#" class=" d-block link-black-100 py-1">Bargain
+                                Shop</a></li>
+                                <li><a href="#"
+                                  class=" d-block link-black-100 py-3 font-size-3 font-weight-medium">Bestselling
+                                Series</a></li>
+                                <li><a href="#" class=" d-block link-black-100 py-1">Harry
+                                Potter</a></li>
+                                <li><a href="#" class=" d-block link-black-100 py-1">Game Of
+                                Thrones</a></li>
+                                <li><a href="#"
+                                class=" d-block link-black-100 py-1">Lego</a></li>
+                                <li><a href="#" class=" d-block link-black-100 py-1">Throne
+                                Of Glass</a></li>
+                                <li><a href="#" class=" d-block link-black-100 py-1">Star
+                                Wars</a></li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                    }
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <!-- End Card -->
+          </div>
+          <!-- End Basics Accordion -->
+
+          <div class="site-navigation mr-auto d-none d-xl-block">
+            <ul class="nav">
+              <li class="nav-item"><a routerLink="/categories"
+                class="nav-link link-black-100 mx-2 px-0 py-3 font-weight-medium border-primary border-width-2"
+              >{{ 'allCategories' | translate }}</a>
+            </li>
+
+            <li class="nav-item"><a routerLink="/shop-list"
+              class="nav-link link-black-100 mx-2 px-0 py-3 font-weight-medium border-primary border-width-2"
+            >{{'allBooks' | translate}}</a>
+          </li>
+
+            <li class="nav-item"><a routerLink="/authors"
+              class="nav-link link-black-100 mx-2 px-0 py-3 font-weight-medium border-primary border-width-2"
+            >{{'authors' | translate}}</a>
+          </li>
+    </ul>
+  </div>
+
+  <div class="d-none d-md-block ml-md-auto secondary-navigation">
+    <ul class="nav">
+      <li class="nav-item"><a href="#"
+      class="nav-link link-black-100 mx-2 px-0 py-3 font-weight-medium">{{'bestSeller' | translate}}</a>
+    </li>
+    <li class="nav-item"><a href="#"
+    class="nav-link link-black-100 mx-2 px-0 py-3 font-weight-medium">{{'trendingBooks' | translate}}</a>
+  </li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<!-- End Bottom Bar -->
+</div>
+</header>

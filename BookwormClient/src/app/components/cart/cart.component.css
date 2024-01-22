@@ -1,0 +1,29 @@
+.disable-pointer {
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.selectacurrency{
+    color: #888;
+    font-style: italic;
+    font-weight: 400;
+}
+
+a{
+    cursor: pointer;
+}
+
+.checkout-button-disabled{
+    color: #888;
+    cursor: not-allowed;
+    pointer-events: none;
+    font-style: italic;
+}
+
+.shipping-disabled{
+    color: #888;
+    cursor: not-allowed;
+    pointer-events: none;
+    font-style: italic;
+}
+

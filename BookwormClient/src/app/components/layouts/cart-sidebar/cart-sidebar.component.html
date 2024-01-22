@@ -1,0 +1,104 @@
+<!-- Cart Sidebar Navigation -->
+<aside id="sidebarContent1" class="u-sidebar u-sidebar__xl" aria-labelledby="sidebarNavToggler1">
+    <div class="u-sidebar__scroller js-scrollbar">
+        <div class="u-sidebar__container">
+            <div class="u-header-sidebar__footer-offset">
+                <!-- Toggle Button -->
+                <div class="d-flex align-items-center position-absolute top-0 right-0 z-index-2 mt-5 mr-md-6 mr-4">
+                    <button #cartSidebarCloseBtn id="cartSidebarCloseBtn" type="button" class="close ml-auto"
+                        aria-controls="sidebarContent1" aria-haspopup="true" aria-expanded="false"
+                        data-unfold-event="click" data-unfold-hide-on-scroll="false"
+                        data-unfold-target="#sidebarContent1" data-unfold-type="css-animation"
+                        data-unfold-animation-in="fadeInRight" data-unfold-animation-out="fadeOutRight"
+                        data-unfold-duration="500">
+                        <span aria-hidden="true">{{'close' | translate}} <i class="fas fa-times ml-2"></i></span>
+                    </button>
+                </div>
+                <!-- End Toggle Button -->
+
+                <!-- Content -->
+                <div class="u-sidebar__body">
+                    <div class="u-sidebar__content u-header-sidebar__content">
+                        <!-- Title -->
+                        <header class="border-bottom px-4 px-md-6 py-4">
+                            <h2 class="font-size-3 mb-0 d-flex align-items-center"><i
+                                    class="flaticon-icon-126515 mr-3 font-size-5"></i>{{'yourShoppingBag' | translate}}
+                                ({{shopping.count}})</h2>
+                        </header>
+                        <!-- End Title -->
+
+                        <!-- Shoppin Bag Products Information -->
+                        <div class="px-4 py-5 px-md-6 border-bottom"
+                            *ngFor="let s of shopping.shoppingCarts let i = index">
+                            <div class="media">
+                                <a href="#" class="d-block"><img [src]="s.imgUrl" style="width: 100px; height: 153px"
+                                        class="img-fluid" alt="image-description"></a>
+                                <div class="media-body ml-4d875">
+                                    <div class="text-primary text-uppercase font-size-1 mb-1 text-truncate"><a
+                                            href="#">{{s.publisher}}</a></div>
+                                    <h2
+                                        class="woocommerce-loop-product__title h6 text-lh-md mb-1 text-height-2 crop-text-2">
+                                        <a href="#" class="text-dark">{{s.title}}</a>
+                                    </h2>
+                                    <div class="font-size-2 mb-1 text-truncate"><a href="#"
+                                            class="text-gray-700">{{s.author.name}} {{s.author.lastname}}</a></div>
+                                    <div class="price d-flex align-items-center font-weight-medium font-size-3">
+                                        @if(s.price.currency === 'USD'){
+                                        <span class="woocommerce-Price-amount amount">{{s.quantity}} x
+                                            <span class="woocommerce-Price-currencySymbol">
+                                                {{s.price.currency}}
+                                            </span>
+                                            {{s.price.value | currency: '':'':'1.2-2'}}
+                                        </span>
+                                    }@else {
+                                        <span class="woocommerce-Price-amount amount">{{s.quantity}} x
+                                            <span class="woocommerce-Price-currencySymbol">
+                                                {{s.price.value | trCurrency}}
+                                            </span>
+                                            {{s.price.currency}}
+                                        </span>
+                                    }
+                                    </div>
+                                </div>
+                                <div class="mt-3 ml-3">
+                                    <a (click)="shopping.removeByIndex(i)" class="text-dark"><i
+                                            class="fas fa-times"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="px-4 py-3 px-md-6 d-flex justify-content-between align-items-center font-size-3"
+                            *ngFor="let p of shopping.prices">
+
+                            <h4 class="mb-0 font-size-3">{{'subtotal' | translate}}:</h4>
+
+                            <div class="font-weight-medium">
+                                <span *ngIf="p.currency === '₺'" class="woocommerce-Price-amount amount">
+                                    {{p.value | trCurrency}} {{p.currency}}
+                                </span>
+                                <span *ngIf="p.currency === '$'" class="woocommerce-Price-amount amount">
+                                    {{p.currency}} {{p.value | currency: '':'':'1.2-2'}}
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="px-4 mb-8 px-md-6">
+                            <button (click)="gotoCart()" type="submit"
+                                class="btn btn-block py-4 rounded-0 btn-outline-dark mb-4">
+                                {{'viewCart' | translate}}
+                            </button>
+                            <!-- @if(shopping.shoppingCarts.length > 0){
+                            <button (click)="gotoCheckout()" type="submit"
+                                class="btn btn-block py-4 rounded-0 btn-dark">
+                                {{'checkout' | translate}}
+                            </button>
+                            } -->
+                        </div>
+                    </div>
+                </div>
+                <!-- End Content -->
+            </div>
+        </div>
+    </div>
+</aside>
+<!-- End Cart Sidebar Navigation -->

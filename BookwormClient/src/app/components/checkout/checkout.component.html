@@ -1,0 +1,760 @@
+<section class="right-sidebar woocommerce-checkout">
+    <div class="page-header border-bottom">
+        <div class="container">
+            <div class="d-md-flex justify-content-between align-items-center py-4">
+                <h1 class="page-title font-size-3 font-weight-medium m-0 text-lh-lg">{{'checkout' | translate}}</h1>
+                <nav class="woocommerce-breadcrumb font-size-2">
+                    <a routerLink="/" class="h-primary">{{'home' | translate}}</a>
+                    <span class="breadcrumb-separator mx-1"><i class="fas fa-angle-right"></i></span>
+                    <a routerLink="/cart" class="h-primary">{{'cart' | translate}}</a>
+                    <span class="breadcrumb-separator mx-1"><i class="fas fa-angle-right"></i></span>{{'checkout' |
+                    translate}}
+                </nav>
+            </div>
+        </div>
+    </div>
+    <div id="content" class="site-content bg-punch-light space-bottom-3">
+        <div class="col-full container">
+            <div id="primary" class="content-area">
+                <main id="main" class="site-main">
+                    <article id="post-6" class="post-6 page type-page status-publish hentry">
+                        <header class="entry-header space-top-2 space-bottom-1 mb-2">
+                            <h4 class="entry-title font-size-7 text-center">{{'checkout' | translate}}</h4>
+                        </header>
+                        <!-- .entry-header -->
+                        <div class="entry-content">
+                            <div class="woocommerce">
+                                <form name="checkout" method="post" class="checkout woocommerce-checkout row mt-8"
+                                    action="https://themes.woocommerce.com/storefront/checkout/"
+                                    enctype="multipart/form-data" novalidate="novalidate">
+                                    <div class="col2-set col-md-6 col-lg-7 col-xl-8 mb-6 mb-md-0" id="customer_details">
+                                        <div class="px-4 pt-5 bg-white border">
+                                            <div class="woocommerce-billing-fields">
+                                                <!-- Buyer Information -->
+                                                <form #buyerForm="ngForm" autocomplete="off">
+                                                    <h3 class="mb-4 font-size-3">{{'buyerInformations' | translate}}
+                                                    </h3>
+                                                    <div
+                                                        class="form-group woocommerce-billing-fields__field-wrapper row">
+                                                        <!-- First Name -->
+                                                        <p class="col-lg-6 mb-4d75 form-row form-row-first validate-required woocommerce-invalid woocommerce-invalid-required-field"
+                                                            id="buyer_first_name_field" data-priority="10">
+                                                            <label for="buyer_first_name"
+                                                                class="form-label">{{'firstName' | translate}}
+                                                                <abbr class="required" title="required">*</abbr></label>
+                                                            <input type="text" [(ngModel)]="paymentRequest.buyer.name"
+                                                                class="input-text form-control" name="buyer_first_name"
+                                                                id="buyer_first_name"
+                                                                placeholder="{{'enterAName' | translate}}" value=""
+                                                                autocomplete="off" autofocus="autofocus" required="">
+                                                        </p>
+
+                                                        <!-- Last Name -->
+                                                        <p class="col-lg-6 mb-4d75 form-row form-row-last validate-required"
+                                                            id="buyer_last_name_field" data-priority="20">
+                                                            <label for="buyer_last_name" class="form-label">{{'lastName'
+                                                                | translate}}
+                                                                <abbr class="required" title="required">*</abbr></label>
+                                                            <input type="text"
+                                                                [(ngModel)]="paymentRequest.buyer.surname"
+                                                                class="input-text form-control" name="buyer_last_name"
+                                                                id="buyer_last_name"
+                                                                placeholder="{{'enterALastname' | translate}}" value=""
+                                                                autocomplete="off" required>
+                                                        </p>
+
+                                                        <!-- Identity Number -->
+                                                        <p class="col-12 mb-4d75 form-row form-row-wide"
+                                                            id="buyer_identity_number_field" data-priority="30">
+                                                            <label for="buyer_identity"
+                                                                class="form-label">{{'identityNumber' | translate}}
+                                                                <abbr class="required" title="required">*</abbr></label>
+                                                            <input type="text"
+                                                                [(ngModel)]="paymentRequest.buyer.identityNumber"
+                                                                class="input-text form-control" name="buyer_identity"
+                                                                id="buyer_identity"
+                                                                placeholder="{{'enterAIdentityNumber' | translate}}"
+                                                                value="" autocomplete="off" maxlength="11"
+                                                                (input)="onIdentityNumberInput($event)" required>
+                                                        </p>
+
+                                                        <!-- Phone Number -->
+                                                        <p class="col-lg-12 mb-4d75 form-row form-row-first validate-required"
+                                                            id="buyer_phone_field" data-priority="100">
+                                                            <label for="buyer_phone" class="form-label">{{'phoneNumber'
+                                                                | translate}}
+                                                            </label>
+                                                            <input type="text"
+                                                                [(ngModel)]="paymentRequest.buyer.gsmNumber"
+                                                                class="input-text form-control" name="buyer_phone"
+                                                                id="buyer_phone"
+                                                                placeholder="{{'enterAPhoneNumber' | translate}}"
+                                                                value="" autocomplete="off" maxlength="15"
+                                                                (input)="onPhoneNumberInput($event)">
+                                                        </p>
+
+                                                        <!-- E-mail Address -->
+                                                        <p class="col-lg-12 mb-4d75 form-row form-row-last validate-required validate-email"
+                                                            id="buyer_email_field" data-priority="110">
+                                                            <label for="buyer_email" class="form-label">{{'emailAddress'
+                                                                | translate}}
+                                                                <abbr class="required" title="required">*</abbr></label>
+                                                            <input type="email" [(ngModel)]="paymentRequest.buyer.email"
+                                                                class="input-text form-control" name="buyer_email"
+                                                                id="buyer_email"
+                                                                placeholder="{{'enterAEmail' | translate}}" value=""
+                                                                autocomplete="off" required>
+                                                        </p>
+
+                                                    </div>
+                                                </form>
+
+                                                <!-- Shipping Address -->
+                                                <hr>
+                                                <form #shippingAddressForm="ngForm" autocomplete="off">
+                                                    <h3 class="mb-4 font-size-3">{{'shippingAddress' | translate}}</h3>
+                                                    <div
+                                                        class="form-group woocommerce-shipping-fields__field-wrapper row">
+
+                                                        <!-- Country -->
+                                                        <p class="col-lg-4 mb-4d75 form-row form-row-wide address-field update_totals_on_change validate-required woocommerce-validated"
+                                                            id="shipping_country_field" data-priority="40">
+                                                            <label for="shipping_country" class="form-label">{{'country'
+                                                                | translate}}
+                                                                <abbr class="required" title="required">*</abbr></label>
+                                                            <select name="shipping_country"
+                                                                [(ngModel)]="paymentRequest.shippingAddress.country"
+                                                                id="shipping_country"
+                                                                class="form-control country_to_state country_select  select2-hidden-accessible"
+                                                                autocomplete="country" tabindex="-1" aria-hidden="true"
+                                                                required>
+                                                                <option value="" disabled selected>{{ 'chooseACountry' |
+                                                                    translate }}</option>
+                                                                <option *ngFor="let country of countries">{{country}}
+                                                                </option>
+
+                                                            </select>
+                                                        </p>
+
+                                                        <!-- City -->
+                                                        <p class="col-lg-4 mb-4d75 form-row form-row-wide address-field validate-required"
+                                                            id="shipping_city_field" data-priority="70"
+                                                            data-o_class="form-row form-row-wide address-field validate-required">
+                                                            <label for="shipping_city" class="form-label">{{'town/City'
+                                                                | translate}}
+                                                                <abbr class="required" title="required">*</abbr></label>
+                                                            <select name="shipping_city" placeholder="Istanbul"
+                                                                [(ngModel)]="paymentRequest.shippingAddress.city"
+                                                                id="shipping_city"
+                                                                class="form-control country_to_state country_select  select2-hidden-accessible"
+                                                                autocomplete="city" tabindex="-1" aria-hidden="true"
+                                                                required>
+                                                                <option value="" disabled selected>{{ 'chooseACity' |
+                                                                    translate }}</option>
+                                                                <option *ngFor="let city of cities">{{city}}</option>
+
+                                                            </select>
+                                                        </p>
+
+                                                        <!-- Postacode -->
+                                                        <p class="col-4 mb-4d75 form-row form-row-wide address-field validate-postcode validate-required"
+                                                            id="shipping_postcode_field" data-priority="90"
+                                                            data-o_class="form-row form-row-wide address-field validate-required validate-postcode">
+                                                            <label for="shipping_postcode"
+                                                                class="form-label">{{'postcode' | translate}}
+                                                                </label>
+                                                            <input type="text"
+                                                                [(ngModel)]="paymentRequest.shippingAddress.zipCode"
+                                                                class="input-text form-control" name="shipping_postcode"
+                                                                id="shipping_postcode"
+                                                                placeholder="{{'enterAPostalCode' | translate}}"
+                                                                value="" autocomplete="off">
+                                                        </p>
+
+                                                        <!-- Contact Name -->
+                                                        <p class="col-6 mb-4d75 form-row form-row-wide address-field validate-postcode validate-required"
+                                                            id="shipping_address_contactName_field" data-priority="60"
+                                                            data-o_class="form-row form-row-wide address-field validate-required">
+                                                            <label for="shipping_contactName"
+                                                                class="form-label">{{'pickupPerson' | translate}}
+                                                                <abbr class="required" title="required">*</abbr></label>
+                                                            <input type="text"
+                                                                [(ngModel)]="paymentRequest.shippingAddress.contactName"
+                                                                class="input-text form-control"
+                                                                name="shipping_address_contactName"
+                                                                id="shipping_address_contactName"
+                                                                placeholder="{{'enterPick-UpPersonInformation' | translate}}"
+                                                                value="" autocomplete="off" required>
+                                                        </p>
+
+                                                        <!-- Description -->
+                                                        <p class="col-6 mb-4d75 form-row form-row-wide address-field validate-postcode validate-required"
+                                                            id="shipping_address_description_field" data-priority="60"
+                                                            data-o_class="form-row form-row-wide address-field validate-required validate-description">
+                                                            <label for="shipping_description"
+                                                                class="form-label">{{'addressDetails' | translate}}
+                                                                <abbr class="required" title="required">*</abbr></label>
+                                                            <input type="text"
+                                                                [(ngModel)]="paymentRequest.shippingAddress.description"
+                                                                class="input-text form-control"
+                                                                name="shipping_address_description"
+                                                                id="shipping_address_description"
+                                                                placeholder="{{'neighborhoodApartmentSuiteUnitEtc' | translate}}"
+                                                                value="" autocomplete="off" required>
+                                                        </p>
+
+                                                    </div>
+                                                </form>
+
+                                                <!-- Billing Address -->
+                                                @if(!isSameAddress){
+                                                <hr>
+                                                <h3 class="mb-4 font-size-3">{{'BillingAddress' | translate}}</h3>
+
+                                                <form #billingAddressForm="ngForm" autocomplete="off">
+                                                    <div
+                                                        class="form-group woocommerce-shipping-fields__field-wrapper row">
+
+                                                        <!-- Country -->
+                                                        <p class="col-lg-4 mb-4d75 form-row form-row-wide address-field update_totals_on_change validate-required woocommerce-validated"
+                                                            id="billing_country_field" data-priority="40">
+                                                            <label for="billing_country" class="form-label">{{'country'
+                                                                | translate}}
+                                                                <abbr class="required" title="required">*</abbr></label>
+                                                            <select name="billing_country" placeholder="Turkiye"
+                                                                [(ngModel)]="paymentRequest.billingAddress.country"
+                                                                id="billing_country"
+                                                                class="form-control country_to_state country_select  select2-hidden-accessible"
+                                                                autocomplete="country" tabindex="-1" aria-hidden="true"
+                                                                required>
+                                                                <option value="" disabled selected>{{ 'chooseACountry' |
+                                                                    translate }}</option>
+                                                                <option *ngFor="let country of countries">{{country}}
+                                                                </option>
+
+                                                            </select>
+                                                        </p>
+
+                                                        <!-- City -->
+                                                        <p class="col-lg-4 mb-4d75 form-row form-row-wide address-field validate-required"
+                                                            id="billing_city_field" data-priority="70"
+                                                            data-o_class="form-row form-row-wide address-field validate-required">
+                                                            <label for="billing_city" class="form-label">{{'town/City' |
+                                                                translate}}
+                                                                <abbr class="required" title="required">*</abbr></label>
+                                                            <select name="billing_city" placeholder="Istanbul"
+                                                                [(ngModel)]="paymentRequest.billingAddress.city"
+                                                                id="billing_city"
+                                                                class="form-control country_to_state country_select  select2-hidden-accessible"
+                                                                autocomplete="city" tabindex="-1" aria-hidden="true"
+                                                                required>
+                                                                <option value="" disabled selected>{{ 'chooseACity' |
+                                                                    translate }}</option>
+                                                                <option *ngFor="let city of cities">{{city}}</option>
+
+                                                            </select>
+                                                        </p>
+
+                                                        <!-- Postacode -->
+                                                        <p class="col-4 mb-4d75 form-row form-row-wide address-field validate-postcode validate-required"
+                                                            id="billing_postcode_field" data-priority="90"
+                                                            data-o_class="form-row form-row-wide address-field validate-required validate-postcode">
+                                                            <label for="billing_postcode"
+                                                                class="form-label">{{'postcode' | translate}}
+                                                                </label>
+                                                            <input type="text"
+                                                                [(ngModel)]="paymentRequest.billingAddress.zipCode"
+                                                                class="input-text form-control" name="billing_postcode"
+                                                                id="billing_postcode"
+                                                                placeholder="{{'enterAPostalCode' | translate}}"
+                                                                value="" autocomplete="off">
+                                                        </p>
+
+                                                        <!-- Contact Name -->
+                                                        <p class="col-6 mb-4d75 form-row form-row-wide address-field validate-postcode validate-required"
+                                                            id="billing_address_contactName_field" data-priority="60"
+                                                            data-o_class="form-row form-row-wide address-field validate-required">
+                                                            <label for="billing_contactName"
+                                                                class="form-label">{{'pickupPerson' | translate}}
+                                                                <abbr class="required" title="required">*</abbr></label>
+                                                            <input type="text"
+                                                                [(ngModel)]="paymentRequest.billingAddress.contactName"
+                                                                class="input-text form-control"
+                                                                name="billing_address_contactName"
+                                                                id="billing_address_contactName"
+                                                                placeholder="{{'enterPick-UpPersonInformation' | translate}}"
+                                                                value="" autocomplete="off" required>
+                                                        </p>
+
+                                                        <!-- Description -->
+                                                        <p class="col-6 mb-4d75 form-row form-row-wide address-field validate-postcode validate-required"
+                                                            id="billing_address_description_field" data-priority="60"
+                                                            data-o_class="form-row form-row-wide address-field validate-required validate-description">
+                                                            <label for="billing_description"
+                                                                class="form-label">{{'addressDetails' | translate}}
+                                                                <abbr class="required" title="required">*</abbr></label>
+                                                            <input type="text"
+                                                                [(ngModel)]="paymentRequest.billingAddress.description"
+                                                                class="input-text form-control"
+                                                                name="billing_address_description"
+                                                                id="billing_address_description"
+                                                                placeholder="{{'neighborhoodApartmentSuiteUnitEtc' | translate}}"
+                                                                value="" autocomplete="off" required>
+                                                        </p>
+
+                                                    </div>
+                                                </form>
+                                                }
+
+                                                <!-- Shipping and Billing Address are the Same Checkbox Button -->
+                                                <div class="custom-control custom-checkbox mb-5">
+                                                    <input [(ngModel)]="isSameAddress" type="checkbox"
+                                                        class="custom-control-input" id="isSameAddress"
+                                                        name="isSameAddress" (change)="changeIsSameAddress()">
+                                                    <label class="custom-control-label" for="isSameAddress">
+                                                        {{'isSameAddress' | translate}}
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <h3 id="order_review_heading" class="d-none">{{'yourOrder' | translate}}</h3>
+                                    <div id="order_review"
+                                        class="col-md-6 col-lg-5 col-xl-4 woocommerce-checkout-review-order">
+                                        <div id="checkoutAccordion" class="border border-gray-900 bg-white mb-5">
+                                            <div class="p-4d875 border">
+                                                <div id="checkoutHeadingOnee" class="checkout-head">
+                                                    <a href="#"
+                                                        class="text-dark d-flex align-items-center justify-content-between"
+                                                        data-toggle="collapse" data-target="#checkoutCollapseOnee"
+                                                        aria-expanded="true" aria-controls="checkoutCollapseOnee">
+
+                                                        <h3 class="checkout-title mb-0 font-weight-medium font-size-3">
+                                                            {{'yourOrder' | translate}}</h3>
+
+                                                        <svg class="mins" xmlns="http://www.w3.org/2000/svg"
+                                                            xmlns:xlink="http://www.w3.org/1999/xlink" width="15px"
+                                                            height="2px">
+                                                            <path fill-rule="evenodd" fill="rgb(22, 22, 25)"
+                                                                d="M0.000,-0.000 L15.000,-0.000 L15.000,2.000 L0.000,2.000 L0.000,-0.000 Z" />
+                                                        </svg>
+
+                                                        <svg class="plus" xmlns="http://www.w3.org/2000/svg"
+                                                            xmlns:xlink="http://www.w3.org/1999/xlink" width="15px"
+                                                            height="15px">
+                                                            <path fill-rule="evenodd" fill="rgb(22, 22, 25)"
+                                                                d="M15.000,8.000 L9.000,8.000 L9.000,15.000 L7.000,15.000 L7.000,8.000 L0.000,8.000 L0.000,6.000 L7.000,6.000 L7.000,-0.000 L9.000,-0.000 L9.000,6.000 L15.000,6.000 L15.000,8.000 Z" />
+                                                        </svg>
+                                                    </a>
+                                                </div>
+
+                                                <div id="checkoutCollapseOnee"
+                                                    class="mt-4 checkout-content collapse show"
+                                                    aria-labelledby="checkoutHeadingOnee"
+                                                    data-parent="#checkoutAccordion">
+                                                    <table class="shop_table woocommerce-checkout-review-order-table">
+                                                        <thead class="d-none">
+                                                            <tr>
+                                                                <th class="product-name">Product</th>
+                                                                <th class="product-total">Total</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr *ngFor="let s of shopping.shoppingCarts"
+                                                                class="cart_item">
+                                                                <td class="product-name">
+                                                                    {{s.title}}&nbsp; <strong class="product-quantity">×
+                                                                        {{s.quantity}}</strong>
+                                                                </td>
+                                                                <td class="product-total">
+                                                                    <span *ngIf="s.price.currency === '₺'"
+                                                                        class="woocommerce-Price-amount amount">
+                                                                        {{s.price.value * s.quantity | trCurrency}}
+                                                                        {{s.price.currency}}
+                                                                    </span>
+
+                                                                    <span *ngIf="s.price.currency === '$'"
+                                                                        class="woocommerce-Price-amount amount">
+                                                                        {{s.price.currency}}
+                                                                        {{s.price.value * s.quantity | currency:
+                                                                        '':'':'1.2-2'}}
+                                                                    </span>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                        <tfoot class="d-none">
+                                                            <tr class="cart-subtotal">
+                                                                <th>{{'subtotal' | translate}}</th>
+                                                                <td><span class="woocommerce-Price-amount amount"><span
+                                                                            class="woocommerce-Price-currencySymbol">£</span>97.99</span>
+                                                                </td>
+                                                            </tr>
+
+                                                            <tr class="order-total">
+                                                                <th>Total</th>
+                                                                <td><strong><span
+                                                                            class="woocommerce-Price-amount amount"><span
+                                                                                class="woocommerce-Price-currencySymbol">£</span>97.99</span></strong>
+                                                                </td>
+                                                            </tr>
+                                                        </tfoot>
+                                                    </table>
+                                                </div>
+                                            </div>
+
+                                            <div class="p-4d875 border">
+                                                <div id="checkoutHeadingOne" class="checkout-head">
+                                                    <a href="#"
+                                                        class="text-dark d-flex align-items-center justify-content-between"
+                                                        data-toggle="collapse" data-target="#checkoutCollapseOne"
+                                                        aria-expanded="true" aria-controls="checkoutCollapseOne">
+
+                                                        <h3 class="checkout-title mb-0 font-weight-medium font-size-3">
+                                                            {{'cartTotals' | translate}}</h3>
+
+                                                        <svg class="mins" xmlns="http://www.w3.org/2000/svg"
+                                                            xmlns:xlink="http://www.w3.org/1999/xlink" width="15px"
+                                                            height="2px">
+                                                            <path fill-rule="evenodd" fill="rgb(22, 22, 25)"
+                                                                d="M0.000,-0.000 L15.000,-0.000 L15.000,2.000 L0.000,2.000 L0.000,-0.000 Z" />
+                                                        </svg>
+
+                                                        <svg class="plus" xmlns="http://www.w3.org/2000/svg"
+                                                            xmlns:xlink="http://www.w3.org/1999/xlink" width="15px"
+                                                            height="15px">
+                                                            <path fill-rule="evenodd" fill="rgb(22, 22, 25)"
+                                                                d="M15.000,8.000 L9.000,8.000 L9.000,15.000 L7.000,15.000 L7.000,8.000 L0.000,8.000 L0.000,6.000 L7.000,6.000 L7.000,-0.000 L9.000,-0.000 L9.000,6.000 L15.000,6.000 L15.000,8.000 Z" />
+                                                        </svg>
+                                                    </a>
+                                                </div>
+
+                                                <div id="checkoutCollapseOne"
+                                                    class="mt-4 checkout-content collapse show"
+                                                    aria-labelledby="checkoutHeadingOne"
+                                                    data-parent="#checkoutAccordion">
+                                                    <table class="shop_table shop_table_responsive">
+                                                        <tbody>
+                                                            <tr class="checkout-subtotal">
+                                                                <th>{{'subtotal' | translate}}</th>
+                                                                @if(shopping.selectedCurrency === '₺'){
+                                                                <td data-title="Subtotal">
+                                                                    <span class="woocommerce-Price-amount amount">
+                                                                        {{ shopping.getTotal() | trCurrency
+                                                                        }}
+                                                                    </span>
+                                                                    <span class="woocommerce-Price-currencySymbol">
+                                                                        {{'₺'}}
+                                                                    </span>
+                                                                </td>
+                                                                }@else {
+                                                                <td class="woocommerce-Price-currencySymbol">
+                                                                    {{'$'}}
+                                                                    <span class="woocommerce-Price-amount amount">
+                                                                        {{ shopping.getTotal() | currency:
+                                                                        '':'':'1.2-2' }}
+                                                                    </span>
+                                                                </td>
+                                                                }
+
+                                                            </tr>
+
+                                                            <tr class="order-shipping">
+                                                                <th>{{'shipping' | translate}}</th>
+                                                                <td *ngIf="(shopping.getTotal() > 249 && shopping.selectedCurrency === '₺') || (shopping.getTotal() > 19 && shopping.selectedCurrency === '$')"
+                                                                    data-title="Shipping">{{'freeShipping' | translate}}
+                                                                </td>
+
+                                                                <td *ngIf="shopping.selectedCurrency === '₺' && shopping.getTotal() < 249"
+                                                                    data-title="Shipping"
+                                                                    class="woocommerce-Price-amount amount">
+                                                                    {{shopping.flatRateTl}}
+                                                                    <span
+                                                                        class="woocommerce-Price-currencySymbol">₺</span>
+                                                                </td>
+
+                                                                <td *ngIf="shopping.selectedCurrency === '$' && shopping.getTotal() < 19"
+                                                                    class="woocommerce-Price-amount amount">
+                                                                    <span
+                                                                        class="woocommerce-Price-currencySymbol">$</span>
+                                                                    {{shopping.flatRateUsd}}
+                                                                </td>
+                                                            </tr>
+
+                                                            <hr>
+                                                            <tr class="order-total">
+                                                                <th> {{'total' | translate}}</th>
+                                                                <td data-title="Total">
+                                                                    <span *ngIf="shopping.selectedCurrency === '₺'"
+                                                                        class="woocommerce-Price-amount amount">
+                                                                        {{ shopping.shippingAndCartTotal() |
+                                                                        trCurrency
+                                                                        }}
+                                                                        <span class="woocommerce-Price-currencySymbol">
+                                                                            {{'₺'}}
+                                                                        </span>
+                                                                    </span>
+                                                                    <span *ngIf="shopping.selectedCurrency === '$'"
+                                                                        class="woocommerce-Price-currencySymbol">
+                                                                        {{'$'}}
+                                                                        <span class="woocommerce-Price-amount amount">
+                                                                            {{ shopping.shippingAndCartTotal() |
+                                                                            currency: '':'':'1.2-2' }}
+                                                                        </span>
+                                                                    </span>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+
+                                            <div class="p-4d875 border">
+                                                <div id="checkoutHeadingThreee" class="checkout-head">
+                                                    <a href="#"
+                                                        class="text-dark d-flex align-items-center justify-content-between"
+                                                        data-toggle="collapse" data-target="#checkoutCollapseThreee"
+                                                        aria-expanded="true" aria-controls="checkoutCollapseThreee">
+
+                                                        <h3 class="checkout-title mb-0 font-weight-medium font-size-3">
+                                                            {{'payment' | translate}}</h3>
+
+                                                        <svg class="mins" xmlns="http://www.w3.org/2000/svg"
+                                                            xmlns:xlink="http://www.w3.org/1999/xlink" width="15px"
+                                                            height="2px">
+                                                            <path fill-rule="evenodd" fill="rgb(22, 22, 25)"
+                                                                d="M0.000,-0.000 L15.000,-0.000 L15.000,2.000 L0.000,2.000 L0.000,-0.000 Z" />
+                                                        </svg>
+
+                                                        <svg class="plus" xmlns="http://www.w3.org/2000/svg"
+                                                            xmlns:xlink="http://www.w3.org/1999/xlink" width="15px"
+                                                            height="15px">
+                                                            <path fill-rule="evenodd" fill="rgb(22, 22, 25)"
+                                                                d="M15.000,8.000 L9.000,8.000 L9.000,15.000 L7.000,15.000 L7.000,8.000 L0.000,8.000 L0.000,6.000 L7.000,6.000 L7.000,-0.000 L9.000,-0.000 L9.000,6.000 L15.000,6.000 L15.000,8.000 Z" />
+                                                        </svg>
+                                                    </a>
+                                                </div>
+
+                                                <div id="checkoutCollapseThreee"
+                                                    class="mt-4 checkout-content collapse show"
+                                                    aria-labelledby="checkoutHeadingThreee"
+                                                    data-parent="#checkoutAccordion">
+                                                    <div id="payment" class="woocommerce-checkout-payment">
+                                                        <ul class="wc_payment_methods payment_methods methods">
+                                                            <li class="wc_payment_method payment_method_cod">
+                                                                <input id="payment_method_cod" type="radio"
+                                                                    class="input-radio" name="payment_method"
+                                                                    value="cod" checked="checked"
+                                                                    data-order_button_text="">
+
+                                                                <label for="payment_method_cod">{{'creditCart' |
+                                                                    translate}}
+                                                                </label>
+                                                                <div class="payment_box payment_method_cod"
+                                                                    style="display: block;">
+                                                                    <p>{{'forSecurePaymentOnlyDebitOrCreditCardPaymentİsAccepted'
+                                                                        | translate}}.</p>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="p-4d875 border">
+                                                <div id="checkoutHeadingThree" class="checkout-head">
+                                                    <a href="#"
+                                                        class="text-dark d-flex align-items-center justify-content-between"
+                                                        data-toggle="collapse" data-target="#checkoutCollapseThree"
+                                                        aria-expanded="true" aria-controls="checkoutCollapseThree">
+
+                                                        <h3 class="checkout-title mb-0 font-weight-medium font-size-3">
+                                                            {{'cardInformation' |
+                                                            translate}}</h3>
+
+                                                        <svg class="mins" xmlns="http://www.w3.org/2000/svg"
+                                                            xmlns:xlink="http://www.w3.org/1999/xlink" width="15px"
+                                                            height="2px">
+                                                            <path fill-rule="evenodd" fill="rgb(22, 22, 25)"
+                                                                d="M0.000,-0.000 L15.000,-0.000 L15.000,2.000 L0.000,2.000 L0.000,-0.000 Z" />
+                                                        </svg>
+
+                                                        <svg class="plus" xmlns="http://www.w3.org/2000/svg"
+                                                            xmlns:xlink="http://www.w3.org/1999/xlink" width="15px"
+                                                            height="15px">
+                                                            <path fill-rule="evenodd" fill="rgb(22, 22, 25)"
+                                                                d="M15.000,8.000 L9.000,8.000 L9.000,15.000 L7.000,15.000 L7.000,8.000 L0.000,8.000 L0.000,6.000 L7.000,6.000 L7.000,-0.000 L9.000,-0.000 L9.000,6.000 L15.000,6.000 L15.000,8.000 Z" />
+                                                        </svg>
+                                                    </a>
+                                                </div>
+
+                                                <!-- Credit Card Information -->
+                                                <form #creditCardForm="ngForm" autocomplete="off">
+                                                    <div
+                                                        class="form-group woocommerce-billing-fields__field-wrapper row mt-4">
+                                                        <!-- Card Holder Name -->
+                                                        <div class="col-lg-12 mb-4d75 form-row form-row-first validate-required woocommerce-invalid woocommerce-invalid-required-field"
+                                                            id="card_holder_name_field" data-priority="10">
+                                                            <div class="d-flex justify-content-between"
+                                                                style="width: 480px;">
+                                                                <label for="card_holder_name"
+                                                                    class="form-label">{{'cardHolderName' | translate}}
+                                                                    <abbr class="required"
+                                                                        title="required">*</abbr></label>
+                                                                <label>
+                                                                    <span
+                                                                        title="{{'youCanUseYourOwnNameAndSurname' | translate}}">
+                                                                        <i
+                                                                            class="font-size-3 glph-icon flaticon-information mr-2"></i>
+                                                                    </span>
+                                                                </label>
+                                                            </div>
+                                                            <input type="text"
+                                                                [(ngModel)]="paymentRequest.paymentCard.cardHolderName"
+                                                                class="input-text form-control" name="card_holder_name"
+                                                                id="card_holder_name"
+                                                                placeholder="{{'cardHolderName' | translate}}" value=""
+                                                                autocomplete="off" autofocus="autofocus" required>
+                                                        </div>
+
+
+
+                                                        <!-- Card Number -->
+                                                        <div class="col-lg-12 mb-4d75 form-row form-row-first validate-required woocommerce-invalid woocommerce-invalid-required-field"
+                                                            id="card_number_field" data-priority="10">
+                                                            <div class="d-flex justify-content-between"
+                                                                style="width: 480px;">
+                                                                <label for="card_number"
+                                                                    class="form-label">{{'cardNumber' |
+                                                                    translate}}
+                                                                    <abbr class="required"
+                                                                        title="required">*</abbr></label>
+                                                                <label>
+                                                                    <span
+                                                                        title="{{'sampleCreditCardNumber' | translate}}">
+                                                                        <i
+                                                                            class="font-size-3 glph-icon flaticon-information mr-2"></i>
+                                                                    </span>
+                                                                </label>
+                                                            </div>
+                                                            <input type="text" pattern="[0-9]*"
+                                                                [(ngModel)]="paymentRequest.paymentCard.cardNumber"
+                                                                class="input-text form-control" name="card_number"
+                                                                id="card_number"
+                                                                placeholder="{{'cardNumber' | translate}}" value=""
+                                                                autocomplete="off" autofocus="autofocus" maxlength="16"
+                                                                (input)="onCardNumberInput($event)" required>
+                                                        </div>
+
+                                                        <!-- Expire Year -->
+                                                        <div class="col-lg-4 mb-4d75 form-row form-row-wide"
+                                                            id="expire_year_field" data-priority="30">
+                                                            <div class="d-flex justify-content-between"
+                                                                style="width: 250px;">
+                                                                <label for="expire_year"
+                                                                    class="form-label">{{'expireYear' |
+                                                                    translate}}
+                                                                    <abbr class="required"
+                                                                        title="required">*</abbr></label>
+                                                                <label>
+                                                                    <span
+                                                                        title="{{'sampleExpirationYear' | translate}}">
+                                                                        <i
+                                                                            class="font-size-3 glph-icon flaticon-information mr-2"></i>
+                                                                    </span>
+                                                                </label>
+                                                            </div>
+                                                            <select name="expire_year"
+                                                                [(ngModel)]="paymentRequest.paymentCard.expireYear"
+                                                                id="expire_year"
+                                                                class="form-control country_to_state country_select  select2-hidden-accessible"
+                                                                autocomplete="off" aria-hidden="true" required>
+                                                                <option value="" disabled selected>{{'expireYear' |                                                        translate}}</option>
+                                                                <option *ngFor="let year of years">{{year}}
+                                                                </option>
+                                                            </select>
+                                                        </div>
+
+                                                        <!-- Expire Month -->
+                                                        <div class="col-lg-4 mb-4d75 form-row form-row-wide"
+                                                            id="expire_month_field" data-priority="30">
+                                                            <div class="d-flex justify-content-between"
+                                                                style="width: 250px;">
+                                                                <label for="expire_month"
+                                                                    class="form-label">{{'expireMonth'
+                                                                    | translate}}
+                                                                    <abbr class="required"
+                                                                        title="required">*</abbr></label>
+                                                                <label>
+                                                                    <span
+                                                                        title="{{'sampleExpirationMonth' | translate}}">
+                                                                        <i
+                                                                            class="font-size-3 glph-icon flaticon-information mr-2"></i>
+                                                                    </span>
+                                                                </label>
+                                                            </div>
+                                                            <select name="expire_month"
+                                                                [(ngModel)]="paymentRequest.paymentCard.expireMonth"
+                                                                id="expire_month"
+                                                                class="form-control country_to_state country_select  select2-hidden-accessible"
+                                                                autocomplete="off" aria-hidden="true" required>
+                                                                <option value="" disabled selected>{{'expireMonth'
+                                                                    | translate}}</option>
+                                                                <option *ngFor="let month of months">{{month}}
+                                                                </option>
+                                                            </select>
+                                                        </div>
+
+                                                        <!-- Cvc -->
+                                                        <div class="col-lg-4 mb-4d75 form-row form-row-wide"
+                                                            id="cvc_field" data-priority="30">
+                                                            <div class="d-flex justify-content-between"
+                                                                style="width: 250px;">
+                                                                <label for="cvc" class="form-label">{{'cvc' |
+                                                                    translate}}
+                                                                    <abbr class="required"
+                                                                        title="required">*</abbr></label>
+                                                                <label>
+                                                                    <span
+                                                                        title="{{'sampleCvcNumber' | translate}}">
+                                                                        <i
+                                                                            class="font-size-3 glph-icon flaticon-information mr-2"></i>
+                                                                    </span>
+                                                                </label>
+                                                            </div>
+                                                            <input type="text"
+                                                                [(ngModel)]="paymentRequest.paymentCard.cvc"
+                                                                class="input-text form-control" name="cvc" id="cvc"
+                                                                placeholder="***" value="" autocomplete="off"
+                                                                maxlength="3" (input)="onCardCvcNumberInput($event)">
+                                                        </div>
+
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="form-row place-order">
+                                            <input type="submit" (click)="payment()"
+                                                class="button alt btn btn-dark btn-block rounded-0 py-4"
+                                                name="woocommerce_checkout_place_order" id="place_order"
+                                                value="{{'placeOrder' | translate}}" data-value="Place order">
+
+                                            <input type="hidden" id="_wpnonce" name="_wpnonce" value="926470d564"><input
+                                                type="hidden" name="_wp_http_referer"
+                                                value="/storefront/?wc-ajax=update_order_review">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- .entry-content -->
+                    </article>
+                    <!-- #post-## -->
+                </main>
+                <!-- #main -->
+            </div>
+            <!-- #primary -->
+        </div>
+        <!-- .col-full -->
+    </div>
+</section>

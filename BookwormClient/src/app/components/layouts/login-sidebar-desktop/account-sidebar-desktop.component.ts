@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoginRegisterService } from 'src/app/services/login.service';
+import { LoginService } from 'src/app/services/login.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
 import { Message } from 'primeng/api';
@@ -29,7 +29,7 @@ export default class AccountSidebarDesktopComponent {
 
   constructor(
     private router: Router,
-    public login: LoginRegisterService,
+    public login: LoginService,
     public register: RegisterService,
     public selectLang: SelectedLanguageService
   ) { 
@@ -41,11 +41,6 @@ export default class AccountSidebarDesktopComponent {
   }
 
   signIn() {
-    // if(this.updateSignInButtonStatus() === true){
-    //   this.messageSignInEn = [{severity: 'error', detail: 'Please Fill All Spaces!'}];
-    //   this.messageSignInTr = [{severity: 'error', detail: 'Lütfen Tüm Alanları Doldurun!'}];
-    //   this.login.signIn();
-    // }
     this.login.signIn();
     if (this.closeBtn != undefined) {
       this.closeBtn.nativeElement.click();

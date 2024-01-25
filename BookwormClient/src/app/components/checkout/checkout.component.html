@@ -206,6 +206,16 @@
                                                     </div>
                                                 </form>
 
+                                                <!-- Shipping and Billing Address are the Same Checkbox Button -->
+                                                <div class="custom-control custom-checkbox mb-5">
+                                                    <input [(ngModel)]="isSameAddress" type="checkbox" 
+                                                        class="custom-control-input" id="isSameAddress"
+                                                        name="isSameAddress" (change)="changeIsSameAddress()">
+                                                    <label class="custom-control-label" for="isSameAddress">
+                                                       <span style="font-weight: 600;">{{'isSameAddress' | translate}}</span> 
+                                                    </label>
+                                                </div>
+
                                                 <!-- Billing Address -->
                                                 @if(!isSameAddress){
                                                 <hr>
@@ -304,17 +314,7 @@
 
                                                     </div>
                                                 </form>
-                                                }
-
-                                                <!-- Shipping and Billing Address are the Same Checkbox Button -->
-                                                <div class="custom-control custom-checkbox mb-5">
-                                                    <input [(ngModel)]="isSameAddress" type="checkbox"
-                                                        class="custom-control-input" id="isSameAddress"
-                                                        name="isSameAddress" (change)="changeIsSameAddress()">
-                                                    <label class="custom-control-label" for="isSameAddress">
-                                                        {{'isSameAddress' | translate}}
-                                                    </label>
-                                                </div>
+                                                }   
                                             </div>
                                         </div>
                                     </div>

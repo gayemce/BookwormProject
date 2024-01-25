@@ -10,6 +10,7 @@ import { CommonModule } from '@angular/common';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { TrCurrencyPipe } from 'tr-currency';
 import { AuthorModel } from 'src/app/models/author.model';
+import { SelectedLanguageService } from 'src/app/services/selected-language.service';
 
 @Component({
     selector: 'app-home',
@@ -32,7 +33,8 @@ export default class HomeComponent {
         private error: ErrorService,
         public translate: TranslateService,
         public shopping: ShoppingCartService,
-        private spinner: NgxSpinnerService
+        private spinner: NgxSpinnerService,
+        public selectedLang: SelectedLanguageService
         ) {
         this.getEnglishBooks();
         this.getNewBooks();

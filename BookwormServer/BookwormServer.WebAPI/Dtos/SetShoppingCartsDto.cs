@@ -1,5 +1,9 @@
-﻿namespace BookwormServer.WebAPI.Dtos;
+﻿using BookwormServer.WebAPI.ValueObjects;
+
+namespace BookwormServer.WebAPI.Dtos;
 
 public sealed record SetShoppingCartsDto(
     int BookId,
-    int Quantity);
+    int AppUserId,
+    int Quantity,
+    Money Price);

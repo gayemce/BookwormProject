@@ -11,6 +11,5 @@ public sealed class Cart
     public int BookId { get; set; }
     public Book? Book { get; set; }
     public int Quantity { get; set; } = 0;
-    public Money TotalPrice { get; set; } = new(0, "₺");
-    public Money ShippingPrice { get; set; } = new(0, "₺");
+    public Money Price { get; set; } = new(0, "₺");
 }

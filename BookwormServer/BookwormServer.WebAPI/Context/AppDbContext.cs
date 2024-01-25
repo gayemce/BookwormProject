@@ -49,19 +49,13 @@ public sealed class AppDbContext : DbContext
             price.Property(p => p.Currency).HasMaxLength(5);
         });
 
-        modelBuilder.Entity<Cart>().OwnsOne(p => p.TotalPrice, price =>
+        modelBuilder.Entity<Cart>().OwnsOne(p => p.Price, price =>
         {
             price.Property(p => p.Value).HasColumnType("money");
             price.Property(p => p.Currency).HasMaxLength(5);
         });
 
-        modelBuilder.Entity<Cart>().OwnsOne(p => p.ShippingPrice, price =>
-        {
-            price.Property(p => p.Value).HasColumnType("money");
-            price.Property(p => p.Currency).HasMaxLength(5);
-        });
-
-        modelBuilder.Entity<Order>().OwnsOne(p => p.TotalPrice, price =>
+        modelBuilder.Entity<Order>().OwnsOne(p => p.Price, price =>
         {
             price.Property(p => p.Value).HasColumnType("money");
             price.Property(p => p.Currency).HasMaxLength(5);

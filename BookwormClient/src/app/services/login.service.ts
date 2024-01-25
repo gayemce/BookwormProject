@@ -9,11 +9,13 @@ import { Router } from '@angular/router';
 import { SelectedLanguageService } from './selected-language.service';
 import { TranslateService } from '@ngx-translate/core';
 import { SwalService } from './swal.service';
+import { SetShoppingCartsModel } from '../models/set-shopping-carts.model';
+import { ShoppingCartService } from './shopping-cart.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LoginRegisterService {
+export class LoginService {
   request: LoginModel = new LoginModel();
 
   errorUserNameOrEmailMessageEn: string = "";
@@ -30,7 +32,8 @@ export class LoginRegisterService {
     private router: Router,
     private error: ErrorService,
     private translate: TranslateService,
-    private swal: SwalService
+    private swal: SwalService,
+    private shopping: ShoppingCartService,
   ) { }
 
   ngOnInit(): void {
@@ -40,9 +43,35 @@ export class LoginRegisterService {
   signIn() {
     this.http.post("https://localhost:7018/api/Auth/Login", this.request).subscribe({
       next: (res: any) => {
+
         localStorage.setItem("response", JSON.stringify(res));
         this.auth.checkAuthentication();
         location.href = "/";
+
+        const request: SetShoppingCartsModel[] = [];
+
+        if (this.shopping.shoppingCarts.length > 0) {
+          for (let s of this.shopping.shoppingCarts) {
+            const cart = new SetShoppingCartsModel();
+            cart.bookId = s.id,
+              cart.appUserId = Number(this.auth.token.userId),
+              cart.quantity = 1,
+              cart.price = s.price
+
+            request.push(cart);
+          }
+
+          this.http.post("https://localhost:7018/api/Carts/SetShoppingCartsFromLocalStorage", request).subscribe({
+            next: (res: any) => {
+              localStorage.removeItem("shoppingCarts");
+              this.shopping.checkLocalStorageForshoppingCarts();
+              // location.href = "/"
+            },
+            error: (err: HttpErrorResponse) => {
+              this.error.errorHandler(err)
+            }
+          })
+        }
       },
       error: (err: HttpErrorResponse) => {
         this.error.errorHandler(err);

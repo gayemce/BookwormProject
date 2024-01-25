@@ -5,6 +5,7 @@ using Iyzipay;
 using Iyzipay.Model;
 using Iyzipay.Request;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Globalization;
 
 namespace BookwormServer.WebAPI.Controllers;
@@ -12,11 +13,56 @@ namespace BookwormServer.WebAPI.Controllers;
 [ApiController]
 public sealed class CartsController : ControllerBase
 {
-    //[HttpPost]
-    //public IActionResult SetShoppingCartsFromLocalStorage(SetShoppingCartsDto request)
-    //{
+    [HttpGet("{userId}")]
+    public IActionResult GetAll(int userId)
+    {
+        AppDbContext context = new();
+        List<Book> books = context.Carts.AsNoTracking().Include(p => p.Book).Select(s => new Book()
+        {
+            Author = s.Book!.Author,
+            AuthorId = s.Book.AuthorId,
+            CreatedAt = s.Book.CreatedAt,
+            Id = s.Book.Id,
+            IsActive = s.Book.IsActive,
+            ImgUrl = s.Book.ImgUrl,
+            IsDeleted = s.Book.IsDeleted,
+            IsFeatured  = s.Book.IsFeatured,
+            Price = s.Price, //sepet
+            Quantity = s.Quantity, //sepet
+            BookDetail = s.Book.BookDetail,
+            Title = s.Book.Title,
+            Publisher = s.Book.Publisher,
+            BookLanguage = s.Book.BookLanguage,
+            BookCategories = s.Book.BookCategories,
+        }).ToList();
 
-    //}
+        return Ok(books);
+    }
+
+    [HttpPost]
+    public IActionResult SetShoppingCartsFromLocalStorage(List<SetShoppingCartsDto> request)
+    {
+        AppDbContext context = new();
+        List<Cart> carts = new();
+
+        foreach (var item in request)
+        {
+            Cart cart = new()
+            {
+                BookId = item.BookId,
+                AppUserId = item.AppUserId,
+                Quantity = item.Quantity,
+                Price = item.Price
+            };
+
+            carts.Add(cart);
+        }
+
+        context.AddRange(carts);
+        context.SaveChanges();
+
+        return NoContent();
+    }
 
     [HttpPost]
     public IActionResult Payment(PaymentDto paymentRequest)
@@ -93,10 +139,9 @@ public sealed class CartsController : ControllerBase
                 {
                     OrderNumber = request.BasketId,
                     BookId = book.Id,
-                    TotalPrice = new ValueObjects.Money(book.Price.Value, book.Price.Currency),
+                    Price = new ValueObjects.Money(book.Price.Value, book.Price.Currency),
                     PaymentDate = DateTime.Now,
-                    PaymentMethodEn = "Credit Card",
-                    PaymentMethodTr = "Kredi Kart",
+                    PaymentMethod = "Credit Card",
                     PaymentNumber = payment.PaymentId,
                 };
                 orders.Add(order);

@@ -28,7 +28,7 @@ export default class CheckoutComponent {
     cities = Cities;
     months = Months;
     years = Years;
-    isSameAddress: boolean = true;
+    isSameAddress: boolean = false;
 
     constructor(
         public shopping: ShoppingCartService,

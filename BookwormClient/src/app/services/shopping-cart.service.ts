@@ -7,6 +7,8 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ErrorService } from './error.service';
 import { PaymentModel } from '../models/payment.model';
 import { Router } from '@angular/router';
+import { AuthService } from './auth.service';
+import { SetShoppingCartsModel } from '../models/set-shopping-carts.model';
 
 @Injectable({
   providedIn: 'root'
@@ -30,21 +32,44 @@ export class ShoppingCartService {
     private swal: SwalService,
     private http: HttpClient,
     private error: ErrorService,
-    private router: Router
+    private router: Router,
+    private auth: AuthService
   ) {
-    if (localStorage.getItem('shoppingCarts')) {
-      const carts: string | null = localStorage.getItem('shoppingCarts')
-      if (carts !== null) {
-        this.shoppingCarts = JSON.parse(carts)
-        this.count = this.shoppingCarts.length;
-      }
-    }
-
+    this.checkLocalStorageForshoppingCarts();
     this.shippingAndCartTotal();
     // this.shippingControl();
     // this.onCurrencyButtonClick('this.selectedCurrency');
     // this.calcTotal();
   }
+
+  checkLocalStorageForshoppingCarts(){
+    if (localStorage.getItem('shoppingCarts')) {
+      const carts: string | null = localStorage.getItem('shoppingCarts')
+      if (carts !== null) {
+        this.shoppingCarts = JSON.parse(carts)
+        // this.count = this.shoppingCarts.length;
+      }
+    }else{
+      this.shoppingCarts = [];
+    }
+
+    //Kullanıcı varsa
+    if (localStorage.getItem('response')) {
+      this.auth.checkAuthentication();
+      this.http.get("https://localhost:7018/api/Carts/GetAll/" + this.auth.token.userId).subscribe({
+        next: (res: any) => {
+          this.shoppingCarts = res;
+          this.calcTotal();
+        },
+        error: (err: HttpErrorResponse) => {
+          this.error.errorHandler(err);
+        }
+      });
+    }
+
+    // this.calcTotal();
+  }
+
 
   calcTotal() {
     this.total = 0;
@@ -74,7 +99,6 @@ export class ShoppingCartService {
 
     this.prices = Array.from(sumMap, ([currency, value]) => ({ currency, value }));
   }
-
 
   removeByIndex(index: number) {
     forkJoin({

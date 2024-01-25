@@ -25,7 +25,7 @@ export class AuthService {
       this.token.exp = decode?.exp;
       this.token.roles = decode?.Roles;
 
-      console.log(this.token);
+      // console.log(this.token);
 
       const now = new Date().getTime() / 1000;
       if (this.token.exp < now) {

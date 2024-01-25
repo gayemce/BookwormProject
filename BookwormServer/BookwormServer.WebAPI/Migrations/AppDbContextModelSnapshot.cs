@@ -368,11 +368,7 @@ namespace BookwormServer.WebAPI.Migrations
                     b.Property<DateTime>("PaymentDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("PaymentMethodEn")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PaymentMethodTr")
+                    b.Property<string>("PaymentMethod")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -581,28 +577,7 @@ namespace BookwormServer.WebAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsOne("BookwormServer.WebAPI.ValueObjects.Money", "ShippingPrice", b1 =>
-                        {
-                            b1.Property<int>("CartId")
-                                .HasColumnType("int");
-
-                            b1.Property<string>("Currency")
-                                .IsRequired()
-                                .HasMaxLength(5)
-                                .HasColumnType("nvarchar(5)");
-
-                            b1.Property<decimal>("Value")
-                                .HasColumnType("money");
-
-                            b1.HasKey("CartId");
-
-                            b1.ToTable("Carts");
-
-                            b1.WithOwner()
-                                .HasForeignKey("CartId");
-                        });
-
-                    b.OwnsOne("BookwormServer.WebAPI.ValueObjects.Money", "TotalPrice", b1 =>
+                    b.OwnsOne("BookwormServer.WebAPI.ValueObjects.Money", "Price", b1 =>
                         {
                             b1.Property<int>("CartId")
                                 .HasColumnType("int");
@@ -627,10 +602,7 @@ namespace BookwormServer.WebAPI.Migrations
 
                     b.Navigation("Book");
 
-                    b.Navigation("ShippingPrice")
-                        .IsRequired();
-
-                    b.Navigation("TotalPrice")
+                    b.Navigation("Price")
                         .IsRequired();
                 });
 
@@ -646,7 +618,7 @@ namespace BookwormServer.WebAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsOne("BookwormServer.WebAPI.ValueObjects.Money", "TotalPrice", b1 =>
+                    b.OwnsOne("BookwormServer.WebAPI.ValueObjects.Money", "Price", b1 =>
                         {
                             b1.Property<int>("OrderId")
                                 .HasColumnType("int");
@@ -671,7 +643,7 @@ namespace BookwormServer.WebAPI.Migrations
 
                     b.Navigation("Book");
 
-                    b.Navigation("TotalPrice")
+                    b.Navigation("Price")
                         .IsRequired();
                 });
 

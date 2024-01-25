@@ -9,6 +9,7 @@ import { PaymentModel } from '../models/payment.model';
 import { Router } from '@angular/router';
 import { AuthService } from './auth.service';
 import { SetShoppingCartsModel } from '../models/set-shopping-carts.model';
+import { AddShoppingCartModel } from '../models/add-shopping-cart.model';
 
 @Injectable({
   providedIn: 'root'
@@ -42,14 +43,14 @@ export class ShoppingCartService {
     // this.calcTotal();
   }
 
-  checkLocalStorageForshoppingCarts(){
+  checkLocalStorageForshoppingCarts() {
     if (localStorage.getItem('shoppingCarts')) {
       const carts: string | null = localStorage.getItem('shoppingCarts')
       if (carts !== null) {
         this.shoppingCarts = JSON.parse(carts)
         // this.count = this.shoppingCarts.length;
       }
-    }else{
+    } else {
       this.shoppingCarts = [];
     }
 
@@ -108,30 +109,55 @@ export class ShoppingCartService {
     }).subscribe(res => {
       this.swal.callSwal(res.delete, res.cancel, res.confirm, () => {
 
-        this.shoppingCarts.splice(index, 1)
-        localStorage.setItem("shoppingCarts", JSON.stringify(this.shoppingCarts));
-        this.count = this.shoppingCarts.length;
-        // localStorage.setItem('cartTotal', JSON.stringify(this.cartTotal));
-        this.calcTotal();
-        this.shippingControl();
-        localStorage.setItem("bookPrices", JSON.stringify(this.prices));
+        if (localStorage.getItem("response")) {
+          this.http.get("https://localhost:7018/api/Carts/RemoveById/" + this.shoppingCarts[index]?.cartId).subscribe(res => {
+            this.checkLocalStorageForshoppingCarts();
+          });
+        }
 
-        // this.onCurrencyButtonClick(this.selectedCurrency)
+        else {
+          this.shoppingCarts.splice(index, 1)
+          localStorage.setItem("shoppingCarts", JSON.stringify(this.shoppingCarts));
+          this.count = this.shoppingCarts.length;
+          // localStorage.setItem('cartTotal', JSON.stringify(this.cartTotal));
+          this.calcTotal();
+          this.shippingControl();
+          localStorage.setItem("bookPrices", JSON.stringify(this.prices));
+
+          // this.onCurrencyButtonClick(this.selectedCurrency)
+        }
       });
     })
   }
 
   addShoppingCart(book: BookModel) {
-    this.shoppingCarts.push(book);
-    localStorage.setItem('shoppingCarts', JSON.stringify(this.shoppingCarts));
-    this.count++;
+    if (localStorage.getItem("response")) {
+
+      const data : AddShoppingCartModel = new AddShoppingCartModel();
+      data.bookId = book.id;
+      data.price = book.price;
+      data.quantity = 1;
+      data.appUserId = Number(this.auth.token.userId);
+
+      this.http.post("https://localhost:7018/api/Carts/AddShoppingCart", data).subscribe(res => {
+        this.checkLocalStorageForshoppingCarts();
+        this.calcTotal();
+        localStorage.setItem("bookPrices", JSON.stringify(this.prices));
+      })
+    }
+    else {
+      this.shoppingCarts.push(book);
+      localStorage.setItem('shoppingCarts', JSON.stringify(this.shoppingCarts));
+      this.calcTotal();
+      localStorage.setItem("bookPrices", JSON.stringify(this.prices));
+    }
+
     this.translate.get("bookAddedtoCart").subscribe(
       res => {
         this.swal.callToast(res, 'success');
       }
     )
-    this.calcTotal();
-    localStorage.setItem("bookPrices", JSON.stringify(this.prices));
+
   }
 
   onCurrencyButtonClick(currency: string) {

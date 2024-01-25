@@ -13,11 +13,42 @@ namespace BookwormServer.WebAPI.Controllers;
 [ApiController]
 public sealed class CartsController : ControllerBase
 {
+    [HttpPost]
+    public IActionResult AddShoppingCart(AddShoppingCartDto request)
+    {
+        AppDbContext context = new();
+        Cart cart = new()
+        {
+            BookId = request.BookId,
+            Price = request.Price,
+            Quantity = request.Quantity,
+            AppUserId = request.AppUserId
+        };
+        context.Add(cart);
+        context.SaveChanges();
+
+        return NoContent();
+    }
+
+    [HttpGet("{id}")]
+    public IActionResult RemoveById(int id)
+    {
+        AppDbContext context = new();
+        var cart = context.Carts.Where(p => p.Id == id).FirstOrDefault();
+        if(cart is not null)
+        {
+            context.Carts.Remove(cart);
+            context.SaveChanges();
+        }
+
+        return NoContent();
+    }
+
     [HttpGet("{userId}")]
     public IActionResult GetAll(int userId)
     {
         AppDbContext context = new();
-        List<Book> books = context.Carts.AsNoTracking().Include(p => p.Book).Select(s => new Book()
+        List<CartResponseDto> carts = context.Carts.AsNoTracking().Include(p => p.Book).Select(s => new CartResponseDto()
         {
             Author = s.Book!.Author,
             AuthorId = s.Book.AuthorId,
@@ -34,9 +65,10 @@ public sealed class CartsController : ControllerBase
             Publisher = s.Book.Publisher,
             BookLanguage = s.Book.BookLanguage,
             BookCategories = s.Book.BookCategories,
+            CartId = s.Id
         }).ToList();
 
-        return Ok(books);
+        return Ok(carts);
     }
 
     [HttpPost]

@@ -41,6 +41,7 @@ export class LoginService {
   }
 
   signIn() {
+    //buradan devam edilecek
     this.http.post("https://localhost:7018/api/Auth/Login", this.request).subscribe({
       next: (res: any) => {
 
@@ -64,6 +65,7 @@ export class LoginService {
           this.http.post("https://localhost:7018/api/Carts/SetShoppingCartsFromLocalStorage", request).subscribe({
             next: (res: any) => {
               localStorage.removeItem("shoppingCarts");
+              // localStorage.removeItem("bookPrices");
               this.shopping.checkLocalStorageForshoppingCarts();
               // location.href = "/"
             },

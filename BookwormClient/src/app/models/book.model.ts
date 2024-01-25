@@ -20,4 +20,5 @@ export class BookModel {
     isActive: boolean = true; 
     isDeleted: boolean = false; 
     createdAt: string = ""; 
+    cartId: number = 0;
  }

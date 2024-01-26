@@ -60,5 +60,11 @@ public sealed class AppDbContext : DbContext
             price.Property(p => p.Value).HasColumnType("money");
             price.Property(p => p.Currency).HasMaxLength(5);
         });
+
+        modelBuilder.Entity<WishList>().OwnsOne(p => p.Price, price =>
+        {
+            price.Property(p => p.Value).HasColumnType("money");
+            price.Property(p => p.Currency).HasMaxLength(5);
+        });
     }
 }

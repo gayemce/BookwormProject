@@ -15,6 +15,7 @@ import AboutUsComponent from './components/about-us/about-us.component';
 import ContactUsComponent from './components/contact-us/contact-us.component';
 import FaqComponent from './components/faq/faq.component';
 import TermsAndConditionsComponent from './components/terms-and-conditions/terms-and-conditions.component';
+import { WishListComponent } from './components/wish-list/wish-list.component';
 
 const routes: Routes = [
   {
@@ -60,6 +61,10 @@ const routes: Routes = [
       {
         path: "checkout",
         component: CheckoutComponent
+      },
+      {
+        path: "wish-list",
+        component: WishListComponent
       },
       {
         path: "order-received",

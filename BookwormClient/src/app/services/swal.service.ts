@@ -33,6 +33,19 @@ export class SwalService {
       }
     })
   }
+
+  callSwalTwo(title: string, confirmButtonName: string, callBack: ()=> void){
+    Swal.fire({
+      title: title,
+      icon: 'warning',
+      showConfirmButton: true,
+      confirmButtonText: confirmButtonName
+    }).then(res => {
+      if(res.isConfirmed){
+        callBack();
+      }
+    })
+  }
 }
 
 export type SweetAlertIcon = 'success' | 'error' | 'warning' | 'info' | 'question'

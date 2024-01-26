@@ -48,7 +48,7 @@ public sealed class CartsController : ControllerBase
     public IActionResult GetAll(int userId)
     {
         AppDbContext context = new();
-        List<CartResponseDto> carts = context.Carts.AsNoTracking().Include(p => p.Book).Select(s => new CartResponseDto()
+        List<CartResponseDto> carts = context.Carts.Where(p => p.AppUserId == userId).AsNoTracking().Include(p => p.Book).Select(s => new CartResponseDto()
         {
             Author = s.Book!.Author,
             AuthorId = s.Book.AuthorId,

@@ -234,5 +234,11 @@
   "passwordChange": "Password Change",
   "currentPassword": "Current Password",
   "newPassword": "New Password",
-  "confirmNewPassword": "Confirm New Password"  
+  "confirmNewPassword": "Confirm New Password",
+
+  "pleaseLoginToAddTheProductToFavorites": "Please login to add the product to favorites.",
+  "confirmButton": "Confirm",
+
+  "wishList": "Wishlist",
+  "bookAddedToWishlist": "Book added to wishlist!"
 }

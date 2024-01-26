@@ -37,8 +37,17 @@
         </form>
       </div>
       <ul class="nav align-self-center d-none d-md-flex">
-        <li class="nav-item"><a href="#" class="nav-link text-dark"><i
-              class="glph-icon flaticon-heart font-size-4"></i></a></li>
+        <!-- Wish List -->
+          <li class="nav-item">
+            <a routerLink="/wish-list" class="nav-link text-dark">
+              <span *ngIf="wishList.wishList.length > 0"
+                class="ml-3 position-absolute bg-dark width-16 height-16 rounded-circle d-flex align-items-center justify-content-center text-white font-size-n9 left-1">{{wishList.wishList.length}}</span>
+              <i  class="glph-icon flaticon-heart font-size-4"></i>
+            </a>
+          </li>
+        
+      
+        <!-- User -->
         <li class="nav-item">
           <!-- Account Sidebar Toggle Button -->
           <a id="sidebarNavToggler" href="javascript:;" role="button" class="nav-link text-dark"
@@ -61,6 +70,8 @@
           </a>
           <!-- End Account Sidebar Toggle Button -->
         </li>
+
+        <!-- Cart -->
         <li class="nav-item">
           <!-- Cart Sidebar Toggle Button -->
           <a id="sidebarNavToggler1" href="javascript:;" role="button" class="nav-link pr-0 text-dark position-relative"
@@ -73,7 +84,7 @@
             }' data-unfold-animation-in="fadeInRight" data-unfold-animation-out="fadeOutRight"
             data-unfold-duration="500">
             <span *ngIf="shopping.shoppingCarts.length > 0"
-              class="ml-1 position-absolute bg-dark width-16 height-16 rounded-circle d-flex align-items-center justify-content-center text-white font-size-n9 left-0">{{shopping.shoppingCarts.length}}</span>
+              class="ml-3 position-absolute bg-dark width-16 height-16 rounded-circle d-flex align-items-center justify-content-center text-white font-size-n9 left-1">{{shopping.shoppingCarts.length}}</span>
             <i class="glph-icon flaticon-icon-126515 font-size-4"></i>
             <span class="d-none d-xl-inline h6 mb-0 ml-1">
               <!-- <span *ngIf="shopping.selectedCurrency === '₺'">{{ shopping.shippingAndCartTotal() | trCurrency }} {{'₺'}}</span>

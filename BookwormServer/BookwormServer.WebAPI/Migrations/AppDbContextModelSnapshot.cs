@@ -680,9 +680,33 @@ namespace BookwormServer.WebAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.OwnsOne("BookwormServer.WebAPI.ValueObjects.Money", "Price", b1 =>
+                        {
+                            b1.Property<int>("WishListId")
+                                .HasColumnType("int");
+
+                            b1.Property<string>("Currency")
+                                .IsRequired()
+                                .HasMaxLength(5)
+                                .HasColumnType("nvarchar(5)");
+
+                            b1.Property<decimal>("Value")
+                                .HasColumnType("money");
+
+                            b1.HasKey("WishListId");
+
+                            b1.ToTable("WishLists");
+
+                            b1.WithOwner()
+                                .HasForeignKey("WishListId");
+                        });
+
                     b.Navigation("AppUser");
 
                     b.Navigation("Book");
+
+                    b.Navigation("Price")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("BookwormServer.WebAPI.Models.Book", b =>

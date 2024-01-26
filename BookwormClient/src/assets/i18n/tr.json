@@ -235,5 +235,11 @@
   "passwordChange": "Şifre Değişikliği",
   "currentPassword": "Mevcut Şifre",
   "newPassword": "Yeni Şifre",
-  "confirmNewPassword": "Yeni Şifreyi Onayla"
+  "confirmNewPassword": "Yeni Şifreyi Onayla",
+
+  "pleaseLoginToAddTheProductToFavorites": "Ürünü favorilere eklemek için lütfen giriş yapın.",
+  "confirmButton": "Tamam",
+
+  "wishList": "Favorilerim",
+  "bookAddedToWishlist": "Kitap favorilere eklendi!"
 }

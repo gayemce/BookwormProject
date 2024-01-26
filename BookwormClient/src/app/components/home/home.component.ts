@@ -11,6 +11,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { TrCurrencyPipe } from 'tr-currency';
 import { AuthorModel } from 'src/app/models/author.model';
 import { SelectedLanguageService } from 'src/app/services/selected-language.service';
+import { WishListComponent } from '../wish-list/wish-list.component';
+import { WishListService } from 'src/app/services/wish-list.service';
 
 @Component({
     selector: 'app-home',
@@ -33,6 +35,7 @@ export default class HomeComponent {
         private error: ErrorService,
         public translate: TranslateService,
         public shopping: ShoppingCartService,
+        public wishList: WishListService,
         private spinner: NgxSpinnerService,
         public selectedLang: SelectedLanguageService
         ) {

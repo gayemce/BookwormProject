@@ -8,6 +8,7 @@ import { RouterLink } from '@angular/router';
 import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
 import { CommonModule } from '@angular/common';
 import { TrCurrencyPipe } from 'tr-currency';
+import { WishListService } from 'src/app/services/wish-list.service';
 
 @Component({
     selector: 'app-middlebar',
@@ -19,6 +20,7 @@ import { TrCurrencyPipe } from 'tr-currency';
 export class MiddlebarComponent {
 
   responseInLocalStorage: any;
+  
 
   ngOnInit(){
     if(localStorage.getItem('response')){
@@ -30,7 +32,8 @@ export class MiddlebarComponent {
   constructor(
     public shopListBooks: ShopListBooksService,
     public auth: AuthService,
-    public shopping: ShoppingCartService
+    public shopping: ShoppingCartService,
+    public wishList: WishListService,
   ){ 
         this.shopping.calcTotal();
   }

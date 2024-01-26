@@ -1,4 +1,4 @@
-import { ErrorHandler, Injectable } from '@angular/core';
+import { ElementRef, ErrorHandler, Injectable, ViewChild } from '@angular/core';
 import { BookModel } from '../models/book.model';
 import { TranslateService } from '@ngx-translate/core';
 import { SwalService } from 'src/app/services/swal.service';
@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { AuthService } from './auth.service';
 import { SetShoppingCartsModel } from '../models/set-shopping-carts.model';
 import { AddShoppingCartModel } from '../models/add-shopping-cart.model';
+import { AddToWishListModel } from '../models/add-to-wish-list.model';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +38,7 @@ export class ShoppingCartService {
     private auth: AuthService
   ) {
     this.checkLocalStorageForshoppingCarts();
+    
     this.shippingAndCartTotal();
     // this.shippingControl();
     // this.onCurrencyButtonClick('this.selectedCurrency');
@@ -47,7 +49,7 @@ export class ShoppingCartService {
     if (localStorage.getItem('shoppingCarts')) {
       const carts: string | null = localStorage.getItem('shoppingCarts')
       if (carts !== null) {
-        this.shoppingCarts = JSON.parse(carts)
+        this.shoppingCarts = JSON.parse(carts);
         // this.count = this.shoppingCarts.length;
       }
     } else {
@@ -133,7 +135,7 @@ export class ShoppingCartService {
   addShoppingCart(book: BookModel) {
     if (localStorage.getItem("response")) {
 
-      const data : AddShoppingCartModel = new AddShoppingCartModel();
+      const data: AddShoppingCartModel = new AddShoppingCartModel();
       data.bookId = book.id;
       data.price = book.price;
       data.quantity = 1;

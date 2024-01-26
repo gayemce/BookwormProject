@@ -21,4 +21,5 @@ export class BookModel {
     isDeleted: boolean = false; 
     createdAt: string = ""; 
     cartId: number = 0;
+    wishListId: number = 0;
  }

@@ -1,0 +1,12 @@
+.password-container {
+    position: relative;
+  }
+  
+  .eye-icon {
+    position: absolute;
+    top: 50%;
+    right: 25px; /* veya uygun bir mesafe belirleyin */
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+  

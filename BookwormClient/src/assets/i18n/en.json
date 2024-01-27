@@ -29,6 +29,7 @@
   "signIn": "Sign In",
   "createAccount": "Create Account",
   "email": "Email",
+  "userName": "User Name",
   "ConfirmPassword": "Confirm Password",
   "login": "Login",
   "recoverPassword": "Recover Password",

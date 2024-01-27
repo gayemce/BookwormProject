@@ -25,14 +25,19 @@ export default class AccountSidebarDesktopComponent {
   messageSignUpEn: Message[] | any;
   messageSignUpTr: Message[] | any;
 
+  passwordsignInHidden = true;
+  passwordsignUpHidden = true;
+  passwordConfirmSignUpHidden = true;
+
   @ViewChild("accountSidebarCloseBtn") closeBtn: ElementRef<HTMLButtonElement> | undefined;
+  @ViewChild("loginbutton") loginBtn: ElementRef<HTMLButtonElement> | undefined;
 
   constructor(
     private router: Router,
     public login: LoginService,
     public register: RegisterService,
     public selectLang: SelectedLanguageService
-  ) { 
+  ) {
     this.updateSignInButtonStatus();
   }
 
@@ -47,25 +52,33 @@ export default class AccountSidebarDesktopComponent {
     }
     if (this.responseInLocalStorage) {
       this.router.navigateByUrl("/my-account")
-    }    
+    }
+  }
+
+  toggleSignInPasswordVisibility() {
+    this.passwordsignInHidden = !this.passwordsignInHidden;
+  }
+
+  toggleSignUpPasswordVisibility() {
+    this.passwordsignUpHidden = !this.passwordsignUpHidden;
+  }
+
+  toggleConfirmSignUpPasswordVisibility() {
+    this.passwordConfirmSignUpHidden = !this.passwordConfirmSignUpHidden;
   }
 
   createAccount() {
-    if(this.updateSignUpButtonStatus() === true){
-      this.messageSignUpEn = [{severity: 'error', detail: 'Please Fill All Spaces!'}];
-      this.messageSignUpTr = [{severity: 'error', detail: 'Lütfen Tüm Alanları Doldurun!'}];
-      this.register.signUp();
-    }
-    else{
-      if (this.closeBtn != undefined) {
-        this.closeBtn.nativeElement.click();
-      }
-      this.register.signUp();
+    if (this.closeBtn != undefined) {
+      this.closeBtn.nativeElement.click();
       this.clearInputs();
+      if (this.loginBtn != undefined) {
+        this.loginBtn.nativeElement.click();
+      }
     }
+    this.register.signUp();
   }
 
-  clearInputs(){  
+  clearInputs() {
     let signupFirstname = document.getElementById('signupFirstname') as HTMLInputElement;
     let signupLastname = document.getElementById('signupLastname') as HTMLInputElement;
     let signupUsername = document.getElementById('signupUsername') as HTMLInputElement;

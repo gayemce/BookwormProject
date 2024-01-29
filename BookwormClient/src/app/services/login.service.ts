@@ -41,16 +41,13 @@ export class LoginService {
   }
 
   signIn() {
-    //buradan devam edilecek
     this.http.post("https://localhost:7018/api/Auth/Login", this.request).subscribe({
       next: (res: any) => {
-
         localStorage.setItem("response", JSON.stringify(res));
         this.auth.checkAuthentication();
         location.href = "/";
 
         const request: SetShoppingCartsModel[] = [];
-
         if (this.shopping.shoppingCarts.length > 0) {
           for (let s of this.shopping.shoppingCarts) {
             const cart = new SetShoppingCartsModel();
@@ -65,15 +62,14 @@ export class LoginService {
           this.http.post("https://localhost:7018/api/Carts/SetShoppingCartsFromLocalStorage", request).subscribe({
             next: (res: any) => {
               localStorage.removeItem("shoppingCarts");
-              // localStorage.removeItem("bookPrices");
               this.shopping.checkLocalStorageForshoppingCarts();
-              // location.href = "/"
             },
             error: (err: HttpErrorResponse) => {
               this.error.errorHandler(err)
             }
           })
         }
+        
       },
       error: (err: HttpErrorResponse) => {
         this.error.errorHandler(err);

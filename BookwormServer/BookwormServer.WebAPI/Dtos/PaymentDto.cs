@@ -4,6 +4,7 @@ using Iyzipay.Model;
 namespace BookwormServer.WebAPI.Dtos;
 
 public sealed record PaymentDto(
+    int AppUserId,
     List<Book> Books,
     Buyer Buyer,
     Address ShippingAddress,

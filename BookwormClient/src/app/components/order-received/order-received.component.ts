@@ -33,13 +33,13 @@ export default class OrderReceivedComponent {
         const paymentDetailsString = localStorage.getItem('paymentDetails');
         const bookPricesString = localStorage.getItem('bookPrices');
 
-        if (paymentDetailsString) {
+        if(paymentDetailsString) {
             this.payment = JSON.parse(paymentDetailsString);
         }
-        if (bookPricesString) {
+        if(bookPricesString) {
             this.bookPrices = JSON.parse(bookPricesString);
         }
-        if (localStorage.getItem('shippingPrice')) {
+        if(localStorage.getItem('shippingPrice')) {
             this.shippingPrice = localStorage.getItem('shippingPrice');
             // console.log(this.shippingPrice);
         }

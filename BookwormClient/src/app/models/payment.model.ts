@@ -3,6 +3,7 @@ import { BuyerModel } from "./buyer.model";
 import { PaymentCardModel } from "./payment-card.model";
 
 export class PaymentModel {
+    appUserId: number = 0;
     books: any[] = [];
     buyer: BuyerModel = new BuyerModel;
     shippingAddress: AddressModel = new AddressModel;

@@ -164,12 +164,15 @@ public sealed class CartsController : ControllerBase
         //Ödeme başarıyla alındıysa
         if(payment.Status == "success")
         {
+            string orderNumber = Order.GetNewOrderNumber();
+
             List<Order> orders = new();
             foreach (var book in paymentRequest.Books)
             {
                 Order order = new()
                 {
-                    OrderNumber = request.BasketId,
+                    AppUserId = paymentRequest.AppUserId,
+                    OrderNumber = orderNumber,
                     BookId = book.Id,
                     Price = new ValueObjects.Money(book.Price.Value, book.Price.Currency),
                     PaymentDate = DateTime.Now,
@@ -180,7 +183,16 @@ public sealed class CartsController : ControllerBase
             }
 
             AppDbContext context = new();
-            context.AddRange(orders);
+            
+            context.Orders.AddRange(orders);
+
+            AppUser? user = context.AppUsers.Find(paymentRequest.AppUserId);
+            if (user is not null)
+            {
+                var carts = context.Carts.Where(p => p.AppUserId == paymentRequest.AppUserId).ToList();
+                context.RemoveRange(carts);
+            }
+            
             context.SaveChanges();
 
             return NoContent();

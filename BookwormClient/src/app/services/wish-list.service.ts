@@ -48,7 +48,7 @@ export class WishListService {
   }
 
   addToWishList(book: BookModel) {
-    if (localStorage.getItem("response")) {
+    if(localStorage.getItem('response')) {
 
       const data: AddToWishListModel = new AddToWishListModel();
       data.bookId = book.id;

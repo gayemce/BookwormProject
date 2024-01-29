@@ -46,7 +46,7 @@ export class ShoppingCartService {
   }
 
   checkLocalStorageForshoppingCarts() {
-    if (localStorage.getItem('shoppingCarts')) {
+    if(localStorage.getItem('shoppingCarts')) {
       const carts: string | null = localStorage.getItem('shoppingCarts')
       if (carts !== null) {
         this.shoppingCarts = JSON.parse(carts);
@@ -57,7 +57,7 @@ export class ShoppingCartService {
     }
 
     //Kullanıcı varsa
-    if (localStorage.getItem('response')) {
+    if(localStorage.getItem('response')) {
       this.auth.checkAuthentication();
       this.http.get("https://localhost:7018/api/Carts/GetAll/" + this.auth.token.userId).subscribe({
         next: (res: any) => {

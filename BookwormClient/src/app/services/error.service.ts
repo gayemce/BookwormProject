@@ -11,7 +11,6 @@ import { SwalService } from "./swal.service";
 export class ErrorService {
 
     constructor(
-        // private router: Router,
         private translate: TranslateService,
         private swal: SwalService
     ) { }

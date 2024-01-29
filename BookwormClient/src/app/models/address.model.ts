@@ -1,7 +1,7 @@
 export class AddressModel {
-    description: string = "test";
-    zipCode: string = "0600";
-    contactName: string = "test";
+    description: string = "Ahi Evran Mah.";
+    zipCode: string = "06000";
+    contactName: string = "Gaye Tekin";
     city: string = "Ankara";
     country: string = "Turkiye";
 }

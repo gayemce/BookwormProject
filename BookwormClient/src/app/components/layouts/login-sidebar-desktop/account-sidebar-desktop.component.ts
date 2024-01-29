@@ -30,7 +30,6 @@ export default class AccountSidebarDesktopComponent {
   passwordConfirmSignUpHidden = true;
 
   @ViewChild("accountSidebarCloseBtn") closeBtn: ElementRef<HTMLButtonElement> | undefined;
-  @ViewChild("loginbutton") loginBtn: ElementRef<HTMLButtonElement> | undefined;
 
   constructor(
     private router: Router,
@@ -71,9 +70,6 @@ export default class AccountSidebarDesktopComponent {
     if (this.closeBtn != undefined) {
       this.closeBtn.nativeElement.click();
       this.clearInputs();
-      if (this.loginBtn != undefined) {
-        this.loginBtn.nativeElement.click();
-      }
     }
     this.register.signUp();
   }

@@ -8,6 +8,7 @@ import { Countries } from 'src/app/constants/countries';
 import { Months } from 'src/app/constants/months';
 import { Years } from 'src/app/constants/years';
 import { PaymentModel } from 'src/app/models/payment.model';
+import { AuthService } from 'src/app/services/auth.service';
 import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
 import { SwalService } from 'src/app/services/swal.service';
 import { TrCurrencyPipe } from 'tr-currency';
@@ -32,9 +33,7 @@ export default class CheckoutComponent {
 
     constructor(
         public shopping: ShoppingCartService,
-        private router: Router,
-        private translate: TranslateService,
-        private swal: SwalService
+        private auth: AuthService
     ) {
         if (localStorage.getItem("currency")) {
             this.currency = localStorage.getItem("currency") as string;
@@ -51,6 +50,7 @@ export default class CheckoutComponent {
         this.paymentRequest.books = this.shopping.shoppingCarts;
         this.paymentRequest.shippingAndCartTotal = Number(localStorage.getItem("shippingAndCartTotal"));
         this.paymentRequest.currency = this.currency;
+        this.paymentRequest.appUserId = Number(this.auth.token.userId);
 
         this.shopping.payment(this.paymentRequest, (res) => {
             localStorage.removeItem("shoppingCarts");

@@ -1,5 +1,5 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { ElementRef, Injectable, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { RegisterModel } from '../models/register.model';
 import { TranslateService } from '@ngx-translate/core';
@@ -33,6 +33,8 @@ export class RegisterService {
   isSignupPasswordError: boolean = false;
   isSignupConfPasswordError: boolean = false;
 
+  @ViewChild("loginbutton") loginBtn: ElementRef<HTMLButtonElement> | undefined;
+
   constructor(
     private http: HttpClient,
     private router: Router,
@@ -44,8 +46,9 @@ export class RegisterService {
   signUp() {
     this.http.post("https://localhost:7018/api/Auth/Register", this.request).subscribe({
       next: (res: any) => {
-        this.router.navigateByUrl("/");
-
+        if (this.loginBtn != undefined) {
+          this.loginBtn.nativeElement.click();
+        }
         const successMessage = res.message;
         this.translate.get(`(${successMessage})`).subscribe(
           res => {

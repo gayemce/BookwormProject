@@ -16,7 +16,6 @@ import { AddToWishListModel } from '../models/add-to-wish-list.model';
   providedIn: 'root'
 })
 export class ShoppingCartService {
-
   paymentRequest: PaymentModel = new PaymentModel();
   shoppingCarts: any[] = [];
   prices: { value: number, currency: string }[] = [];
@@ -38,15 +37,18 @@ export class ShoppingCartService {
     private auth: AuthService
   ) {
     this.checkLocalStorageForshoppingCarts();
-    
+
     this.shippingAndCartTotal();
+
+
+
     // this.shippingControl();
     // this.onCurrencyButtonClick('this.selectedCurrency');
     // this.calcTotal();
   }
 
   checkLocalStorageForshoppingCarts() {
-    if(localStorage.getItem('shoppingCarts')) {
+    if (localStorage.getItem('shoppingCarts')) {
       const carts: string | null = localStorage.getItem('shoppingCarts')
       if (carts !== null) {
         this.shoppingCarts = JSON.parse(carts);
@@ -57,7 +59,7 @@ export class ShoppingCartService {
     }
 
     //Kullanıcı varsa
-    if(localStorage.getItem('response')) {
+    if (localStorage.getItem('response')) {
       this.auth.checkAuthentication();
       this.http.get("https://localhost:7018/api/Carts/GetAll/" + this.auth.token.userId).subscribe({
         next: (res: any) => {
@@ -81,19 +83,26 @@ export class ShoppingCartService {
 
     for (const s of this.shoppingCarts) {
       const price = { ...s.price };
-      const exchangeRate = this.getExchangeRate(price.currency);
+      const quantity = s.quantity;
 
+      localStorage.setItem('quantity', JSON.stringify(quantity));
+
+      const exchangeRate = this.getExchangeRate(price.currency);
       if (price.currency !== this.selectedCurrency) {
         // Sepetteki ürünün para birimi, seçilen para birimiyle aynı değilse dönüşüm yap
         if (this.selectedCurrency === '₺') {
           // $'yi ₺'ye çevir
-          price.value *= exchangeRate;
-          price.currency = this.selectedCurrency;
+          if (price.currency === '$') {
+            price.value = ((price.value * exchangeRate) * quantity);
+          }
         } else if (this.selectedCurrency === '$') {
           // ₺'yi $'ye çevir
-          price.value /= exchangeRate;
-          price.currency = this.selectedCurrency;
+          if (price.currency === '₺') {
+            price.value = ((price.value /= exchangeRate) * quantity);
+          }
         }
+      } else {
+        price.value *= quantity;
       }
 
       const currentSum = sumMap.get(price.currency) || 0;
@@ -101,6 +110,7 @@ export class ShoppingCartService {
     }
 
     this.prices = Array.from(sumMap, ([currency, value]) => ({ currency, value }));
+    localStorage.setItem('prices', JSON.stringify(this.prices));
   }
 
   removeByIndex(index: number) {
@@ -112,8 +122,13 @@ export class ShoppingCartService {
       this.swal.callSwal(res.delete, res.cancel, res.confirm, () => {
 
         if (localStorage.getItem("response")) {
-          this.http.get("https://localhost:7018/api/Carts/RemoveById/" + this.shoppingCarts[index]?.cartId).subscribe(res => {
-            this.checkLocalStorageForshoppingCarts();
+          this.http.get("https://localhost:7018/api/Carts/RemoveById/" + this.shoppingCarts[index]?.cartId).subscribe({
+            next: (res: any) => {
+              this.checkLocalStorageForshoppingCarts();
+            },
+            error: (err: HttpErrorResponse) => {
+              this.error.errorHandler(err);
+            }
           });
         }
 
@@ -134,32 +149,55 @@ export class ShoppingCartService {
 
   addShoppingCart(book: BookModel) {
     if (localStorage.getItem("response")) {
-
       const data: AddShoppingCartModel = new AddShoppingCartModel();
       data.bookId = book.id;
       data.price = book.price;
-      data.quantity = 1;
+      data.quantity = book.quantity;
       data.appUserId = Number(this.auth.token.userId);
 
-      this.http.post("https://localhost:7018/api/Carts/AddShoppingCart", data).subscribe(res => {
-        this.checkLocalStorageForshoppingCarts();
-        this.calcTotal();
-        localStorage.setItem("bookPrices", JSON.stringify(this.prices));
+      this.http.post("https://localhost:7018/api/Carts/AddShoppingCart", data).subscribe({
+        next: (res: any) => {
+          this.checkLocalStorageForshoppingCarts();
+          this.calcTotal();
+          localStorage.setItem("bookPrices", JSON.stringify(this.prices));
+
+          this.translate.get("bookAddedtoCart").subscribe(
+            res => {
+              this.swal.callToast(res, 'success');
+            });
+        },
+        error: (err: HttpErrorResponse) => {
+          this.error.errorHandler(err);
+        }
       })
     }
     else {
-      this.shoppingCarts.push(book);
-      localStorage.setItem('shoppingCarts', JSON.stringify(this.shoppingCarts));
-      this.calcTotal();
-      localStorage.setItem("bookPrices", JSON.stringify(this.prices));
-    }
-
-    this.translate.get("bookAddedtoCart").subscribe(
-      res => {
-        this.swal.callToast(res, 'success');
+      console.log(book.quantity)
+      if (book.quantity === 0) {
+        this.translate.get("theBookIsOutOfStock").subscribe(res => {
+          this.swal.callToast(res, 'error');
+        });
       }
-    )
+      else {
+        const checkBookIsAlreadyExists = this.shoppingCarts.find(p => p.id == book.id);
+        if (checkBookIsAlreadyExists !== undefined) {
+          checkBookIsAlreadyExists.quantity += 1;
+        } else {
+          const newBook = { ...book };
+          newBook.quantity = 1;
+          this.shoppingCarts.push(newBook);
+        }
 
+        localStorage.setItem('shoppingCarts', JSON.stringify(this.shoppingCarts));
+        this.calcTotal();
+        localStorage.setItem("bookPrices", JSON.stringify(this.prices));
+        book.quantity -= 1;
+        this.translate.get("bookAddedtoCart").subscribe(
+          res => {
+            this.swal.callToast(res, 'success');
+          });
+      }
+    }
   }
 
   onCurrencyButtonClick(currency: string) {

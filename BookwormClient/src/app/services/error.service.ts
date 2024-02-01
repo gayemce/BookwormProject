@@ -21,7 +21,7 @@ export class ErrorService {
         switch (err.status) {
             case 0:
                 this.translate.get("apiNotAvailable").subscribe(res => {
-                    console.log(res, "error");
+                    this.swal.callToast(res, "error");
                 });
                 break;
 
@@ -36,12 +36,12 @@ export class ErrorService {
 
             case 404:
                 this.translate.get("apiNotFound").subscribe(res => {
-                    console.log(res, "error");
+                    this.swal.callToast(res, "error");
                 });
                 break;
 
             case 422:
-                const error422 = err.error[0];
+                const error422 = err.error[0] || err.error.message;
                 this.translate.get(`(${error422})`).subscribe(
                     res => {
                         this.swal.callToast(res, "error");
@@ -55,12 +55,11 @@ export class ErrorService {
                         this.swal.callToast(res, "error");
                     }
                 )
-                console.log(err.error.message, "error");
                 break;
 
             default:
                 this.translate.get("errorStatusNotFound").subscribe(res => {
-                    console.log(res, "error")
+                    this.swal.callToast(res, "error");
                 });
                 break;
         }

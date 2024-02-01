@@ -169,8 +169,11 @@
   "billingAddress": "Fatura Adresi",
 
   "Sorry, something went wrong on our end. Our team has been notified.": "Üzgünüz, bizim tarafımızda bir şeyler ters gitti. Ekibimiz bilgilendirildi.",
-  "(Request message is not readable)": "Ödeme Alınamadı! Üzgünüz, bizim tarafımızda bir şeyler ters gitti. Ekibimiz bilgilendirildi.",
   "Bilinmeyen bir hata oluştu": "Bilinmeyen bir hata oluştu.",
+  "apiNotAvailable": "Üzgünüz, sunucuya ulaşılamıyor.",
+  "apiNotFound": "Üzgünüz, sunucu bulunamadı.",
+
+  "(Request message is not readable)": "Ödeme Alınamadı! Üzgünüz, bizim tarafımızda bir şeyler ters gitti. Ekibimiz bilgilendirildi.",
   "(buyerName gönderilmesi zorunludur)": "Alıcı adı boş bırakılamaz!",
   "(buyerSurname gönderilmesi zorunludur)": "Alıcı soyadı boş bırakılamaz!",
   "(identityNumber gönderilmesi zorunludur)": "Kimlik numarası alanı boş bırakılmaz!",
@@ -242,5 +245,9 @@
   "confirmButton": "Tamam",
 
   "wishList": "Favorilerim",
-  "bookAddedToWishlist": "Kitap favorilere eklendi!"
+  "bookAddedToWishlist": "Kitap favorilere eklendi!",
+
+  "(Kitap stokta kalmadı!)": "Kitap stokta kalmadı!",
+  "theBookIsOutOfStock": "Kitap stokta yok.",
+  "(Kitap stoğu yeterli değil. Lütfen daha az adet ile tekrar deneyin)": "Kitap stoğu yeterli değil. Lütfen daha az adet ile tekrar deneyin."
 }

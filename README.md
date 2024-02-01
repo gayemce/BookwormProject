@@ -1,21 +1,21 @@
 # Bookworm Project
 
-Bu proje, kitap satışı üzerine odaklanan bir web uygulamasını içermektedir.
+This project encompasses a web application focused on book sales.
 
-## Proje Hakkında
+## About the Project
 
-Kitap Satış Sitesi projesi, kitap severlere geniş bir kitap koleksiyonunu keşfetme ve satın alma imkanı sunan bir e-ticaret platformudur. Projenin temel amacı, kullanıcıların dil seçenekleri, ödeme yöntemleri ve güvenli alışveriş gibi konularda zengin bir deneyim yaşamalarını sağlamaktır.
+The Book Sales Site project is an e-commerce platform that offers book lovers the opportunity to explore and purchase from a wide collection of books. The main objective of the project is to provide users with a rich experience concerning language options, payment methods, and secure shopping.
 
-## Öne Çıkan Özellikler
+## Key Features
 
-- **Çoklu Dil Desteği:** Kullanıcılar, site üzerinde Türkçe veya İngilizce dil seçeneklerini tercih edebilirler. Çeviriler, '@ngx-translate/core' npm paketi ile kolaylıkla yapılabilmektedir.
+- **Multi-Language Support:** Users can choose between Turkish or English language options on the site. Translations can be easily done using the '@ngx-translate/core' npm package.
 
-- **Etkileşimli Kullanıcı Mesajları:** Kullanıcı dostu bir arayüz sağlamak adına, sepete ekleme veya silme gibi durumlarda '@sweetalert2/ngx-sweetalert2' paketi kullanılarak etkileşimli mesajlar sunulmuştur.
+- **Interactive User Messages:** To provide a user-friendly interface, interactive messages are presented using the '@sweetalert2/ngx-sweetalert2' package in cases such as adding or removing items from the cart.
 
-- **Çeşitli Kitaplar ve Fiyatlandırma:** Proje, hem Türkçe hem İngilizce dilinde geniş bir kitap yelpazesi sunmaktadır. Her kitabın fiyatı dil bazında özelleştirilmiştir. Ödeme aşamasında kullanıcıya para birimi seçme imkanı tanınmıştır.
+- **Variety of Books and Pricing:** The project offers a wide range of books in both Turkish and English languages. The price of each book is customized based on the language. Users are given the option to select the currency during the payment stage.
 
-- **Güvenli Ödeme İşlemleri:** 'İyzico Kütüphanesi' kullanılarak ödeme işlemleri sağlanmıştır. Kullanıcı bilgileri ve ödeme bilgileri güvenli bir şekilde server'a iletilerek başarılı bir ödeme süreci sunulmuştur.
+- **Secure Payment Transactions:** Payment transactions are facilitated using the 'İyzico Library'. User and payment information is securely transmitted to the server, ensuring a successful payment process.
 
-## Ek Bilgiler
+## Additional Information
 
-Projenin geliştirilme süreci devam etmektedir.
+The development process of the project is ongoing.

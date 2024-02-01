@@ -176,12 +176,14 @@
                                                     @else {
                                                     <div
                                                         class="price d-flex align-items-center font-weight-medium font-size-3">
-                                                        <span class="woocommerce-Price-amount amount"><span                                                                class="woocommerce-Price-currencySymbol">{{b.price.value
+                                                        <span class="woocommerce-Price-amount amount"><span
+                                                                class="woocommerce-Price-currencySymbol">{{b.price.value
                                                                 | trCurrency }}</span>{{b.price.currency}}</span>
                                                     </div>
                                                     }
                                                 </div>
                                                 <div class="product__hover d-flex align-items-center">
+                                                    @if(b.quantity === 0){
                                                     <a (click)="shopping.addShoppingCart(b)"
                                                         class="text-uppercase text-dark h-dark font-weight-medium mr-auto"
                                                         data-toggle="tooltip" data-placement="right" title=""
@@ -191,6 +193,18 @@
                                                         <span class="product__add-to-cart-icon font-size-4"><i
                                                                 class="flaticon-icon-126515"></i></span>
                                                     </a>
+                                                    }
+                                                    @else{
+                                                        <a (click)="shopping.addShoppingCart(b)"
+                                                        class="text-uppercase text-dark h-dark font-weight-medium mr-auto"
+                                                        data-toggle="tooltip" data-placement="right" title=""
+                                                        data-original-title="ADD TO CART">
+                                                        <span class="product__add-to-cart">{{'addToCart' |
+                                                            translate}}</span>
+                                                        <span class="product__add-to-cart-icon font-size-4"><i
+                                                                class="flaticon-icon-126515"></i></span>
+                                                    </a>
+                                                    }
                                                     <a href="../shop/single-product-v2.html"
                                                         class="mr-1 h-p-bg btn btn-outline-primary border-0">
                                                         <i class="flaticon-switch"></i>

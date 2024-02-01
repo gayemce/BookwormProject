@@ -67,20 +67,20 @@
                             </div>
                         </div>
 
-                        <div class="px-4 py-3 px-md-6 d-flex justify-content-between align-items-center font-size-3"
-                            *ngFor="let p of shopping.prices">
+                        <!-- <div class="px-4 py-3 px-md-6 d-flex justify-content-between align-items-center font-size-3"
+                            *ngFor="let s of shopping.prices">
 
                             <h4 class="mb-0 font-size-3">{{'subtotal' | translate}}:</h4>
 
                             <div class="font-weight-medium">
-                                <span *ngIf="p.currency === '₺'" class="woocommerce-Price-amount amount">
-                                    {{p.value | trCurrency}} {{p.currency}}
+                                <span *ngIf="s.currency === '₺'" class="woocommerce-Price-amount amount">
+                                    {{s.value  | trCurrency}} {{s.currency}}
                                 </span>
-                                <span *ngIf="p.currency === '$'" class="woocommerce-Price-amount amount">
-                                    {{p.currency}} {{p.value | currency: '':'':'1.2-2'}}
+                                <span *ngIf="s.currency === '$'" class="woocommerce-Price-amount amount">
+                                    {{s.currency}} {{s.value | currency: '':'':'1.2-2'}}
                                 </span>
                             </div>
-                        </div>
+                        </div> -->
 
                         <div class="px-4 mb-8 px-md-6">
                             <button (click)="gotoCart()" type="submit"

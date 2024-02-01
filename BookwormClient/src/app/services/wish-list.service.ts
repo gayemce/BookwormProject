@@ -92,8 +92,13 @@ export class WishListService {
       this.swal.callSwal(res.delete, res.cancel, res.confirm, () => {
 
         if (localStorage.getItem("response")) {
-          this.http.get("https://localhost:7018/api/WishLists/removeFromWishListById/" + this.wishList[index]?.wishListId).subscribe(res => {
-            this.checkLocalStorageForWishList();
+          this.http.get("https://localhost:7018/api/WishLists/removeFromWishListById/" + this.wishList[index]?.wishListId).subscribe({
+            next: (res: any) => {
+                this.checkLocalStorageForWishList();
+            },
+            error: (err: HttpErrorResponse) => {
+              this.error.errorHandler(err);
+            }
           });
         }
       });

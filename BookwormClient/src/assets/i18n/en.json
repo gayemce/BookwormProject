@@ -169,8 +169,11 @@
   "billingAddress": "Billing Address",
 
   "Sorry, something went wrong on our end. Our team has been notified.": "Sorry, something went wrong on our end. Our team has been notified.",
-  "(Request message is not readable)": "Failed to Receive Payment! Sorry, something went wrong on our end. Our team has been notified.",
   "Bilinmeyen bir hata oluştu": "An unknown error occurred.",
+  "apiNotAvailable": "Sorry, the server is unavailable.",
+  "apiNotFound": "Sorry, no server found.",
+
+  "(Request message is not readable)": "Failed to Receive Payment! Sorry, something went wrong on our end. Our team has been notified.",
   "(buyerName gönderilmesi zorunludur)": "Buyer name is required!",
   "(buyerSurname gönderilmesi zorunludur)": "Buyer surname is required!",
   "(identityNumber gönderilmesi zorunludur)": "Identity number field cannot be empty!",
@@ -241,5 +244,9 @@
   "confirmButton": "Confirm",
 
   "wishList": "Wishlist",
-  "bookAddedToWishlist": "Book added to wishlist!"
+  "bookAddedToWishlist": "Book added to wishlist!",
+
+  "(Kitap stokta kalmadı!)": "The book is out of stock!",
+  "theBookIsOutOfStock": "The book is out of stock.",
+  "(Kitap stoğu yeterli değil. Lütfen daha az adet ile tekrar deneyin)": "The book stock is insufficient. Please try again with a smaller quantity."
 }

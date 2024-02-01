@@ -67,10 +67,11 @@
                                                                 <a href="#">{{s.title}}</a>
                                                                 <p>
                                                                     <a class="text-gray-700 font-size-2 d-block"
-                                                                    tabindex="0">{{s.publisher}}</a>
+                                                                        tabindex="0">{{s.publisher}}</a>
                                                                 </p>
                                                                 <a href="#" class="text-gray-700 font-size-2 d-block"
-                                                                    tabindex="0">{{s.author.name}} {{s.author.lastname}}</a>
+                                                                    tabindex="0">{{s.author.name}}
+                                                                    {{s.author.lastname}}</a>
                                                             </div>
                                                         </div>
                                                     </td>
@@ -88,7 +89,7 @@
                                                             class="woocommerce-Price-currencySymbol">
                                                             {{s.price.currency}}
                                                             <span class="woocommerce-Price-amount amount">
-                                                                {{s.price.value * s.quantity | currency: '':'':'1.2-2'}}
+                                                                {{s.price.value | currency: '':'':'1.2-2'}}
 
                                                             </span>
                                                         </span>
@@ -113,10 +114,11 @@
                                                                                     d="M-0.000,-0.000 L10.000,-0.000 L10.000,1.000 L-0.000,1.000 L-0.000,-0.000 Z" />
                                                                             </svg>
                                                                         </a>
-                                                                        <input type="number"
+                                                                        <!-- [(ngModel)]="s.quantity" -->
+                                                                        <input [(ngModel)]="s.quantity" type="number"
                                                                             class="input-text qty text js-result form-control text-center border-0"
                                                                             step="1" min="1" max="100" name="quantity"
-                                                                            value={{s.quantity}} title="Qty">
+                                                                            title="Qty">
                                                                         <a class="js-plus text-dark"
                                                                             href="javascript:;">
                                                                             <svg xmlns="http://www.w3.org/2000/svg"
@@ -137,7 +139,7 @@
                                                     <td class="product-subtotal" data-title="Total">
                                                         <span *ngIf="s.price.currency === '₺'"
                                                             class="woocommerce-Price-amount amount">
-                                                            {{s.price.value | trCurrency}}
+                                                            {{s.price.value * s.quantity | trCurrency}}
                                                             <span class="woocommerce-Price-currencySymbol">
                                                                 {{s.price.currency}}
                                                             </span>
@@ -203,47 +205,46 @@
 
                             <div id="cartCollapseOne" class="mt-4 cart-content collapse show"
                                 aria-labelledby="cartHeadingOne" data-parent="#cartAccordion">
-                                <table class="shop_table shop_table_responsive">
+                                <table class="shop_table woocommerce-checkout-review-order-table">
                                     <tbody>
-                                        <tr class="cart-subtotal" *ngFor="let p of shopping.prices">
-                                            <th>{{'subtotal' | translate}}</th>
-                                            <td data-title="Subtotal">
-                                                <span *ngIf="p.currency === '₺'"
+                                        <tr *ngFor="let s of shopping.shoppingCarts" class="cart_item">
+                                            <td class="product-name">
+                                                {{s.title}}&nbsp; 
+                                                <strong class="product-quantity">× {{s.quantity}}</strong>
+                                            </td>
+                                            <td class="product-total">
+                                                <span *ngIf="s.price.currency === '₺'"
                                                     class="woocommerce-Price-amount amount">
-                                                    {{p.value | trCurrency}} {{p.currency}}
+                                                    {{s.price.value * s.quantity | trCurrency}}{{s.price.currency}}
                                                 </span>
-                                                <span *ngIf="p.currency === '$'"
+
+                                                <span *ngIf="s.price.currency === '$'"
                                                     class="woocommerce-Price-amount amount">
-                                                    {{p.currency}} {{p.value | currency: '':'':'1.2-2'}}
+                                                    {{s.price.currency}}{{s.price.value * s.quantity | currency:'':'':'1.2-2'}}
                                                 </span>
                                             </td>
                                         </tr>
-
-                                        <!-- <tr class="order-shipping">
-                                                <th>{{'shipping' | translate}}</th>
-                                                <td data-title="Shipping">{{'freeShipping' | translate}}</td>
-                                            </tr> -->
                                     </tbody>
                                 </table>
-                               
+
                             </div>
 
-                            
+
                         </div>
 
                         <div class="p-4d875 border">
                             <h3 class="cart-title mb-0 font-weight-medium font-size-3">{{'currencyUnit' |
                                 translate}}</h3>
-                                 <button (click)="shopping.onCurrencyButtonClick('₺')"
-                                 class="btn btn-block py-2 rounded-0 btn-outline-dark mt-4 mb-2"
-                                 [ngClass]="shopping.payBtnDisabled ? 'pay-disabled' : ''">
-                                 {{'payTL' | translate}}
-                             </button>
-                             <button (click)="shopping.onCurrencyButtonClick('$')"
-                                 class="btn btn-block py-2 rounded-0 btn-outline-dark"
-                                 [ngClass]="shopping.payBtnDisabled ? 'pay-disabled' : ''">
-                                 {{'payUSD' | translate}}
-                             </button>
+                            <button (click)="shopping.onCurrencyButtonClick('₺')"
+                                class="btn btn-block py-2 rounded-0 btn-outline-dark mt-4 mb-2"
+                                [ngClass]="shopping.payBtnDisabled ? 'pay-disabled' : ''">
+                                {{'payTL' | translate}}
+                            </button>
+                            <button (click)="shopping.onCurrencyButtonClick('$')"
+                                class="btn btn-block py-2 rounded-0 btn-outline-dark"
+                                [ngClass]="shopping.payBtnDisabled ? 'pay-disabled' : ''">
+                                {{'payUSD' | translate}}
+                            </button>
                         </div>
 
                         <div class="p-4d875 border">
@@ -393,7 +394,8 @@
                     </div>
                     @if(shopping.selectedCurrency === ''){
                     <div class="wc-proceed-to-checkout">
-                        <a class="checkout-button-disabled checkout-button button alt wc-forward btn btn btn-block btn-outline-dark rounded-0 py-4">
+                        <a
+                            class="checkout-button-disabled checkout-button button alt wc-forward btn btn btn-block btn-outline-dark rounded-0 py-4">
                             {{'proceedToCheckout' | translate}}
                         </a>
                     </div>

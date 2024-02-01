@@ -85,7 +85,7 @@ namespace BookwormServer.WebAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AppUsers");
+                    b.ToTable("AppUsers", (string)null);
                 });
 
             modelBuilder.Entity("BookwormServer.WebAPI.Models.Author", b =>
@@ -122,7 +122,7 @@ namespace BookwormServer.WebAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Authors");
+                    b.ToTable("Authors", (string)null);
                 });
 
             modelBuilder.Entity("BookwormServer.WebAPI.Models.Book", b =>
@@ -183,7 +183,7 @@ namespace BookwormServer.WebAPI.Migrations
 
                     b.HasIndex("BookLanguageId");
 
-                    b.ToTable("Books");
+                    b.ToTable("Books", (string)null);
                 });
 
             modelBuilder.Entity("BookwormServer.WebAPI.Models.BookCategory", b =>
@@ -198,7 +198,7 @@ namespace BookwormServer.WebAPI.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("BookCategories");
+                    b.ToTable("BookCategories", (string)null);
                 });
 
             modelBuilder.Entity("BookwormServer.WebAPI.Models.BookDetail", b =>
@@ -236,7 +236,7 @@ namespace BookwormServer.WebAPI.Migrations
                     b.HasIndex("BookId")
                         .IsUnique();
 
-                    b.ToTable("BookDetails");
+                    b.ToTable("BookDetails", (string)null);
                 });
 
             modelBuilder.Entity("BookwormServer.WebAPI.Models.BookDiscount", b =>
@@ -263,7 +263,7 @@ namespace BookwormServer.WebAPI.Migrations
 
                     b.HasIndex("BookId");
 
-                    b.ToTable("BookDiscounts");
+                    b.ToTable("BookDiscounts", (string)null);
                 });
 
             modelBuilder.Entity("BookwormServer.WebAPI.Models.BookLanguage", b =>
@@ -284,7 +284,7 @@ namespace BookwormServer.WebAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("BookLanguages");
+                    b.ToTable("BookLanguages", (string)null);
                 });
 
             modelBuilder.Entity("BookwormServer.WebAPI.Models.Cart", b =>
@@ -310,7 +310,7 @@ namespace BookwormServer.WebAPI.Migrations
 
                     b.HasIndex("BookId");
 
-                    b.ToTable("Carts");
+                    b.ToTable("Carts", (string)null);
                 });
 
             modelBuilder.Entity("BookwormServer.WebAPI.Models.Category", b =>
@@ -341,7 +341,7 @@ namespace BookwormServer.WebAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("BookwormServer.WebAPI.Models.Order", b =>
@@ -376,13 +376,16 @@ namespace BookwormServer.WebAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("AppUserId");
 
                     b.HasIndex("BookId");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Orders", (string)null);
                 });
 
             modelBuilder.Entity("BookwormServer.WebAPI.Models.OrderStatus", b =>
@@ -408,7 +411,7 @@ namespace BookwormServer.WebAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("OrderStatuses");
+                    b.ToTable("OrderStatuses", (string)null);
                 });
 
             modelBuilder.Entity("BookwormServer.WebAPI.Models.Review", b =>
@@ -453,7 +456,7 @@ namespace BookwormServer.WebAPI.Migrations
 
                     b.HasIndex("BookId");
 
-                    b.ToTable("Reviews");
+                    b.ToTable("Reviews", (string)null);
                 });
 
             modelBuilder.Entity("BookwormServer.WebAPI.Models.WishList", b =>
@@ -476,7 +479,7 @@ namespace BookwormServer.WebAPI.Migrations
 
                     b.HasIndex("BookId");
 
-                    b.ToTable("WishLists");
+                    b.ToTable("WishLists", (string)null);
                 });
 
             modelBuilder.Entity("BookwormServer.WebAPI.Models.Book", b =>
@@ -493,7 +496,7 @@ namespace BookwormServer.WebAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsOne("BookwormServer.WebAPI.ValueObjects.Money", "Price", b1 =>
+                    b.OwnsOne("BookwormServer.WebAPI.Models.Book.Price#BookwormServer.WebAPI.ValueObjects.Money", "Price", b1 =>
                         {
                             b1.Property<int>("BookId")
                                 .HasColumnType("int");
@@ -508,7 +511,7 @@ namespace BookwormServer.WebAPI.Migrations
 
                             b1.HasKey("BookId");
 
-                            b1.ToTable("Books");
+                            b1.ToTable("Books", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("BookId");
@@ -577,7 +580,7 @@ namespace BookwormServer.WebAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsOne("BookwormServer.WebAPI.ValueObjects.Money", "Price", b1 =>
+                    b.OwnsOne("BookwormServer.WebAPI.Models.Cart.Price#BookwormServer.WebAPI.ValueObjects.Money", "Price", b1 =>
                         {
                             b1.Property<int>("CartId")
                                 .HasColumnType("int");
@@ -592,7 +595,7 @@ namespace BookwormServer.WebAPI.Migrations
 
                             b1.HasKey("CartId");
 
-                            b1.ToTable("Carts");
+                            b1.ToTable("Carts", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("CartId");
@@ -618,7 +621,7 @@ namespace BookwormServer.WebAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsOne("BookwormServer.WebAPI.ValueObjects.Money", "Price", b1 =>
+                    b.OwnsOne("BookwormServer.WebAPI.Models.Order.Price#BookwormServer.WebAPI.ValueObjects.Money", "Price", b1 =>
                         {
                             b1.Property<int>("OrderId")
                                 .HasColumnType("int");
@@ -633,7 +636,7 @@ namespace BookwormServer.WebAPI.Migrations
 
                             b1.HasKey("OrderId");
 
-                            b1.ToTable("Orders");
+                            b1.ToTable("Orders", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("OrderId");
@@ -680,7 +683,7 @@ namespace BookwormServer.WebAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsOne("BookwormServer.WebAPI.ValueObjects.Money", "Price", b1 =>
+                    b.OwnsOne("BookwormServer.WebAPI.Models.WishList.Price#BookwormServer.WebAPI.ValueObjects.Money", "Price", b1 =>
                         {
                             b1.Property<int>("WishListId")
                                 .HasColumnType("int");
@@ -695,7 +698,7 @@ namespace BookwormServer.WebAPI.Migrations
 
                             b1.HasKey("WishListId");
 
-                            b1.ToTable("WishLists");
+                            b1.ToTable("WishLists", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("WishListId");

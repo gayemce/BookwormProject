@@ -31,7 +31,7 @@ public sealed class BooksController : ControllerBase
         try
         {
 
-            Book book = _context.Books.Where(p => p.Title == request.Title).FirstOrDefault();
+            Book? book = _context.Books.Where(p => p.Title == request.Title).FirstOrDefault();
             if (book is not null)
             {
                 return BadRequest(new { Message = "Bu kitap zaten eklenmiş" });

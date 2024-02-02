@@ -17,7 +17,7 @@ import { AddToWishListModel } from '../models/add-to-wish-list.model';
 })
 export class ShoppingCartService {
   paymentRequest: PaymentModel = new PaymentModel();
-  shoppingCarts: any[] = [];
+  shoppingCarts: BookModel[] = [];
   prices: { value: number, currency: string }[] = [];
   selectedCurrency: string = '';
   count: number = 0;
@@ -52,7 +52,6 @@ export class ShoppingCartService {
       const carts: string | null = localStorage.getItem('shoppingCarts')
       if (carts !== null) {
         this.shoppingCarts = JSON.parse(carts);
-        // this.count = this.shoppingCarts.length;
       }
     } else {
       this.shoppingCarts = [];
@@ -85,7 +84,7 @@ export class ShoppingCartService {
       const price = { ...s.price };
       const quantity = s.quantity;
 
-      localStorage.setItem('quantity', JSON.stringify(quantity));
+      // localStorage.setItem('quantity', JSON.stringify(quantity));
 
       const exchangeRate = this.getExchangeRate(price.currency);
       if (price.currency !== this.selectedCurrency) {

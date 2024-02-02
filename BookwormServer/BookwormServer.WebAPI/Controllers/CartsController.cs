@@ -50,9 +50,9 @@ public sealed class CartsController : ControllerBase
                 Quantity = 1,
                 AppUserId = request.AppUserId
             };
+            _context.Carts.Add(cart);
         }
 
-        _context.Carts.Add(cart);
         _context.SaveChanges();
 
         return NoContent();

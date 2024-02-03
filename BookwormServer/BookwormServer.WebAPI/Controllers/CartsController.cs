@@ -21,6 +21,18 @@ public sealed class CartsController : ControllerBase
     }
 
     [HttpGet("{bookId}/{quantity}")]
+    public IActionResult CheckBookQuantityIsAvailable(int bookId, int quantity)
+    {
+        Book? book = _context.Books.Find(bookId);
+        if(book!.Quantity < quantity)
+        {
+            return StatusCode(422, new { message = $"Kitap stoğu yeterli değil" });
+        }
+
+        return NoContent();
+    }
+
+    [HttpGet("{bookId}/{quantity}")]
     public IActionResult ChangeBookQuantityInCart(int bookId,int quantity)
     {
         Cart? cart = _context.Carts.Where(p => p.BookId == bookId).FirstOrDefault();
@@ -40,7 +52,7 @@ public sealed class CartsController : ControllerBase
             {
                 if(book.Quantity < quantity)
                 {
-                    return StatusCode(422, new { message = $"Kitap stoğu yeterli değil. Lütfen daha az adet ile tekrar deneyin" });
+                    return StatusCode(422, new { message = $"Kitap stoğu yeterli değil" });
                 }
                 else
                 {
@@ -73,6 +85,10 @@ public sealed class CartsController : ControllerBase
 
         if(cart is not null) 
         {
+            if (book.Quantity <= cart.Quantity)
+            {
+                return StatusCode(422, new { message = "Kitap stokta kalmadı!" });
+            }
             cart.Quantity += 1;
         }
         else

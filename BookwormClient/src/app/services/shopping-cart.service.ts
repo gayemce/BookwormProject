@@ -37,11 +37,7 @@ export class ShoppingCartService {
     private auth: AuthService
   ) {
     this.getAllShoppingCarts();
-
     this.shippingAndCartTotal();
-
-
-
     // this.shippingControl();
     // this.onCurrencyButtonClick('this.selectedCurrency');
     // this.calcTotal();
@@ -59,6 +55,7 @@ export class ShoppingCartService {
       });
     }
     else {
+      debugger
       const book = this.shoppingCarts.find(p => p.id == bookId);
       if (book !== undefined) {
         if (quantity == 0) {
@@ -68,13 +65,18 @@ export class ShoppingCartService {
             return;
           }
         }
-        book.quantity = quantity;
-        localStorage.setItem('shoppingCarts', JSON.stringify(this.shoppingCarts));
-        this.calcTotal();
-        this.translate.get("bookAddedtoCart").subscribe(
-          res => {
-            this.swal.callToast(res, 'success');
+        else {
+          this.http.get(`https://localhost:7018/api/Carts/CheckBookQuantityIsAvailable/${bookId}/${quantity}`).subscribe({
+            next: (res: any) => {
+              book.quantity = quantity;
+              this.onCurrencyButtonClick(this.selectedCurrency);
+              localStorage.setItem('shoppingCarts', JSON.stringify(this.shoppingCarts));
+            },
+            error: (err: HttpErrorResponse) => {
+              this.error.errorHandler(err);
+            }
           });
+        }
       }
     }
   }
@@ -95,7 +97,7 @@ export class ShoppingCartService {
       this.http.get("https://localhost:7018/api/Carts/GetAll/" + this.auth.token.userId).subscribe({
         next: (res: any) => {
           this.shoppingCarts = res;
-          this.calcTotal();
+          this.onCurrencyButtonClick(this.selectedCurrency);
         },
         error: (err: HttpErrorResponse) => {
           this.error.errorHandler(err);

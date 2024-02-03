@@ -248,5 +248,6 @@
 
   "(Kitap stokta kalmadı!)": "The book is out of stock!",
   "theBookIsOutOfStock": "The book is out of stock.",
-  "(Kitap stoğu yeterli değil. Lütfen daha az adet ile tekrar deneyin)": "The book stock is insufficient. Please try again with a smaller quantity."
+  "(Kitap stoğu yeterli değil. Lütfen daha az adet ile tekrar deneyin)": "The book stock is insufficient. Please try again with a smaller quantity.",
+  "(Kitap stoğu yeterli değil)": "The book stock is insufficient."
 }

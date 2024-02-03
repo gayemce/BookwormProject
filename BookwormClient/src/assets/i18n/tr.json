@@ -249,5 +249,6 @@
 
   "(Kitap stokta kalmadı!)": "Kitap stokta kalmadı!",
   "theBookIsOutOfStock": "Kitap stokta yok.",
-  "(Kitap stoğu yeterli değil. Lütfen daha az adet ile tekrar deneyin)": "Kitap stoğu yeterli değil. Lütfen daha az adet ile tekrar deneyin."
+  "(Kitap stoğu yeterli değil. Lütfen daha az adet ile tekrar deneyin)": "Kitap stoğu yeterli değil. Lütfen daha az adet ile tekrar deneyin.",
+  "(Kitap stoğu yeterli değil)": "Kitap stoğu yeterli değil."
 }

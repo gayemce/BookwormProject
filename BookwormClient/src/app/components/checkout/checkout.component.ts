@@ -50,7 +50,8 @@ export default class CheckoutComponent {
         this.paymentRequest.books = this.shopping.shoppingCarts;
         this.paymentRequest.shippingAndCartTotal = Number(localStorage.getItem("shippingAndCartTotal"));
         this.paymentRequest.currency = this.currency;
-        this.paymentRequest.appUserId = Number(this.auth.token.userId);
+        const userId = Number(this.auth.token.userId);
+        this.paymentRequest.appUserId = userId === 0 ? Number("null") : userId;
 
         this.shopping.payment(this.paymentRequest, (res) => {
             localStorage.removeItem("shoppingCarts");

@@ -104,7 +104,8 @@
                                                                         <label
                                                                             class="screen-reader-text sr-only">{{'quantity'
                                                                             | translate}}</label>
-                                                                        <a (click)="shopping.removeByIndex(i)" class="js-minus text-dark"
+                                                                        <a (click)="shopping.changeBookQuantityInCart(s.id, s.quantity-1)"
+                                                                            class="js-minus text-dark"
                                                                             href="javascript:;">
                                                                             <svg xmlns="http://www.w3.org/2000/svg"
                                                                                 xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -114,12 +115,11 @@
                                                                                     d="M-0.000,-0.000 L10.000,-0.000 L10.000,1.000 L-0.000,1.000 L-0.000,-0.000 Z" />
                                                                             </svg>
                                                                         </a>
-                                                                        <!-- [(ngModel)]="s.quantity" -->
-                                                                        <input type="number" [value]="s.quantity"
-                                                                            class="input-text qty text js-result form-control text-center border-0"
-                                                                            step="1" min="1" max="100" name="quantity"
-                                                                            title="Qty">
-                                                                        <a class="js-plus text-dark"
+
+                                                                        <p type="number" [innerHtml]="s.quantity"
+                                                                            class="form-control text-center border-0 pt-4"></p>
+                                                                        <a (click)="shopping.changeBookQuantityInCart(s.id, s.quantity+1)"
+                                                                            class="js-plus text-dark"
                                                                             href="javascript:;">
                                                                             <svg xmlns="http://www.w3.org/2000/svg"
                                                                                 xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -209,7 +209,7 @@
                                     <tbody>
                                         <tr *ngFor="let s of shopping.shoppingCarts" class="cart_item">
                                             <td class="product-name">
-                                                {{s.title}}&nbsp; 
+                                                {{s.title}}&nbsp;
                                                 <strong class="product-quantity">× {{s.quantity}}</strong>
                                             </td>
                                             <td class="product-total">
@@ -220,7 +220,8 @@
 
                                                 <span *ngIf="s.price.currency === '$'"
                                                     class="woocommerce-Price-amount amount">
-                                                    {{s.price.currency}}{{s.price.value * s.quantity | currency:'':'':'1.2-2'}}
+                                                    {{s.price.currency}}{{s.price.value * s.quantity |
+                                                    currency:'':'':'1.2-2'}}
                                                 </span>
                                             </td>
                                         </tr>

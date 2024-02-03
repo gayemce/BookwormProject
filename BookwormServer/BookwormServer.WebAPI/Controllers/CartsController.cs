@@ -20,6 +20,40 @@ public sealed class CartsController : ControllerBase
         _context = context;
     }
 
+    [HttpGet("{bookId}/{quantity}")]
+    public IActionResult ChangeBookQuantityInCart(int bookId,int quantity)
+    {
+        Cart? cart = _context.Carts.Where(p => p.BookId == bookId).FirstOrDefault();
+        if(cart is null)
+        {
+            return StatusCode(422, new { message = "Kitap bulunamadı!" });
+        }
+
+        if(quantity == 0)
+        {
+            _context.Remove(cart);
+        }
+        else
+        {
+            Book? book = _context.Books.Find(bookId);
+            if(book is not null)
+            {
+                if(book.Quantity < quantity)
+                {
+                    return StatusCode(422, new { message = $"Kitap stoğu yeterli değil. Lütfen daha az adet ile tekrar deneyin" });
+                }
+                else
+                {
+                    cart.Quantity = quantity;
+                    _context.Update(cart);
+                }
+            }
+        }
+      
+        _context.SaveChanges();
+        return NoContent();
+    }
+
     [HttpPost]
     public IActionResult AddShoppingCart(AddShoppingCartDto request)
     {
@@ -135,7 +169,7 @@ public sealed class CartsController : ControllerBase
             {
                 if (item.Quantity > checkBook.Quantity)
                 {
-                    return StatusCode(422, new { message = "Kitap stoğu yeterli değil. Lütfen daha az adet ile tekrar deneyin"});
+                    return StatusCode(422, new { message = $"Kitap stoğu yeterli değil. Lütfen daha az adet ile tekrar deneyin" });
                 }
             }
             

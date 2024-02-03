@@ -24,7 +24,7 @@ export default class MyAccountComponent {
 
   logout(){
     localStorage.removeItem("response");
-    this.shopping.checkLocalStorageForshoppingCarts();
+    this.shopping.getAllShoppingCarts();
     location.href = "/"
   }
 }

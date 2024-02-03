@@ -36,7 +36,7 @@ export class ShoppingCartService {
     private router: Router,
     private auth: AuthService
   ) {
-    this.checkLocalStorageForshoppingCarts();
+    this.getAllShoppingCarts();
 
     this.shippingAndCartTotal();
 
@@ -47,7 +47,39 @@ export class ShoppingCartService {
     // this.calcTotal();
   }
 
-  checkLocalStorageForshoppingCarts() {
+  changeBookQuantityInCart(bookId: number, quantity: number) {
+    if (localStorage.getItem('response')) {
+      this.http.get(`https://localhost:7018/api/Carts/ChangeBookQuantityInCart/${bookId}/${quantity}`).subscribe({
+        next: (res: any) => {
+          this.getAllShoppingCarts();
+        },
+        error: (err: HttpErrorResponse) => {
+          this.error.errorHandler(err);
+        }
+      });
+    }
+    else {
+      const book = this.shoppingCarts.find(p => p.id == bookId);
+      if (book !== undefined) {
+        if (quantity == 0) {
+          const bookIndex = this.shoppingCarts.findIndex(p => p.id === bookId);
+          if (bookIndex !== -1) {
+            this.removeByIndex(bookIndex);
+            return;
+          }
+        }
+        book.quantity = quantity;
+        localStorage.setItem('shoppingCarts', JSON.stringify(this.shoppingCarts));
+        this.calcTotal();
+        this.translate.get("bookAddedtoCart").subscribe(
+          res => {
+            this.swal.callToast(res, 'success');
+          });
+      }
+    }
+  }
+
+  getAllShoppingCarts() {
     if (localStorage.getItem('shoppingCarts')) {
       const carts: string | null = localStorage.getItem('shoppingCarts')
       if (carts !== null) {
@@ -70,8 +102,6 @@ export class ShoppingCartService {
         }
       });
     }
-
-    // this.calcTotal();
   }
 
 
@@ -123,7 +153,7 @@ export class ShoppingCartService {
         if (localStorage.getItem("response")) {
           this.http.get("https://localhost:7018/api/Carts/RemoveById/" + this.shoppingCarts[index]?.cartId).subscribe({
             next: (res: any) => {
-              this.checkLocalStorageForshoppingCarts();
+              this.getAllShoppingCarts();
             },
             error: (err: HttpErrorResponse) => {
               this.error.errorHandler(err);
@@ -156,7 +186,7 @@ export class ShoppingCartService {
 
       this.http.post("https://localhost:7018/api/Carts/AddShoppingCart", data).subscribe({
         next: (res: any) => {
-          this.checkLocalStorageForshoppingCarts();
+          this.getAllShoppingCarts();
           this.calcTotal();
           localStorage.setItem("bookPrices", JSON.stringify(this.prices));
 

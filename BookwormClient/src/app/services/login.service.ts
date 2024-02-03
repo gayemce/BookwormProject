@@ -62,7 +62,7 @@ export class LoginService {
           this.http.post("https://localhost:7018/api/Carts/SetShoppingCartsFromLocalStorage", request).subscribe({
             next: (res: any) => {
               localStorage.removeItem("shoppingCarts");
-              this.shopping.checkLocalStorageForshoppingCarts();
+              this.shopping.getAllShoppingCarts();
             },
             error: (err: HttpErrorResponse) => {
               this.error.errorHandler(err)

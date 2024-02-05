@@ -20,7 +20,9 @@ export default class MyAccountComponent {
     public translate: TranslateService,
     public selectedLang: SelectedLanguageService,
     private shopping: ShoppingCartService
-  ){}
+  ){
+    auth.getUser();
+  }
 
   logout(){
     localStorage.removeItem("response");

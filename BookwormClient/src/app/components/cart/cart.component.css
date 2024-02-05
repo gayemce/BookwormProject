@@ -9,10 +9,6 @@
     font-weight: 400;
 }
 
-a{
-    cursor: pointer;
-}
-
 .checkout-button-disabled{
     color: #888;
     cursor: not-allowed;

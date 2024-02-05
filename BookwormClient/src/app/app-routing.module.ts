@@ -16,6 +16,10 @@ import ContactUsComponent from './components/contact-us/contact-us.component';
 import FaqComponent from './components/faq/faq.component';
 import TermsAndConditionsComponent from './components/terms-and-conditions/terms-and-conditions.component';
 import { WishListComponent } from './components/wish-list/wish-list.component';
+import { OrdersComponent } from './components/my-account/orders/orders.component';
+import { AddressesComponent } from './components/my-account/addresses/addresses.component';
+import { AccountDetailsComponent } from './components/my-account/account-details/account-details.component';
+import { WishlistComponent } from './components/my-account/wishlist/wishlist.component';
 
 const routes: Routes = [
   {
@@ -77,6 +81,22 @@ const routes: Routes = [
       {
         path: "my-account",
         component: MyAccountComponent
+      },
+      {
+        path: "orders",
+        component: OrdersComponent
+      },
+      {
+        path: "addresses",
+        component: AddressesComponent
+      },
+      {
+        path: "account-details",
+        component: AccountDetailsComponent
+      },
+      {
+        path: "wishlist",
+        component: WishlistComponent
       },
       {
         path: "about-us",

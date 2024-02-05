@@ -16,8 +16,11 @@ public sealed class Order
     public int Quantity { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.Now;
     public DateTime PaymentDate { get; set; } = DateTime.Now;
-    public string PaymentMethod { get; set; } = string.Empty;
+    public string PaymentMethodEn { get; set; } = string.Empty;
+    public string PaymentMethodTr { get; set; } = string.Empty;
     public string PaymentNumber { get; set; } = string.Empty;
+    public string StatusEn { get; set; } = string.Empty;
+    public string StatusTr { get; set; } = string.Empty;
 
     public static string GetNewOrderNumber()
     {
@@ -51,13 +54,14 @@ public sealed class Order
         while (!isOrderNumberUnique)
         {
             currentOrderNumberInt++;
-            newOrderNumber += currentOrderNumberInt.ToString("D9");
-            string checkOrderNumber = newOrderNumber;
-            var order = context.Orders.FirstOrDefault(o => o.OrderNumber == checkOrderNumber);
+            string potentialOrderNumber = newOrderNumber + currentOrderNumberInt.ToString("D9");
+            var order = context.Orders.FirstOrDefault(o => o.OrderNumber == potentialOrderNumber);
             if (order == null)
             {
+                newOrderNumber = potentialOrderNumber; // Yalnızca yeni sipariş numarasını güncelle
                 isOrderNumberUnique = true;
             }
         }
     }
+
 }

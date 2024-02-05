@@ -63,7 +63,7 @@
             @if (responseInLocalStorage) {
             <span>
               <a routerLink="/my-account">
-                <span> {{auth.token.name}}</span>
+                <span> {{auth.user.firstName}} {{auth.user.lastName}}</span>
               </a>
             </span>
             }

@@ -1,0 +1,139 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-3 border-right">
+            <h6 class="font-weight-medium font-size-7 pt-5 pt-lg-8  mb-5 mb-lg-7">{{'myAccount' | translate}}
+            </h6>
+            <div class="tab-wrapper">
+                <ul class="my__account-nav nav flex-column mb-0" role="tablist" id="pills-tab">
+                    <li class="nav-item mx-0">
+                        <a href="/my-account" class="nav-link d-flex align-items-center px-0 active">
+                            <span class="font-weight-normal text-gray-600">{{'dashboard' | translate}}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item mx-0">
+                        <a href="/orders" class="nav-link d-flex align-items-center px-0">
+                            <span class="font-weight-normal text-gray-600">{{'orders' | translate}}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item mx-0">
+                        <a href="/addresses" class="nav-link d-flex align-items-center px-0">
+                            <span class="font-weight-normal text-gray-600">{{'addresses' | translate}}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item mx-0">
+                        <a href="/account-details" class="nav-link d-flex align-items-center px-0">
+                            <span class="font-weight-normal text-gray-600">{{'accountDetails' | translate}}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item mx-0">
+                        <a href="/wishlist" class="nav-link d-flex align-items-center px-0">
+                            <span class="font-weight-normal text-gray-600">{{'wishlist' | translate}}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item mx-0">
+                        <a class="nav-link d-flex align-items-center px-0">
+                            <span class="font-weight-normal text-gray-600">{{'logout' | translate}}</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <!-- Account Details -->
+            <div class="border-bottom mb-6 pb-6 mb-lg-8 pb-lg-9">
+                <div class="pt-5 pl-md-5 pt-lg-8 pl-lg-9">
+                    <h6 class="font-weight-medium font-size-7 ml-lg-1 mb-lg-8 pb-xl-1">
+                        {{'accountDetails' | translate}}
+                    </h6>
+                    <div class="font-weight-medium font-size-22 mb-4 pb-xl-1">{{'editAccount' |
+                        translate}}</div>
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <div class="js-form-message">
+                                <label for="exampleFormControlInput1">{{'firstName' | translate}}
+                                    *</label>
+                                <input [(ngModel)]="auth.firstName" type="text" class="form-control rounded-0 pl-3 placeholder-color-3"
+                                    id="exampleFormControlInput1" name="name" aria-label="Jack Wayley" autocomplete="off"
+                                    required="" data-error-class="u-has-error"
+                                    data-success-class="u-has-success">
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="js-form-message">
+                                <label for="exampleFormControlInput2">{{'lastName' | translate}}
+                                    *</label>
+                                <input [(ngModel)]="auth.lastName" type="text" class="form-control rounded-0 pl-3 placeholder-color-3"
+                                    id="exampleFormControlInput2" name="name" aria-label="Jack Wayley" autocomplete="off"
+                                    required="" data-error-class="u-has-error"
+                                 data-success-class="u-has-success">
+                            </div>
+                        </div>
+                        <div class="col-md-12 mb-4">
+                            <div class="js-form-message">
+                                <label for="exampleFormControlInput4">{{'emailaddress' | translate}}</label>
+                                <input [(ngModel)]="auth.email" type="email" class="form-control rounded-0" name="name"
+                                    id="exampleFormControlInput4" aria-label="Jack Wayley" required="" autocomplete="off"
+                                    data-error-class="u-has-error"
+                                    data-success-class="u-has-success">
+                            </div>
+                        </div>
+                        <div class="col-md-12 mb-4 mb-md-0">
+                            <div class="js-form-message">
+                                <label for="exampleFormControlInput3">{{'displayName' |
+                                    translate}}</label>
+                                <input [(ngModel)]="auth.userName" type="text" class="form-control rounded-0" name="name" aria-label="Jack Wayley" autocomplete="off"
+                                    id="exampleFormControlInput3" required="" data-error-class="u-has-error"
+                                 data-success-class="u-has-success">
+                            </div>
+                        </div>
+                        <div class="ml-3 mt-5">
+                            <button type="submit" (click)="updateUserInformation()"
+                                class="btn btn-wide btn-dark text-white rounded-0 transition-3d-hover height-60 width-390">{{'saveChanges'
+                                | translate}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pl-md-5 pl-lg-9 space-bottom-2 space-bottom-lg-3">
+                <div class="font-weight-medium font-size-22 mb-4 pb-xl-1">{{'passwordChange' |
+                    translate}}</div>
+                <div class="row">
+                    <div class="col-md-12 mb-4">
+                        <div class="js-form-message">
+                            <label for="exampleFormControlInput5">{{'currentPassword' |
+                                translate}}</label>
+                            <input [(ngModel)]="currentPassword" type="password" class="form-control rounded-0" name="name" autocomplete="off" placeholder="********"
+                                id="exampleFormControlInput5" aria-label="Jack Wayley" required=""
+                                data-error-class="u-has-error"
+                                data-success-class="u-has-success">
+                        </div>
+                    </div>
+                    <div class="col-md-12 mb-4">
+                        <div class="js-form-message">
+                            <label for="exampleFormControlInput6">{{'newPassword' | translate}}</label>
+                            <input [(ngModel)]="newPassword" type="password" class="form-control rounded-0" name="name" autocomplete="off" placeholder="********"
+                                id="exampleFormControlInput6" aria-label="Jack Wayley" required=""
+                                data-error-class="u-has-error"
+                                data-success-class="u-has-success">
+                        </div>
+                    </div>
+                    <div class="col-md-12 mb-5">
+                        <div class="js-form-message">
+                            <label for="exampleFormControlInput7">{{'confirmNewPassword' |
+                                translate}}</label>
+                            <input [(ngModel)]="confirmedPassword" type="password" class="form-control rounded-0" name="name" autocomplete="off" placeholder="********"
+                                id="exampleFormControlInput7" aria-label="Jack Wayley" required=""
+                                data-error-class="u-has-error" data-msg="Please enter your name."
+                                data-success-class="u-has-success">
+                        </div>
+                    </div>
+                    <div class="ml-3">
+                        <button type="submit" (click)="updateUserPassword()"
+                            class="btn btn-wide btn-dark text-white rounded-0 transition-3d-hover height-60 width-390">{{'saveChanges'
+                            | translate}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -219,6 +219,7 @@
   "(Bu kullanıcı kayıdı zaten mevcut)": "Bu kullanıcı kayıdı zaten mevcut!",
   "(Kayıt işlemi başarıyla tamamlandı.)": "Kayıt işlemi başarıyla tamamlandı.",
 
+  "myAccount": "Hesabım",
   "dashboard": "Pano",
   "orders": "Siparişler",
   "downloads": "İndirmeler",
@@ -229,17 +230,20 @@
   "hello": "Merhaba",
   "notUser": "değil misiniz",
   "userlogout": "Çıkış Yapın",
-  "From your account dashboard you can view your recent orders, manage your shipping and billing addresses, and edit your password and account details.": "Hesap panonuzdan son siparişlerinizi görebilir, kargo ve fatura adreslerinizi yönetebilir ve şifre ile hesap detaylarınızı düzenleyebilirsiniz.",
+  "From your account dashboard you can view your recent orders, manage your shipping and billing addresses, and edit your password and account details.": "Hesap panonuzdan son siparişlerinizi görebilir, kargo ve fatura adreslerinizi yönetebilir ve şifre ile hesap detaylarınızı düzenleyebilirsiniz",
   "staus": "Durum",
   "actions": "İşlemler",
   "view": "Görüntüle",
+  "edit": "Düzenle",
+  "removee": "Kaldır",
   "editAccount": "Hesabı Düzenle",
-  "displayName": "Görünen Ad",
+  "displayName": "Kullanıcı Adı",
   "emailaddress": "E-posta Adresi",
   "passwordChange": "Şifre Değişikliği",
   "currentPassword": "Mevcut Şifre",
   "newPassword": "Yeni Şifre",
   "confirmNewPassword": "Yeni Şifreyi Onayla",
+  "saveChanges": "Değişiklikleri Kaydet",
 
   "pleaseLoginToAddTheProductToFavorites": "Ürünü favorilere eklemek için lütfen giriş yapın.",
   "confirmButton": "Tamam",
@@ -250,5 +254,13 @@
   "(Kitap stokta kalmadı!)": "Kitap stokta kalmadı!",
   "theBookIsOutOfStock": "Kitap stokta yok.",
   "(Kitap stoğu yeterli değil. Lütfen daha az adet ile tekrar deneyin)": "Kitap stoğu yeterli değil. Lütfen daha az adet ile tekrar deneyin.",
-  "(Kitap stoğu yeterli değil)": "Kitap stoğu yeterli değil."
+  "(Kitap stoğu yeterli değil)": "Kitap stoğu yeterli değil.",
+  "(Bu kitap zaten favorilerde ekli!)": "Bu kitap zaten favorilerde ekli!",
+  "There are no products in the wish list": "İstek listesinde herhangi bir ürün bulunmamaktadır.",
+
+  "Account information updated!": "Hesap şifresi güncellendi!",
+  "Account password updated!": "Hesap şifresi güncellendi!",
+  "(Kayıt Bulunamadı!)": "Kayıt Bulunamadı!",
+  "(Mevcut şifre yanlış!)": "Mevcut şifre yanlış!",
+  "(Yeni şifreler uyuşmuyor!)": "Yeni şifreler uyuşmuyor!"
 }

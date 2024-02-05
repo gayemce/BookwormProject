@@ -19,14 +19,14 @@ import { WishListService } from 'src/app/services/wish-list.service';
 })
 export class MiddlebarComponent {
 
-  responseInLocalStorage: any;
-  
+  responseInLocalStorage: any;  
 
   ngOnInit(){
     if(localStorage.getItem('response')){
       this.responseInLocalStorage = localStorage.getItem("response");
       this.auth.checkAuthentication();
     }
+    this.auth.getUser();
   }
 
   constructor(

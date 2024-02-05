@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BookwormServer.WebAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+13f77b899c21ed3515da312b513a0b766b7c07d7")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3c295692bae874585a2d77ddd451f77c31e5dbc7")]
 [assembly: System.Reflection.AssemblyProductAttribute("BookwormServer.WebAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BookwormServer.WebAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

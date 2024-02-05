@@ -1,0 +1,242 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-3 border-right">
+            <h6 class="font-weight-medium font-size-7 pt-5 pt-lg-8  mb-5 mb-lg-7">{{'myAccount' | translate}}
+            </h6>
+            <div class="tab-wrapper">
+                <ul class="my__account-nav nav flex-column mb-0" role="tablist" id="pills-tab">
+                    <li class="nav-item mx-0">
+                        <a href="/my-account" class="nav-link d-flex align-items-center px-0 active">
+                            <span class="font-weight-normal text-gray-600">{{'dashboard' | translate}}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item mx-0">
+                        <a href="/orders" class="nav-link d-flex align-items-center px-0">
+                            <span class="font-weight-normal text-gray-600">{{'orders' | translate}}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item mx-0">
+                        <a href="/addresses" class="nav-link d-flex align-items-center px-0">
+                            <span class="font-weight-normal text-gray-600">{{'addresses' | translate}}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item mx-0">
+                        <a href="/account-details" class="nav-link d-flex align-items-center px-0">
+                            <span class="font-weight-normal text-gray-600">{{'accountDetails' |
+                                translate}}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item mx-0">
+                        <a href="/wishlist" class="nav-link d-flex align-items-center px-0">
+                            <span class="font-weight-normal text-gray-600">{{'wishlist' | translate}}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item mx-0">
+                        <a class="nav-link d-flex align-items-center px-0">
+                            <span class="font-weight-normal text-gray-600">{{'logout' | translate}}</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="pt-5 pl-md-5 pt-lg-8 pl-lg-9 space-bottom-2 mb-lg-4">
+                <h6 class="font-weight-medium font-size-7 ml-lg-1 mb-5 mb-lg-8 pb-xl-1">{{'addresses' |
+                    translate}}</h6>
+                <div class="row row-cols-1 row-cols-md-2">
+                    <div class="col">
+                        @if(!isShippingAddress){
+                        <div class="mb-6 mb-md-0">
+                            <h6 class="font-weight-medium font-size-22 mb-3">{{'shippingAddress' | translate}}</h6>
+                            <address class="d-flex flex-column mb-4">
+                                <span class="text-gray-600 font-size-2">Ali Tufan</span>
+                                <span class="text-gray-600 font-size-2">Bedford St,</span>
+                                <span class="text-gray-600 font-size-2">Covent Garden, </span>
+                                <span class="text-gray-600 font-size-2">London WC2E 9ED</span>
+                                <span class="text-gray-600 font-size-2">United Kingdom</span>
+                            </address>
+                            <div class="d-flex">
+                                <button type="submit" (click)="editShippingAddress()"
+                                    class="btn btn-dark width-150 rounded-0 btn-wide font-weight-medium">{{'edit'
+                                    | translate}}</button>
+                            </div>
+                        </div>
+                        }
+                        @else {
+                        <div class="mb-6 mb-md-0">
+                            <form #shippingAddressForm="ngForm" autocomplete="off">
+                                <h3 class="mb-4 font-size-3">{{'shippingAddress' | translate}}</h3>
+                                <div class="form-group woocommerce-shipping-fields__field-wrapper row">
+
+                                    <!-- Country -->
+                                    <p class="col-lg-4 mb-4d75 form-row form-row-wide address-field update_totals_on_change validate-required woocommerce-validated"
+                                        id="shipping_country_field" data-priority="40">
+                                        <label for="shipping_country" class="form-label">{{'country' | translate}}
+                                            <abbr class="required" title="required">*</abbr></label>
+                                        <select name="shipping_country" id="shipping_country"
+                                            class="form-control country_to_state country_select select2-hidden-accessible"
+                                            autocomplete="country" tabindex="-1" aria-hidden="true" required>
+                                            <option value="" disabled selected></option>
+                                            <option *ngFor="let country of countries">{{country}}</option>
+                                        </select>
+                                    </p>
+
+                                    <!-- City -->
+                                    <p class="col-lg-4 mb-4d75 form-row form-row-wide address-field validate-required"
+                                        id="shipping_city_field" data-priority="70"
+                                        data-o_class="form-row form-row-wide address-field validate-required">
+                                        <label for="shipping_city" class="form-label">{{'town/City'
+                                            | translate}}
+                                            <abbr class="required" title="required">*</abbr></label>
+                                        <select name="shipping_city" id="shipping_city"
+                                            class="form-control country_to_state country_select  select2-hidden-accessible"
+                                            autocomplete="city" tabindex="-1" aria-hidden="true" required>
+                                            <option value="" disabled selected></option>
+                                            <option *ngFor="let city of cities">{{city}}</option>
+                                        </select>
+                                    </p>
+
+                                    <!-- Postacode -->
+                                    <p class="col-4 mb-4d75 form-row form-row-wide address-field validate-postcode validate-required"
+                                        id="shipping_postcode_field" data-priority="90"
+                                        data-o_class="form-row form-row-wide address-field validate-required validate-postcode">
+                                        <label for="shipping_postcode" class="form-label">{{'postcode' | translate}}
+                                        </label>
+                                        <input type="text" class="input-text form-control" name="shipping_postcode"
+                                            id="shipping_postcode"
+                                            value="" autocomplete="off">
+                                    </p>
+
+                                    <!-- Contact Name -->
+                                    <p class="col-6 mb-4d75 form-row form-row-wide address-field validate-postcode validate-required"
+                                        id="shipping_address_contactName_field" data-priority="60"
+                                        data-o_class="form-row form-row-wide address-field validate-required">
+                                        <label for="shipping_contactName" class="form-label">{{'pickupPerson' |
+                                            translate}}
+                                            <abbr class="required" title="required">*</abbr></label>
+                                        <input type="text" class="input-text form-control"
+                                            name="shipping_address_contactName" id="shipping_address_contactName"
+                                            value="" autocomplete="off" required>
+                                    </p>
+
+                                    <!-- Description -->
+                                    <p class="col-6 mb-4d75 form-row form-row-wide address-field validate-postcode validate-required"
+                                        id="shipping_address_description_field" data-priority="60"
+                                        data-o_class="form-row form-row-wide address-field validate-required validate-description">
+                                        <label for="shipping_description" class="form-label">{{'addressDetails' |
+                                            translate}}
+                                            <abbr class="required" title="required">*</abbr></label>
+                                        <input type="text" class="input-text form-control"
+                                            name="shipping_address_description" id="shipping_address_description"
+                                            value="" autocomplete="off" required>
+                                    </p>
+                                </div>
+                                <div class="d-flex">
+                                    <button type="submit" (click)="editShippingAddress()"
+                                        class="btn btn-dark width-150 rounded-0 btn-wide font-weight-medium">{{'edit'
+                                        | translate}}</button>
+                                </div>
+                            </form>
+                        </div>
+                        }
+                    </div>
+
+                    <div class="col">
+                        @if(!isBillingAddress){
+                        <div class="mb-6 mb-md-0">
+                            <h6 class="font-weight-medium font-size-22 mb-3">{{'billingAddress' | translate}}</h6>
+                            <address class="d-flex flex-column mb-4">
+                                <span class="text-gray-600 font-size-2">Ali Tufan</span>
+                                <span class="text-gray-600 font-size-2">Bedford St,</span>
+                                <span class="text-gray-600 font-size-2">Covent Garden, </span>
+                                <span class="text-gray-600 font-size-2">London WC2E 9ED</span>
+                                <span class="text-gray-600 font-size-2">United Kingdom</span>
+                            </address>
+                            <div class="d-flex">
+                                <button type="submit" (click)="editBillingAddress()"
+                                    class="btn btn-dark width-150 rounded-0 btn-wide font-weight-medium">{{'edit'
+                                    | translate}}</button>
+                            </div>
+                        </div>
+                        }@else {
+                        <div class="mb-6 mb-md-0">
+                            <form #billingAddressForm="ngForm" autocomplete="off">
+                                <h3 class="mb-4 font-size-3">{{'BillingAddress' | translate}}</h3>
+                                <div class="form-group woocommerce-shipping-fields__field-wrapper row">
+
+                                    <!-- Country -->
+                                    <p class="col-lg-4 mb-4d75 form-row form-row-wide address-field update_totals_on_change validate-required woocommerce-validated"
+                                        id="billing_country_field" data-priority="40">
+                                        <label for="billing_country" class="form-label">{{'country'
+                                            | translate}}
+                                            <abbr class="required" title="required">*</abbr></label>
+                                        <select name="billing_country" id="billing_country"
+                                            class="form-control country_to_state country_select  select2-hidden-accessible"
+                                            autocomplete="country" tabindex="-1" aria-hidden="true" required>
+                                            <option value="" disabled selected></option>
+                                            <option *ngFor="let country of countries">{{country}}</option>
+                                        </select>
+                                    </p>
+
+                                    <!-- City -->
+                                    <p class="col-lg-4 mb-4d75 form-row form-row-wide address-field validate-required"
+                                        id="billing_city_field" data-priority="70"
+                                        data-o_class="form-row form-row-wide address-field validate-required">
+                                        <label for="billing_city" class="form-label">{{'town/City' |
+                                            translate}}
+                                            <abbr class="required" title="required">*</abbr></label>
+                                        <select name="billing_city" id="billing_city"
+                                            class="form-control country_to_state country_select  select2-hidden-accessible"
+                                            autocomplete="city" tabindex="-1" aria-hidden="true" required>
+                                            <option value="" disabled selected></option>
+                                            <option *ngFor="let city of cities">{{city}}</option>
+                                        </select>
+                                    </p>
+
+                                    <!-- Postacode -->
+                                    <p class="col-4 mb-4d75 form-row form-row-wide address-field validate-postcode validate-required"
+                                        id="billing_postcode_field" data-priority="90"
+                                        data-o_class="form-row form-row-wide address-field validate-required validate-postcode">
+                                        <label for="billing_postcode" class="form-label">{{'postcode' | translate}}
+                                        </label>
+                                        <input type="text" class="input-text form-control" name="billing_postcode"
+                                            id="billing_postcode" value="" autocomplete="off">
+                                    </p>
+
+                                    <!-- Contact Name -->
+                                    <p class="col-6 mb-4d75 form-row form-row-wide address-field validate-postcode validate-required"
+                                        id="billing_address_contactName_field" data-priority="60"
+                                        data-o_class="form-row form-row-wide address-field validate-required">
+                                        <label for="billing_contactName" class="form-label">{{'pickupPerson' |
+                                            translate}}
+                                            <abbr class="required" title="required">*</abbr></label>
+                                        <input type="text" class="input-text form-control"
+                                            name="billing_address_contactName" id="billing_address_contactName"
+                                            value="" autocomplete="off" required>
+                                    </p>
+
+                                    <!-- Description -->
+                                    <p class="col-6 mb-4d75 form-row form-row-wide address-field validate-postcode validate-required"
+                                        id="billing_address_description_field" data-priority="60"
+                                        data-o_class="form-row form-row-wide address-field validate-required validate-description">
+                                        <label for="billing_description" class="form-label">{{'addressDetails' |
+                                            translate}}
+                                            <abbr class="required" title="required">*</abbr></label>
+                                        <input type="text" class="input-text form-control"
+                                            name="billing_address_description" id="billing_address_description"
+                                            value="" autocomplete="off" required>
+                                    </p>
+                                </div>
+                                <div class="d-flex">
+                                    <button type="submit" (click)="editBillingAddress()"
+                                        class="btn btn-dark width-150 rounded-0 btn-wide font-weight-medium">{{'edit'
+                                        | translate}}</button>
+                                </div>
+                            </form>
+                        </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

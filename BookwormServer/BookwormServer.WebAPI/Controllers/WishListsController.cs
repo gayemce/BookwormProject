@@ -11,11 +11,17 @@ namespace BookwormServer.WebAPI.Controllers;
 [ApiController]
 public class WishListsController : ControllerBase
 {
+    private readonly AppDbContext _context;
+
+    public WishListsController(AppDbContext context)
+    {
+        _context = context;
+    }
+
     [HttpGet("{userId}")]
     public IActionResult GetAllWishList(int userId)
     {
-        AppDbContext context = new();
-        List<WishListResponseDto> wishLists = context.WishLists.Where(p => p.AppUserId == userId).AsNoTracking().Include(p => p.Book).Select(s => new WishListResponseDto()
+        List<WishListResponseDto> wishLists = _context.WishLists.Where(p => p.AppUserId == userId).AsNoTracking().Include(p => p.Book).Select(s => new WishListResponseDto()
         {
             Author = s.Book!.Author,
             AuthorId = s.Book.AuthorId,
@@ -40,28 +46,35 @@ public class WishListsController : ControllerBase
     [HttpPost]
     public IActionResult AddToWishList(AddToWishListDto request)
     {
-        AppDbContext context = new();
-        WishList wishList = new()
-        {
-            BookId = request.BookId,
-            AppUserId = request.AppUserId,    
-            
-        };
-        context.Add(wishList);
-        context.SaveChanges();
+        WishList? wishList = _context.WishLists.Where(p => p.BookId == request.BookId && p.AppUserId == request.AppUserId).FirstOrDefault();
 
+        if(wishList is not null)
+        {
+            return StatusCode(422, new { message = "Bu kitap zaten favorilerde ekli!" });
+        }
+        else
+        {
+            wishList = new()
+            {
+                BookId = request.BookId,
+                AppUserId = request.AppUserId,
+                Price = request.Price
+            };
+            _context.Add(wishList);
+        }
+        
+        _context.SaveChanges();
         return NoContent();
     }
 
     [HttpGet("{id}")]
     public IActionResult removeFromWishListById(int id)
     {
-        AppDbContext context = new();
-        var wishList = context.WishLists.Where(p => p.Id == id).FirstOrDefault();
+        var wishList = _context.WishLists.Where(p => p.Id == id).FirstOrDefault();
         if (wishList is not null)
         {
-            context.WishLists.Remove(wishList);
-            context.SaveChanges();
+            _context.WishLists.Remove(wishList);
+            _context.SaveChanges();
         }
 
         return NoContent();

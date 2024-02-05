@@ -1,8 +1,10 @@
-﻿using BookwormServer.WebAPI.Context;
+﻿using Azure.Core;
+using BookwormServer.WebAPI.Context;
 using BookwormServer.WebAPI.Dtos;
 using BookwormServer.WebAPI.Models;
 using BookwormServer.WebAPI.Services;
 using BookwormServer.WebAPI.Validators;
+using FluentValidation;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -58,6 +60,76 @@ public sealed class AuthController : ControllerBase
         string token = _jwtService.CreateToken(appUser, null ,request.RemeberMe);
         return Ok(new { AccessToken = token });
     }
+
+    [HttpGet("{userId}")]
+    public IActionResult GetUser(int userId)
+    {
+        var user = _context.AppUsers.Where(p => p.Id == userId).FirstOrDefault();
+        return Ok(user);
+    }
+
+    [HttpPost]
+    public IActionResult UpdateUserInformation(UpdateUserInformationDto request)
+    {
+        var user = _context.AppUsers.Find(request.Id);
+        if (user is null)
+        {
+            return BadRequest(new { Message = "Kayıt Bulunamadı!" });
+        }
+
+        UpdateUserInformationValidator informationValidator = new();
+        ValidationResult validationResult = informationValidator.Validate(request);
+
+        if (!validationResult.IsValid)
+        {
+            return StatusCode(422, validationResult.Errors.Select(s => s.ErrorMessage));
+        }
+
+        user.FirstName = request.FirstName;
+        user.LastName = request.LastName;
+        user.UserName = request.UserName;
+        user.Email = request.Email;
+
+        _context.SaveChanges();
+        return NoContent();
+    }
+
+    [HttpPost]
+    public IActionResult UpdateUserPassword(UpdateUserPasswordDto request)
+    {
+        var user = _context.AppUsers.Find(request.Id);
+        if (user is null)
+        {
+            return BadRequest(new { Message = "Kayıt Bulunamadı!" });
+        }
+
+        UpdateUserPasswordValidator passwordValidator = new();
+        ValidationResult validationResult = passwordValidator.Validate(request);
+
+        if (!validationResult.IsValid)
+        {
+            return StatusCode(422, validationResult.Errors.Select(s => s.ErrorMessage));
+        }
+
+        var passwordHasher = new PasswordHasher<AppUser>();
+        var passwordVerificationResult = passwordHasher.VerifyHashedPassword(user, user.PasswordHash, request.CurrentPassword);
+        if (passwordVerificationResult != PasswordVerificationResult.Success)
+        {
+            return BadRequest(new { Message = "Mevcut şifre yanlış!" });
+        }
+
+        if (request.NewPassword != request.ConfirmedPassword)
+        {
+            return BadRequest(new { Message = "Yeni şifreler uyuşmuyor!" });
+        }
+
+        var hashedNewPassword = passwordHasher.HashPassword(null, request.NewPassword);
+        user.PasswordHash = hashedNewPassword;
+
+        _context.SaveChanges();
+        return NoContent();
+    }
+
 
     [HttpPost]
     public async Task<IActionResult> Register(RegisterDto request, CancellationToken cancellationToken)

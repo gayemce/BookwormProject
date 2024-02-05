@@ -33,7 +33,6 @@ export class WishListService {
         {
           next: (res: any) => {
             this.wishList = res;
-            console.log(this.wishList);
           },
           error: (err: HttpErrorResponse) => {
             this.error.errorHandler(err);
@@ -53,6 +52,7 @@ export class WishListService {
       const data: AddToWishListModel = new AddToWishListModel();
       data.bookId = book.id;
       data.appUserId = Number(this.auth.token.userId);
+      data.price = book.price;
 
       this.http.post("https://localhost:7018/api/WishLists/AddToWishList", data).subscribe({
         next: (res: any) => {

@@ -286,9 +286,12 @@ public sealed class CartsController : ControllerBase
                     Price = new ValueObjects.Money(book.Price.Value, book.Price.Currency),
                     Quantity = book.Quantity,
                     PaymentDate = DateTime.Now,
-                    PaymentMethod = "Credit Card",
+                    PaymentMethodEn = "Credit Card",
+                    PaymentMethodTr = "Kredi Kartı",
                     AppUserId = paymentRequest.AppUserId,
                     PaymentNumber = payment.PaymentId,
+                    StatusEn = "Preparing",
+                    StatusTr = "Hazırlanıyor"
                 };
                 orders.Add(order);
             }

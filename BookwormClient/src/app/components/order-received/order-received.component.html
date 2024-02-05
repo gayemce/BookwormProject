@@ -30,8 +30,9 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <th scope="row" class="pr-0 py-0 font-weight-medium">1779</th>
+                                        <tr *ngFor="let o of orders let i = index">
+                                            <th scope="row" class="pr-0 py-0 font-weight-medium"></th>
+                                            <td class="pr-md-12 py-0 font-weight-medium text-md-right">{{o.orderNumber}}</td>
                                             @if(payment.currency === '₺'){
                                                 <td class="pr-0 py-0 font-weight-medium">{{day}} {{monthNameTr}}, {{year}}</td>
                                             }
@@ -40,15 +41,19 @@
                                             }
                                             @if(payment.currency === '₺'){
                                             <td class="pr-0 py-0 font-weight-medium text-md-center">
-                                                {{ payment.shippingAndCartTotal | trCurrency }} {{payment.currency}}</td>
+                                                {{ o.price.value| trCurrency }} {{o.price.currency}}</td>
                                             }
                                             @else {
                                             <td class="pr-0 py-0 font-weight-medium text-md-center">
-                                                {{ payment.shippingAndCartTotal | currency: '':'':'1.2-2' }} {{payment.currency}}
+                                                {{ o.price.value | currency: '':'':'1.2-2' }} {{o.price.currency}}
                                             </td>
                                             }
-                                            <td class="pr-md-12 py-0 font-weight-medium text-md-right">{{'creditCard' |
-                                                translate}}</td>
+                                            @if(selectLang.userSelectedLanguage === "en"){
+                                                <td class="pr-md-12 py-0 font-weight-medium text-md-right">{{o.paymentMethodEn}}</td>
+                                            }
+                                            @else {
+                                                <td class="pr-md-12 py-0 font-weight-medium text-md-right">{{o.paymentMethodTr}}</td>
+                                            }
                                         </tr>
                                     </tbody>
                                 </table>

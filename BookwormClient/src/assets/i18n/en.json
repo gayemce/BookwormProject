@@ -261,5 +261,12 @@
   "Account password updated!": "Account password updated!",
   "(Kayıt Bulunamadı!)": "No Record Found!",
   "(Mevcut şifre yanlış!)": "The current password is incorrect!",
-  "(Yeni şifreler uyuşmuyor!)": "The new passwords don't match!"
+  "(Yeni şifreler uyuşmuyor!)": "The new passwords don't match!",
+  "Shipping address updated": "Shipping address updated.",
+  "addShippingAddress": "Add Shipping Address",
+  "addBillingAddress": "Add Billing Address",
+  "Shipping address added": "Shipping address added.",
+  "Billing address added": "Billing address added.",
+  "Billing address updated": "Billing address updated.",
+  "add": "Add"
 }

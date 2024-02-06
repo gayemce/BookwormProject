@@ -2,8 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
-import { Cities } from 'src/app/constants/cities';
-import { Countries } from 'src/app/constants/countries';
+import { AddressService } from 'src/app/services/address.service';
+
 
 @Component({
   selector: 'app-addresses',
@@ -14,20 +14,9 @@ import { Countries } from 'src/app/constants/countries';
 })
 export class AddressesComponent {
 
-  isShippingAddress: boolean = false;
-  isBillingAddress: boolean = false;
-  countries = Countries;
-  cities = Cities;
+  constructor(
+    public address: AddressService
+  ){
 
-  constructor() {
-
-  }
-
-  editShippingAddress() {
-    this.isShippingAddress = !this.isShippingAddress;
-  }
-
-  editBillingAddress() {
-    this.isBillingAddress = !this.isBillingAddress;
   }
 }

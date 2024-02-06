@@ -12,6 +12,8 @@ public sealed class AppDbContext : DbContext
         optionsBuilder.UseSqlServer("Data Source=DESKTOP-I7G56NT\\SQLEXPRESS;Initial Catalog=BookwormWebDb;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
     }
 
+    public DbSet<Address> Addresses { get; set; }
+    public DbSet<BillingAddress> BillingAddresses { get; set; }
     public DbSet<Author> Authors { get; set; }
     public DbSet<Book> Books { get; set; }
     public DbSet<BookCategory> BookCategories { get; set; }

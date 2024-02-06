@@ -262,5 +262,12 @@
   "Account password updated!": "Hesap şifresi güncellendi!",
   "(Kayıt Bulunamadı!)": "Kayıt Bulunamadı!",
   "(Mevcut şifre yanlış!)": "Mevcut şifre yanlış!",
-  "(Yeni şifreler uyuşmuyor!)": "Yeni şifreler uyuşmuyor!"
+  "(Yeni şifreler uyuşmuyor!)": "Yeni şifreler uyuşmuyor!",
+  "Shipping address updated": "Gönderi adresi güncellendi.",
+  "addShippingAddress": "Gönderi Adresi Ekle",
+  "addBillingAddress": "Fatura Adresi Ekle",
+  "Shipping address added": "Gönderi adresi eklendi.",
+  "Billing address added": "Fatura adresi eklendi.",
+  "Billing address updated": "Fatura adresi güncellendi.",
+  "add": "Ekle"
 }

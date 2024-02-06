@@ -12,6 +12,8 @@ import { AuthService } from 'src/app/services/auth.service';
 import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
 import { SwalService } from 'src/app/services/swal.service';
 import { TrCurrencyPipe } from 'tr-currency';
+import { AddressesComponent } from '../my-account/addresses/addresses.component';
+import { AddressService } from 'src/app/services/address.service';
 
 @Component({
     selector: 'app-checkout',
@@ -31,19 +33,18 @@ export default class CheckoutComponent {
     years = Years;
     isSameAddress: boolean = false;
 
+    isAvailableShippingAddress = true;
+    isAvailableBillingAddress = true;
+
     constructor(
         public shopping: ShoppingCartService,
-        private auth: AuthService
+        private auth: AuthService,
+        public address: AddressService
     ) {
         if (localStorage.getItem("currency")) {
             this.currency = localStorage.getItem("currency") as string;
             this.shopping.onCurrencyButtonClick(this.currency);
         }
-
-        // if (localStorage.getItem("cartTotal")) {
-        //     this.cartTotal = localStorage.getItem("cartTotal") as string;
-        // }
-
     }
 
     payment() {
@@ -57,7 +58,6 @@ export default class CheckoutComponent {
             localStorage.removeItem("shoppingCarts");
             this.shopping.shoppingCarts = [];
             this.shopping.shoppingCarts.length = 0;
-            // Buradan devam edilecek
             localStorage.removeItem("shippingAndCartTotal");
             // localStorage.removeItem("currency");
             localStorage.setItem("paymentDetails", JSON.stringify(this.paymentRequest));

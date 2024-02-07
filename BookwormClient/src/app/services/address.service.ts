@@ -97,6 +97,7 @@ export class AddressService {
     this.http.get("https://localhost:7018/api/Addresses/Get/" + this.auth.token.userId).subscribe({
       next: (res: any) => {
         this.shippingAddress = res;
+        console.log(this.shippingAddress);
         this.addressId = this.shippingAddress.id;
         this.contactName = this.shippingAddress.contactName;
         this.country = this.shippingAddress.country;

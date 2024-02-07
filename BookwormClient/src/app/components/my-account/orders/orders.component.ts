@@ -40,4 +40,10 @@ export class OrdersComponent {
       }
     })
   }
+
+  logout(){
+    localStorage.removeItem("response");
+    this.shopping.getAllShoppingCarts();
+    location.href = "/"
+  }
 }

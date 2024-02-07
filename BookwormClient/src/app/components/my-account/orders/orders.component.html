@@ -32,78 +32,88 @@
                         </a>
                     </li>
                     <li class="nav-item mx-0">
-                        <a class="nav-link d-flex align-items-center px-0">
+                        <a class="nav-link d-flex align-items-center px-0" (click)="logout()">
                             <span class="font-weight-normal text-gray-600">{{'logout' | translate}}</span>
                         </a>
                     </li>
                 </ul>
             </div>
         </div>
-        <div class="col-md-9">
-            <div class="pt-5 pl-md-5 pt-lg-8 pl-lg-9 space-bottom-lg-2 mb-lg-4">
-                <h6 class="font-weight-medium font-size-7 ml-lg-1 mb-lg-8 pb-xl-1">{{'orders' |
-                    translate}}</h6>
-                <table class="table">
-                    <thead>
-                        <tr class="border">
-                            <th scope="col" class="py-3 border-bottom-0 font-weight-medium pl-3 pl-lg-5">{{'orders'
-                                | translate}}</th>
-                            <th scope="col" class="py-3 border-bottom-0 font-weight-medium">{{'date' |
-                                translate}}</th>
-                            <th scope="col" class="py-3 border-bottom-0 font-weight-medium">{{'staus' |
-                                translate}}</th>
-                            <th scope="col" class="py-3 border-bottom-0 font-weight-medium">{{'total' |
-                                translate}}</th>
-                            <th scope="col" class="py-3 border-bottom-0 font-weight-medium">{{'actions'
-                                | translate}}</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        <tr class="border" *ngFor="let o of orders let i = index">
-                            <th class="pl-3 pl-md-5 font-weight-normal align-middle py-6">{{o.orderNumber}}</th>
-                            @if(selectedLang.userSelectedLanguage === "en"){
-                                <td class="align-middle py-5">{{o.paymentDate | date: 'MM/dd/yyyy HH:mm'}}</td>
-                            }@else{
-                                <td class="align-middle py-5">{{o.paymentDate | date: 'dd.MM.yyyy HH:mm'}}</td>
-                            }
-                            @if(selectedLang.userSelectedLanguage === "en"){
-                                <td class="align-middle py-5">{{o.statusEn}}</td>
-                            }@else {
-                                <td class="align-middle py-5">{{o.statusTr}}</td>
-                            }
-                            @if(selectedLang.userSelectedLanguage === "en"){
+        @if(orders.length > 0){
+            <div class="col-md-9">
+                <div class="pt-5 pl-md-5 pt-lg-8 pl-lg-9 space-bottom-lg-2 mb-lg-4">
+                    <h6 class="font-weight-medium font-size-7 ml-lg-1 mb-lg-8 pb-xl-1">{{'orders' |
+                        translate}}</h6>
+                    <table class="table">
+                        <thead>
+                            <tr class="border">
+                                <th scope="col" class="py-3 border-bottom-0 font-weight-medium pl-3 pl-lg-5">{{'orders'
+                                    | translate}}</th>
+                                <th scope="col" class="py-3 border-bottom-0 font-weight-medium">{{'date' |
+                                    translate}}</th>
+                                <th scope="col" class="py-3 border-bottom-0 font-weight-medium">{{'staus' |
+                                    translate}}</th>
+                                <th scope="col" class="py-3 border-bottom-0 font-weight-medium">{{'total' |
+                                    translate}}</th>
+                                <th scope="col" class="py-3 border-bottom-0 font-weight-medium">{{'actions'
+                                    | translate}}</th>
+                            </tr>
+                        </thead>
+    
+                        <tbody>
+                            <tr class="border" *ngFor="let o of orders let i = index">
+                                <th class="pl-3 pl-md-5 font-weight-normal align-middle py-6">{{o.orderNumber}}</th>
+                                @if(selectedLang.userSelectedLanguage === "en"){
+                                    <td class="align-middle py-5">{{o.paymentDate | date: 'MM/dd/yyyy HH:mm'}}</td>
+                                }@else{
+                                    <td class="align-middle py-5">{{o.paymentDate | date: 'dd.MM.yyyy HH:mm'}}</td>
+                                }
+                                @if(selectedLang.userSelectedLanguage === "en"){
+                                    <td class="align-middle py-5">{{o.statusEn}}</td>
+                                }@else {
+                                    <td class="align-middle py-5">{{o.statusTr}}</td>
+                                }
+                                @if(selectedLang.userSelectedLanguage === "en"){
+                                    <td class="align-middle py-5">
+                                        @if(shopping.selectedCurrency === '$'){
+                                            <span>{{o.price.currency}}{{o.price.value * o.quantity | currency: '':'':'1.2-2'}}</span> 
+                                        }@else {
+                                            <span>{{o.price.value * o.quantity | trCurrency}}{{o.price.currency}}</span>   
+                                        }
+                                        for {{o.quantity}} items
+                                    </td>
+                                }
+                                @else {
+                                    <td class="align-middle py-5">
+                                        {{o.quantity}} adet ürün için 
+                                        @if(shopping.selectedCurrency === '$'){
+                                            <span>{{o.price.currency}}{{o.price.value * o.quantity | currency: '':'':'1.2-2'}}</span> 
+                                        }@else {
+                                            <span>{{o.price.value * o.quantity | trCurrency }}{{o.price.currency}}</span> 
+                                        }
+                                    </td>
+                                }
                                 <td class="align-middle py-5">
-                                    @if(shopping.selectedCurrency === '$'){
-                                        <span>{{o.price.currency}}{{o.price.value * o.quantity | currency: '':'':'1.2-2'}}</span> 
-                                    }@else {
-                                        <span>{{o.price.value * o.quantity | trCurrency}}{{o.price.currency}}</span>   
-                                    }
-                                    for {{o.quantity}} items
+                                    <div class="d-flex justify-content-center">
+                                        <button type="submit" 
+                                            class="btn btn-dark rounded-0 btn-wide font-weight-medium">
+                                            <a href="/order-received" style="color: white;">{{'view' | translate}}</a>
+                                        </button>
+                                    </div>
                                 </td>
-                            }
-                            @else {
-                                <td class="align-middle py-5">
-                                    {{o.quantity}} adet ürün için 
-                                    @if(shopping.selectedCurrency === '$'){
-                                        <span>{{o.price.currency}}{{o.price.value * o.quantity | currency: '':'':'1.2-2'}}</span> 
-                                    }@else {
-                                        <span>{{o.price.value * o.quantity | trCurrency }}{{o.price.currency}}</span> 
-                                    }
-                                </td>
-                            }
-                            <td class="align-middle py-5">
-                                <div class="d-flex justify-content-center">
-                                    <button type="submit" 
-                                        class="btn btn-dark rounded-0 btn-wide font-weight-medium">
-                                        <a href="/order-received" style="color: white;">{{'view' | translate}}</a>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>     
+        }
+        @else {
+            <div class="col-md-9">
+                <div class="pt-5 pl-md-5 pt-lg-8 pl-lg-9 space-bottom-lg-2 mb-lg-4">
+                    <h6 class="font-weight-medium font-size-7 ml-lg-1 mb-lg-8 pb-xl-1">
+                        {{'No order has ever been placed.' | translate}}</h6>
+                </div>
             </div>
-        </div>
+        }
     </div>
 </div>

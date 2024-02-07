@@ -268,5 +268,9 @@
   "Shipping address added": "Shipping address added.",
   "Billing address added": "Billing address added.",
   "Billing address updated": "Billing address updated.",
-  "add": "Add"
+  "add": "Add",
+  "useShippingAddress": "Use the registered address",
+  "addNewShippingAddress": "Add new address",
+  "useBillingAddress": "Use the registered address",
+  "addNewBillingAddress": "Add new address"
 }

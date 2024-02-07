@@ -8,6 +8,7 @@ import { UpdateUserPasswordModel } from 'src/app/models/update-user-password.mod
 import { UserModel } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { ErrorService } from 'src/app/services/error.service';
+import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
 import { SwalService } from 'src/app/services/swal.service';
 
 
@@ -32,7 +33,8 @@ export class AccountDetailsComponent {
     public auth: AuthService,
     private error: ErrorService,
     private swal: SwalService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private shopping: ShoppingCartService
   ){
     this.auth.checkAuthentication();
     this.auth.getUser(); 
@@ -84,5 +86,11 @@ export class AccountDetailsComponent {
         this.error.errorHandler(err);
       }
     })
+  }
+
+  logout(){
+    localStorage.removeItem("response");
+    this.shopping.getAllShoppingCarts();
+    location.href = "/"
   }
 }

@@ -26,7 +26,7 @@ export class ErrorService {
                 break;
 
             case 400:
-                const error400 = err.error.message;
+                const error400 = err.error[0] || err.error.message;
                 this.translate.get(`(${error400})`).subscribe(
                     res => {
                         this.swal.callToast(res, 'error');
@@ -35,9 +35,8 @@ export class ErrorService {
                 break;
 
             case 404:
-                this.translate.get("apiNotFound").subscribe(res => {
-                    this.swal.callToast(res, "error");
-                });
+                // console.log(err.error.message, "error");
+                console.log("apiNotFound")
                 break;
 
             case 422:

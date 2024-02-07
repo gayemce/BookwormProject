@@ -32,7 +32,7 @@
                         </a>
                     </li>
                     <li class="nav-item mx-0">
-                        <a class="nav-link d-flex align-items-center px-0">
+                        <a class="nav-link d-flex align-items-center px-0" (click)="logout()">
                             <span class="font-weight-normal text-gray-600">{{'logout' | translate}}</span>
                         </a>
                     </li>
@@ -70,7 +70,6 @@
                                         <select [(ngModel)]="address.country" name="shipping_country" id="shipping_country"
                                             class="form-control country_to_state country_select select2-hidden-accessible"
                                             autocomplete="country" tabindex="-1" aria-hidden="true" required>
-                                            <option value="" disabled selected></option>
                                             <option *ngFor="let c of address.countries">{{c}}</option>
                                         </select>
                                     </p>
@@ -85,7 +84,6 @@
                                         <select [(ngModel)]="address.city" name="shipping_city" id="shipping_city"
                                             class="form-control country_to_state country_select  select2-hidden-accessible"
                                             autocomplete="city" tabindex="-1" aria-hidden="true" required>
-                                            <option value="" disabled selected></option>
                                             <option *ngFor="let c of address.cities">{{c}}</option>
                                         </select>
                                     </p>
@@ -140,9 +138,12 @@
                         <div class="mb-6 mb-md-0">
                             <h6 class="font-weight-medium font-size-22 mb-3">{{'shippingAddress' | translate}}</h6>
                             <address class="d-flex flex-column mb-4">
-                                <span class="text-gray-600 font-size-2">{{address.contactName}}</span>
-                                <span class="text-gray-600 font-size-2">{{address.zipCode}} {{address.city}} {{address.country}}</span>
+                                <span
+                                    class="text-gray-600 font-size-2">{{address.contactName}}</span>
                                 <span class="text-gray-600 font-size-2">{{address.description}}</span>
+                                <span
+                                    class="text-gray-600 font-size-2">{{address.city}} {{address.zipCode}}</span>
+                                <span class="text-gray-600 font-size-2">{{address.country}}</span>
                             </address>
                             <div class="d-flex">
                                 <button type="submit" (click)="address.editShippingAddress()"
@@ -165,7 +166,6 @@
                                         <select [(ngModel)]="address.country" name="shipping_country" id="shipping_country"
                                             class="form-control country_to_state country_select select2-hidden-accessible"
                                             autocomplete="country" tabindex="-1" aria-hidden="true" required>
-                                            <option value="" disabled selected></option>
                                             <option *ngFor="let c of address.countries">{{c}}</option>
                                         </select>
                                     </p>
@@ -180,7 +180,6 @@
                                         <select [(ngModel)]="address.city" name="shipping_city" id="shipping_city"
                                             class="form-control country_to_state country_select  select2-hidden-accessible"
                                             autocomplete="city" tabindex="-1" aria-hidden="true" required>
-                                            <option value="" disabled selected></option>
                                             <option *ngFor="let c of address.cities">{{c}}</option>
                                         </select>
                                     </p>
@@ -257,7 +256,6 @@
                                         <select [(ngModel)]="address.billingCountry" name="billing_country" id="billing_country"
                                             class="form-control country_to_state country_select  select2-hidden-accessible"
                                             autocomplete="country" tabindex="-1" aria-hidden="true" required>
-                                            <option value="" disabled selected></option>
                                             <option *ngFor="let country of address.countries">{{country}}</option>
                                         </select>
                                     </p>
@@ -272,7 +270,6 @@
                                         <select [(ngModel)]="address.billingCity" name="billing_city" id="billing_city"
                                             class="form-control country_to_state country_select  select2-hidden-accessible"
                                             autocomplete="city" tabindex="-1" aria-hidden="true" required>
-                                            <option value="" disabled selected></option>
                                             <option *ngFor="let city of address.cities">{{city}}</option>
                                         </select>
                                     </p>
@@ -328,8 +325,10 @@
                             <h6 class="font-weight-medium font-size-22 mb-3">{{'billingAddress' | translate}}</h6>
                             <address class="d-flex flex-column mb-4">
                                 <span class="text-gray-600 font-size-2">{{address.billingContactName}}</span>
-                                <span class="text-gray-600 font-size-2">{{address.billingZipCode}} {{address.billingCity}} {{address.billingCountry}}</span>
-                                <span class="text-gray-600 font-size-2">{{address.billingDescription}}</span>
+                                <span  class="text-gray-600 font-size-2">{{address.billingDescription}}</span>
+                                <span class="text-gray-600 font-size-2">{{address.billingCity}} {{address.billingZipCode}}</span>
+                                <span
+                                    class="text-gray-600 font-size-2">{{address.billingCountry}}</span>
                             </address>
                             <div class="d-flex">
                                 <button type="submit" (click)="address.editBillingAddress()"
@@ -352,7 +351,6 @@
                                         <select [(ngModel)]="address.billingCountry" name="billing_country" id="billing_country"
                                             class="form-control country_to_state country_select  select2-hidden-accessible"
                                             autocomplete="country" tabindex="-1" aria-hidden="true" required>
-                                            <option value="" disabled selected></option>
                                             <option *ngFor="let country of address.countries">{{country}}</option>
                                         </select>
                                     </p>
@@ -367,7 +365,6 @@
                                         <select [(ngModel)]="address.billingCity" name="billing_city" id="billing_city"
                                             class="form-control country_to_state country_select  select2-hidden-accessible"
                                             autocomplete="city" tabindex="-1" aria-hidden="true" required>
-                                            <option value="" disabled selected></option>
                                             <option *ngFor="let city of address.cities">{{city}}</option>
                                         </select>
                                     </p>

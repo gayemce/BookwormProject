@@ -33,8 +33,11 @@ export default class CheckoutComponent {
     years = Years;
     isSameAddress: boolean = false;
 
-    isAvailableShippingAddress = true;
-    isAvailableBillingAddress = true;
+    isAvailableShippingAddress = false;
+    isAvailableBillingAddress = false;
+
+    newShippingAddress = false;
+    newBillingAddress = false;
 
     constructor(
         public shopping: ShoppingCartService,
@@ -54,6 +57,22 @@ export default class CheckoutComponent {
         const userId = Number(this.auth.token.userId);
         this.paymentRequest.appUserId = userId === 0 ? Number("null") : userId;
 
+        if(this.isAvailableShippingAddress){
+            this.paymentRequest.shippingAddress.country = this.address.country;
+            this.paymentRequest.shippingAddress.city = this.address.city;
+            this.paymentRequest.shippingAddress.contactName = this.address.contactName;
+            this.paymentRequest.shippingAddress.zipCode = this.address.zipCode;
+            this.paymentRequest.shippingAddress.description = this.address.description;
+        }
+
+        if(this.isAvailableBillingAddress){
+            this.paymentRequest.billingAddress.country = this.address.billingCountry;
+            this.paymentRequest.billingAddress.city = this.address.billingCity;
+            this.paymentRequest.billingAddress.contactName = this.address.billingContactName;
+            this.paymentRequest.billingAddress.zipCode = this.address.billingZipCode;
+            this.paymentRequest.billingAddress.description = this.address.billingDescription;
+        }
+
         this.shopping.payment(this.paymentRequest, (res) => {
             localStorage.removeItem("shoppingCarts");
             this.shopping.shoppingCarts = [];
@@ -63,6 +82,25 @@ export default class CheckoutComponent {
             localStorage.setItem("paymentDetails", JSON.stringify(this.paymentRequest));
         })
     }
+
+    selectUseSaveShippingAdress(){
+        this.isAvailableShippingAddress = true;
+    }
+
+    selectAddNewShippingAdress(){
+        this.isAvailableShippingAddress = false;
+        this.newShippingAddress = true;
+    }
+
+    selectUseSaveBillingAdress(){
+        this.isAvailableBillingAddress = true;
+    }
+
+    selectAddNewBillingAdress(){
+        this.isAvailableBillingAddress = false;
+        this.newBillingAddress = true;
+    }
+
 
     changeIsSameAddress() {
         if (this.isSameAddress) {

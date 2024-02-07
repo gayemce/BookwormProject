@@ -257,8 +257,9 @@
   "(Kitap stoğu yeterli değil)": "Kitap stoğu yeterli değil.",
   "(Bu kitap zaten favorilerde ekli!)": "Bu kitap zaten favorilerde ekli!",
   "There are no products in the wish list": "İstek listesinde herhangi bir ürün bulunmamaktadır.",
+  "No order has ever been placed.": "Şu ana kadar herhangi bir sipariş verilmedi.",
 
-  "Account information updated!": "Hesap şifresi güncellendi!",
+  "Account information updated!": "Hesap bilgileri güncellendi!",
   "Account password updated!": "Hesap şifresi güncellendi!",
   "(Kayıt Bulunamadı!)": "Kayıt Bulunamadı!",
   "(Mevcut şifre yanlış!)": "Mevcut şifre yanlış!",
@@ -269,5 +270,9 @@
   "Shipping address added": "Gönderi adresi eklendi.",
   "Billing address added": "Fatura adresi eklendi.",
   "Billing address updated": "Fatura adresi güncellendi.",
-  "add": "Ekle"
+  "add": "Ekle",
+  "useShippingAddress": "Kayıtlı adresi kullan",
+  "addNewShippingAddress": "Yeni adres ekle",
+  "useBillingAddress": "Kayıtlı adresi kullan",
+  "addNewBillingAddress": "Yeni adres ekle"
 }

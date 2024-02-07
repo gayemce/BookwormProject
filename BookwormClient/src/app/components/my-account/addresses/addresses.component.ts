@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { AddressService } from 'src/app/services/address.service';
+import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
 
 
 @Component({
@@ -15,8 +16,15 @@ import { AddressService } from 'src/app/services/address.service';
 export class AddressesComponent {
 
   constructor(
-    public address: AddressService
+    public address: AddressService,
+    private shopping: ShoppingCartService
   ){
 
+  }
+
+  logout(){
+    localStorage.removeItem("response");
+    this.shopping.getAllShoppingCarts();
+    location.href = "/"
   }
 }

@@ -20,7 +20,7 @@ public sealed class CategoriesController : ControllerBase
     [HttpPost]
     public IActionResult CreateCategory(CreateCategoryDto request)
     {
-        Category category = _context.Categories
+        Category? category = _context.Categories
             .Where(p => p.NameEn == request.NameEn || p.NameTr == request.NameTr)
             .FirstOrDefault();
 

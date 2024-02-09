@@ -251,7 +251,7 @@ export class ShoppingCartService {
     switch (shippingMethod) {
       case 'flatRate':
         this.total = this.selectedCurrency === '₺' ? this.flatRateTl : this.flatRateUsd;
-        console.log(this.selectedCurrency)
+        // console.log(this.selectedCurrency)
         // localStorage.setItem("shippingPrice", this.selectedCurrency === '$' ? JSON.stringify(this.flatRateUsd) : JSON.stringify(this.flatRateTl));
         break;
       default:

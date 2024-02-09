@@ -274,29 +274,38 @@ public sealed class CartsController : ControllerBase
             _context.Books.UpdateRange();
 
             string orderNumber = Order.GetNewOrderNumber();
-
-            List<Order> orders = new();
-            
+            int totalProductQuantity = 0;
             foreach (var book in paymentRequest.Books)
             {
-                Order order = new()
-                {
-                    OrderNumber = orderNumber,
-                    BookId = book.Id,
-                    Price = new ValueObjects.Money(book.Price.Value, book.Price.Currency),
-                    Quantity = book.Quantity,
-                    PaymentDate = DateTime.Now,
-                    PaymentMethodEn = "Credit Card",
-                    PaymentMethodTr = "Kredi Kartı",
-                    AppUserId = paymentRequest.AppUserId,
-                    PaymentNumber = payment.PaymentId,
-                    StatusEn = "Preparing",
-                    StatusTr = "Hazırlanıyor"
-                };
-                orders.Add(order);
+                totalProductQuantity += book.Quantity;
             }
-            
-            _context.Orders.AddRange(orders);
+            Order order = new()
+            {
+                OrderNumber = orderNumber,
+                AppUserId = paymentRequest.AppUserId,
+                PaymentDate = DateTime.Now,
+                PaymentMethodEn = "Credit Card",
+                PaymentMethodTr = "Kredi Kartı",
+                PaymentNumber = payment.PaymentId,
+                StatusEn = "Preparing",
+                StatusTr = "Hazırlanıyor",
+                PaymentCurrency = paymentRequest.Currency,
+                ProductQuantity = totalProductQuantity,
+                CreatedAt = DateTime.Now,
+                OrderDetails = new List<OrderDetail>()
+            };
+            foreach (var book in paymentRequest.Books)
+            {
+                OrderDetail orderDetail = new OrderDetail
+                {
+                    BookId = book.Id,
+                    Quantity = book.Quantity,
+                    Price = new ValueObjects.Money(book.Price.Value, book.Price.Currency)
+                };
+                order.OrderDetails.Add(orderDetail);
+            }
+
+            _context.Orders.Add(order);
 
             AppUser? user = _context.AppUsers.Find(paymentRequest.AppUserId);
             if (user is not null)

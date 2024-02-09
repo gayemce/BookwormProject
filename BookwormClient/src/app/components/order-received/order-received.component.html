@@ -17,44 +17,47 @@
                                 <table class="table table-borderless mb-0 ml-1">
                                     <thead>
                                         <tr>
-                                            <th scope="col" class="font-size-2 font-weight-normal py-0">{{'orderNumber'
-                                                | translate}}:
-                                            </th>
-                                            <th scope="col" class="font-size-2 font-weight-normal py-0">{{'date' |
-                                                translate}}:</th>
+                                            <th scope="col" class="font-size-2 font-weight-normal py-0">
+                                                {{'orderNumber' | translate}}:</th>
+                                            <th scope="col" class="font-size-2 font-weight-normal py-0">
+                                                {{'date' | translate}}:</th>
                                             <th scope="col" class="font-size-2 font-weight-normal py-0 text-md-center">
-                                                {{'total' | translate}}: </th>
+                                                {{'total' | translate}}:</th>
                                             <th scope="col"
                                                 class="font-size-2 font-weight-normal py-0 text-md-right pr-md-9">
                                                 {{'paymentMethod' | translate}}:</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr *ngFor="let o of orders let i = index">
-                                            <th scope="row" class="pr-0 py-0 font-weight-medium"></th>
-                                            <td class="pr-md-12 py-0 font-weight-medium text-md-right">{{o.orderNumber}}</td>
-                                            @if(payment.currency === '₺'){
-                                                <td class="pr-0 py-0 font-weight-medium">{{day}} {{monthNameTr}}, {{year}}</td>
+                                        @for (o of order; track o) {
+                                        <tr>
+                                            <td class="font-weight-medium py-0">{{o.orderNumber}}</td>
+                                            @if(selectLang.userSelectedLanguage === "en"){
+                                            <td class="font-weight-medium py-0">{{o.createdAt | date: 'MM/dd/yyyy'}}
+                                            </td>
+                                            }@else{
+                                            <td class="font-weight-medium py-0">{{o.createdAt | date: 'dd.MM.yyyy'}}
+                                            </td>
+                                            }
+                                            @if(o.paymentCurrency === '₺'){
+                                            <td class="font-weight-medium py-0 text-md-center">
+                                                {{ o.totalPrice | trCurrency }} {{o.paymentCurrency}}</td>
                                             }
                                             @else {
-                                                <td class="pr-0 py-0 font-weight-medium">{{monthNameEn}} {{day}}, {{year}}</td>
-                                            }
-                                            @if(payment.currency === '₺'){
-                                            <td class="pr-0 py-0 font-weight-medium text-md-center">
-                                                {{ o.price.value| trCurrency }} {{o.price.currency}}</td>
-                                            }
-                                            @else {
-                                            <td class="pr-0 py-0 font-weight-medium text-md-center">
-                                                {{ o.price.value | currency: '':'':'1.2-2' }} {{o.price.currency}}
+                                            <td class="font-weight-medium py-0 text-md-center">
+                                                {{ o.totalPrice | currency: '':'':'1.2-2' }} {{o.paymentCurrency}}
                                             </td>
                                             }
                                             @if(selectLang.userSelectedLanguage === "en"){
-                                                <td class="pr-md-12 py-0 font-weight-medium text-md-right">{{o.paymentMethodEn}}</td>
+                                            <td class="font-weight-medium py-0 text-md-right pr-md-9">
+                                                {{o.paymentMethodEn}}</td>
                                             }
                                             @else {
-                                                <td class="pr-md-12 py-0 font-weight-medium text-md-right">{{o.paymentMethodTr}}</td>
+                                            <td class="font-weight-medium py-0 text-md-right pr-md-9">
+                                                {{o.paymentMethodTr}}</td>
                                             }
                                         </tr>
+                                        }
                                     </tbody>
                                 </table>
                             </div>
@@ -66,66 +69,68 @@
                                 <div class="ml-md-2">
                                     <h6 class="font-size-3 on-weight-medium mb-4 pb-1">{{'orderDetails' | translate }}
                                     </h6>
-                                    <div *ngFor="let p of payment.books" class="d-flex justify-content-between mb-4">
+                                    @for (b of order[0].books; track b) {
+                                    <div class="d-flex justify-content-between mb-4">
                                         <div class="d-flex align-items-baseline">
                                             <div>
-                                                <h6 class="font-size-2 font-weight-normal mb-1">{{p.title}} <br>
-                                                    {{p.author.name}} {{p.author.lastname}}</h6>
+                                                <h6 class="font-size-2 font-weight-normal mb-1">{{b.title}} <br>
+                                                    {{b.name}} {{b.lastname}}</h6>
                                                 <!-- <span class="font-size-2 text-gray-600">({{Paperback, English}})</span> -->
-                                                <span class="font-size-2 text-gray-600">({{p.publisher}})</span>
+                                                <span class="font-size-2 text-gray-600">({{b.publisher}})</span>
                                             </div>
-                                            <span class="font-size-2 ml-4 ml-md-8">x{{p.quantity}}</span>
+                                            <span class="font-size-2 ml-4 ml-md-8">x{{b.quantity}}</span>
                                         </div>
-                                        @if(p.price.currency === '₺'){
+                                        @if(b.currency === '₺'){
                                         <span class="font-weight-medium font-size-2">
-                                            {{p.price.value * p.quantity | trCurrency}}{{p.price.currency}}
+                                            {{b.price | trCurrency}}{{b.currency}}
                                         </span>
                                         }
                                         @else {
                                         <span class="font-weight-medium font-size-2">
-                                            {{p.price.currency}} {{p.price.value * p.quantity | currency:'':'':'1.2-2'}}
+                                            {{b.currency}}{{b.price | currency:'':'':'1.2-2'}}
                                         </span>
                                         }
                                     </div>
+                                    }
                                 </div>
                             </div>
                         </div>
 
                         <!-- Totals -->
+                        @for (o of order; track o) {
                         <div class="border-bottom mb-5 pb-5">
                             <ul class="list-unstyled px-3 pl-md-5 pr-md-4 mb-0">
                                 <li class="d-flex justify-content-between py-2">
                                     <span class="font-weight-medium font-size-2">{{'subtotal' | translate}}:</span>
-                                    @if(bookPrices[0].currency === '₺'){
+                                    @if(o.priceCurrency === '₺'){
                                     <span class="font-weight-medium font-size-2">
-                                        {{ bookPrices[0].value | trCurrency }} {{'₺'}}
+                                        {{ o.totalPrice | trCurrency }} {{'₺'}}
                                     </span>
                                     }
                                     @else {
                                     <span class="font-weight-medium font-size-2">
-                                        {{'$'}} {{ bookPrices[0].value | currency: '':'':'1.2-2' }}</span>
+                                        {{'$'}} {{ o.totalPrice | currency: '':'':'1.2-2' }}</span>
                                     }
                                 </li>
                                 <li class="d-flex justify-content-between py-2">
                                     <span class="font-weight-medium font-size-2">{{'shipping' | translate}}:</span>
-                                    @if(bookPrices[0].currency === '₺' && bookPrices[0].value < 249)
-                                    {
-                                    <span class="font-weight-medium font-size-2">
-                                        <span>24,99</span> {{payment.currency}}
-                                    </span>
-                                    }
-                                    @if(bookPrices[0].currency === '$' && bookPrices[0].value < 19 ) { <span
+                                    @if(o.priceCurrency === '₺' && o.totalPrice < 249) { <span
                                         class="font-weight-medium font-size-2">
-                                        {{payment.currency}} <span>4.99</span>
+                                        <span>24,99</span> {{o.priceCurrency }}
                                         </span>
                                         }
-                                        @else if((bookPrices[0].value > 249 && bookPrices[0].currency === '₺') ||
-                                        (bookPrices[0].value > 19 && bookPrices[0].currency === '$'))
-                                        {
-                                        <span class="font-weight-medium font-size-2">{{'freeShipping' |
-                                            translate}}
-                                        </span>
-                                        }
+                                        @if(o.priceCurrency === '$' && o.totalPrice < 19 ) { <span
+                                            class="font-weight-medium font-size-2">
+                                            {{o.priceCurrency}} <span>4.99</span>
+                                            </span>
+                                            }
+                                            @else if((o.totalPrice > 249 && o.priceCurrency === '₺') ||
+                                            (o.totalPrice > 19 && o.priceCurrency === '$'))
+                                            {
+                                            <span class="font-weight-medium font-size-2">{{'freeShipping' |
+                                                translate}}
+                                            </span>
+                                            }
                                 </li>
                                 <li class="d-flex justify-content-between pt-2">
                                     <span class="font-weight-medium font-size-2">{{'paymentMethod' | translate}}:</span>
@@ -133,22 +138,33 @@
                                 </li>
                             </ul>
                         </div>
-                        <div class="border-bottom mb-5 pb-4">
+                        <div class="border-bottom pb-4">
                             <div class="px-3 pl-md-5 pr-md-4">
                                 <div class="d-flex justify-content-between">
                                     <span class="font-size-2 font-weight-medium">{{'total' | translate}}</span>
-                                    @if(payment.currency === '₺'){
-                                    <span class="font-weight-medium fon-size-2">
-                                        {{ payment.shippingAndCartTotal | trCurrency }} {{'₺'}}
-                                    </span>
-                                    }
-                                    @else {
-                                    <span class="font-weight-medium fon-size-2">
-                                        {{'$'}} {{ payment.shippingAndCartTotal | currency: '':'':'1.2-2' }}</span>
-                                    }
+                                    @if(o.priceCurrency === '₺' && o.totalPrice < 249){ <span
+                                        class="font-weight-medium fon-size-2">
+                                        {{ (o.totalPrice + 24.99 ) | trCurrency }} {{'₺'}}
+                                        </span>
+                                        }@else if(o.priceCurrency === '₺'){
+                                        <span class="font-weight-medium fon-size-2">
+                                            {{ o.totalPrice | trCurrency }} {{'₺'}}
+                                        </span>
+                                        }
+
+                                        @if(o.priceCurrency === '$' && o.totalPrice < 19){ <span
+                                            class="font-weight-medium fon-size-2">
+                                            {{'$'}} {{ (o.totalPrice + 4.99) | currency: '':'':'1.2-2' }}
+                                            </span>
+                                            }@else if(o.priceCurrency === '$'){
+                                            <span class="font-weight-medium fon-size-2">
+                                                {{'$'}} {{ o.totalPrice | currency: '':'':'1.2-2' }}
+                                            </span>
+                                            }
                                 </div>
                             </div>
                         </div>
+
                         <div class="px-3 pl-md-5 pr-md-4 mb-6 pb-xl-1">
                             <div class="row row-cols-1 row-cols-md-2">
                                 <div class="col">
@@ -186,6 +202,7 @@
                                 </div>
                             </div>
                         </div>
+                    }
                     </div>
                 </div>
             </div>

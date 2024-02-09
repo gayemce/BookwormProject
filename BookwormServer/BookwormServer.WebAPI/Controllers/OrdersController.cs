@@ -1,7 +1,9 @@
 ﻿using BookwormServer.WebAPI.Context;
 using BookwormServer.WebAPI.Models;
+using Iyzipay.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookwormServer.WebAPI.Controllers;
 [Route("api/[controller]/[action]")]
@@ -16,9 +18,108 @@ public class OrdersController : ControllerBase
     }
 
     [HttpGet("{userId}")]
-    public IActionResult GetAll(int UserId, DateTime paymentDate)
+    public IActionResult GetAllOrdersByUserId(int userId)
     {
-        List<Order> orders = _context.Orders.Where(p => p.AppUserId == UserId).ToList();
-        return Ok(orders);
+        var orders = _context.Orders.Where(o => o.AppUserId == userId)
+            .Include(o => o.OrderDetails!)
+                .ThenInclude(b => b.Book)
+                    .ThenInclude(a => a.Author)
+            .ToList();
+
+        if (orders == null || orders.Count == 0)
+        {
+            return NotFound("Kullanıcıya ait herhangi bir sipariş bulunamadı.");
+        }
+
+        var orderResponse = orders.Select(o => new
+        {
+            Id = o.Id,
+            OrderNumber = o.OrderNumber,
+            CreatedAt = o.CreatedAt,
+            //TotalPrice = o.OrderDetails!.Sum(od => od.Price.Value * od.Quantity),
+            //PriceCurrency = o.OrderDetails!.Select(od => od.Price.Currency).FirstOrDefault(),
+            ProductQuantity = o.ProductQuantity,
+            StatusEn = o.StatusEn,
+            StatusTr = o.StatusTr,
+            PaymentCurrency = o.PaymentCurrency
+        });
+
+        return Ok(orderResponse);
     }
+
+    [HttpGet("{userId}")]
+    public IActionResult OrderReceivedByUserId(int userId)
+    {
+        var order = _context.Orders
+            .Where(o => o.AppUserId == userId)
+            .OrderByDescending(o => o.CreatedAt)
+            .Include(o => o.OrderDetails!)
+                .ThenInclude(b => b.Book)
+                    .ThenInclude(a => a.Author)
+            .FirstOrDefault();
+
+        if (order == null)
+        {
+            return NotFound("Kullanıcıya ait herhangi bir sipariş bulunamadı.");
+        }
+
+        var orderResponse = new
+        {
+            Id = order.Id,
+            OrderNumber = order.OrderNumber,
+            CreatedAt = order.CreatedAt,
+            TotalPrice = order.OrderDetails!.Sum(od => od.Price.Value * od.Quantity),
+            PriceCurrency = order.OrderDetails!.Select(od => od.Price.Currency).FirstOrDefault(),
+            ProductQuantity = order.ProductQuantity,
+            StatusEn = order.StatusEn,
+            StatusTr = order.StatusTr,
+        };
+
+        return Ok(orderResponse);
+    }
+
+    [HttpGet("{userId}/{orderId}")]
+    public IActionResult GetAllOrdersDetailByUserId(int userId, int orderId)
+    {
+        var order = _context.Orders
+            .Where(o => o.AppUserId == userId && o.Id == orderId)
+            .Include(o => o.OrderDetails!)
+                .ThenInclude(b => b.Book)
+                    .ThenInclude(a => a.Author)
+            .ToList();
+
+        if (order == null || order.Count == 0)
+        {
+            return NotFound("Kullanıcıya ait herhangi bir sipariş bulunamadı.");
+        }
+
+        var orderResponse = order.Select(order => new
+        {
+            Id = order.Id,
+            OrderNumber = order.OrderNumber,
+            ProductQuantity = order.ProductQuantity,
+            CreatedAt = order.CreatedAt,
+            PaymentMethodTr = order.PaymentMethodTr,
+            PaymentMethodEn = order.PaymentMethodEn,
+            StatusEn = order.StatusEn,
+            StatusTr = order.StatusTr,
+            PaymentCurrency = order.PaymentCurrency,
+            //TotalPrice = order.OrderDetails!.Sum(od => od.Price.Value * od.Quantity),
+            //PriceCurrency = order.OrderDetails!.Select(od => od.Price.Currency).FirstOrDefault(),
+            Books = order.OrderDetails!.Select(OrderDetail => new
+            {
+                Id = OrderDetail.BookId,
+                Title = OrderDetail.Book!.Title,
+                Name = OrderDetail.Book!.Author!.Name,
+                Lastname = OrderDetail.Book!.Author.Lastname,
+                Publisher = OrderDetail.Book!.Publisher,
+                Quantity = OrderDetail.Quantity,
+                Price = OrderDetail.Price.Value,
+                Currency = OrderDetail.Price.Currency
+            })
+        });
+
+        return Ok(orderResponse);
+    }
+
 }

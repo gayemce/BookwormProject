@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { OrderModel } from 'src/app/models/order-model';
+import { OrderModel } from 'src/app/models/order.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { ErrorService } from 'src/app/services/error.service';
 import { SelectedLanguageService } from 'src/app/services/selected-language.service';
@@ -19,7 +19,8 @@ import { TrCurrencyPipe } from 'tr-currency';
 })
 export default class OrderReceivedComponent {
 
-    orders: OrderModel[] = [];
+    order: OrderModel[] = [];
+
     payment: any;
     bookPrices: any;
     shippingPrice: any;
@@ -60,14 +61,14 @@ export default class OrderReceivedComponent {
         public selectLang: SelectedLanguageService
     ) {
         auth.checkAuthentication();
-        http.get("https://localhost:7018/api/Orders/GetAll/" + auth.token.userId).subscribe({
+        http.get("https://localhost:7018/api/Orders/OrderReceivedByUserId/" + auth.token.userId).subscribe({
             next: (res: any) => {
-                this.orders = res;
+                this.order = res;
+                console.log(this.order);
             },
             error: (err: HttpErrorResponse) => {
                 error.errorHandler(err);
             }
         })
-        console.log(`${this.monthNameEn} ${this.day}, ${this.year}`);
     }
 }

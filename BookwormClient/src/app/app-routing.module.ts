@@ -20,6 +20,7 @@ import { OrdersComponent } from './components/my-account/orders/orders.component
 import { AddressesComponent } from './components/my-account/addresses/addresses.component';
 import { AccountDetailsComponent } from './components/my-account/account-details/account-details.component';
 import { WishlistComponent } from './components/my-account/wishlist/wishlist.component';
+import { ViewOrderComponent } from './components/my-account/orders/view-order/view-order.component';
 
 const routes: Routes = [
   {
@@ -85,6 +86,10 @@ const routes: Routes = [
       {
         path: "orders",
         component: OrdersComponent
+      },
+      {
+        path: "view-orders/:order-id",
+        component: ViewOrderComponent
       },
       {
         path: "addresses",

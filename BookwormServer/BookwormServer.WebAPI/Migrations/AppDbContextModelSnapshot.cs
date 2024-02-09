@@ -429,13 +429,14 @@ namespace BookwormServer.WebAPI.Migrations
                     b.Property<int?>("AppUserId")
                         .HasColumnType("int");
 
-                    b.Property<int>("BookId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("OrderNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PaymentCurrency")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -454,7 +455,7 @@ namespace BookwormServer.WebAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Quantity")
+                    b.Property<int>("ProductQuantity")
                         .HasColumnType("int");
 
                     b.Property<string>("StatusEn")
@@ -469,9 +470,28 @@ namespace BookwormServer.WebAPI.Migrations
 
                     b.HasIndex("AppUserId");
 
-                    b.HasIndex("BookId");
-
                     b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("BookwormServer.WebAPI.Models.OrderDetail", b =>
+                {
+                    b.Property<int>("BookId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("BookId", "OrderId");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("OrderDetails");
                 });
 
             modelBuilder.Entity("BookwormServer.WebAPI.Models.OrderStatus", b =>
@@ -719,15 +739,29 @@ namespace BookwormServer.WebAPI.Migrations
                         .WithMany()
                         .HasForeignKey("AppUserId");
 
+                    b.Navigation("AppUser");
+                });
+
+            modelBuilder.Entity("BookwormServer.WebAPI.Models.OrderDetail", b =>
+                {
                     b.HasOne("BookwormServer.WebAPI.Models.Book", "Book")
                         .WithMany()
                         .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("BookwormServer.WebAPI.Models.Order", null)
+                        .WithMany("OrderDetails")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.OwnsOne("BookwormServer.WebAPI.ValueObjects.Money", "Price", b1 =>
                         {
-                            b1.Property<int>("OrderId")
+                            b1.Property<int>("OrderDetailBookId")
+                                .HasColumnType("int");
+
+                            b1.Property<int>("OrderDetailOrderId")
                                 .HasColumnType("int");
 
                             b1.Property<string>("Currency")
@@ -738,15 +772,13 @@ namespace BookwormServer.WebAPI.Migrations
                             b1.Property<decimal>("Value")
                                 .HasColumnType("money");
 
-                            b1.HasKey("OrderId");
+                            b1.HasKey("OrderDetailBookId", "OrderDetailOrderId");
 
-                            b1.ToTable("Orders");
+                            b1.ToTable("OrderDetails");
 
                             b1.WithOwner()
-                                .HasForeignKey("OrderId");
+                                .HasForeignKey("OrderDetailBookId", "OrderDetailOrderId");
                         });
-
-                    b.Navigation("AppUser");
 
                     b.Navigation("Book");
 
@@ -821,6 +853,11 @@ namespace BookwormServer.WebAPI.Migrations
                     b.Navigation("BookCategories");
 
                     b.Navigation("BookDetail");
+                });
+
+            modelBuilder.Entity("BookwormServer.WebAPI.Models.Order", b =>
+                {
+                    b.Navigation("OrderDetails");
                 });
 #pragma warning restore 612, 618
         }

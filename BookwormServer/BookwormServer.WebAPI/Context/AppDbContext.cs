@@ -23,6 +23,7 @@ public sealed class AppDbContext : DbContext
     public DbSet<Cart> Carts { get; set; }
     public DbSet<Category> Categories { get; set; }
     public DbSet<Order> Orders { get; set; }
+    public DbSet<OrderDetail> OrderDetails { get; set; }
     public DbSet<OrderStatus> OrderStatuses { get; set; }
     public DbSet<Review> Reviews { get; set; }
     public DbSet<AppUser> AppUsers { get; set; }
@@ -39,6 +40,8 @@ public sealed class AppDbContext : DbContext
 
         //Composite Key - Çoka çok ilişki
         modelBuilder.Entity<BookCategory>().HasKey(p => new { p.BookId, p.CategoryId });
+
+        modelBuilder.Entity<OrderDetail>().HasKey(p => new { p.BookId, p.OrderId });
 
         //Book & BookDetail - Bire bir ilişki
         modelBuilder.Entity<Book>().HasOne(b => b.BookDetail).WithOne(bd => bd.Book).HasForeignKey<BookDetail>(bd => bd.BookId);
@@ -57,11 +60,17 @@ public sealed class AppDbContext : DbContext
             price.Property(p => p.Currency).HasMaxLength(5);
         });
 
-        modelBuilder.Entity<Order>().OwnsOne(p => p.Price, price =>
+        modelBuilder.Entity<OrderDetail>().OwnsOne(p => p.Price, price =>
         {
             price.Property(p => p.Value).HasColumnType("money");
             price.Property(p => p.Currency).HasMaxLength(5);
         });
+
+        //modelBuilder.Entity<Order>().OwnsOne(p => p.Price, price =>
+        //{
+        //    price.Property(p => p.Value).HasColumnType("money");
+        //    price.Property(p => p.Currency).HasMaxLength(5);
+        //});
 
         modelBuilder.Entity<WishList>().OwnsOne(p => p.Price, price =>
         {

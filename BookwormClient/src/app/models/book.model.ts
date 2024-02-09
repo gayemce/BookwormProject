@@ -15,8 +15,8 @@ export class BookModel {
     descriptionTr: string = "";
     publisher: string = "";
     price: MoneyModel = new MoneyModel();
-    imgUrl: string = "";
     quantity: number = 0; 
+    imgUrl: string = "";
     isActive: boolean = true; 
     isDeleted: boolean = false; 
     createdAt: string = ""; 

@@ -7,10 +7,8 @@ export class OrderModel {
     createdAt: string = "";
     paymentMethodEn: string = "";
     paymentMethodTr: string = "";
-    totalPrice: number = 0;
     statusEn: string = "";
     statusTr: string = "";
-    priceCurrency: string = "";
-    books: OrderDetailModel[] = [];
     paymentCurrency: string = "";
+    books: OrderDetailModel[] = [];
 }

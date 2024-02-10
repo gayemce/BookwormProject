@@ -28,7 +28,7 @@ public class OrdersController : ControllerBase
 
         if (orders == null || orders.Count == 0)
         {
-            return NotFound("Kullanıcıya ait herhangi bir sipariş bulunamadı.");
+            return BadRequest("Kullanıcıya ait herhangi bir sipariş bulunamadı.");
         }
 
         var orderResponse = orders.Select(o => new
@@ -36,8 +36,6 @@ public class OrdersController : ControllerBase
             Id = o.Id,
             OrderNumber = o.OrderNumber,
             CreatedAt = o.CreatedAt,
-            //TotalPrice = o.OrderDetails!.Sum(od => od.Price.Value * od.Quantity),
-            //PriceCurrency = o.OrderDetails!.Select(od => od.Price.Currency).FirstOrDefault(),
             ProductQuantity = o.ProductQuantity,
             StatusEn = o.StatusEn,
             StatusTr = o.StatusTr,
@@ -60,19 +58,31 @@ public class OrdersController : ControllerBase
 
         if (order == null)
         {
-            return NotFound("Kullanıcıya ait herhangi bir sipariş bulunamadı.");
+            return BadRequest("Kullanıcıya ait herhangi bir sipariş bulunamadı.");
         }
 
         var orderResponse = new
         {
             Id = order.Id,
             OrderNumber = order.OrderNumber,
-            CreatedAt = order.CreatedAt,
-            TotalPrice = order.OrderDetails!.Sum(od => od.Price.Value * od.Quantity),
-            PriceCurrency = order.OrderDetails!.Select(od => od.Price.Currency).FirstOrDefault(),
             ProductQuantity = order.ProductQuantity,
+            CreatedAt = order.CreatedAt,
+            PaymentMethodTr = order.PaymentMethodTr,
+            PaymentMethodEn = order.PaymentMethodEn,
             StatusEn = order.StatusEn,
             StatusTr = order.StatusTr,
+            PaymentCurrency = order.PaymentCurrency,
+            Books = order.OrderDetails!.Select(OrderDetail => new
+            {
+                Id = OrderDetail.BookId,
+                Title = OrderDetail.Book!.Title,
+                Name = OrderDetail.Book!.Author!.Name,
+                Lastname = OrderDetail.Book!.Author.Lastname,
+                Publisher = OrderDetail.Book!.Publisher,
+                Quantity = OrderDetail.Quantity,
+                Price = OrderDetail.Price.Value,
+                Currency = OrderDetail.Price.Currency
+            })
         };
 
         return Ok(orderResponse);
@@ -90,7 +100,7 @@ public class OrdersController : ControllerBase
 
         if (order == null || order.Count == 0)
         {
-            return NotFound("Kullanıcıya ait herhangi bir sipariş bulunamadı.");
+            return BadRequest("Kullanıcıya ait herhangi bir sipariş bulunamadı.");
         }
 
         var orderResponse = order.Select(order => new
@@ -104,8 +114,6 @@ public class OrdersController : ControllerBase
             StatusEn = order.StatusEn,
             StatusTr = order.StatusTr,
             PaymentCurrency = order.PaymentCurrency,
-            //TotalPrice = order.OrderDetails!.Sum(od => od.Price.Value * od.Quantity),
-            //PriceCurrency = order.OrderDetails!.Select(od => od.Price.Currency).FirstOrDefault(),
             Books = order.OrderDetails!.Select(OrderDetail => new
             {
                 Id = OrderDetail.BookId,

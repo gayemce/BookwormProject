@@ -39,14 +39,21 @@
                                             <td class="font-weight-medium py-0">{{o.createdAt | date: 'dd.MM.yyyy'}}
                                             </td>
                                             }
-                                            @if(o.paymentCurrency === '₺'){
+                                            @if(o.paymentCurrency === '₺' && calcTotal() < 249){
                                             <td class="font-weight-medium py-0 text-md-center">
-                                                {{ calcTotal() | trCurrency }}{{o.paymentCurrency}}</td>
+                                                {{ (calcTotal() + 24.99 ) | trCurrency }}{{'₺'}}</td>        
                                             }
-                                            @else {
+                                            @else if(o.paymentCurrency === '₺'){
                                             <td class="font-weight-medium py-0 text-md-center">
-                                                {{o.paymentCurrency}}{{ calcTotal() | currency: '':'':'1.2-2' }}
-                                            </td>
+                                                {{ calcTotal() | trCurrency }}{{'₺'}}</td>
+                                            }                         
+                                            @if(o.paymentCurrency === '$' && calcTotal() < 19){
+                                            <td class="font-weight-medium py-0 text-md-center">
+                                                {{o.paymentCurrency}}{{ (calcTotal() + 4.99) | currency: '':'':'1.2-2' }}</td>
+                                            }
+                                            @else if(o.paymentCurrency === '$'){
+                                            <td class="font-weight-medium py-0 text-md-center">
+                                                {{'$'}}{{ calcTotal() | currency: '':'':'1.2-2' }}</td>
                                             }
                                             @if(selectLang.userSelectedLanguage === "en"){
                                             <td class="font-weight-medium py-0 text-md-right pr-md-9">
@@ -105,12 +112,12 @@
                                     <span class="font-weight-medium font-size-2">{{'subtotal' | translate}}:</span>
                                     @if(o.paymentCurrency === '₺'){
                                     <span class="font-weight-medium font-size-2">
-                                        {{ calcTotal() | trCurrency }} {{'₺'}}
+                                        {{ calcTotal() | trCurrency }}{{'₺'}}
                                     </span>
                                     }
                                     @else {
                                     <span class="font-weight-medium font-size-2">
-                                        {{'$'}} {{ calcTotal() | currency: '':'':'1.2-2' }}</span>
+                                        {{'$'}}{{ calcTotal() | currency: '':'':'1.2-2' }}</span>
                                     }
                                 </li>
                                 <li class="d-flex justify-content-between py-2">
@@ -122,7 +129,7 @@
                                         }
                                         @if(o.paymentCurrency === '$' && calcTotal() < 19 ) { <span
                                             class="font-weight-medium font-size-2">
-                                            {{o.paymentCurrency}} <span>4.99</span>
+                                            {{o.paymentCurrency}}<span>4.99</span>
                                             </span>
                                             }
                                             @else if((calcTotal() > 249 && o.paymentCurrency === '₺') ||
@@ -149,17 +156,17 @@
                                         </span>
                                         }@else if(o.paymentCurrency === '₺'){
                                         <span class="font-weight-medium fon-size-2">
-                                            {{ calcTotal() | trCurrency }} {{'₺'}}
+                                            {{ calcTotal() | trCurrency }}{{'₺'}}
                                         </span>
                                         }
 
                                         @if(o.paymentCurrency === '$' && calcTotal() < 19){ <span
                                             class="font-weight-medium fon-size-2">
-                                            {{'$'}} {{ (calcTotal() + 4.99) | currency: '':'':'1.2-2' }}
+                                            {{'$'}}{{ (calcTotal() + 4.99) | currency: '':'':'1.2-2' }}
                                             </span>
                                             }@else if(o.paymentCurrency === '$'){
                                             <span class="font-weight-medium fon-size-2">
-                                                {{'$'}} {{ calcTotal() | currency: '':'':'1.2-2' }}
+                                                {{'$'}}{{ calcTotal() | currency: '':'':'1.2-2' }}
                                             </span>
                                             }
                                 </div>

@@ -19,7 +19,8 @@ import { TrCurrencyPipe } from 'tr-currency';
 })
 export default class OrderReceivedComponent {
 
-    order: OrderModel[] = [];
+    order: OrderModel = new OrderModel();
+    total: number = 0;
 
     payment: any;
     bookPrices: any;
@@ -70,5 +71,32 @@ export default class OrderReceivedComponent {
                 error.errorHandler(err);
             }
         })
+    }
+
+    calcTotal(): number {
+        this.total = 0;
+
+        if(this.order.paymentCurrency === '₺'){
+            for (let i = 0; i < this.order.books.length; i++) {
+                if(this.order.books[i].currency === '₺'){
+                    this.total += (this.order.books[i].price * this.order.books[i].quantity);
+                    console.log(this.total);
+                }
+                else if(this.order.books[i].currency === '$'){
+                    this.total += ((this.order.books[i].price * 30) * this.order.books[i].quantity);
+                }     
+            }
+        }
+        else{
+            for (let i = 0; i < this.order.books.length; i++) {
+                if(this.order.books[i].currency === '$'){
+                    this.total += (this.order.books[i].price * this.order.books[i].quantity);
+                }
+                else if(this.order.books[i].currency === '₺'){
+                    this.total += ((this.order.books[i].price / 30) * this.order.books[i].quantity);
+                }     
+            }
+        }
+        return this.total;          
     }
 }

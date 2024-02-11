@@ -16,6 +16,14 @@ The Book Sales Site project is an e-commerce platform that offers book lovers th
 
 - **Secure Payment Transactions:** Payment transactions are facilitated using the 'İyzico Library'. User and payment information is securely transmitted to the server, ensuring a successful payment process.
 
+- **Identity and FluentValidation Libraries:** The Identity library was used for user registration and login processes, while the FluentValidation library was utilized for data validation during user registration and login.
+
+- **Error Handling with Error Service:** To control errors in the data received from the server, an Error Service was created to perform error handling. This service captures validation messages received from the server via ports and processes them to be compatible with multi-language support.
+
+- **JWT Library, Decoding Operations on the Client:** During user login, the JWT library was utilized to generate a token.
+The generated token data was decoded using jwtDecode on the client side to access user-specific information such as user ID and username for further processing.
+
+
 ## Additional Information
 
 The development process of the project is ongoing.

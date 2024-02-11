@@ -26,7 +26,7 @@ export class ErrorService {
                 break;
 
             case 400:
-                const error400 =  err.error || err.error[0] || err.error[0].message || err.error.message;
+                const error400 =  err.error.message || err.error || err.error[0] || err.error[0].message;
                 this.translate.get(`(${error400})`).subscribe(
                     res => {
                         this.swal.callToast(res, 'error');

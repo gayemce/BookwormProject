@@ -71,7 +71,7 @@ export class AccountDetailsComponent {
     this.requestUserPassword.newPassword = this.newPassword;
     this.requestUserPassword.confirmedPassword = this.confirmedPassword;
 
-    this.http.post("https://localhost:7018/api/Auth/UpdateUserPassword/", this.requestUserPassword).subscribe({
+    this.http.post("https://localhost:7018/api/Auth/UpdateUserPassword", this.requestUserPassword).subscribe({
       next: (res: any) => {
         this.translate.get("Account password updated!").subscribe(
           (res: any) => {

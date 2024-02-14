@@ -28,7 +28,6 @@ export class WishListService {
   checkLocalStorageForWishList(){
     if(localStorage.getItem('response')){
       this.auth.checkAuthentication();
-      console.log(this.auth.token.userId);
       this.http.get("https://localhost:7018/api/WishLists/GetAllWishList/" + this.auth.token.userId).subscribe(
         {
           next: (res: any) => {

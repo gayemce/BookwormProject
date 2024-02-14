@@ -56,27 +56,29 @@
                                             </div>
 
                                             @if(book.price.currency === '$'){
-                                                <p class="price font-size-22 font-weight-medium mb-4">
-                                                    <span class="woocommerce-Price-amount amount">
-                                                        <span
-                                                            class="woocommerce-Price-currencySymbol">{{book.price.currency}}</span>{{book.price.value | currency:'':'':'1.2-2' }}
-                                                    </span>
-                                                </p>
+                                            <p class="price font-size-22 font-weight-medium mb-4">
+                                                <span class="woocommerce-Price-amount amount">
+                                                    <span
+                                                        class="woocommerce-Price-currencySymbol">{{book.price.currency}}</span>{{book.price.value
+                                                    | currency:'':'':'1.2-2' }}
+                                                </span>
+                                            </p>
                                             }
                                             @else {
-                                                <p class="price font-size-22 font-weight-medium mb-4">
-                                                    <span class="woocommerce-Price-amount amount">
-                                                        <span
-                                                            class="woocommerce-Price-currencySymbol">{{book.price.value | trCurrency}}
-                                                        </span>
-                                                        {{book.price.currency}}
+                                            <p class="price font-size-22 font-weight-medium mb-4">
+                                                <span class="woocommerce-Price-amount amount">
+                                                    <span class="woocommerce-Price-currencySymbol">{{book.price.value |
+                                                        trCurrency}}
                                                     </span>
-                                                </p>
+                                                    {{book.price.currency}}
+                                                </span>
+                                            </p>
                                             }
-                                            
+
 
                                             <div class="mb-4">
-                                                <label class="form-label font-size-2 font-weight-medium mb-3">Book Format</label>
+                                                <label class="form-label font-size-2 font-weight-medium mb-3">Book
+                                                    Format</label>
                                                 <!-- Select -->
                                                 <select
                                                     class="js-select selectpicker dropdown-select w-100 position-relative"
@@ -217,9 +219,9 @@
                                                     </tr>
                                                     <tr>
                                                         <th class="px-4 px-xl-5">Publication City/Country:</th>
-                                                        <td>{{selectLang.userSelectedLanguage === 'en' ? 
-                                                        book.bookDetail.publicationCityCountryEn : 
-                                                        book.bookDetail.publicationCityCountryTr}}</td>
+                                                        <td>{{selectLang.userSelectedLanguage === 'en' ?
+                                                            book.bookDetail.publicationCityCountryEn :
+                                                            book.bookDetail.publicationCityCountryTr}}</td>
                                                     </tr>
                                                     <tr>
                                                         <th class="px-4 px-xl-5">Language:</th>
@@ -409,23 +411,52 @@
                                         </div>
 
                                         <h4 class="font-size-3 mb-8">1-5 of 44 reviews</h4>
-
                                         <ul class="list-unstyled mb-8">
+                                            @for(r of reviews; track r){
                                             <li class="mb-4 pb-5 border-bottom">
                                                 <div class="d-flex align-items-center mb-3">
-                                                    <h6 class="mb-0">Amazing Story! You will LOVE it</h6>
+                                                    <h6 class="mb-0">{{r.titleTr}}</h6>
                                                     <div class="text-yellow-darker ml-3">
+                                                        @if(r.raiting === 5){
+                                                        <small class="fas fa-star"></small>
+                                                        <small class="fas fa-star"></small>
+                                                        <small class="fas fa-star"></small>
+                                                        <small class="fas fa-star"></small>
+                                                        <small class="fas fa-star"></small>
+                                                        }
+                                                        @else if(r.raiting === 4){
                                                         <small class="fas fa-star"></small>
                                                         <small class="fas fa-star"></small>
                                                         <small class="fas fa-star"></small>
                                                         <small class="fas fa-star"></small>
                                                         <small class="far fa-star"></small>
+                                                        }
+                                                        @else if(r.raiting === 3){
+                                                            <small class="fas fa-star"></small>
+                                                            <small class="fas fa-star"></small>
+                                                            <small class="fas fa-star"></small>
+                                                            <small class="far fa-star"></small>
+                                                            <small class="far fa-star"></small>
+                                                        }
+                                                        @else if(r.raiting === 2){
+                                                            <small class="fas fa-star"></small>
+                                                            <small class="fas fa-star"></small>
+                                                            <small class="far fa-star"></small>
+                                                            <small class="far fa-star"></small>
+                                                            <small class="far fa-star"></small>
+                                                        }
+                                                        @else if(r.raiting === 1){
+                                                            <small class="fas fa-star"></small>
+                                                            <small class="far fa-star"></small>
+                                                            <small class="far fa-star"></small>
+                                                            <small class="far fa-star"></small>
+                                                            <small class="far fa-star"></small>
+                                                        }
                                                     </div>
                                                 </div>
-                                                <p class="mb-4 text-lh-md">Such an incredibly complex story! I had to
-                                                    buy it because there was a waiting list of 30+ at the local library
-                                                    for this book. Thrilled that I made the purchase</p>
-                                                <div class="text-gray-600 mb-4">Staci, February 22, 2020 </div>
+                                                <p class="mb-4 text-lh-md">{{r.commentTr}}</p>
+                                                <div class="text-gray-600 mb-4">{{r.appUser.firstName}}
+                                                    {{r.appUser.lastName}}, {{r.createdAt | date: 'dd.MM.yyyy'}} </div>
                                                 <ul class="nav">
                                                     <li class="mr-7">
                                                         <a href="#" class="text-gray-600 d-flex align-items-center">
@@ -447,78 +478,7 @@
 
                                                 </ul>
                                             </li>
-                                            <li class="mb-4 pb-5 border-bottom">
-                                                <div class="d-flex align-items-center mb-3">
-                                                    <h6 class="mb-0">Get the best seller at a great price.</h6>
-                                                    <div class="text-yellow-darker ml-3">
-                                                        <small class="fas fa-star"></small>
-                                                        <small class="fas fa-star"></small>
-                                                        <small class="fas fa-star"></small>
-                                                        <small class="fas fa-star"></small>
-                                                        <small class="far fa-star"></small>
-                                                    </div>
-                                                </div>
-                                                <p class="mb-4 text-lh-md">Awesome book, great price, fast delivery.
-                                                    Thanks so much.</p>
-                                                <div class="text-gray-600 mb-4">Staci, February 22, 2020 </div>
-                                                <ul class="nav">
-                                                    <li class="mr-7">
-                                                        <a href="#" class="text-gray-600 d-flex align-items-center">
-                                                            <i class="text-dark font-size-5 flaticon-like-1"></i>
-                                                            <span class="ml-2">90</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="mr-7">
-                                                        <a href="#" class="text-gray-600 d-flex align-items-center">
-                                                            <i class="text-dark font-size-5 flaticon-dislike"></i>
-                                                            <span class="ml-2">10</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="mr-7">
-                                                        <a href="#" class="text-gray-600 d-flex align-items-center">
-                                                            <i class="text-dark font-size-5 flaticon-flag"></i>
-                                                        </a>
-                                                    </li>
-
-                                                </ul>
-                                            </li>
-                                            <li class="mb-4 pb-5 border-bottom">
-                                                <div class="d-flex align-items-center mb-3">
-                                                    <h6 class="mb-0">I read this book short...</h6>
-                                                    <div class="text-yellow-darker ml-3">
-                                                        <small class="fas fa-star"></small>
-                                                        <small class="fas fa-star"></small>
-                                                        <small class="fas fa-star"></small>
-                                                        <small class="fas fa-star"></small>
-                                                        <small class="far fa-star"></small>
-                                                    </div>
-                                                </div>
-                                                <p class="mb-4 text-lh-md">I read this book shortly after I got it and
-                                                    didn't just put it on my TBR shelf mainly because I saw it on Reese
-                                                    Witherspoon's bookclub September read. It was one of the best books
-                                                    I've read this year, and reminded me some of Kristen Hannah's The
-                                                    Great Alone. </p>
-                                                <div class="text-gray-600 mb-4">Staci, February 22, 2020 </div>
-                                                <ul class="nav">
-                                                    <li class="mr-7">
-                                                        <a href="#" class="text-gray-600 d-flex align-items-center">
-                                                            <i class="text-dark font-size-5 flaticon-like-1"></i>
-                                                            <span class="ml-2">90</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="mr-7">
-                                                        <a href="#" class="text-gray-600 d-flex align-items-center">
-                                                            <i class="text-dark font-size-5 flaticon-dislike"></i>
-                                                            <span class="ml-2">10</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="mr-7">
-                                                        <a href="#" class="text-gray-600 d-flex align-items-center">
-                                                            <i class="text-dark font-size-5 flaticon-flag"></i>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </li>
+                                            }
                                         </ul>
 
                                         <h4 class="font-size-3 mb-4">Write a Review</h4>
@@ -567,47 +527,40 @@
                 </div>
                 <div id="secondary" class="sidebar widget-area order-1" role="complementary">
                     <div id="widgetAccordion">
-                        <div class="widget p-4d875 border mb-5">
-                            <div class="mb-5">
+                        @if(booksByAuthor.length > 0)
+                        {
+                        <div class="widget p-4d875 border mb-3">
+                            @for(b of booksByAuthor; track b){
+                            <div class="mb-2">
                                 <div class="media d-md-flex">
-                                    <a class="d-block" href="#">
-                                        <img class="img-fluid" src="https://placehold.it/60x92" alt="Image-Description">
+                                    <a class="d-block" href="/single-product/{{b.id}}">
+                                        <img class="img-fluid" src={{b.imgUrl}} style="height: 92px; width: 60px;"
+                                            alt="Image-Description">
                                     </a>
                                     <div class="media-body ml-3 pl-1">
                                         <h6 class="font-size-2 text-lh-md font-weight-normal">
-                                            <a href="#">Lessons Learned from 15 Years as CEO...</a>
+                                            <a href="/single-product/{{b.id}}">{{b.title}}</a>
+                                            <p class="font-size-1 text-lh-md font-weight-normal">
+                                                <a>{{b.publisher}}</a>
+                                            </p>
                                         </h6>
-                                        <span class="font-weight-medium">$37</span>
+
+                                        @if(b.price.currency == "₺"){
+                                        <span class="font-size-2 text-lh-md font-weight-normal">{{b.price.value |
+                                            trCurrency}}{{b.price.currency}}</span>
+                                        }
+                                        @else {
+                                        <span
+                                            class="font-size-2 text-lh-md font-weight-normal">{{b.price.currency}}{{b.price.value
+                                            | currency:
+                                            '':'':'1.2-2'}}</span>
+                                        }
                                     </div>
                                 </div>
                             </div>
-                            <div class="mb-5">
-                                <div class="media d-md-flex">
-                                    <a class="d-block" href="#">
-                                        <img class="img-fluid" src="https://placehold.it/60x92" alt="Image-Description">
-                                    </a>
-                                    <div class="media-body ml-3 pl-1">
-                                        <h6 class="font-size-2 text-lh-md font-weight-normal">
-                                            <a href="#">Love, Livestock, and Big Life Lessons...</a>
-                                        </h6>
-                                        <span class="font-weight-medium">$21</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="media d-md-flex">
-                                    <a class="d-block" href="#">
-                                        <img class="img-fluid" src="https://placehold.it/60x92" alt="Image-Description">
-                                    </a>
-                                    <div class="media-body ml-3 pl-1">
-                                        <h6 class="font-size-2 text-lh-md font-weight-normal">
-                                            <a href="#">Sleeper Cells, Ghost Stories, and Hunt...</a>
-                                        </h6>
-                                        <span class="font-weight-medium">$182</span>
-                                    </div>
-                                </div>
-                            </div>
+                            }
                         </div>
+                        }
 
                         <div class="widget border mb-5">
                             <!-- Features Section -->
@@ -620,8 +573,16 @@
                                                 <i class="glyph-icon flaticon-delivery"></i>
                                             </div>
                                             <div class="media-body ml-xl-4">
-                                                <h4 class="feature__title h6 mb-1 text-dark">Free Delivery</h4>
-                                                <p class="feature__subtitle m-0 text-dark">Orders over $100</p>
+                                                <h4 class="feature__title h6 mb-1 text-dark">{{'freeDelivery' |
+                                                    translate}}</h4>
+                                                @if(selectLang.userSelectedLanguage === 'en'){
+                                                <p class="feature__subtitle m-0 text-dark">{{'ordersOver$19' |
+                                                    translate}}</p>
+                                                }
+                                                @else {
+                                                <p class="feature__subtitle m-0 text-dark">{{'ordersOver249₺' |
+                                                    translate}}</p>
+                                                }
                                             </div>
                                         </div>
                                     </li>
@@ -632,8 +593,10 @@
                                                 <i class="glyph-icon flaticon-credit"></i>
                                             </div>
                                             <div class="media-body ml-xl-4">
-                                                <h4 class="feature__title h6 mb-1 text-dark">Secure Payment</h4>
-                                                <p class="feature__subtitle m-0 text-dark">100% Secure Payment</p>
+                                                <h4 class="feature__title h6 mb-1 text-dark">{{'securePayment' |
+                                                    translate}}</h4>
+                                                <p class="feature__subtitle m-0 text-dark">{{'100%SecurePayment' |
+                                                    translate}}</p>
                                             </div>
                                         </div>
                                     </li>
@@ -644,8 +607,10 @@
                                                 <i class="glyph-icon flaticon-warranty"></i>
                                             </div>
                                             <div class="media-body ml-xl-4">
-                                                <h4 class="feature__title h6 mb-1 text-dark">Money Back Guarantee</h4>
-                                                <p class="feature__subtitle m-0 text-dark">Within 30 Days</p>
+                                                <h4 class="feature__title h6 mb-1 text-dark">{{'moneyBackGuarantee' |
+                                                    translate}}</h4>
+                                                <p class="feature__subtitle m-0 text-dark">{{'within30Days' |
+                                                    translate}}</p>
                                             </div>
                                         </div>
                                     </li>
@@ -656,8 +621,10 @@
                                                 <i class="glyph-icon flaticon-help"></i>
                                             </div>
                                             <div class="media-body ml-xl-4">
-                                                <h4 class="feature__title h6 mb-1 text-dark">24/7 Support</h4>
-                                                <p class="feature__subtitle m-0 text-dark">Within 1 Business Day</p>
+                                                <h4 class="feature__title h6 mb-1 text-dark">{{'24/7Support' |
+                                                    translate}}</h4>
+                                                <p class="feature__subtitle m-0 text-dark">{{'within1BusinessDay' |
+                                                    translate}}</p>
                                             </div>
                                         </div>
                                     </li>

@@ -20,9 +20,10 @@ export class ErrorService {
 
         switch (err.status) {
             case 0:
-                this.translate.get("apiNotAvailable").subscribe(res => {
-                    this.swal.callToast(res, "error");
-                });
+                console.log("apiNotFound")
+                // this.translate.get("console.log("apiNotFound")").subscribe(res => {
+                //     this.swal.callToast(res, "error");
+                // });
                 break;
 
             case 400:

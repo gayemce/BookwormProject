@@ -148,7 +148,7 @@
                                             <div
                                                 class="woocommerce-LoopProduct-link woocommerce-loop-product__link d-block position-relative">
                                                 <div class="woocommerce-loop-product__thumbnail">
-                                                    <a routerLink="single-product/{{b.id}}" class="d-block">
+                                                    <a href="single-product/{{b.id}}" class="d-block">
                                                         <img src={{b.imgUrl}}
                                                             class="img-fluid d-block mx-auto attachment-shop_catalog size-shop_catalog wp-post-image img-fluid"
                                                             alt="image-description" style="height: 250px;"></a>
@@ -159,7 +159,7 @@
                                                     </div>
                                                     <h2
                                                         class="woocommerce-loop-product__title product__title h6 text-lh-md mb-1 text-height-2 crop-text-2 h-dark">
-                                                        <a routerLink="single-product/{{b.id}}">{{b.title}}</a>
+                                                        <a href="single-product/{{b.id}}">{{b.title}}</a>
                                                     </h2>
                                                     <div class="font-size-2  mb-1 text-truncate"><a
                                                             href="../others/authors-single.html"
@@ -238,7 +238,7 @@
                                         <div
                                             class="woocommerce-LoopProduct-link woocommerce-loop-product__link row position-relative">
                                             <div class="col-md-auto woocommerce-loop-product__thumbnail mb-3 mb-md-0">
-                                                <a routerLink="single-product/{{b.id}}" class="d-block">
+                                                <a href="single-product/{{b.id}}" class="d-block">
                                                     <img src={{b.imgUrl}}
                                                         class="img-fluid d-block mx-auto attachment-shop_catalog size-shop_catalog wp-post-image img-fluid"
                                                         alt="image-description" style="height: 150px;"></a>
@@ -249,7 +249,7 @@
                                                         href="../shop/single-product-v2.html">{{b.publisher}}</a></div>
                                                 <h2
                                                     class="woocommerce-loop-product__title product__title h6 text-lh-md mb-1 crop-text-2 h-dark">
-                                                    <a routerLink="single-product/{{b.id}}" tabindex="0">{{b.title}}</a>
+                                                    <a href="single-product/{{b.id}}" tabindex="0">{{b.title}}</a>
                                                 </h2>
                                                 <div class="font-size-2  mb-2 text-truncate"><a
                                                         href="../others/authors-single.html"
@@ -626,13 +626,13 @@
                                 @for (fb of shopListBooks.featuredBooks.slice(0,5); track $index) {
                                 <div class="mb-5">
                                     <div class="media d-md-flex">
-                                        <a class="d-block" routerLink="single-product/{{fb.id}}">
+                                        <a class="d-block" href="single-product/{{fb.id}}">
                                             <img class="img-fluid" src={{fb.imgUrl}} style="height: 92px; width: 60px;"
                                                 alt="Image-Description">
                                         </a>
                                         <div class="media-body ml-3 pl-1">
                                             <h6 class="font-size-2 text-lh-md font-weight-normal">
-                                                <a routerLink="single-product/{{fb.id}}">{{fb.title}}</a>
+                                                <a href="single-product/{{fb.id}}">{{fb.title}}</a>
                                             </h6>
                                             @if(fb.price.currency === '₺'){
                                             <span class="font-weight-medium">{{fb.price.value |

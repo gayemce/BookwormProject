@@ -118,11 +118,15 @@
                     <div class="product__inner overflow-hidden p-3 p-md-4d875">
                       <div class="woocommerce-LoopProduct-link woocommerce-loop-product__link d-block position-relative">
                         <div class="woocommerce-loop-product__thumbnail">
-                          <a href="../shop/single-product-v2.html" class="d-block"><img src={{b.imgUrl}} class="img-fluid d-block mx-auto attachment-shop_catalog size-shop_catalog wp-post-image img-fluid" alt="image-description"></a>
+                          <a href="single-product/{{b.id}}"  class="d-block">
+                            <img src={{b.imgUrl}} class="img-fluid d-block mx-auto attachment-shop_catalog size-shop_catalog wp-post-image img-fluid" alt="image-description">
+                          </a>
                         </div>
                         <div class="woocommerce-loop-product__body product__body pt-3 bg-white">
                           <div class="text-uppercase font-size-1 mb-1 text-truncate"><a href="../shop/single-product-v2.html">{{b.publisher}}</a></div>
-                          <h2 class="woocommerce-loop-product__title product__title h6 text-lh-md mb-1 text-height-2 crop-text-2 h-dark"><a href="../shop/single-product-v2.html">{{b.title}}</a></h2>
+                          <h2 class="woocommerce-loop-product__title product__title h6 text-lh-md mb-1 text-height-2 crop-text-2 h-dark">
+                            <a href="single-product/{{b.id}}" >{{b.title}}</a
+                            ></h2>
                           <div class="font-size-2  mb-1 text-truncate"><a href="../others/authors-single.html" class="text-gray-700">{{b.author.name}} {{b.author.lastname}}</a></div>
                           @if(b.price.currency === '$'){
                             <div class="price d-flex align-items-center font-weight-medium font-size-3">
@@ -289,7 +293,7 @@
                       <div class="input-group-prepend">
                         <i class="glph-icon flaticon-loupe py-2d75 bg-white-100 border-white-100 text-dark pl-3 pr-0 rounded-0"></i>
                       </div>
-                      <input [(ngModel)]="shopListBooks.searchAuthor" (keyup)="shopListBooks.getAllAuthors()"  name="searchAuthor" autocomplete="off" class="form-control bg-white-100 py-2d75 height-4 border-white-100 rounded-0" type="text" placeholder="Search" aria-label="Search">
+                      <input (keyup)="shopListBooks.getAllAuthors()"  name="searchAuthor" autocomplete="off" class="form-control bg-white-100 py-2d75 height-4 border-white-100 rounded-0" type="text" placeholder="Search" aria-label="Search">
                     </div>
                     <button class="btn btn-outline-success my-2 my-sm-0 sr-only" type="submit">Search</button>
                   </form>

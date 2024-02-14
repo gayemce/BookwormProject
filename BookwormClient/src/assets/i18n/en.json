@@ -272,5 +272,7 @@
   "useShippingAddress": "Use the registered address",
   "addNewShippingAddress": "Add new address",
   "useBillingAddress": "Use the registered address",
-  "addNewBillingAddress": "Add new address"
+  "addNewBillingAddress": "Add new address",
+  "addAComment": "Add a comment",
+  "requestARefund": "Request a refund"
 }

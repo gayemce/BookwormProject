@@ -318,4 +318,15 @@ public sealed class BooksController : ControllerBase
         return Ok(response);
     }
 
+    [HttpGet("{authorId}/{bookId}")]
+    public IActionResult GetBooksbyAuthor(int authorId, int bookId)
+    {
+        var response = _context.Books
+            .Where(p => p.Author!.Id == authorId && p.Id != bookId)
+            .Take(3)
+            .ToList();
+
+        return Ok(response);
+    }
+
 }

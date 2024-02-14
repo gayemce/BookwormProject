@@ -74,7 +74,8 @@ public class OrdersController : ControllerBase
             PaymentCurrency = order.PaymentCurrency,
             Books = order.OrderDetails!.Select(OrderDetail => new
             {
-                Id = OrderDetail.BookId,
+                Id = OrderDetail.Id,
+                BookId = OrderDetail.BookId,
                 Title = OrderDetail.Book!.Title,
                 Name = OrderDetail.Book!.Author!.Name,
                 Lastname = OrderDetail.Book!.Author.Lastname,
@@ -116,7 +117,8 @@ public class OrdersController : ControllerBase
             PaymentCurrency = order.PaymentCurrency,
             Books = order.OrderDetails!.Select(OrderDetail => new
             {
-                Id = OrderDetail.BookId,
+                Id = OrderDetail.Id,
+                BookId = OrderDetail.BookId,
                 Title = OrderDetail.Book!.Title,
                 Name = OrderDetail.Book!.Author!.Name,
                 Lastname = OrderDetail.Book!.Author.Lastname,

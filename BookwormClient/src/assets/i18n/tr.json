@@ -274,5 +274,7 @@
   "useShippingAddress": "Kayıtlı adresi kullan",
   "addNewShippingAddress": "Yeni adres ekle",
   "useBillingAddress": "Kayıtlı adresi kullan",
-  "addNewBillingAddress": "Yeni adres ekle"
+  "addNewBillingAddress": "Yeni adres ekle",
+  "addAComment": "Yorum Yap",
+  "requestARefund": "İade Et"
 }

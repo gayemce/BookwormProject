@@ -56,6 +56,10 @@ const routes: Routes = [
         component: SingleProductComponent
       },
       {
+        path: "shop-list/single-product/:value",
+        component: SingleProductComponent
+      },
+      {
         path: "authors",
         component: AuthorsComponent
       },

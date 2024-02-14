@@ -39,30 +39,33 @@
                                             <td class="font-weight-medium py-0">{{o.createdAt | date: 'dd.MM.yyyy'}}
                                             </td>
                                             }
-                                            @if(o.paymentCurrency === '₺' && calcTotal() < 249){
-                                            <td class="font-weight-medium py-0 text-md-center">
-                                                {{ (calcTotal() + 24.99 ) | trCurrency }}{{'₺'}}</td>        
-                                            }
-                                            @else if(o.paymentCurrency === '₺'){
-                                            <td class="font-weight-medium py-0 text-md-center">
-                                                {{ calcTotal() | trCurrency }}{{'₺'}}</td>
-                                            }                         
-                                            @if(o.paymentCurrency === '$' && calcTotal() < 19){
-                                            <td class="font-weight-medium py-0 text-md-center">
-                                                {{o.paymentCurrency}}{{ (calcTotal() + 4.99) | currency: '':'':'1.2-2' }}</td>
-                                            }
-                                            @else if(o.paymentCurrency === '$'){
-                                            <td class="font-weight-medium py-0 text-md-center">
-                                                {{'$'}}{{ calcTotal() | currency: '':'':'1.2-2' }}</td>
-                                            }
-                                            @if(selectLang.userSelectedLanguage === "en"){
-                                            <td class="font-weight-medium py-0 text-md-right pr-md-9">
-                                                {{o.paymentMethodEn}} - {{o.paymentCurrency === '₺' ? 'TL' : 'USD'}}</td>
-                                            }
-                                            @else {
-                                            <td class="font-weight-medium py-0 text-md-right pr-md-9">
-                                                {{o.paymentMethodTr}} - {{o.paymentCurrency === '₺' ? 'TL' : 'USD'}}</td>
-                                            }
+                                            @if(o.paymentCurrency === '₺' && calcTotal() < 249){ <td
+                                                class="font-weight-medium py-0 text-md-center">
+                                                {{ (calcTotal() + 24.99 ) | trCurrency }}{{'₺'}}</td>
+                                                }
+                                                @else if(o.paymentCurrency === '₺'){
+                                                <td class="font-weight-medium py-0 text-md-center">
+                                                    {{ calcTotal() | trCurrency }}{{'₺'}}</td>
+                                                }
+                                                @if(o.paymentCurrency === '$' && calcTotal() < 19){ <td
+                                                    class="font-weight-medium py-0 text-md-center">
+                                                    {{o.paymentCurrency}}{{ (calcTotal() + 4.99) | currency:
+                                                    '':'':'1.2-2' }}</td>
+                                                    }
+                                                    @else if(o.paymentCurrency === '$'){
+                                                    <td class="font-weight-medium py-0 text-md-center">
+                                                        {{'$'}}{{ calcTotal() | currency: '':'':'1.2-2' }}</td>
+                                                    }
+                                                    @if(selectLang.userSelectedLanguage === "en"){
+                                                    <td class="font-weight-medium py-0 text-md-right pr-md-9">
+                                                        {{o.paymentMethodEn}} - {{o.paymentCurrency === '₺' ? 'TL' :
+                                                        'USD'}}</td>
+                                                    }
+                                                    @else {
+                                                    <td class="font-weight-medium py-0 text-md-right pr-md-9">
+                                                        {{o.paymentMethodTr}} - {{o.paymentCurrency === '₺' ? 'TL' :
+                                                        'USD'}}</td>
+                                                    }
                                         </tr>
                                         }
 
@@ -88,21 +91,43 @@
                                             </div>
                                             <span class="font-size-2 ml-4 ml-md-8">x{{b.quantity}}</span>
                                         </div>
-                                        @if(b.currency === '₺'){
-                                        <span class="font-weight-medium font-size-2">
-                                            {{b.price | trCurrency}}{{b.currency}}
-                                        </span>
-                                        }
-                                        @else {
-                                        <span class="font-weight-medium font-size-2">
-                                            {{b.currency}}{{b.price | currency:'':'':'1.2-2'}}
-                                        </span>
-                                        }
+                                        <div>
+                                            @if(b.currency === '₺'){
+                                            <span class="font-weight-medium font-size-2">
+                                                {{b.price | trCurrency}}{{b.currency}}
+                                            </span>
+                                            }
+                                            @else {
+                                            <span class="font-weight-medium font-size-2">
+                                                {{b.currency}}{{b.price | currency:'':'':'1.2-2'}}
+                                            </span>
+                                            }
+                                        </div>
+
+                                    </div>
+                                    <div>
+                                        @if(orders[0].statusTr === "Teslim Edildi" || orders[0].statusEn === "Delivered"){
+                                            <span>
+                                                <a href="single-product/{{b.bookId}}" style="color: white;">
+                                                    <button type="submit" class="btn btn-primary mb-5 mr-3">
+                                                        {{'requestARefund' | translate}}
+                                                    </button>
+                                                </a>
+                                            </span>
+                                            <span>
+                                                <a href="single-product/{{b.bookId}}" style="color: white;">
+                                                    <button type="submit" class="btn btn-primary mb-5">
+                                                        {{'addAComment' | translate}}
+                                                    </button>
+                                                </a>
+                                            </span>
+                                            }
                                     </div>
                                     }
                                 </div>
                             </div>
                         </div>
+
 
                         <!-- Totals -->
                         @for (o of orders; track o) {

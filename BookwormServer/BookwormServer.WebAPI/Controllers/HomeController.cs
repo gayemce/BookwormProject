@@ -56,42 +56,6 @@ public sealed class HomeController : ControllerBase
     }
 
     [HttpGet]
-    public IActionResult GetFeaturedBooks()
-    {
-        var response = _context.Books
-            .Include(a => a.Author)
-            .Include(b => b.BookLanguage)
-            .Where(p => p.IsActive == true && p.IsFeatured == true && p.IsDeleted == false)
-            .ToList();
-
-        List<BookDto> books = response
-            .Select(item => new BookDto
-            {
-                Author = new AuthorDto
-                {
-                    Id = item.Author.Id,
-                    Name = item.Author.Name,
-                    Lastname = item.Author.Lastname,
-                }
-            })
-            .ToList();
-
-        List<BookDto> ftBooks = response
-            .Select(item => new BookDto
-            {
-                BookLanguage = new BookLanguageDto
-                {
-                    Id = item.BookLanguage!.Id,
-                    NameEn = item.BookLanguage.NameEn,
-                    NameTr = item.BookLanguage.NameTr,
-                }
-            })
-            .ToList();
-
-        return Ok(response);
-    }
-
-    [HttpGet]
     public IActionResult GetEnglishBooks()
     {
         var response = _context.Books
@@ -112,17 +76,17 @@ public sealed class HomeController : ControllerBase
             })
             .ToList();
 
-         List<BookDto> enBook = response
-            .Select(item => new BookDto
-            {
-                BookLanguage = new BookLanguageDto
-                {
-                    Id = item.BookLanguage!.Id,
-                    NameEn = item.BookLanguage.NameEn,
-                    NameTr = item.BookLanguage.NameTr,
-                }
-            })
-            .ToList();
+        List<BookDto> enBook = response
+           .Select(item => new BookDto
+           {
+               BookLanguage = new BookLanguageDto
+               {
+                   Id = item.BookLanguage!.Id,
+                   NameEn = item.BookLanguage.NameEn,
+                   NameTr = item.BookLanguage.NameTr,
+               }
+           })
+           .ToList();
 
         return Ok(response);
     }

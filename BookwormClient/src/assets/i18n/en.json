@@ -274,5 +274,26 @@
   "useBillingAddress": "Use the registered address",
   "addNewBillingAddress": "Add new address",
   "addAComment": "Add a comment",
-  "requestARefund": "Request a refund"
+  "requestARefund": "Request a refund",
+
+  "description": "Description",
+  "productDetails": "Product Details",
+  "page": "Page",
+  "publicationDate": "Publication Date",
+  "Publisher": "Publisher",
+  "publicationCity/Country": "Publication City/Country",
+  "language": "Language",
+  "review": "Review",
+  "reviews": "Reviews",
+  "customerReviews": "Customer Reviews",
+  "star": "Star",
+  "stars": "Stars",
+  "writeAReview": "Write A Review",
+  "selectARating(required)": "Select A Rating (required)",
+  "detailsPlease!YourReviewHelpsOtherShoppers": "Details please! your review helps other shoppers",
+  "What did you like or dislike? What should other shoppers know before buying?": "What did you like or dislike? What should other shoppers know before buying?",
+  "addATitle": "Add A Title",
+  "3000 characters remaining": "3000 characters remaining",
+  "submitReview": "Submit Review",
+  "commentSuccessfullySaved": "Comment Successfully Saved."
 }

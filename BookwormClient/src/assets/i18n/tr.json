@@ -276,5 +276,26 @@
   "useBillingAddress": "Kayıtlı adresi kullan",
   "addNewBillingAddress": "Yeni adres ekle",
   "addAComment": "Yorum Yap",
-  "requestARefund": "İade Et"
+  "requestARefund": "İade Et",
+
+  "description": "Açıklama",
+  "productDetails": "Ürün Detayları",
+  "page": "Sayfa",
+  "publicationDate": "Yayın Tarihi",
+  "Publisher": "Yayıncı",
+  "publicationCity/Country": "Yayın Şehri/Ülkesi",
+  "language": "Dil",
+  "review": "Değerlendirme",
+  "reviews": "Değerlendirmeler",
+  "customerReviews": "Müşteri Değerlendirmeleri",
+  "star": "Yıldız",
+  "stars": "Yıldızlar",
+  "writeAReview": "Yorum Yap",
+  "selectARating(required)": "Bir derecelendirme seçin.",
+  "detailsPlease!YourReviewHelpsOtherShoppers": "Detaylardan bahsedin, yorumunuz diğer alışveriş yapanlara yardımcı olur",
+  "What did you like or dislike? What should other shoppers know before buying?": "Neyi beğendiniz ya da beğenmediniz? Diğer alışveriş yapanların satın almadan önce bilmesi gerekenler nelerdir?",
+  "addATitle": "Başlık Ekle",
+  "3000 characters remaining": "3000 karakter ile sınırlıdır.",
+  "submitReview": "Değerlendirmeyi Gönder",
+  "commentSuccessfullySaved": "Yorum başarıyla kaydedildi."
 }

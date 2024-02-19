@@ -481,9 +481,6 @@ namespace BookwormServer.WebAPI.Migrations
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
-
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
@@ -534,10 +531,8 @@ namespace BookwormServer.WebAPI.Migrations
                     b.Property<int>("BookId")
                         .HasColumnType("int");
 
-                    b.Property<string>("CommentEn")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CommentTr")
+                    b.Property<string>("Comment")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedAt")
@@ -546,10 +541,8 @@ namespace BookwormServer.WebAPI.Migrations
                     b.Property<short>("Raiting")
                         .HasColumnType("smallint");
 
-                    b.Property<string>("TitleEn")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TitleTr")
+                    b.Property<string>("Title")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -750,7 +743,7 @@ namespace BookwormServer.WebAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("BookwormServer.WebAPI.Models.Order", null)
+                    b.HasOne("BookwormServer.WebAPI.Models.Order", "Order")
                         .WithMany("OrderDetails")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -781,6 +774,8 @@ namespace BookwormServer.WebAPI.Migrations
                         });
 
                     b.Navigation("Book");
+
+                    b.Navigation("Order");
 
                     b.Navigation("Price")
                         .IsRequired();

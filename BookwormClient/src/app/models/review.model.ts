@@ -8,9 +8,7 @@ export class ReviewModel{
     appUserId: number = 0;
     appUser: UserModel = new UserModel();
     raiting: number = 0;
-    titleEn: string = "";
-    titleTr: string = "";
-    commentEn: string = "";
-    commentTr: string = "";
+    title: string = "";
+    comment: string = "";
     createdAt: string = "";
 }

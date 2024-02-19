@@ -8,7 +8,6 @@ import { AuthService } from 'src/app/services/auth.service';
 import { ErrorService } from 'src/app/services/error.service';
 import { SelectedLanguageService } from 'src/app/services/selected-language.service';
 import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
-import { SwalService } from 'src/app/services/swal.service';
 import { TrCurrencyPipe } from 'tr-currency';
 
 @Component({
@@ -24,22 +23,22 @@ export class ViewOrderComponent {
     orders: OrderModel[] = [];
     paymentDetails: string = "";
     total: number = 0;
+    addComment = false;
 
     constructor(
         private http: HttpClient,
-        public shopping: ShoppingCartService,
-        private swal: SwalService,
         private auth: AuthService,
-        private error: ErrorService,
         private activated: ActivatedRoute,
+        private error: ErrorService,
+        public shopping: ShoppingCartService,
         public selectLang: SelectedLanguageService,
-    ) {      
-
+    ) {
         auth.checkAuthentication();
         this.activated.params.subscribe(res => {
             http.get<OrderModel[]>(`https://localhost:7018/api/Orders/GetAllOrdersDetailByUserId/${auth.token.userId}/${res["order-id"]}`).subscribe({
                 next: (res: any) => {
                     this.orders = res;
+                    this.commentBtnHideorShow();
                 },
                 error: (err: HttpErrorResponse) => {
                     error.errorHandler(err);
@@ -50,28 +49,35 @@ export class ViewOrderComponent {
 
     calcTotal(): number {
         this.total = 0;
-
-        if(this.orders[0].paymentCurrency === '₺'){
+        if (this.orders[0].paymentCurrency === '₺') {
             for (let i = 0; i < this.orders[0].books.length; i++) {
-                if(this.orders[0].books[i].currency === '₺'){
+                if (this.orders[0].books[i].currency === '₺') {
                     this.total += (this.orders[0].books[i].price * this.orders[0].books[i].quantity);
-                    console.log(this.total);
                 }
-                else if(this.orders[0].books[i].currency === '$'){
+                else if (this.orders[0].books[i].currency === '$') {
                     this.total += ((this.orders[0].books[i].price * 30) * this.orders[0].books[i].quantity);
-                }     
+                }
             }
         }
-        else{
+        else {
             for (let i = 0; i < this.orders[0].books.length; i++) {
-                if(this.orders[0].books[i].currency === '$'){
+                if (this.orders[0].books[i].currency === '$') {
                     this.total += (this.orders[0].books[i].price * this.orders[0].books[i].quantity);
                 }
-                else if(this.orders[0].books[i].currency === '₺'){
+                else if (this.orders[0].books[i].currency === '₺') {
                     this.total += ((this.orders[0].books[i].price / 30) * this.orders[0].books[i].quantity);
-                }     
+                }
             }
         }
-        return this.total;          
+        return this.total;
     }
+
+    commentBtnHideorShow() {
+        if (this.orders[0].statusTr === "Teslim Edildi" || this.orders[0].statusEn === "Delivered") {
+          this.addComment = true;
+        }
+        else {
+            this.addComment = false;
+        }
+      }
 }

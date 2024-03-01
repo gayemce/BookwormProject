@@ -18,11 +18,28 @@ import { WishListService } from 'src/app/services/wish-list.service';
     imports: [NgIf, FormsModule, NgFor, RouterLink, NgClass, TranslateModule, TrCurrencyPipe, CurrencyPipe]
 })
 export class ShopListByCategoryComponent {
+  currentMonthEn: string = "";
+  currentMonthTr: string = "";
 
   constructor(
     public shopListBooks: ShopListBooksService,
     public selectLang: SelectedLanguageService,
     public shopping: ShoppingCartService,
-    public wishList: WishListService
-  ){}
+    public wishList: WishListService,
+    public selectedLang: SelectedLanguageService
+  ){
+    const currentDate = new Date();
+    const monthNamesEn = [
+      "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
+    ];
+
+    const monthNamesTr = [
+      "Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran",
+      "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"
+    ];
+    const currentMonthIndex = currentDate.getMonth();
+    this.currentMonthEn = monthNamesEn[currentMonthIndex];
+    this.currentMonthTr = monthNamesTr[currentMonthIndex];
+  }
 }

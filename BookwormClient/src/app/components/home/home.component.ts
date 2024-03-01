@@ -13,6 +13,7 @@ import { AuthorModel } from 'src/app/models/author.model';
 import { SelectedLanguageService } from 'src/app/services/selected-language.service';
 import { WishListComponent } from '../wish-list/wish-list.component';
 import { WishListService } from 'src/app/services/wish-list.service';
+import { ShopListBooksService } from 'src/app/services/shop-list-books.service';
 
 @Component({
     selector: 'app-home',
@@ -23,12 +24,16 @@ import { WishListService } from 'src/app/services/wish-list.service';
 })
 export default class HomeComponent {
 
+    book: BookModel = new BookModel();
+    discountBooks: BookModel[] = [];
     englishBooks: BookModel[] = [];
     newArrivalBooks: BookModel[] = [];
     featuredBooks: BookModel[] = [];
     scienceFictionBooks: BookModel[] = [];
     authors: AuthorModel[] = [];
     language: string = "";
+    currentMonthEn: string = "";
+    currentMonthTr: string = "";
 
     constructor(
         private http: HttpClient,
@@ -37,15 +42,18 @@ export default class HomeComponent {
         public shopping: ShoppingCartService,
         public wishList: WishListService,
         private spinner: NgxSpinnerService,
-        public selectedLang: SelectedLanguageService
-        ) {
+        public selectedLang: SelectedLanguageService,
+        public shopListBooks: ShopListBooksService,
+    ) {
         this.getEnglishBooks();
         this.getNewBooks();
         this.getFeaturedBooks();
         this.getScienceFictionBooks();
         this.getAuthors();
+        this.getBooks();
+        this.getDiscountedBooks(23);
 
-        if(localStorage.getItem("language")){
+        if (localStorage.getItem("language")) {
             this.language = (localStorage.getItem("language")) as string;
         }
 
@@ -53,29 +61,54 @@ export default class HomeComponent {
         localStorage.removeItem("shippingAndCartTotal");
         localStorage.removeItem("shippingPrice");
         localStorage.removeItem("currency");
-        // Buradan devam edilecek.
-        // localStorage.removeItem("bookPrices");
+
+        const currentDate = new Date();
+        const monthNamesEn = [
+            "January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+        ];
+
+        const monthNamesTr = [
+            "Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran",
+            "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"
+        ];
+        const currentMonthIndex = currentDate.getMonth();
+        this.currentMonthEn = monthNamesEn[currentMonthIndex];
+        this.currentMonthTr = monthNamesTr[currentMonthIndex];
     }
+
+    getBooks() {
+        this.http.get(`https://localhost:7018/api/Books/GetBooks`).subscribe({
+          next: (res: any) => {
+            this.book = res;
+            console.log(this.book);
+          },
+          error: (err: HttpErrorResponse) => {
+            this.error.errorHandler(err);
+          }
+        })
+      }
 
     getNewBooks() {
         // this.spinner.show();
         setTimeout(() => {
             this.http.get<BookModel[]>("https://localhost:7018/api/Home/GetNewArrivalBooks")
-            .subscribe({
-                next: (res: any) => {
-                    this.newArrivalBooks = res;
-                    // this.spinner.hide();
-                },
-                error: (err: HttpErrorResponse) => {
-                    this.error.errorHandler(err);
-                }
-            });
-        }, 1000); 
+                .subscribe({
+                    next: (res: any) => {
+                        this.newArrivalBooks = res;
+                        // this.spinner.hide();
+                    },
+                    error: (err: HttpErrorResponse) => {
+                        this.error.errorHandler(err);
+                    }
+                });
+        }, 1000);
     }
 
     getFeaturedBooks() {
         this.http.get("https://localhost:7018/api/Home/GetFeaturedBooks").subscribe({
             next: (res: any) => {
+                console.log(res);
                 this.featuredBooks = res;
             },
             error: (err: HttpErrorResponse) => {
@@ -106,14 +139,27 @@ export default class HomeComponent {
         })
     }
 
-    getScienceFictionBooks(){
+    getScienceFictionBooks() {
         this.http.get("https://localhost:7018/api/Home/GetScienceFictionBooks").subscribe({
-          next: (res: any) => {
-            this.scienceFictionBooks = res;
-          },
-          error: (err: HttpErrorResponse) => {
-            this.error.errorHandler(err);
-          }
+            next: (res: any) => {
+                this.scienceFictionBooks = res;
+            },
+            error: (err: HttpErrorResponse) => {
+                this.error.errorHandler(err);
+            }
         })
-      }
+    }
+
+    getDiscountedBooks(id: number){
+        this.http.get("https://localhost:7018/api/BookDiscount/Get/" + id).subscribe({
+            next: (res: any) => {
+                this.discountBooks = res;
+                console.log(this.discountBooks);
+            },
+            error: (err: HttpErrorResponse) => {
+                this.error.errorHandler(err);
+            }
+        })
+    }
+
 }

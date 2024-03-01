@@ -282,7 +282,7 @@
   "productDetails": "Ürün Detayları",
   "page": "Sayfa",
   "publicationDate": "Yayın Tarihi",
-  "Publisher": "Yayıncı",
+  "publisher": "Yayıncı",
   "publicationCity/Country": "Yayın Şehri/Ülkesi",
   "language": "Dil",
   "review": "Değerlendirme",
@@ -296,6 +296,16 @@
   "What did you like or dislike? What should other shoppers know before buying?": "Neyi beğendiniz ya da beğenmediniz? Diğer alışveriş yapanların satın almadan önce bilmesi gerekenler nelerdir?",
   "addATitle": "Başlık Ekle",
   "3000 characters remaining": "3000 karakter ile sınırlıdır.",
-  "submitReview": "Değerlendirmeyi Gönder",
-  "commentSuccessfullySaved": "Yorum başarıyla kaydedildi."
+  "submit": "Gönder",
+  "commentSuccessfullySaved": "Yorum başarıyla kaydedildi.",
+  "Your Door to the Magical World of Books: Our Storehouse of Happiness for Bookworms!": "Kitapların Büyülü Dünyasına Açılan Kapınız: Kitap Kurtları İçin Mutluluk Depomuz!",
+  "©2024 Developed by Gaye Tekin. All rights reserved": "©2024 Gaye Tekin tarafından geliştirilmiştir. Tüm hakları saklıdır",
+  "THE BOOKWORM EDITORS": "KİTAP KURDU EDİTÖRLERİNDEN",
+
+  "(Başlık alanı boş olamaz)": "Başlık alanı boş olamaz!",
+  "(Yorum alanı boş olamaz)": "Yorum alanı boş olamaz!",
+  "(Derecelendirme alanı boş olamaz)": "Derecelendirme yıldız alanı boş olamaz!",
+  "(Bu ürün için zaten yorumunuz var.)": "Bu kitap için zaten yorumunuz mevcut.",
+  "addToWishlist": "Favolere Ekle",
+  "share": "Paylaş"
 }

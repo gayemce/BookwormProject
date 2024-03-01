@@ -20,7 +20,7 @@ public sealed class BookDetailsController : ControllerBase
     [HttpPost]
     public IActionResult CreateBookDetail(CreateBookDetailDto request)
     {
-        BookDetail bookDetail = _context.BookDetails
+        BookDetail? bookDetail = _context.BookDetails
             .Where(p => p.BookId == request.BookId)
             .FirstOrDefault();
 

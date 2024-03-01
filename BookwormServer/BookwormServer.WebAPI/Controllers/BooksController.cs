@@ -172,8 +172,8 @@ public sealed class BooksController : ControllerBase
                 Id = book.Author!.Id,
                 Name = book.Author.Name,
                 Lastname = book.Author.Lastname,
-                AboutEn = book.Author.AboutEn,
-                AboutTr = book.Author.AboutTr,
+                AboutEn = book.Author!.AboutEn!,
+                AboutTr = book.Author!.AboutTr!,
             },
             BookLanguage = new BookLanguageDto
             {
@@ -316,6 +316,15 @@ public sealed class BooksController : ControllerBase
         response.IsLastPage = request.PageNumber == response.TotalPageCount;
 
         return Ok(response);
+    }
+
+    [HttpGet]
+    public IActionResult GetBooks()
+    {
+        var books = _context.Books
+            .ToList();
+
+        return Ok(books);
     }
 
     [HttpGet("{authorId}/{bookId}")]

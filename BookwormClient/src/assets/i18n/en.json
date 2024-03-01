@@ -6,8 +6,8 @@
   "shopNow": "Shop Now",
 
   "freeDelivery": "Free Delivery",
-  "ordersOver$19": "Orders Over$19",
-  "ordersOver249₺": "Orders Over249₺",
+  "ordersOver$19": "Orders Over $19",
+  "ordersOver249₺": "Orders Over 249₺",
   "securePayment": "Secure Payment",
   "100%SecurePayment": "100% Secure Payment",
   "moneyBackGuarantee": "Money Back Guarantee",
@@ -280,7 +280,7 @@
   "productDetails": "Product Details",
   "page": "Page",
   "publicationDate": "Publication Date",
-  "Publisher": "Publisher",
+  "publisher": "Publisher",
   "publicationCity/Country": "Publication City/Country",
   "language": "Language",
   "review": "Review",
@@ -294,6 +294,16 @@
   "What did you like or dislike? What should other shoppers know before buying?": "What did you like or dislike? What should other shoppers know before buying?",
   "addATitle": "Add A Title",
   "3000 characters remaining": "3000 characters remaining",
-  "submitReview": "Submit Review",
-  "commentSuccessfullySaved": "Comment Successfully Saved."
+  "submit": "Submit",
+  "commentSuccessfullySaved": "Comment Successfully Saved.",
+  "Your Door to the Magical World of Books: Our Storehouse of Happiness for Bookworms!": "Your Door to the Magical World of Books: Our Storehouse of Happiness for Bookworms!",
+  "©2024 Developed by Gaye Tekin. All rights reserved": "©2024 Developed by Gaye Tekin. All rights reserved",
+  "THE BOOKWORM EDITORS": "THE BOOKWORM EDITORS",
+
+  "(Başlık alanı boş olamaz)": "The header field cannot be empty!",
+  "(Yorum alanı boş olamaz)": "The comment field cannot be empty!",
+  "(Derecelendirme alanı boş olamaz)": "The rating star field cannot be empty!",
+  "(Bu ürün için zaten yorumunuz var.)": "You already have a review for this book.",
+  "addToWishlist": "Add To Wishlist",
+  "share": "Share"
 }

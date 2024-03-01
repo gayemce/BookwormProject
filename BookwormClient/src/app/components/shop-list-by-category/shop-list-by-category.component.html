@@ -14,24 +14,34 @@
                                         <div class="col-lg-7 col-wd-6">
                                             <div class="media d-block d-lg-flex">
                                                 <div class="media-body align-self-center mb-4 mb-lg-0">
-                                                    <p
-                                                        class="banner__pretitle text-uppercase text-gray-400 font-weight-bold mb-2">
-                                                        THE BOOKWORM EDITORS’</p>
-                                                    <h2 class="font-size-10 mb-3 pb-1">
-                                                        <span
-                                                            class="hero__title-line-1 font-weight-regular d-block">Featured
-                                                            Books of the</span>
-                                                        <span
-                                                            class="hero__title-line-2 font-weight-bold d-block">February</span>
-                                                    </h2>
-                                                    <a href="../shop/v2.html"
-                                                        class="banner_btn btn btn-wide btn-primary rounded-0 text-white">Shop
-                                                        Now</a>
+                                                    <p class="banner__pretitle text-uppercase text-gray-400 font-weight-bold mb-2">
+                                                        {{'THE BOOKWORM EDITORS' | translate}}’</p>
+                                                    @if(selectedLang.userSelectedLanguage === 'en'){
+                                                        <h2 class="font-size-10 mb-3 pb-1" data-scs-animation-in="fadeInUp" data-scs-animation-delay="300">
+                                                          <span class="hero__title-line-1 font-weight-regular d-block">{{'featuredBooksOfThe' |
+                                                            translate}}</span>
+                                                          <span class="hero__title-line-2 font-weight-bold d-block">{{currentMonthEn}}</span>
+                                                        </h2>
+                                                        <div class="font-size-2 text-secondary-gray-700" data-scs-animation-in="fadeInUp"
+                                                          data-scs-animation-delay="300">{{'discount' | translate}}</div>
+                                                        <div class="font-size-26 font-weight-medium text-primary mb-2" data-scs-animation-in="fadeInUp"
+                                                          data-scs-animation-delay="300">{{'40% Off' | translate}}</div>
+                                                        }@else {
+                                                        <h2 class="font-size-10 mb-3 pb-1" data-scs-animation-in="fadeInUp" data-scs-animation-delay="300">
+                                                          <span class="hero__title-line-2 font-weight-bold d-block">{{currentMonthTr}}</span>
+                                                          <span class="hero__title-line-1 font-weight-regular d-block">{{'featuredBooksOfThe' |
+                                                            translate}}</span>
+                                                        </h2>
+                                                        <div class="font-size-26 font-weight-medium text-primary mb-2" data-scs-animation-in="fadeInUp"
+                                                          data-scs-animation-delay="300">{{'40% Off' | translate}}</div>
+                                                        <div class="font-size-2 text-secondary-gray-700" data-scs-animation-in="fadeInUp"
+                                                          data-scs-animation-delay="300">{{'discount' | translate}}</div>
+                                                        }
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-lg-5 col-wd-6">
-                                            <img src="https://placehold.it/350x296" class="img-fluid"
+                                            <img src="../../../assets/img/img-1.jpg" style="width: 350px; height: 296px;" class="img-fluid"
                                                 alt="image-description">
                                         </div>
                                     </div>

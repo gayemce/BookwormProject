@@ -7,10 +7,12 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { BookModel } from 'src/app/models/book.model';
 import { CreateReviewModel } from 'src/app/models/create-review.model';
 import { ReviewModel } from 'src/app/models/review.model';
+import { StarData } from 'src/app/models/star-data.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { ErrorService } from 'src/app/services/error.service';
 import { SelectedLanguageService } from 'src/app/services/selected-language.service';
 import { SwalService } from 'src/app/services/swal.service';
+import { WishListService } from 'src/app/services/wish-list.service';
 import { TrCurrencyPipe } from 'tr-currency';
 
 
@@ -34,6 +36,9 @@ export default class SingleProductComponent {
   isResponse: boolean | undefined = undefined;
   allowToComment: boolean = false;
   starRating: number = 0;
+  rating: number = 0;
+
+  starData: StarData = new StarData;
 
   constructor(
     private http: HttpClient,
@@ -42,7 +47,8 @@ export default class SingleProductComponent {
     public selectLang: SelectedLanguageService,
     private auth: AuthService,
     private swal: SwalService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    public wishList: WishListService
   ) {
     if (localStorage.getItem('response')) {
       this.isResponse = true;
@@ -52,10 +58,11 @@ export default class SingleProductComponent {
       this.http.get<BookModel[]>('https://localhost:7018/api/Books/GetBookDetailById/' + res["value"]).subscribe({
         next: (res: any) => {
           this.book = res;
-          console.log(this.book)
           this.getBooksbyAuthor();
           this.getAllReview();
           this.AllowToComment();
+          this.calculateReviews();
+          this.calculateStar();
         },
         error: (err: HttpErrorResponse) => {
           this.error.errorHandler(err);
@@ -68,7 +75,6 @@ export default class SingleProductComponent {
     this.http.get(`https://localhost:7018/api/Books/GetBooksbyAuthor/${this.book.author.id}/${this.book.id}`).subscribe({
       next: (res: any) => {
         this.booksByAuthor = res;
-        console.log(this.booksByAuthor)
       },
       error: (err: HttpErrorResponse) => {
         this.error.errorHandler(err);
@@ -88,10 +94,10 @@ export default class SingleProductComponent {
     this.requestCreateReview.comment = this.comment;
     this.http.post("https://localhost:7018/api/Reviews/Create", this.requestCreateReview).subscribe({
       next: (res: any) => {
-        this.reviews = res;
-        console.log(res);
         this.getAllReview();
         this.clearReviews();
+        this.calculateReviews();
+        this.calculateStar();
         this.translate.get("commentSuccessfullySaved").subscribe(
           res => {
             this.swal.callToast(res, 'success');
@@ -107,7 +113,7 @@ export default class SingleProductComponent {
     this.http.get(`https://localhost:7018/api/Reviews/AllowToComment/${this.book.id}/${this.auth.token.userId}`).subscribe({
       next: (res: any) => {
         this.allowToComment = res;
-        console.log(res);
+        // console.log(this.allowToComment);
       },
       error: (err: HttpErrorResponse) => {
         this.error.errorHandler(err);
@@ -118,8 +124,30 @@ export default class SingleProductComponent {
   getAllReview() {
     this.http.get("https://localhost:7018/api/Reviews/GetAllReviews/" + this.book.id).subscribe({
       next: (res: any) => {
-        console.log(res);
         this.reviews = res;
+      },
+      error: (err: HttpErrorResponse) => {
+        this.error.errorHandler(err);
+      }
+    })
+  }
+
+  calculateStar() {
+    this.http.get("https://localhost:7018/api/Reviews/calculateStar/" + this.book.id).subscribe({
+      next: (res: any) => {
+        this.starData = res;
+        console.log(this.starData);
+      },
+      error: (err: HttpErrorResponse) => {
+        this.error.errorHandler(err);
+      }
+    })
+  }
+
+  calculateReviews() {
+    this.http.get("https://localhost:7018/api/Reviews/calculateReviews/" + this.book.id).subscribe({
+      next: (res: any) => {
+        this.rating = res;
       },
       error: (err: HttpErrorResponse) => {
         this.error.errorHandler(err);

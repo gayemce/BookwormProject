@@ -92,14 +92,50 @@ public sealed class HomeController : ControllerBase
     }
 
     [HttpGet]
+    public IActionResult GetFeaturedBooks()
+    {
+        var response = _context.Books
+            .Include(a => a.Author)
+            .Include(b => b.BookLanguage)
+            .Where(p => p.IsActive == true && p.IsFeatured == true && p.IsDeleted == false)
+            .ToList();
+
+        List<BookDto> books = response
+            .Select(item => new BookDto
+            {
+                Author = new AuthorDto
+                {
+                    Id = item.Author!.Id,
+                    Name = item.Author.Name,
+                    Lastname = item.Author.Lastname,
+                }
+            })
+            .ToList();
+
+        List<BookDto> ftBooks = response
+            .Select(item => new BookDto
+            {
+                BookLanguage = new BookLanguageDto
+                {
+                    Id = item.BookLanguage!.Id,
+                    NameEn = item.BookLanguage.NameEn,
+                    NameTr = item.BookLanguage.NameTr,
+                }
+            })
+            .ToList();
+
+        return Ok(response);
+    }
+
+    [HttpGet]
     public IActionResult GetScienceFictionBooks()
     {
-        //Kategori ID'si 3 olan kitapları getir
+        //Kategori ID'si 2 olan kitapları getir
         var categoryId = 2; 
 
         List<Book> books = _context.Books
             .Include(a => a.Author)
-            .Include(c => c.BookCategories)
+            .Include(c => c.BookCategories!)
                 .ThenInclude(c => c.Category)
             .Where(p => p.IsActive == true && p.IsDeleted == false &&
                         p.BookCategories!.Any(bc => bc.CategoryId == categoryId))
@@ -112,7 +148,7 @@ public sealed class HomeController : ControllerBase
             Title = book.Title,
             Author = new AuthorDto
             {
-                Id = book.Author.Id,
+                Id = book.Author!.Id,
                 Name = book.Author.Name,
                 Lastname = book.Author.Lastname
             },
@@ -126,10 +162,10 @@ public sealed class HomeController : ControllerBase
             CreatedAt = book.CreatedAt,
 
             //Kitaba ait kategori isimlerini getir.
-            BookCategories = book.BookCategories.Select(bc => new BookCategoryDto
+            BookCategories = book.BookCategories!.Select(bc => new BookCategoryDto
             {
                 CategoryId = bc.CategoryId,
-                CategoryName = bc.Category.NameTr
+                CategoryName = bc.Category!.NameTr
             }).ToList()
         }).ToList();
 

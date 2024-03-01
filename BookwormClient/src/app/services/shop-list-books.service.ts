@@ -64,6 +64,7 @@ export class ShopListBooksService {
   goToShopListByCategoryId(categoryId: number) {
     this.request.categoryId = categoryId;
     this.router.navigate(['/shop-list', categoryId]);
+    // window.location.href = '/shop-list/' + categoryId;
     this.getAllCategories();
     this.getAllAuthors();
     this.getAllBooks();

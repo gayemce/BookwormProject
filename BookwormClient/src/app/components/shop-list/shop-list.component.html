@@ -175,7 +175,7 @@
                             <div class="text-uppercase font-size-1 mb-1 text-truncate"><a href="../shop/single-product-v2.html">{{b.publisher}}</a></div>
                             <h2 class="woocommerce-loop-product__title product__title h6 text-lh-md mb-1 crop-text-2 h-dark"><a href="../shop/single-product-v2.html" tabindex="0">{{b.title}}</a></h2>
                             <div class="font-size-2  mb-2 text-truncate"><a href="../others/authors-single.html" class="text-gray-700">{{b.author.name}} {{b.author.lastname}}</a></div>
-                            <p class="font-size-2 mb-2 crop-text-2">{{selectLang.userSelectedLanguage === 'en' ? b.descriptionEn : b.descriptionTr}}</p>
+                            <p class="font-size-2 mb-2 crop-text-2">{{selectedLang.userSelectedLanguage === 'en' ? b.descriptionEn : b.descriptionTr}}</p>
                             @if(b.price.currency === '$'){
                               <div class="price d-flex align-items-center font-weight-medium font-size-3">
                                 <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">{{b.price.currency}}</span>{{b.price.value | currency:'':'':'1.2-2'}}</span>
@@ -257,7 +257,7 @@
                     @for (c of shopListBooks.category; track c) {
                       <li class="cat-item cat-item-9 cat-parent">
                         <a (click)="shopListBooks.changeCategory(c.id)">
-                        {{selectLang.userSelectedLanguage === 'en' ? c.nameEn : c.nameTr}}</a>
+                        {{selectedLang.userSelectedLanguage === 'en' ? c.nameEn : c.nameTr}}</a>
                       </li>
                     }
                   </ul>

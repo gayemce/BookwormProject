@@ -7,6 +7,7 @@ using FluentValidation.Results;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace BookwormServer.WebAPI.Controllers;
 [Route("api/[controller]/[action]")]
@@ -40,9 +41,7 @@ public class ReviewsController : ControllerBase
         review = new()
         {
             BookId = request.BookId,
-            Book = request.Book,
             AppUserId = request.AppUserId,
-            AppUser = request.AppUser,
             Comment = request.Comment,
             Raiting = request.Raiting,
             Title = request.Title,
@@ -84,7 +83,6 @@ public class ReviewsController : ControllerBase
             _context.Reviews
             .Where(p => p.BookId == bookId)
             .Include(p => p.Book)
-            .Include(p => p.AppUser)
             .Select(s => new ReviewDto()
             {
                 Id = s.Id,
@@ -101,6 +99,57 @@ public class ReviewsController : ControllerBase
             .ToList();
 
         return Ok(reviews);
+    }
+
+    [HttpGet("{bookId}")]
+    public IActionResult calculateStar(int bookId)
+    {
+        var reviews = _context.Reviews
+            .Where(p => p.BookId == bookId)
+            .Select(s => s.Raiting)
+            .ToList();
+
+        int star1 = 0; 
+        int star2 = 0; 
+        int star3 = 0; 
+        int star4 = 0; 
+        int star5 = 0;
+
+        foreach (var rating in reviews)
+        {
+            if (rating == 1) star1++;
+            if (rating == 2) star2++;
+            if (rating == 3) star3++;
+            if (rating == 4) star4++;
+            if (rating == 5) star5++;
+        }
+
+        return Ok(new { star1, star2, star3, star4, star5});
+    }
+
+
+    [HttpGet("{bookId}")]
+    public IActionResult calculateReviews(int bookId)
+    {
+        var reviews = _context.Reviews
+            .Where(p => p.BookId == bookId)
+            .Select(s => s.Raiting)
+            .ToList();
+
+        if (reviews.Count == 0)
+        {
+            return NotFound("Belirtilen kitap için yorum bulunamadı.");
+        }
+
+        double sum = 0;
+        foreach (var rating in reviews)
+        {
+            sum += rating;
+        }
+
+        double averageRating = sum / reviews.Count;
+
+        return Ok(averageRating);
     }
 
 }

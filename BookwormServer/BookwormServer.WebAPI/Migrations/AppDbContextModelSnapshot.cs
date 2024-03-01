@@ -327,6 +327,9 @@ namespace BookwormServer.WebAPI.Migrations
                     b.Property<int>("DiscountPercentage")
                         .HasColumnType("int");
 
+                    b.Property<decimal>("DiscountedPrice")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 

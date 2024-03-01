@@ -2,28 +2,12 @@
 <footer class="site-footer_v5">
     <div class="border-top">
         <div class="container">
-            <!-- Newsletter -->
             <div>
                 <div class="space-1 space-lg-2">
                     <div class="text-center mb-5">
-                        <h5 class="font-size-7 font-weight-medium">Join Our Newsletter</h5>
-                        <p class="text-gray-700">Signup to be the first to hear about exclusive deals, special offers and upcoming collections</p>
+                        <h5 class="font-size-7 font-weight-medium">Bookworm Store </h5>
+                        <p class="text-gray-700">{{'Your Door to the Magical World of Books: Our Storehouse of Happiness for Bookworms!' | translate}}</p>
                     </div>
-                    <!-- Form Group -->
-                    <div class="form-row justify-content-center">
-                        <div class="col-lg-5 mb-2">
-                            <div class="js-form-message">
-                                <div class="input-group">
-                                    <input type="text" class="form-control rounded-0 border-dark font-size-2 px-5 py-4d75" name="name" id="signupSrName" placeholder="Enter email for weekly newsletter." aria-label="Your name" required="" data-msg="Name must contain only letters." data-error-class="u-has-error" data-success-class="u-has-success">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="ml-lg-2">
-                            <button type="submit" class="btn btn-dark rounded-0 btn-wide py-3 font-weight-medium">Subscribe
-                            </button>
-                        </div>
-                    </div>
-                    <!-- End Form Group -->
                 </div>
             </div>
         </div>
@@ -172,7 +156,20 @@
             <div class=" container">
                 <div class="text-center">
                     <!-- Copyright -->
-                    <p class="mb-3 mb-lg-0 font-size-2 text-gray-500">©2020 Book Worm. All rights reserved</p>
+                    @if(selectedLang.userSelectedLanguage === "en"){
+                        <p class="mb-3 mb-lg-0 font-size-2 text-gray-500">©2024 |
+                            <span>
+                                <a target="_blank" href="https://gayemce.github.io/myPortfolio/">Gaye Tekin</a>
+                            </span>  tarafından geliştirilmiştir. Tüm hakları saklıdır.
+                        </p>
+                    }
+                    @if(selectedLang.userSelectedLanguage === "tr"){
+                        <p class="mb-3 mb-lg-0 font-size-2 text-gray-500">©2024 |
+                            <span>
+                                <a target="_blank" href="https://gayemce.github.io/myPortfolio/">Gaye Tekin</a>
+                            </span>  tarafından geliştirilmiştir. Tüm hakları saklıdır.
+                        </p>
+                    }
                     <!-- End Copyright -->
                 </div>
             </div>

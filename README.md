@@ -1,6 +1,6 @@
 # Bookworm Project
 
-This project encompasses a web application focused on book sales.
+[This project](https://github.com/gayemce/myPortfolio/blob/main/assets/img/BookwormProject.gif) encompasses a web application focused on book sales.
 
 ## About the Project
 
